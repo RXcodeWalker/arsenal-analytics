@@ -138,10 +138,13 @@
 <body>
 
 <nav class="nav">
-  <div class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <div class="nav-logo-icon">AFC</div>
-    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
-  </div>
+    <div>
+      <span class="nav-logo-text">Arsenal Analytics</span>
+      <span class="nav-logo-sub">Beyond the Basics</span>
+    </div>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html" class="nav-link">Home</a></li>
     <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
@@ -201,21 +204,38 @@
         </div>
         <div class="card-body">
           <div style="display:flex;flex-direction:column;gap:0;">
-            ${[
-              { label: 'Season', val: '2024/25 PL' },
-              { label: 'Data Points', val: '12,000+' },
-              { label: 'Matches Tracked', val: '31' },
-              { label: 'Players Profiled', val: '6 (growing)' },
-              { label: 'Articles Published', val: '6' },
-              { label: 'Transfer Targets', val: '3 Scouted' },
-              { label: 'Charts & Visuals', val: '20+ per match' },
-              { label: 'Last Updated', val: 'Apr 6, 2025' },
-            ].map(item => `
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
-                <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">${item.label}</span>
-                <span style="font-size:13px;font-weight:600;color:var(--white);">${item.val}</span>
-              </div>
-            `).join('')}
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Season</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">2024/25 PL</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Data Points</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">12,000+</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Matches Tracked</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">31</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Players Profiled</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">6 (growing)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Articles Published</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">6</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Transfer Targets</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">3 Scouted</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Charts & Visuals</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">20+ per match</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">Last Updated</span>
+              <span style="font-size:13px;font-weight:600;color:var(--white);">Apr 6, 2025</span>
+            </div>
           </div>
 
           <div class="callout" style="margin-top:20px;margin-bottom:0;">
@@ -273,23 +293,46 @@
         <span class="badge badge-gray">Quick Reference</span>
       </div>
       <div class="card-body">
-        ${[
-          { term: 'xG', def: 'Expected Goals. The probability of a shot resulting in a goal, expressed as a decimal between 0 and 1. A 0.72 xG shot is expected to be scored roughly 72% of the time.' },
-          { term: 'xA', def: 'Expected Assists. Applied to passes that lead to shots. A pass is given an xA value equivalent to the xG of the shot it created.' },
-          { term: 'npxG', def: 'Non-Penalty Expected Goals. xG with penalty shots excluded, providing a purer measure of open-play attacking quality.' },
-          { term: 'PPDA', def: 'Passes Allowed Per Defensive Action. Measures pressing intensity. Arsenal\'s 7.8 means they allow roughly 8 opposition passes per defensive action — well below the league average of ~11.' },
-          { term: 'Field Tilt', def: 'The percentage of combined final-third touches belonging to one team. Arsenal\'s 62.4% means they dominate the attacking third in virtually every game.' },
-          { term: 'Prog. Pass', def: 'A progressive pass moves the ball at least 10 yards toward the opponent\'s goal, or into the final third. A key indicator of ball-progressing ability.' },
-          { term: 'Prog. Carry', def: 'A progressive carry moves the ball with control at least 10 yards toward the opponent\'s goal. Bubbles on the Progressive Actions chart represent these carries.' },
-          { term: 'G/A', def: 'Goals plus Assists. The standard combined output metric. Used in the player contribution tables on the Season Stats page.' },
-          { term: 'xG/Shot', def: 'Average xG per shot attempt. Higher values indicate a player is generating and taking higher-quality shots. Saka\'s 0.15 per shot is well above average.' },
-          { term: 'Shot Conversion', def: 'Goals divided by total shots, expressed as a percentage. The gap between shot conversion and xG conversion reveals over or underperformance.' },
-        ].map(item => `
-          <div class="glossary-item">
-            <div class="glossary-term">${item.term}</div>
-            <div class="glossary-def">${item.def}</div>
-          </div>
-        `).join('')}
+        <div class="glossary-item">
+          <div class="glossary-term">xG</div>
+          <div class="glossary-def">Expected Goals. The probability of a shot resulting in a goal, expressed as a decimal between 0 and 1. A 0.72 xG shot is expected to be scored roughly 72% of the time.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">xA</div>
+          <div class="glossary-def">Expected Assists. Applied to passes that lead to shots. A pass is given an xA value equivalent to the xG of the shot it created.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">npxG</div>
+          <div class="glossary-def">Non-Penalty Expected Goals. xG with penalty shots excluded, providing a purer measure of open-play attacking quality.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">PPDA</div>
+          <div class="glossary-def">Passes Allowed Per Defensive Action. Measures pressing intensity. Arsenal's 7.8 means they allow roughly 8 opposition passes per defensive action — well below the league average of ~11.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Field Tilt</div>
+          <div class="glossary-def">The percentage of combined final-third touches belonging to one team. Arsenal's 62.4% means they dominate the attacking third in virtually every game.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Prog. Pass</div>
+          <div class="glossary-def">A progressive pass moves the ball at least 10 yards toward the opponent's goal, or into the final third. A key indicator of ball-progressing ability.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Prog. Carry</div>
+          <div class="glossary-def">A progressive carry moves the ball with control at least 10 yards toward the opponent's goal. Bubbles on the Progressive Actions chart represent these carries.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">G/A</div>
+          <div class="glossary-def">Goals plus Assists. The standard combined output metric. Used in the player contribution tables on the Season Stats page.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">xG/Shot</div>
+          <div class="glossary-def">Average xG per shot attempt. Higher values indicate a player is generating and taking higher-quality shots. Saka's 0.15 per shot is well above average.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Shot Conversion</div>
+          <div class="glossary-def">Goals divided by total shots, expressed as a percentage. The gap between shot conversion and xG conversion reveals over or underperformance.</div>
+        </div>
       </div>
     </div>
 
@@ -299,22 +342,48 @@
       <h2 class="heading-1" style="margin-bottom:32px;">How We Got Here</h2>
       <div class="card">
         <div class="card-body">
-          ${[
-            { date: 'Aug 2024', title: 'Season 2024/25 begins', body: 'Arsenal Analytics launches for the new Premier League season. Match data tracking begins from Gameweek 1.' },
-            { date: 'Sep 2024', title: 'Player Dashboard added', body: 'Full radar chart profiling introduced for six first-team regulars. Shot map visualizations go live.' },
-            { date: 'Nov 2024', title: 'Tactical Articles launched', body: 'The editorial section opens with three deep-dive analyses. The half-space article becomes the most-read piece on the site.' },
-            { date: 'Jan 2025', title: 'Transfer Radar added', body: 'Scouting comparison tool launches ahead of the January window. Wirtz, Gyökeres, and Yamal profiled.' },
-            { date: 'Mar 2025', title: 'Season Statistics overhauled', body: 'Full seasonal trend charts, pressing metrics, and monthly xG breakdowns introduced.' },
-            { date: 'Apr 2025', title: 'Chelsea 3-1 — deep dive', body: 'The most comprehensive single-match analysis on the site. Every shot plotted, every key moment explained.' },
-          ].map(item => `
-            <div class="timeline-item">
-              <div class="timeline-date">${item.date}</div>
-              <div>
-                <div class="timeline-title">${item.title}</div>
-                <div class="timeline-body">${item.body}</div>
-              </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Aug 2024</div>
+            <div>
+              <div class="timeline-title">Season 2024/25 begins</div>
+              <div class="timeline-body">Arsenal Analytics launches for the new Premier League season. Match data tracking begins from Gameweek 1.</div>
             </div>
-          `).join('')}
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Sep 2024</div>
+            <div>
+              <div class="timeline-title">Player Dashboard added</div>
+              <div class="timeline-body">Full radar chart profiling introduced for six first-team regulars. Shot map visualizations go live.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Nov 2024</div>
+            <div>
+              <div class="timeline-title">Tactical Articles launched</div>
+              <div class="timeline-body">The editorial section opens with three deep-dive analyses. The half-space article becomes the most-read piece on the site.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Jan 2025</div>
+            <div>
+              <div class="timeline-title">Transfer Radar added</div>
+              <div class="timeline-body">Scouting comparison tool launches ahead of the January window. Wirtz, Gyökeres, and Yamal profiled.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Mar 2025</div>
+            <div>
+              <div class="timeline-title">Season Statistics overhauled</div>
+              <div class="timeline-body">Full seasonal trend charts, pressing metrics, and monthly xG breakdowns introduced.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 2025</div>
+            <div>
+              <div class="timeline-title">Chelsea 3-1 — deep dive</div>
+              <div class="timeline-body">The most comprehensive single-match analysis on the site. Every shot plotted, every key moment explained.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -324,22 +393,46 @@
       <div class="section-label">Under the Hood</div>
       <h2 class="heading-1" style="margin-bottom:32px;">Built With</h2>
       <div class="grid-4">
-        ${[
-          { icon: '🌐', name: 'HTML5', desc: 'Semantic markup, accessibility-first structure' },
-          { icon: '🎨', name: 'CSS3', desc: 'Custom properties, Grid, animations — zero frameworks' },
-          { icon: '⚙️', name: 'Vanilla JS', desc: 'No build tools, no bundlers. Pure ES6+' },
-          { icon: '📈', name: 'Chart.js 4', desc: 'Radar, bar, line, doughnut, bubble, polar charts' },
-          { icon: '📦', name: 'JSON Data', desc: 'Structured datasets for matches, players, shots' },
-          { icon: '🚀', name: 'Static Deploy', desc: 'Netlify / Vercel. Zero server, instant load' },
-          { icon: '🔤', name: 'Google Fonts', desc: 'Playfair Display · DM Sans · JetBrains Mono' },
-          { icon: '📱', name: 'Responsive', desc: 'Mobile-first, tested from 320px to 4K' },
-        ].map(item => `
-          <div class="stat-card" style="padding:20px;">
-            <div style="font-size:1.6rem;margin-bottom:8px;">${item.icon}</div>
-            <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">${item.name}</div>
-            <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">${item.desc}</div>
-          </div>
-        `).join('')}
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🌐</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">HTML5</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Semantic markup, accessibility-first structure</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🎨</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">CSS3</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Custom properties, Grid, animations — zero frameworks</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">⚙️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">Vanilla JS</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">No build tools, no bundlers. Pure ES6+</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📈</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">Chart.js 4</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Radar, bar, line, doughnut, bubble, polar charts</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📦</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">JSON Data</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Structured datasets for matches, players, shots</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🚀</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">Static Deploy</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Netlify / Vercel. Zero server, instant load</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🔤</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">Google Fonts</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Playfair Display · DM Sans · JetBrains Mono</div>
+        </div>
+        <div class="stat-card" style="padding:20px;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📱</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">Responsive</div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">Mobile-first, tested from 320px to 4K</div>
+        </div>
       </div>
     </div>
 
@@ -349,40 +442,48 @@
       <h2 class="heading-1" style="margin-bottom:32px;">Common Questions</h2>
       <div class="card">
         <div class="card-body" id="faq-container">
-          ${[
-            {
-              q: 'Is this data from official sources?',
-              a: 'The data on this platform is illustrative and curated for analytical demonstration purposes. Statistics are modelled to reflect realistic Premier League performance ranges for Arsenal in 2024/25, but this is not an official data provider and should not be cited as a primary source.'
-            },
-            {
-              q: 'What does it mean when a player "underperforms xG"?',
-              a: 'xG (Expected Goals) represents the probability of a shot resulting in a goal based on the chance quality. If a player scores 12 goals from 16.0 xG, they are underperforming their xG — the model expected them to score more. This can indicate poor finishing, or simply bad luck. Over a large sample, most players regress toward their xG.'
-            },
-            {
-              q: 'Why does Arsenal\'s possession % sometimes feel misleading?',
-              a: 'Possession statistics count all touches equally — a sideways pass in your own half counts the same as a progressive pass into the box. This is why we also track Field Tilt, which only measures touches in the attacking third. Arsenal\'s 56% possession with 62.4% field tilt tells a very specific story: they dominate the ball in the areas that matter most.'
-            },
-            {
-              q: 'How are the player radar scores calculated?',
-              a: 'Each of the six radar attributes (Shooting, Passing, Dribbling, Defending, Physical, Vision) is a composite of several underlying metrics, weighted by positional importance. For example, a striker\'s Shooting score weights shot conversion and xG per shot heavily, while a midfielder\'s Passing score weights key passes, progressive passes, and pass accuracy. All scores are normalized to 0–100 against positional peers.'
-            },
-            {
-              q: 'Will you add more players and teams?',
-              a: 'The current focus is Arsenal\'s first team with coverage of key rivals for context. We plan to expand the player dashboard to cover the full squad and add head-to-head team comparison features for Champions League analysis.'
-            },
-            {
-              q: 'How is the site affiliated with Arsenal FC?',
-              a: 'It isn\'t. Arsenal Analytics is an independent fan project operating under beyondthebasics.me. It has no official relationship with Arsenal FC, the Premier League, or any official data providers. All analysis represents personal editorial opinion.'
-            },
-          ].map((item, i) => `
-            <div class="faq-item" id="faq-${i}" onclick="toggleFAQ(${i})">
-              <div class="faq-q">
-                <span>${item.q}</span>
-                <span class="toggle">+</span>
-              </div>
-              <div class="faq-a">${item.a}</div>
+          <div class="faq-item" id="faq-0" onclick="toggleFAQ(0)">
+            <div class="faq-q">
+              <span>Is this data from official sources?</span>
+              <span class="toggle">+</span>
             </div>
-          `).join('')}
+            <div class="faq-a">The data on this platform is illustrative and curated for analytical demonstration purposes. Statistics are modelled to reflect realistic Premier League performance ranges for Arsenal in 2024/25, but this is not an official data provider and should not be cited as a primary source.</div>
+          </div>
+          <div class="faq-item" id="faq-1" onclick="toggleFAQ(1)">
+            <div class="faq-q">
+              <span>What does it mean when a player "underperforms xG"?</span>
+              <span class="toggle">+</span>
+            </div>
+            <div class="faq-a">xG (Expected Goals) represents the probability of a shot resulting in a goal based on the chance quality. If a player scores 12 goals from 16.0 xG, they are underperforming their xG — the model expected them to score more. This can indicate poor finishing, or simply bad luck. Over a large sample, most players regress toward their xG.</div>
+          </div>
+          <div class="faq-item" id="faq-2" onclick="toggleFAQ(2)">
+            <div class="faq-q">
+              <span>Why does Arsenal's possession % sometimes feel misleading?</span>
+              <span class="toggle">+</span>
+            </div>
+            <div class="faq-a">Possession statistics count all touches equally — a sideways pass in your own half counts the same as a progressive pass into the box. This is why we also track Field Tilt, which only measures touches in the attacking third. Arsenal's 56% possession with 62.4% field tilt tells a very specific story: they dominate the ball in the areas that matter most.</div>
+          </div>
+          <div class="faq-item" id="faq-3" onclick="toggleFAQ(3)">
+            <div class="faq-q">
+              <span>How are the player radar scores calculated?</span>
+              <span class="toggle">+</span>
+            </div>
+            <div class="faq-a">Each of the six radar attributes (Shooting, Passing, Dribbling, Defending, Physical, Vision) is a composite of several underlying metrics, weighted by positional importance. For example, a striker's Shooting score weights shot conversion and xG per shot heavily, while a midfielder's Passing score weights key passes, progressive passes, and pass accuracy. All scores are normalized to 0–100 against positional peers.</div>
+          </div>
+          <div class="faq-item" id="faq-4" onclick="toggleFAQ(4)">
+            <div class="faq-q">
+              <span>Will you add more players and teams?</span>
+              <span class="toggle">+</span>
+            </div>
+            <div class="faq-a">The current focus is Arsenal's first team with coverage of key rivals for context. We plan to expand the player dashboard to cover the full squad and add head-to-head team comparison features for Champions League analysis.</div>
+          </div>
+          <div class="faq-item" id="faq-5" onclick="toggleFAQ(5)">
+            <div class="faq-q">
+              <span>How is the site affiliated with Arsenal FC?</span>
+              <span class="toggle">+</span>
+            </div>
+            <div class="faq-a">It isn't. Arsenal Analytics is an independent fan project operating under beyondthebasics.me. It has no official relationship with Arsenal FC, the Premier League, or any official data providers. All analysis represents personal editorial opinion.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -455,3 +556,4 @@ function toggleFAQ(idx) {
 </script>
 </body>
 </html>
+

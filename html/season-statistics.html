@@ -15,10 +15,13 @@
 <body>
 
 <nav class="nav">
-  <div class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <div class="nav-logo-icon">AFC</div>
-    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
-  </div>
+    <div>
+      <span class="nav-logo-text">Arsenal Analytics</span>
+      <span class="nav-logo-sub">Beyond the Basics</span>
+    </div>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html" class="nav-link">Home</a></li>
     <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
@@ -266,9 +269,15 @@ async function loadData() {
       <table style="width:100%;border-collapse:collapse;">
         <thead>
           <tr style="border-bottom:1px solid var(--border);">
-            ${['Player','Pos','Apps','Goals','Assists','G+A','xG','xA','xG+xA'].map(h =>
-              `<th style="padding:10px 16px;text-align:${h==='Player'?'left':'center'};font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">${h}</th>`
-            ).join('')}
+            <th style="padding:10px 16px;text-align:left;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">Player</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">Pos</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">Apps</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">Goals</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">Assists</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">G+A</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">xG</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">xA</th>
+            <th style="padding:10px 16px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">xG+xA</th>
           </tr>
         </thead>
         <tbody>
@@ -357,3 +366,4 @@ loadData();
 </script>
 </body>
 </html>
+
