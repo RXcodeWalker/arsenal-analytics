@@ -89,4 +89,15 @@ test.describe("page smoke — data-driven UI", () => {
     await expect(statsComp.locator(".loader")).toHaveCount(0, { timeout: 15_000 });
     await expect(statsComp).toContainText(/Shots|Possession|Corners/i);
   });
+
+  test("contact page: header, mailto link, and form", async ({ page }) => {
+    await page.goto("/html/contact.html", { waitUntil: "domcontentloaded" });
+
+    await expect(page.locator(".page-header")).toBeVisible();
+    await expect(page.locator(".page-header h1")).toContainText(/Touch/i);
+    await expect(
+      page.locator('a.btn.btn-primary[href^="mailto:hello@beyondthebasics.me"]')
+    ).toBeVisible();
+    await expect(page.locator("#contact-form")).toBeVisible();
+  });
 });
