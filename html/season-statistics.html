@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Season Statistics — Arsenal Analytics</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AFC</div>
+    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
+    <li><a href="player-dashboard.html" class="nav-link">Players</a></li>
+    <li><a href="season-statistics.html" class="nav-link active">Season Stats</a></li>
+    <li><a href="transfer-radar.html" class="nav-link">Transfer Radar</a></li>
+    <li><a href="tactical-articles.html" class="nav-link">Articles</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span class="nav-badge">2024/25</span>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="match-analysis.html" class="mobile-nav-link">Match Analysis</a>
+  <a href="player-dashboard.html" class="mobile-nav-link">Players</a>
+  <a href="season-statistics.html" class="mobile-nav-link active">Season Stats</a>
+  <a href="transfer-radar.html" class="mobile-nav-link">Transfer Radar</a>
+  <a href="tactical-articles.html" class="mobile-nav-link">Articles</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="container">
+    <div class="page-header">
+      <div class="section-label">Season Statistics</div>
+      <h1 class="display-2">2024/25 <span style="color:var(--red);">Season</span></h1>
+      <p class="text-secondary" style="margin-top:8px;font-size:14px;">Full season metrics, trends and team analysis</p>
+    </div>
+
+    <!-- Season Summary Strip -->
+    <div class="grid-4" style="margin-bottom:32px;" id="season-summary-strip"></div>
+
+    <!-- Record Summary -->
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px 32px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:0;position:relative;overflow:hidden;" id="season-record">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(239,1,7,0.04) 0%,transparent 50%);pointer-events:none;"></div>
+    </div>
+
+    <!-- xG Monthly Chart -->
+    <div class="grid-2" style="margin-bottom:32px;">
+      <div class="chart-wrapper" style="grid-column:span 2;">
+        <div class="chart-header">
+          <div>
+            <span class="card-title">Monthly xG & Goals</span>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Attacking output trend across the season</div>
+          </div>
+          <div style="display:flex;gap:12px;font-size:11px;color:var(--text-secondary);font-family:var(--font-mono);">
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:var(--red);border-radius:2px;display:inline-block;"></span> xG For</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#4A6CF7;border-radius:2px;display:inline-block;"></span> xG Against</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:var(--gold);border-radius:2px;display:inline-block;"></span> Goals</span>
+          </div>
+        </div>
+        <div class="chart-body" style="height:280px;">
+          <canvas id="monthly-xg-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:32px;">
+      <!-- Points Accumulation -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">Points Accumulation</span>
+        </div>
+        <div class="chart-body" style="height:240px;">
+          <canvas id="points-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Team Radar (Season) -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">Team Profile</span>
+          <div style="font-size:11px;color:var(--text-muted);">Percentile rank vs PL teams</div>
+        </div>
+        <div class="chart-body" style="display:flex;align-items:center;justify-content:center;">
+          <div style="width:280px;height:280px;">
+            <canvas id="team-radar-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player Goals & Assists Table -->
+    <div class="card" style="margin-bottom:32px;">
+      <div class="card-header">
+        <span class="card-title">Player Contributions</span>
+        <span class="badge badge-gold">Goals + Assists Ranking</span>
+      </div>
+      <div class="card-body p-0" id="player-contributions-table"></div>
+    </div>
+
+    <!-- Press Stats -->
+    <div class="grid-2" style="margin-bottom:32px;">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Pressing Metrics</span>
+          <span class="badge badge-red">High Press</span>
+        </div>
+        <div class="card-body" id="press-metrics"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Defensive Record</span>
+        </div>
+        <div class="card-body" id="defensive-record"></div>
+      </div>
+    </div>
+
+    <!-- Polar chart - all metrics -->
+    <div class="chart-wrapper">
+      <div class="chart-header">
+        <span class="card-title">Season Strengths Overview</span>
+        <div style="font-size:11px;color:var(--text-muted);">Relative performance across key metrics (% of max)</div>
+      </div>
+      <div class="chart-body" style="display:flex;align-items:center;justify-content:center;padding:32px;">
+        <div style="width:340px;height:340px;">
+          <canvas id="season-polar-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;border:none;">
+      <span>© 2025 arsenal.beyondthebasics.me</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="https://beyondthebasics.me" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">beyondthebasics.me</a>
+        <a href="index.html" style="color:var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/charts.js"></script>
+<script>
+async function loadData() {
+  const matchData  = await fetch('../data/matches.json').then(r=>r.json()).catch(()=>null);
+  const playerData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
+
+  if (!matchData) return;
+  const ss = matchData.seasonStats;
+
+  // Summary strip
+  const strip = [
+    { label: 'League Position', val: `${ss.position}st`, color: 'var(--gold)' },
+    { label: 'Points', val: ss.points, color: 'var(--red)' },
+    { label: 'Goal Difference', val: `+${ss.goalsFor - ss.goalsAgainst}`, color: '' },
+    { label: 'xG Diff.', val: `+${(ss.xGFor - ss.xGAgainst).toFixed(1)}`, color: 'var(--gold)' },
+  ];
+  document.getElementById('season-summary-strip').innerHTML = strip.map(s => `
+    <div class="stat-card">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value" style="${s.color?'color:'+s.color:''}">${s.val}</div>
+    </div>
+  `).join('');
+
+  // Record row
+  const record = [
+    { label: 'Played', val: ss.played },
+    { label: 'Won', val: ss.won, color: '#4ADE80' },
+    { label: 'Drawn', val: ss.drawn, color: 'var(--gold)' },
+    { label: 'Lost', val: ss.lost, color: 'var(--red)' },
+    { label: 'Clean Sheets', val: ss.cleanSheets },
+  ];
+  document.getElementById('season-record').innerHTML = record.map(r => `
+    <div style="text-align:center;padding:16px;position:relative;z-index:1;${r.label!=='Played'?'border-left:1px solid var(--border)':''};">
+      <div style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;line-height:1;color:${r.color||'var(--white)'};">${r.val}</div>
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin-top:6px;">${r.label}</div>
+    </div>
+  `).join('');
+
+  // Monthly xG chart
+  setTimeout(() => createMonthlyXGChart('monthly-xg-chart', ss.monthlyXG), 100);
+
+  // Points accumulation
+  setTimeout(() => {
+    const pts = [];
+    let running = 0;
+    ss.form.forEach((r,i) => {
+      running += r==='W' ? 3 : r==='D' ? 1 : 0;
+      pts.push(running);
+    });
+    new Chart(document.getElementById('points-chart'), {
+      type: 'line',
+      data: {
+        labels: ss.form.map((_,i) => `GW${22+i}`),
+        datasets: [{
+          label: 'Points',
+          data: pts,
+          borderColor: '#EF0107',
+          backgroundColor: 'rgba(239,1,7,0.08)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: pts.map((p,i) => ss.form[i]==='W' ? '#4ADE80' : ss.form[i]==='D' ? '#C8A84B' : '#EF0107'),
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(255,255,255,0.04)' } }
+        }
+      }
+    });
+  }, 200);
+
+  // Team radar
+  setTimeout(() => {
+    const labels = ['xG For', 'Press (PPDA)', 'Possession', 'Pass Acc.', 'Clean Sheets', 'Field Tilt'];
+    // Normalize to 0-100 scale vs PL max
+    const vals = [
+      Math.round((ss.xGFor / 75) * 100),
+      Math.round(((14 - ss.ppda) / 8) * 100),
+      Math.round((ss.avgPossession / 65) * 100),
+      88,
+      Math.round((ss.cleanSheets / 18) * 100),
+      Math.round((ss.fieldTilt / 70) * 100),
+    ];
+    createRadarChart('team-radar-chart', labels, [{
+      label: 'Arsenal 24/25',
+      data: vals,
+      borderColor: '#EF0107',
+      backgroundColor: 'rgba(239,1,7,0.1)',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#EF0107',
+      pointRadius: 4,
+    }]);
+  }, 300);
+
+  // Player contributions
+  if (playerData?.players) {
+    const sorted = [...playerData.players].sort((a,b) => (b.stats.goals+b.stats.assists) - (a.stats.goals+a.stats.assists));
+    document.getElementById('player-contributions-table').innerHTML = `
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            ${['Player','Pos','Apps','Goals','Assists','G+A','xG','xA','xG+xA'].map(h =>
+              `<th style="padding:10px 16px;text-align:${h==='Player'?'left':'center'};font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;">${h}</th>`
+            ).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${sorted.map((p,i) => `
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.03);transition:background 0.15s;" onmouseover="this.style.background='var(--bg-hover)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:12px 16px;display:flex;align-items:center;gap:10px;">
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);width:16px;">${i+1}</span>
+                <a href="player-dashboard.html?id=${p.id}" style="font-weight:600;font-size:13px;color:var(--white);text-decoration:none;">${p.name}</a>
+              </td>
+              <td style="padding:12px 16px;text-align:center;"><span class="badge badge-gray">${p.position}</span></td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:12px;">${p.stats.appearances}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--red);">${p.stats.goals}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:13px;font-weight:600;">${p.stats.assists}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--gold);">${p.stats.goals+p.stats.assists}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:12px;">${p.stats.xG}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:12px;">${p.stats.xA}</td>
+              <td style="padding:12px 16px;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--gold);">${(p.stats.xG+p.stats.xA).toFixed(1)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  // Press metrics
+  document.getElementById('press-metrics').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:12px;color:var(--text-secondary);">PPDA (lower = more intense)</span>
+          <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--red);">${ss.ppda}</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${Math.round((14-ss.ppda)/10*100)}%;background:var(--red);"></div></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">PL Average: ~11.2 · Elite threshold: <8.0</div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:12px;color:var(--text-secondary);">High Press Recoveries</span>
+          <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;">${ss.highPressRecoveries}</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:82%;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:12px;color:var(--text-secondary);">Field Tilt %</span>
+          <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--gold);">${ss.fieldTilt}%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${ss.fieldTilt}%;background:var(--gold);"></div></div>
+      </div>
+    </div>
+  `;
+
+  // Defensive record
+  document.getElementById('defensive-record').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:var(--bg-raised);padding:14px;border-radius:var(--radius-md);text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#4ADE80;">${ss.cleanSheets}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Clean Sheets</div>
+      </div>
+      <div style="background:var(--bg-raised);padding:14px;border-radius:var(--radius-md);text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--gold);">${ss.goalsAgainst}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Goals Against</div>
+      </div>
+      <div style="background:var(--bg-raised);padding:14px;border-radius:var(--radius-md);text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;">${ss.xGAgainst.toFixed(1)}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">xGA</div>
+      </div>
+      <div style="background:var(--bg-raised);padding:14px;border-radius:var(--radius-md);text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--red);">${(ss.goalsAgainst/ss.played).toFixed(2)}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Goals per Game</div>
+      </div>
+    </div>
+  `;
+
+  // Season polar
+  setTimeout(() => {
+    createPolarChart('season-polar-chart',
+      ['Attack (xG)', 'Defending', 'Pressing', 'Possession', 'Set Pieces', 'Transition'],
+      [86, 88, 82, 78, 72, 84],
+      'Arsenal 24/25'
+    );
+  }, 400);
+}
+
+loadData();
+</script>
+</body>
+</html>

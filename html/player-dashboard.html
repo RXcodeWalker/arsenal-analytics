@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Dashboard — Arsenal Analytics</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AFC</div>
+    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
+    <li><a href="player-dashboard.html" class="nav-link active">Players</a></li>
+    <li><a href="season-statistics.html" class="nav-link">Season Stats</a></li>
+    <li><a href="transfer-radar.html" class="nav-link">Transfer Radar</a></li>
+    <li><a href="tactical-articles.html" class="nav-link">Articles</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span class="nav-badge">2024/25</span>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="match-analysis.html" class="mobile-nav-link">Match Analysis</a>
+  <a href="player-dashboard.html" class="mobile-nav-link active">Players</a>
+  <a href="season-statistics.html" class="mobile-nav-link">Season Stats</a>
+  <a href="transfer-radar.html" class="mobile-nav-link">Transfer Radar</a>
+  <a href="tactical-articles.html" class="mobile-nav-link">Articles</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="container">
+    <div class="page-header">
+      <div class="section-label">Player Dashboard</div>
+      <h1 class="display-2">Player <span style="color:var(--red);">Analytics</span></h1>
+      <p class="text-secondary" style="margin-top:8px;font-size:14px;">Radar charts · Shot maps · Season stats · Progressive passes</p>
+    </div>
+
+    <!-- Player Selector -->
+    <div style="margin-bottom:40px;">
+      <div class="section-label">Select Player</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" id="player-selector"></div>
+    </div>
+
+    <!-- Player Profile Header -->
+    <div id="player-profile-header" style="margin-bottom:32px;"></div>
+
+    <!-- Stats Overview Strip -->
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:32px;" id="player-stats-strip"></div>
+
+    <!-- Main Content Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+      <!-- Radar Chart -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <div>
+            <span class="card-title">Performance Radar</span>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Overall attribute profile (out of 100)</div>
+          </div>
+        </div>
+        <div class="chart-body" style="display:flex;align-items:center;justify-content:center;padding:24px;">
+          <div style="width:100%;max-width:320px;aspect-ratio:1;">
+            <canvas id="player-radar-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Stats Table -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">Season Statistics</span>
+          <span class="badge badge-gray">2024/25</span>
+        </div>
+        <div class="chart-body p-0" id="player-stats-table" style="max-height:360px;overflow-y:auto;padding:0;"></div>
+      </div>
+    </div>
+
+    <!-- Shot Map + Progressive Passes -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+      <!-- Shot Map -->
+      <div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;">
+          <span class="card-title">Shot Map</span>
+          <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">Size = xG value</div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:16px;">
+          <canvas id="player-shot-map" width="480" height="320" style="width:100%;height:auto;border-radius:var(--radius-md);"></canvas>
+          <div style="display:flex;justify-content:center;gap:20px;margin-top:12px;" id="player-shot-legend">
+            <span style="font-size:11px;color:#4ADE80;font-family:var(--font-mono);display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#EF0107;display:inline-block;"></span> Goal</span>
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;border:2px solid #EF0107;display:inline-block;"></span> Saved</span>
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:rgba(239,1,7,0.3);display:inline-block;"></span> Off Target</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble Chart - Progressive Actions -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <div>
+            <span class="card-title">Progressive Actions</span>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Passes vs Carries · Bubble size = xG</div>
+          </div>
+        </div>
+        <div class="chart-body" style="height:300px;">
+          <canvas id="progressive-bubble-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Per 90 Stats Bar Chart -->
+    <div class="chart-wrapper" style="margin-bottom:32px;">
+      <div class="chart-header">
+        <span class="card-title">Attacking Contributions per 90 Mins</span>
+        <span class="badge badge-gold">All Squad Players</span>
+      </div>
+      <div class="chart-body" style="height:220px;">
+        <canvas id="per90-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Form & Minutes -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <!-- Match Form -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Recent Form</span>
+          <span class="badge badge-gray">Last 10 Matches</span>
+        </div>
+        <div class="card-body" id="player-form-section">
+        </div>
+      </div>
+
+      <!-- Minutes Played Breakdown -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Season Overview</span>
+        </div>
+        <div class="card-body" id="player-season-overview">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;border:none;">
+      <span>© 2025 arsenal.beyondthebasics.me</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="https://beyondthebasics.me" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">beyondthebasics.me</a>
+        <a href="index.html" style="color:var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/charts.js"></script>
+<script>
+let playersData = null;
+let shotsData = null;
+let currentPlayer = null;
+
+async function loadData() {
+  playersData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
+  shotsData   = await fetch('../data/shots.json').then(r=>r.json()).catch(()=>null);
+
+  if (playersData?.players) {
+    renderPlayerSelector(playersData.players);
+
+    // Check URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = parseInt(urlParams.get('id')) || playersData.players[0].id;
+    const player = playersData.players.find(p=>p.id===id) || playersData.players[0];
+    selectPlayer(player);
+
+    // Render bubble for all players
+    setTimeout(() => {
+      createBubbleChart('progressive-bubble-chart', playersData.players);
+    }, 300);
+
+    // Per-90 chart
+    setTimeout(() => {
+      const names = playersData.players.map(p=>p.name.split(' ').pop());
+      const per90 = playersData.players.map(p => ((p.stats.goals + p.stats.assists) / (p.stats.minutesPlayed/90)).toFixed(2));
+      createHorizontalBar('per90-chart', names, per90.map(Number), '#EF0107');
+    }, 400);
+  }
+}
+
+function renderPlayerSelector(players) {
+  const el = document.getElementById('player-selector');
+  el.innerHTML = players.map(p => `
+    <button class="player-card" style="width:120px;flex-shrink:0;text-align:center;" id="psel-${p.id}" onclick="selectPlayer(playersData.players.find(x=>x.id===${p.id}))">
+      <div style="padding:12px 8px;">
+        <div class="player-position-badge" style="font-size:9px;padding:2px 6px;">${p.position}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--white);margin-top:6px;line-height:1.2;">${p.name}</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">#${p.number}</div>
+      </div>
+    </button>
+  `).join('');
+}
+
+function selectPlayer(player) {
+  currentPlayer = player;
+
+  // Update selector
+  document.querySelectorAll('[id^="psel-"]').forEach(el => el.classList.remove('selected'));
+  const sel = document.getElementById(`psel-${player.id}`);
+  if (sel) sel.classList.add('selected');
+
+  renderProfileHeader(player);
+  renderStatsStrip(player);
+  renderRadar(player);
+  renderStatsTable(player);
+  renderShotMap(player);
+  renderForm(player);
+  renderSeasonOverview(player);
+}
+
+function renderProfileHeader(p) {
+  document.getElementById('player-profile-header').innerHTML = `
+    <div style="background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-card2) 100%);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px 32px;display:flex;align-items:center;gap:32px;overflow:hidden;position:relative;">
+      <div style="position:absolute;right:-20px;top:-20px;font-family:'Playfair Display',serif;font-size:180px;font-weight:900;color:rgba(239,1,7,0.04);line-height:1;pointer-events:none;">${p.number}</div>
+
+      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:white;flex-shrink:0;position:relative;">
+        ${p.name.split(' ').map(n=>n[0]).join('')}
+        <div style="position:absolute;inset:-2px;border-radius:50%;border:2px solid rgba(239,1,7,0.3);"></div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="section-label" style="margin-bottom:6px;">${p.position} · #${p.number}</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;line-height:1;letter-spacing:-0.5px;">${p.name}</h2>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+          <span class="badge badge-gray">${p.nationality}</span>
+          <span class="badge badge-gray">Age ${p.age}</span>
+          <span class="badge badge-red">${p.stats.appearances} Apps</span>
+          <span class="badge badge-gold">${p.stats.minutesPlayed.toLocaleString()} mins</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:24px;flex-shrink:0;">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--red);line-height:1;">${p.stats.goals}</div>
+          <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">Goals</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;line-height:1;">${p.stats.assists}</div>
+          <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">Assists</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1;">${p.stats.xG}</div>
+          <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">xG</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderStatsStrip(p) {
+  const strip = [
+    { label: 'Shots', value: p.stats.shots, sub: `${p.stats.shotsOnTarget} on target` },
+    { label: 'Key Passes', value: p.stats.keyPasses, sub: 'per game: ' + (p.stats.keyPasses/p.stats.appearances).toFixed(1) },
+    { label: 'Prog. Passes', value: p.stats.progressivePasses, sub: 'Total progressive' },
+    { label: 'Dribbles', value: `${p.stats.dribbleSuccess}/${p.stats.dribbles}`, sub: `${Math.round(p.stats.dribbleSuccess/p.stats.dribbles*100)}% success` },
+    { label: 'Pass Acc.', value: p.stats.passAccuracy + '%', sub: 'Season average' },
+    { label: 'xA', value: p.stats.xA, sub: 'Expected assists' },
+  ];
+
+  document.getElementById('player-stats-strip').innerHTML = strip.map(s => `
+    <div class="stat-card" style="text-align:center;">
+      <div class="stat-label">${s.label}</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;line-height:1;margin:4px 0;">${s.value}</div>
+      <div style="font-size:10px;color:var(--text-muted);">${s.sub}</div>
+    </div>
+  `).join('');
+}
+
+function renderRadar(p) {
+  const labels = ['Shooting', 'Passing', 'Dribbling', 'Defending', 'Physical', 'Vision'];
+  const values = [p.radar.shooting, p.radar.passing, p.radar.dribbling, p.radar.defending, p.radar.physical, p.radar.vision];
+
+  setTimeout(() => {
+    createRadarChart('player-radar-chart', labels, [{
+      label: p.name,
+      data: values,
+      borderColor: '#EF0107',
+      backgroundColor: 'rgba(239,1,7,0.12)',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#EF0107',
+      pointRadius: 4,
+      pointHoverRadius: 6,
+    }]);
+  }, 100);
+}
+
+function renderStatsTable(p) {
+  const rows = [
+    { cat: 'Attacking', stats: [
+      { name: 'Goals', val: p.stats.goals },
+      { name: 'xG', val: p.stats.xG },
+      { name: 'Shots', val: p.stats.shots },
+      { name: 'Shots on Target', val: p.stats.shotsOnTarget },
+      { name: 'Shot Accuracy', val: `${Math.round(p.stats.shotsOnTarget/p.stats.shots*100)}%` },
+    ]},
+    { cat: 'Creating', stats: [
+      { name: 'Assists', val: p.stats.assists },
+      { name: 'xA (Exp. Assists)', val: p.stats.xA },
+      { name: 'Key Passes', val: p.stats.keyPasses },
+      { name: 'Prog. Passes', val: p.stats.progressivePasses },
+      { name: 'Prog. Carries', val: p.stats.progressiveCarries },
+    ]},
+    { cat: 'Duels', stats: [
+      { name: 'Dribbles Attempted', val: p.stats.dribbles },
+      { name: 'Dribbles Completed', val: `${p.stats.dribbleSuccess} (${Math.round(p.stats.dribbleSuccess/p.stats.dribbles*100)}%)` },
+      { name: 'Aerial Won', val: p.stats.aerialWon },
+      { name: 'Aerial Lost', val: p.stats.aerialLost },
+    ]},
+    { cat: 'Defensive', stats: [
+      { name: 'Tackles', val: p.stats.tackles },
+      { name: 'Interceptions', val: p.stats.interceptions },
+      { name: 'Pressures', val: p.stats.pressures },
+      { name: 'Pressure Success', val: `${p.stats.pressureSuccess}%` },
+    ]},
+  ];
+
+  document.getElementById('player-stats-table').innerHTML = rows.map(cat => `
+    <div style="padding:12px 20px 0;">
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:4px;">${cat.cat}</div>
+    </div>
+    ${cat.stats.map(s => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 20px;border-bottom:1px solid rgba(255,255,255,0.03);">
+        <span style="font-size:12px;color:var(--text-secondary);">${s.name}</span>
+        <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--white);">${s.val}</span>
+      </div>
+    `).join('')}
+  `).join('');
+}
+
+function renderShotMap(p) {
+  setTimeout(() => {
+    const shots = shotsData?.shots?.player_saka?.shots || [];
+    const canvas = document.getElementById('player-shot-map');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    drawPitch(ctx, W, H);
+
+    // Only show attacking half (right side)
+    shots.forEach(shot => {
+      const px = (shot.x / 100) * W;
+      const py = (shot.y / 100) * H;
+      const r = 5 + shot.xG * 16;
+      const isGoal = shot.outcome === 'Goal';
+      const isSaved = shot.outcome === 'Saved';
+
+      ctx.beginPath();
+      ctx.arc(px, py, r, 0, Math.PI * 2);
+      if (isGoal) {
+        ctx.fillStyle = 'rgba(239,1,7,0.85)';
+        ctx.strokeStyle = '#FF6B6B';
+        ctx.lineWidth = 2;
+        ctx.fill(); ctx.stroke();
+      } else if (isSaved) {
+        ctx.fillStyle = 'transparent';
+        ctx.strokeStyle = 'rgba(239,1,7,0.7)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = 'rgba(239,1,7,0.2)';
+        ctx.strokeStyle = 'rgba(239,1,7,0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.fill(); ctx.stroke();
+      }
+    });
+  }, 200);
+}
+
+function renderForm(p) {
+  const form = p.form;
+  const results = form.map(r => r===1 ? 'W' : r===0 ? 'D' : 'L');
+  document.getElementById('player-form-section').innerHTML = `
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+      ${results.map((r,i) => `
+        <div style="text-align:center;">
+          <div class="form-dot ${r.toLowerCase()}">${r}</div>
+          <div style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);margin-top:3px;">GW${31-results.length+i+1}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="display:flex;gap:20px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#4ADE80;">${results.filter(r=>r==='W').length}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Won</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);">${results.filter(r=>r==='D').length}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Drawn</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--red);">${results.filter(r=>r==='L').length}</div>
+        <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Lost</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderSeasonOverview(p) {
+  const per90Goals = (p.stats.goals / (p.stats.minutesPlayed/90)).toFixed(2);
+  const per90Assists = (p.stats.assists / (p.stats.minutesPlayed/90)).toFixed(2);
+  const shotConversion = Math.round((p.stats.goals / p.stats.shots) * 100);
+
+  document.getElementById('player-season-overview').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:12px;color:var(--text-secondary);">Minutes Played</span>
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;">${p.stats.minutesPlayed.toLocaleString()}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${Math.round(p.stats.minutesPlayed/(p.stats.appearances*90)*100)}%;background:var(--red);"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:var(--bg-raised);padding:12px;border-radius:var(--radius-md);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--red);">${per90Goals}</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Goals / 90</div>
+        </div>
+        <div style="background:var(--bg-raised);padding:12px;border-radius:var(--radius-md);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;">${per90Assists}</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Assists / 90</div>
+        </div>
+        <div style="background:var(--bg-raised);padding:12px;border-radius:var(--radius-md);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);">${shotConversion}%</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Shot Conv.</div>
+        </div>
+        <div style="background:var(--bg-raised);padding:12px;border-radius:var(--radius-md);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;">${p.stats.passAccuracy}%</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Pass Acc.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+loadData();
+</script>
+</body>
+</html>

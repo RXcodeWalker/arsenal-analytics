@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Arsenal Analytics</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .method-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .method-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .method-card:hover::before { transform: scaleX(1); }
+    .method-card:hover { border-color: var(--border-red); }
+
+    .method-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .method-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .method-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .glossary-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .glossary-item:last-child { border: none; }
+    .glossary-term {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.5px;
+      padding-top: 2px;
+    }
+    .glossary-def {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .timeline-item:last-child { border: none; }
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding-top: 3px;
+    }
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .timeline-body {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .faq-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .faq-item:last-child { border: none; }
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-q .toggle {
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-top: 12px;
+      display: none;
+    }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .toggle { transform: rotate(45deg); color: var(--red); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AFC</div>
+    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
+    <li><a href="player-dashboard.html" class="nav-link">Players</a></li>
+    <li><a href="season-statistics.html" class="nav-link">Season Stats</a></li>
+    <li><a href="transfer-radar.html" class="nav-link">Transfer Radar</a></li>
+    <li><a href="tactical-articles.html" class="nav-link">Articles</a></li>
+    <li><a href="about.html" class="nav-link active">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span class="nav-badge">2024/25</span>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="match-analysis.html" class="mobile-nav-link">Match Analysis</a>
+  <a href="player-dashboard.html" class="mobile-nav-link">Players</a>
+  <a href="season-statistics.html" class="mobile-nav-link">Season Stats</a>
+  <a href="transfer-radar.html" class="mobile-nav-link">Transfer Radar</a>
+  <a href="tactical-articles.html" class="mobile-nav-link">Articles</a>
+  <a href="about.html" class="mobile-nav-link active">About</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="section-label">About</div>
+      <h1 class="display-2">Beyond the <span style="color:var(--red);">Basics</span></h1>
+      <p class="text-secondary" style="margin-top:8px;font-size:14px;">Why this site exists, how it works, and the methodology behind every number</p>
+    </div>
+
+    <!-- Mission Statement -->
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;margin-bottom:64px;">
+      <div>
+        <div class="section-label">The Mission</div>
+        <h2 class="heading-1" style="margin-bottom:20px;font-size:1.6rem;">Football is underexplained.<br>We're here to fix that.</h2>
+        <div style="font-size:15px;color:var(--text-secondary);line-height:1.8;max-width:580px;">
+          <p style="margin-bottom:16px;">Match reports tell you what happened. xG tells you what <em style="color:var(--gold);">should</em> have happened. Neither one tells you <em style="color:var(--gold);">why</em>. Arsenal Analytics exists to answer the why.</p>
+          <p style="margin-bottom:16px;">This platform is built for Arsenal supporters who want to understand the game at a deeper level — who want to know not just that Arteta's press is elite, but what PPDA is, how it's measured, and exactly where the press broke down in the Liverpool draw.</p>
+          <p>Every number on this site is paired with context. Every chart comes with an explanation. We don't assume you're a data scientist. We assume you care about Arsenal and want to understand them better.</p>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+          <a href="tactical-articles.html" class="btn btn-primary">Read the Analysis</a>
+          <a href="match-analysis.html" class="btn btn-outline">Match Data</a>
+        </div>
+      </div>
+
+      <!-- Quick facts card -->
+      <div class="card" style="position:sticky;top:calc(var(--nav-height) + 20px);">
+        <div class="card-header">
+          <span class="card-title">Site at a Glance</span>
+          <span class="badge badge-green"><span class="live-dot" style="gap:4px;"><span></span>Live</span></span>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:0;">
+            ${[
+              { label: 'Season', val: '2024/25 PL' },
+              { label: 'Data Points', val: '12,000+' },
+              { label: 'Matches Tracked', val: '31' },
+              { label: 'Players Profiled', val: '6 (growing)' },
+              { label: 'Articles Published', val: '6' },
+              { label: 'Transfer Targets', val: '3 Scouted' },
+              { label: 'Charts & Visuals', val: '20+ per match' },
+              { label: 'Last Updated', val: 'Apr 6, 2025' },
+            ].map(item => `
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">${item.label}</span>
+                <span style="font-size:13px;font-weight:600;color:var(--white);">${item.val}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="callout" style="margin-top:20px;margin-bottom:0;">
+            <div class="callout-title">Data Disclaimer</div>
+            <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;margin-top:4px;">All data on this platform is illustrative and for analytical demonstration. Not affiliated with Arsenal FC or the Premier League.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology Cards -->
+    <div style="margin-bottom:64px;">
+      <div class="section-label">Methodology</div>
+      <h2 class="heading-1" style="margin-bottom:8px;">How We Work</h2>
+      <p class="text-secondary" style="margin-bottom:32px;font-size:14px;">The analytical frameworks and metrics that power every page on this site</p>
+
+      <div class="grid-3">
+        <div class="method-card">
+          <span class="method-icon">📐</span>
+          <div class="method-title">Expected Goals (xG)</div>
+          <div class="method-desc">xG quantifies the quality of a shot by calculating the probability of it resulting in a goal, based on factors including distance, angle, shot type, and the preceding action. We use xG to assess whether a result reflects true performance or variance.</div>
+        </div>
+        <div class="method-card">
+          <span class="method-icon">⚡</span>
+          <div class="method-title">PPDA (Press Intensity)</div>
+          <div class="method-desc">Passes Allowed Per Defensive Action measures how aggressively a team presses. Calculated by dividing opposition passes in their own half by the defending team's defensive actions in that zone. Lower = more intense. Arsenal's 7.8 is among the Premier League's elite.</div>
+        </div>
+        <div class="method-card">
+          <span class="method-icon">🎯</span>
+          <div class="method-title">Progressive Actions</div>
+          <div class="method-desc">Progressive passes and carries are actions that move the ball significantly closer to the opponent's goal — typically defined as moving the ball at least 10 yards toward goal, or into the final third. These are key indicators of a player's ability to advance play.</div>
+        </div>
+        <div class="method-card">
+          <span class="method-icon">🔵</span>
+          <div class="method-title">Radar Profiles</div>
+          <div class="method-desc">Player radar charts map six core attributes — Shooting, Passing, Dribbling, Defending, Physical, and Vision — each scored from 0 to 100. Scores represent a composite of relevant underlying metrics, normalized to a percentile within the player's positional peer group.</div>
+        </div>
+        <div class="method-card">
+          <span class="method-icon">🗺️</span>
+          <div class="method-title">Shot Maps</div>
+          <div class="method-desc">Shot maps plot every attempt on a scaled pitch representation. Bubble size indicates xG value. Goals, saved shots, and off-target efforts are visually differentiated. This allows spatial analysis of where a player or team generates their best opportunities.</div>
+        </div>
+        <div class="method-card">
+          <span class="method-icon">📊</span>
+          <div class="method-title">Field Tilt</div>
+          <div class="method-desc">Field tilt measures the percentage of total final-third touches that belong to one team. An alternative to possession metrics, it focuses specifically on territorial dominance in the attacking third — the zone that most directly correlates with goalscoring opportunities.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- xG Glossary -->
+    <div class="card" style="margin-bottom:64px;">
+      <div class="card-header">
+        <span class="card-title">Analytics Glossary</span>
+        <span class="badge badge-gray">Quick Reference</span>
+      </div>
+      <div class="card-body">
+        ${[
+          { term: 'xG', def: 'Expected Goals. The probability of a shot resulting in a goal, expressed as a decimal between 0 and 1. A 0.72 xG shot is expected to be scored roughly 72% of the time.' },
+          { term: 'xA', def: 'Expected Assists. Applied to passes that lead to shots. A pass is given an xA value equivalent to the xG of the shot it created.' },
+          { term: 'npxG', def: 'Non-Penalty Expected Goals. xG with penalty shots excluded, providing a purer measure of open-play attacking quality.' },
+          { term: 'PPDA', def: 'Passes Allowed Per Defensive Action. Measures pressing intensity. Arsenal\'s 7.8 means they allow roughly 8 opposition passes per defensive action — well below the league average of ~11.' },
+          { term: 'Field Tilt', def: 'The percentage of combined final-third touches belonging to one team. Arsenal\'s 62.4% means they dominate the attacking third in virtually every game.' },
+          { term: 'Prog. Pass', def: 'A progressive pass moves the ball at least 10 yards toward the opponent\'s goal, or into the final third. A key indicator of ball-progressing ability.' },
+          { term: 'Prog. Carry', def: 'A progressive carry moves the ball with control at least 10 yards toward the opponent\'s goal. Bubbles on the Progressive Actions chart represent these carries.' },
+          { term: 'G/A', def: 'Goals plus Assists. The standard combined output metric. Used in the player contribution tables on the Season Stats page.' },
+          { term: 'xG/Shot', def: 'Average xG per shot attempt. Higher values indicate a player is generating and taking higher-quality shots. Saka\'s 0.15 per shot is well above average.' },
+          { term: 'Shot Conversion', def: 'Goals divided by total shots, expressed as a percentage. The gap between shot conversion and xG conversion reveals over or underperformance.' },
+        ].map(item => `
+          <div class="glossary-item">
+            <div class="glossary-term">${item.term}</div>
+            <div class="glossary-def">${item.def}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Site History Timeline -->
+    <div style="margin-bottom:64px;">
+      <div class="section-label">Site History</div>
+      <h2 class="heading-1" style="margin-bottom:32px;">How We Got Here</h2>
+      <div class="card">
+        <div class="card-body">
+          ${[
+            { date: 'Aug 2024', title: 'Season 2024/25 begins', body: 'Arsenal Analytics launches for the new Premier League season. Match data tracking begins from Gameweek 1.' },
+            { date: 'Sep 2024', title: 'Player Dashboard added', body: 'Full radar chart profiling introduced for six first-team regulars. Shot map visualizations go live.' },
+            { date: 'Nov 2024', title: 'Tactical Articles launched', body: 'The editorial section opens with three deep-dive analyses. The half-space article becomes the most-read piece on the site.' },
+            { date: 'Jan 2025', title: 'Transfer Radar added', body: 'Scouting comparison tool launches ahead of the January window. Wirtz, Gyökeres, and Yamal profiled.' },
+            { date: 'Mar 2025', title: 'Season Statistics overhauled', body: 'Full seasonal trend charts, pressing metrics, and monthly xG breakdowns introduced.' },
+            { date: 'Apr 2025', title: 'Chelsea 3-1 — deep dive', body: 'The most comprehensive single-match analysis on the site. Every shot plotted, every key moment explained.' },
+          ].map(item => `
+            <div class="timeline-item">
+              <div class="timeline-date">${item.date}</div>
+              <div>
+                <div class="timeline-title">${item.title}</div>
+                <div class="timeline-body">${item.body}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div style="margin-bottom:64px;">
+      <div class="section-label">Under the Hood</div>
+      <h2 class="heading-1" style="margin-bottom:32px;">Built With</h2>
+      <div class="grid-4">
+        ${[
+          { icon: '🌐', name: 'HTML5', desc: 'Semantic markup, accessibility-first structure' },
+          { icon: '🎨', name: 'CSS3', desc: 'Custom properties, Grid, animations — zero frameworks' },
+          { icon: '⚙️', name: 'Vanilla JS', desc: 'No build tools, no bundlers. Pure ES6+' },
+          { icon: '📈', name: 'Chart.js 4', desc: 'Radar, bar, line, doughnut, bubble, polar charts' },
+          { icon: '📦', name: 'JSON Data', desc: 'Structured datasets for matches, players, shots' },
+          { icon: '🚀', name: 'Static Deploy', desc: 'Netlify / Vercel. Zero server, instant load' },
+          { icon: '🔤', name: 'Google Fonts', desc: 'Playfair Display · DM Sans · JetBrains Mono' },
+          { icon: '📱', name: 'Responsive', desc: 'Mobile-first, tested from 320px to 4K' },
+        ].map(item => `
+          <div class="stat-card" style="padding:20px;">
+            <div style="font-size:1.6rem;margin-bottom:8px;">${item.icon}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;color:var(--white);">${item.name}</div>
+            <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">${item.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-bottom:64px;">
+      <div class="section-label">FAQ</div>
+      <h2 class="heading-1" style="margin-bottom:32px;">Common Questions</h2>
+      <div class="card">
+        <div class="card-body" id="faq-container">
+          ${[
+            {
+              q: 'Is this data from official sources?',
+              a: 'The data on this platform is illustrative and curated for analytical demonstration purposes. Statistics are modelled to reflect realistic Premier League performance ranges for Arsenal in 2024/25, but this is not an official data provider and should not be cited as a primary source.'
+            },
+            {
+              q: 'What does it mean when a player "underperforms xG"?',
+              a: 'xG (Expected Goals) represents the probability of a shot resulting in a goal based on the chance quality. If a player scores 12 goals from 16.0 xG, they are underperforming their xG — the model expected them to score more. This can indicate poor finishing, or simply bad luck. Over a large sample, most players regress toward their xG.'
+            },
+            {
+              q: 'Why does Arsenal\'s possession % sometimes feel misleading?',
+              a: 'Possession statistics count all touches equally — a sideways pass in your own half counts the same as a progressive pass into the box. This is why we also track Field Tilt, which only measures touches in the attacking third. Arsenal\'s 56% possession with 62.4% field tilt tells a very specific story: they dominate the ball in the areas that matter most.'
+            },
+            {
+              q: 'How are the player radar scores calculated?',
+              a: 'Each of the six radar attributes (Shooting, Passing, Dribbling, Defending, Physical, Vision) is a composite of several underlying metrics, weighted by positional importance. For example, a striker\'s Shooting score weights shot conversion and xG per shot heavily, while a midfielder\'s Passing score weights key passes, progressive passes, and pass accuracy. All scores are normalized to 0–100 against positional peers.'
+            },
+            {
+              q: 'Will you add more players and teams?',
+              a: 'The current focus is Arsenal\'s first team with coverage of key rivals for context. We plan to expand the player dashboard to cover the full squad and add head-to-head team comparison features for Champions League analysis.'
+            },
+            {
+              q: 'How is the site affiliated with Arsenal FC?',
+              a: 'It isn\'t. Arsenal Analytics is an independent fan project operating under beyondthebasics.me. It has no official relationship with Arsenal FC, the Premier League, or any official data providers. All analysis represents personal editorial opinion.'
+            },
+          ].map((item, i) => `
+            <div class="faq-item" id="faq-${i}" onclick="toggleFAQ(${i})">
+              <div class="faq-q">
+                <span>${item.q}</span>
+                <span class="toggle">+</span>
+              </div>
+              <div class="faq-a">${item.a}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact / CTA -->
+    <div style="background:linear-gradient(135deg,rgba(239,1,7,0.06) 0%,rgba(200,168,75,0.03) 100%);border:1px solid rgba(239,1,7,0.12);border-radius:var(--radius-xl);padding:48px;text-align:center;margin-bottom:64px;">
+      <div class="section-label" style="justify-content:center;">Get In Touch</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:16px;">Questions, Corrections, Feedback?</h2>
+      <p class="text-secondary" style="max-width:480px;margin:0 auto 28px;font-size:14px;">If you've spotted an error, have a data question, or want to suggest an analysis topic — reach out. Good analytics improves with scrutiny.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:hello@beyondthebasics.me" class="btn btn-primary">Contact Us</a>
+        <a href="tactical-articles.html" class="btn btn-outline">Read the Analysis</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div class="nav-logo-icon">AFC</div>
+          <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;">Arsenal Analytics</span>
+        </div>
+        <p>The most detailed Arsenal football analytics platform. Data-driven insights beyond the box score.</p>
+        <p style="margin-top:8px;font-size:11px;color:var(--text-muted);">All data is illustrative and for demonstration purposes.</p>
+        <a href="https://beyondthebasics.me" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer" style="margin-top:14px;">beyondthebasics.me</a>
+      </div>
+      <div>
+        <div class="footer-heading">Analysis</div>
+        <div class="footer-links">
+          <a href="match-analysis.html" class="footer-link">Match Analysis</a>
+          <a href="player-dashboard.html" class="footer-link">Player Dashboard</a>
+          <a href="season-statistics.html" class="footer-link">Season Stats</a>
+          <a href="transfer-radar.html" class="footer-link">Transfer Radar</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Editorial</div>
+        <div class="footer-links">
+          <a href="tactical-articles.html" class="footer-link">Tactical Articles</a>
+          <a href="tactical-articles.html?article=chelsea-postmortem" class="footer-link">Match Reports</a>
+          <a href="tactical-articles.html?article=saka-breakdown" class="footer-link">Player Profiles</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">About</div>
+        <div class="footer-links">
+          <a href="about.html" class="footer-link">About the Site</a>
+          <a href="about.html#methodology" class="footer-link">Methodology</a>
+          <a href="mailto:hello@beyondthebasics.me" class="footer-link">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 arsenal.beyondthebasics.me · All Rights Reserved</span>
+      <span>Data is illustrative · Not affiliated with Arsenal FC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script>
+function toggleFAQ(idx) {
+  const item = document.getElementById(`faq-${idx}`);
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>

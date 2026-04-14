@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Analysis — Arsenal Analytics</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AFC</div>
+    <div>
+      <span class="nav-logo-text">Arsenal Analytics</span>
+      <span class="nav-logo-sub">Beyond the Basics</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="match-analysis.html" class="nav-link active">Match Analysis</a></li>
+    <li><a href="player-dashboard.html" class="nav-link">Players</a></li>
+    <li><a href="season-statistics.html" class="nav-link">Season Stats</a></li>
+    <li><a href="transfer-radar.html" class="nav-link">Transfer Radar</a></li>
+    <li><a href="tactical-articles.html" class="nav-link">Articles</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span class="nav-badge">2024/25</span>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="match-analysis.html" class="mobile-nav-link active">Match Analysis</a>
+  <a href="player-dashboard.html" class="mobile-nav-link">Players</a>
+  <a href="season-statistics.html" class="mobile-nav-link">Season Stats</a>
+  <a href="transfer-radar.html" class="mobile-nav-link">Transfer Radar</a>
+  <a href="tactical-articles.html" class="mobile-nav-link">Articles</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="container">
+    <div class="page-header">
+      <div class="section-label">Match Analysis</div>
+      <h1 class="display-2">Match <span style="color:var(--red);">Intelligence</span></h1>
+      <p class="text-secondary" style="margin-top:8px;font-size:14px;">xG timelines · Shot maps · Key stats · Tactical breakdowns</p>
+    </div>
+
+    <!-- Match Selector -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;" id="match-selector">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Match Header Card -->
+    <div id="match-header-card" style="margin-bottom:32px;">
+      <div class="loader"><div class="loader-spinner"></div></div>
+    </div>
+
+    <!-- Key Stats Strip -->
+    <div class="grid-4" id="key-stats-strip" style="margin-bottom:32px;"></div>
+
+    <!-- Main Charts Grid -->
+    <div class="grid-2" style="margin-bottom:32px;">
+
+      <!-- xG Timeline -->
+      <div class="chart-wrapper" style="grid-column:span 2;">
+        <div class="chart-header">
+          <div>
+            <span class="card-title">xG Timeline</span>
+            <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px;">Cumulative expected goals over 90 minutes</div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;" id="xg-legend"></div>
+        </div>
+        <div class="chart-body" style="height:260px;">
+          <canvas id="xg-timeline-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:32px;">
+      <!-- Shot Map -->
+      <div>
+        <div class="card-header" style="background:var(--bg-card);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:18px 24px;">
+          <span class="card-title">Shot Map</span>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;"></span> Arsenal
+            </span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);">
+              <span style="width:8px;height:8px;border-radius:50%;background:#4A6CF7;display:inline-block;"></span> Opponent
+            </span>
+          </div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:16px;">
+          <canvas id="shot-map-canvas" width="560" height="360" style="width:100%;height:auto;border-radius:var(--radius-md);"></canvas>
+          <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);display:flex;align-items:center;gap:6px;">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block;"></span> Goal
+            </span>
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);display:flex;align-items:center;gap:6px;">
+              <span style="width:10px;height:10px;border-radius:50%;border:2px solid var(--red);display:inline-block;"></span> Saved
+            </span>
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);display:flex;align-items:center;gap:6px;">
+              <span style="width:10px;height:10px;border-radius:50%;background:rgba(239,1,7,0.25);display:inline-block;"></span> Off Target
+            </span>
+            <span style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Size = xG</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Comparison -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">Stats Comparison</span>
+        </div>
+        <div class="chart-body" id="stats-comparison">
+          <div class="loader"><div class="loader-spinner"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Match Timeline Events -->
+    <div class="card" style="margin-bottom:32px;">
+      <div class="card-header">
+        <span class="card-title">Match Timeline</span>
+        <span class="badge badge-gray">Key Moments</span>
+      </div>
+      <div class="card-body" id="match-timeline">
+        <div class="loader"><div class="loader-spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- Possession Chart -->
+    <div class="grid-2">
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">Possession</span>
+        </div>
+        <div class="chart-body" style="display:flex;align-items:center;justify-content:center;gap:32px;padding:32px 24px;">
+          <div style="width:140px;height:140px;position:relative;">
+            <canvas id="possession-chart"></canvas>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;" id="poss-home-val">58%</span>
+              <span style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);">ARSENAL</span>
+            </div>
+          </div>
+          <div style="flex:1;" id="poss-breakdown"></div>
+        </div>
+      </div>
+
+      <!-- xG Summary -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <span class="card-title">xG Breakdown</span>
+        </div>
+        <div class="chart-body" id="xg-breakdown" style="padding:24px;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;border:none;">
+      <span>© 2025 arsenal.beyondthebasics.me</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="https://beyondthebasics.me" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">beyondthebasics.me</a>
+        <a href="index.html" style="color:var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/charts.js"></script>
+<script>
+let currentMatch = null;
+let matchData = null;
+let shotData = null;
+
+async function loadData() {
+  matchData = await fetch('../data/matches.json').then(r=>r.json()).catch(()=>null);
+  shotData  = await fetch('../data/shots.json').then(r=>r.json()).catch(()=>null);
+  if (matchData) {
+    renderMatchSelector(matchData.matches);
+    loadMatch(matchData.matches[0]);
+  }
+}
+
+function renderMatchSelector(matches) {
+  const el = document.getElementById('match-selector');
+  el.innerHTML = matches.map((m, i) => `
+    <button class="btn ${i===0?'btn-primary':'btn-ghost'} btn-sm" onclick="loadMatchById(${m.id})" id="match-btn-${m.id}">
+      ${m.homeTeam} ${m.homeScore}–${m.awayScore} ${m.awayTeam}
+      <span style="font-size:10px;opacity:0.6;margin-left:4px;">${m.date}</span>
+    </button>
+  `).join('');
+}
+
+function loadMatchById(id) {
+  const m = matchData.matches.find(x=>x.id===id);
+  if (!m) return;
+  // Update active buttons
+  document.querySelectorAll('[id^="match-btn-"]').forEach(btn => {
+    btn.className = 'btn btn-ghost btn-sm';
+  });
+  const activeBtn = document.getElementById(`match-btn-${id}`);
+  if (activeBtn) activeBtn.className = 'btn btn-primary btn-sm';
+  loadMatch(m);
+}
+
+function loadMatch(m) {
+  currentMatch = m;
+  renderMatchHeader(m);
+  renderKeyStats(m);
+  renderXGTimeline(m);
+  renderShotMap(m);
+  renderStatsComparison(m);
+  renderMatchTimeline(m);
+  renderPossession(m);
+  renderXGBreakdown(m);
+}
+
+function renderMatchHeader(m) {
+  const isArsenalHome = m.homeTeam === 'Arsenal';
+  const resultColor = m.result==='W' ? '#4ADE80' : m.result==='D' ? 'var(--gold)' : 'var(--red)';
+  const resultLabel = m.result==='W' ? '✓ Arsenal Win' : m.result==='D' ? '= Draw' : '✗ Arsenal Defeat';
+
+  document.getElementById('match-header-card').innerHTML = `
+    <div class="match-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;">${m.competition} · Matchweek ${m.matchweek}</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${m.date} · ${m.venue}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:${resultColor};">${resultLabel}</span>
+          <span class="badge badge-gray">${m.attendance?.toLocaleString()||'—'} attendance</span>
+        </div>
+      </div>
+
+      <div class="score-display">
+        <div class="score-team">
+          <div class="score-team-name" style="color:${isArsenalHome?'var(--red)':'var(--text-secondary)'};">${m.homeTeam}</div>
+          <div class="score-number">${m.homeScore}</div>
+          ${m.scorers ? `<div style="font-size:11px;color:var(--text-muted);text-align:center;">
+            ${m.scorers.filter(s=>s.team===m.homeTeam||(!s.team&&isArsenalHome)).map(s=>`${s.player} ${s.minute}'`).join(', ')}
+          </div>` : ''}
+        </div>
+
+        <div style="text-align:center;">
+          <div class="score-divider">–</div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-top:4px;">FT</div>
+        </div>
+
+        <div class="score-team">
+          <div class="score-team-name" style="color:${!isArsenalHome?'var(--red)':'var(--text-secondary)'};">${m.awayTeam}</div>
+          <div class="score-number">${m.awayScore}</div>
+          ${m.scorers ? `<div style="font-size:11px;color:var(--text-muted);text-align:center;">
+            ${m.scorers.filter(s=>s.team===m.awayTeam).map(s=>`${s.player} ${s.minute}'`).join(', ')}
+          </div>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderKeyStats(m) {
+  if (!m.stats) {
+    document.getElementById('key-stats-strip').innerHTML = '';
+    return;
+  }
+  const h = m.stats.home, a = m.stats.away;
+  const isHome = m.homeTeam === 'Arsenal';
+  const ars = isHome ? h : a, opp = isHome ? a : h;
+
+  const stats = [
+    { label: 'xG', val: ars.xG?.toFixed(2)||'—', sub: `vs ${opp.xG?.toFixed(2)||'—'} opp`, color: 'var(--red)' },
+    { label: 'Shots on Target', val: ars.shotsOnTarget||'—', sub: `${ars.shots} total shots`, color: '' },
+    { label: 'Pass Accuracy', val: `${ars.passAccuracy}%`, sub: `${ars.passes} passes`, color: 'var(--gold)' },
+    { label: 'PPDA', val: ars.ppda||'—', sub: 'Passes allowed per def. action', color: '' },
+  ];
+
+  document.getElementById('key-stats-strip').innerHTML = stats.map(s => `
+    <div class="stat-card">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value ${s.color ? '' : ''}" style="${s.color ? 'color:'+s.color : ''}">${s.val}</div>
+      <div class="stat-change neutral">${s.sub}</div>
+    </div>
+  `).join('');
+}
+
+function renderXGTimeline(m) {
+  if (!m.xgTimeline) return;
+  setTimeout(() => {
+    createXGTimeline('xg-timeline-chart', m.xgTimeline, m.homeTeam, m.awayTeam);
+  }, 100);
+
+  // Legend
+  document.getElementById('xg-legend').innerHTML = `
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);font-family:var(--font-mono);">
+      <span style="width:16px;height:3px;background:var(--red);border-radius:2px;display:inline-block;"></span> ${m.homeTeam} ${m.stats?.home?.xG?.toFixed(2)||''}
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);font-family:var(--font-mono);">
+      <span style="width:16px;height:3px;background:#4A6CF7;border-radius:2px;display:inline-block;"></span> ${m.awayTeam} ${m.stats?.away?.xG?.toFixed(2)||''}
+    </span>
+  `;
+}
+
+function renderShotMap(m) {
+  setTimeout(() => {
+    const matchShots = shotData?.shots?.match_1?.shots || [];
+    createShotMap('shot-map-canvas', matchShots, m.homeTeam);
+  }, 150);
+}
+
+function renderStatsComparison(m) {
+  if (!m.stats) return;
+  const h = m.stats.home, a = m.stats.away;
+  const isHome = m.homeTeam === 'Arsenal';
+
+  const comparisons = [
+    { label: 'xG', home: h.xG, away: a.xG, format: v=>v?.toFixed(2) },
+    { label: 'Shots', home: h.shots, away: a.shots, format: v=>v },
+    { label: 'On Target', home: h.shotsOnTarget, away: a.shotsOnTarget, format: v=>v },
+    { label: 'Possession', home: h.possession, away: a.possession, format: v=>v+'%' },
+    { label: 'Pass Acc.', home: h.passAccuracy, away: a.passAccuracy, format: v=>v+'%' },
+    { label: 'Corners', home: h.corners, away: a.corners, format: v=>v },
+    { label: 'Fouls', home: h.fouls, away: a.fouls, format: v=>v },
+    { label: 'Yellow Cards', home: h.yellowCards, away: a.yellowCards, format: v=>v },
+  ];
+
+  const total_row = (item) => {
+    const total = (item.home||0) + (item.away||0);
+    const homeWidth = total > 0 ? Math.round((item.home/total)*100) : 50;
+    const awayWidth = 100 - homeWidth;
+    return `
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);">
+        <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;width:36px;text-align:right;color:${isHome?'var(--white)':'var(--text-secondary)'};">${item.format(item.home)}</span>
+        <div style="flex:1;display:flex;gap:2px;align-items:center;height:6px;">
+          <div style="height:100%;border-radius:3px 0 0 3px;background:var(--red);width:${homeWidth}%;transition:width 0.8s ease;"></div>
+          <div style="height:100%;border-radius:0 3px 3px 0;background:#4A6CF7;width:${awayWidth}%;transition:width 0.8s ease;"></div>
+        </div>
+        <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;width:36px;color:${!isHome?'var(--white)':'var(--text-secondary)'};">${item.format(item.away)}</span>
+        <span style="font-size:10px;color:var(--text-muted);width:72px;text-align:center;font-family:var(--font-mono);letter-spacing:0.5px;">${item.label}</span>
+      </div>
+    `;
+  };
+
+  document.getElementById('stats-comparison').innerHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+      <span style="font-size:12px;font-weight:700;color:var(--red);">${m.homeTeam}</span>
+      <span style="font-size:12px;font-weight:700;color:#4A6CF7;">${m.awayTeam}</span>
+    </div>
+    ${comparisons.map(total_row).join('')}
+  `;
+}
+
+function renderMatchTimeline(m) {
+  if (!m.keyMoments) {
+    document.getElementById('match-timeline').innerHTML = '<p class="text-muted" style="text-align:center;padding:20px;">Timeline not available for this match.</p>';
+    return;
+  }
+
+  document.getElementById('match-timeline').innerHTML = `
+    <div class="timeline">
+      ${m.keyMoments.map((ev, i) => {
+        const isArsenal = ev.team === 'Arsenal';
+        const side = isArsenal ? 'home' : 'away';
+        const icon = ev.event === 'GOAL' ? '⚽' : ev.event === 'SAVE' ? '🧤' : ev.event === 'YELLOW' ? '🟨' : '📋';
+        return `
+          <div class="timeline-event ${side}">
+            <div class="timeline-content">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span>${icon}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:1px;color:${isArsenal?'var(--red)':'#4A6CF7'};">${ev.event}</span>
+              </div>
+              <div style="font-size:12px;color:var(--text-secondary);">${ev.description}</div>
+            </div>
+            <div class="timeline-minute">${ev.minute}'</div>
+            <div style="width:calc(50% - 60px);"></div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderPossession(m) {
+  if (!m.stats) return;
+  const h = m.stats.home, a = m.stats.away;
+  setTimeout(() => {
+    createPossessionChart('possession-chart', h.possession, a.possession, m.homeTeam, m.awayTeam);
+  }, 200);
+
+  document.getElementById('poss-home-val').textContent = h.possession + '%';
+  document.getElementById('poss-breakdown').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:12px;color:var(--red);font-weight:600;">${m.homeTeam}</span>
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;">${h.possession}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="${h.possession}" style="background:var(--red);"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:12px;color:#4A6CF7;font-weight:600;">${m.awayTeam}</span>
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;">${a.possession}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="${a.possession}" style="background:#4A6CF7;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  // Re-init progress bars
+  setTimeout(() => {
+    document.querySelectorAll('.progress-fill[data-width]').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+  }, 300);
+}
+
+function renderXGBreakdown(m) {
+  if (!m.stats) return;
+  const h = m.stats.home, a = m.stats.away;
+  const isHome = m.homeTeam === 'Arsenal';
+  const arsXG = (isHome ? h.xG : a.xG) || 0;
+  const oppXG = (isHome ? a.xG : h.xG) || 0;
+  const arsGoals = isHome ? m.homeScore : m.awayScore;
+  const oppGoals = isHome ? m.awayScore : m.homeScore;
+
+  document.getElementById('xg-breakdown').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <div style="background:var(--bg-raised);border-radius:var(--radius-md);padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:1px;">ARSENAL xG</div>
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--red);">${arsXG.toFixed(2)}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:1px;">GOALS</div>
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;">${arsGoals}</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:${arsGoals > arsXG ? '#4ADE80' : arsGoals < arsXG ? 'var(--red)' : 'var(--gold)'};">
+          ${arsGoals > arsXG ? `↑ Overperformed xG by +${(arsGoals-arsXG).toFixed(2)}` :
+            arsGoals < arsXG ? `↓ Underperformed xG by ${(arsGoals-arsXG).toFixed(2)}` :
+            '= Performed to xG'}
+        </div>
+      </div>
+
+      <div style="background:var(--bg-raised);border-radius:var(--radius-md);padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:1px;">OPPONENT xG</div>
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#4A6CF7;">${oppXG.toFixed(2)}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:1px;">GOALS</div>
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;">${oppGoals}</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:${oppGoals > oppXG ? 'var(--red)' : '#4ADE80'};">
+          ${oppGoals > oppXG ? `↑ They overperformed xG by +${(oppGoals-oppXG).toFixed(2)}` : `↓ We limited them — conceded less than expected`}
+        </div>
+      </div>
+
+      <div style="font-family:var(--font-mono);font-size:11px;text-align:center;color:var(--text-muted);">
+        xG Difference: <strong style="color:${arsXG>oppXG?'var(--red)':'#4A6CF7'};">
+          ${arsXG>oppXG?'+':''}${(arsXG-oppXG).toFixed(2)}
+        </strong> in Arsenal's favor
+      </div>
+    </div>
+  `;
+}
+
+loadData();
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+{
+  "matches": [
+    {
+      "id": 1,
+      "date": "2025-04-06",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Chelsea",
+      "homeScore": 3,
+      "awayScore": 1,
+      "competition": "Premier League",
+      "matchweek": 31,
+      "venue": "Emirates Stadium",
+      "attendance": 60288,
+      "result": "W",
+      "stats": {
+        "home": {
+          "possession": 58,
+          "shots": 18,
+          "shotsOnTarget": 8,
+          "xG": 2.84,
+          "passes": 612,
+          "passAccuracy": 88,
+          "corners": 7,
+          "fouls": 9,
+          "yellowCards": 1,
+          "redCards": 0,
+          "offsides": 2,
+          "saves": 4,
+          "ppda": 7.2,
+          "highPress": 38,
+          "counterpressRecoveries": 12
+        },
+        "away": {
+          "possession": 42,
+          "shots": 12,
+          "shotsOnTarget": 5,
+          "xG": 1.42,
+          "passes": 424,
+          "passAccuracy": 81,
+          "corners": 3,
+          "fouls": 14,
+          "yellowCards": 3,
+          "redCards": 0,
+          "offsides": 3,
+          "saves": 5,
+          "ppda": 11.4,
+          "highPress": 22,
+          "counterpressRecoveries": 7
+        }
+      },
+      "scorers": [
+        { "player": "Bukayo Saka", "minute": 23, "type": "goal" },
+        { "player": "Kai Havertz", "minute": 51, "type": "goal" },
+        { "player": "Kai Havertz", "minute": 78, "type": "goal" },
+        { "player": "Nicolas Jackson", "minute": 64, "type": "goal", "team": "Chelsea" }
+      ],
+      "assists": [
+        { "player": "Martin Ødegaard", "minute": 23 },
+        { "player": "Bukayo Saka", "minute": 51 },
+        { "player": "Gabriel Martinelli", "minute": 78 }
+      ],
+      "xgTimeline": [
+        { "minute": 8, "team": "home", "xg": 0.08, "cumHome": 0.08, "cumAway": 0.00 },
+        { "minute": 14, "team": "away", "xg": 0.12, "cumHome": 0.08, "cumAway": 0.12 },
+        { "minute": 23, "team": "home", "xg": 0.72, "cumHome": 0.80, "cumAway": 0.12, "goal": true },
+        { "minute": 31, "team": "home", "xg": 0.18, "cumHome": 0.98, "cumAway": 0.12 },
+        { "minute": 38, "team": "away", "xg": 0.24, "cumHome": 0.98, "cumAway": 0.36 },
+        { "minute": 44, "team": "home", "xg": 0.09, "cumHome": 1.07, "cumAway": 0.36 },
+        { "minute": 51, "team": "home", "xg": 0.48, "cumHome": 1.55, "cumAway": 0.36, "goal": true },
+        { "minute": 57, "team": "away", "xg": 0.14, "cumHome": 1.55, "cumAway": 0.50 },
+        { "minute": 64, "team": "away", "xg": 0.58, "cumHome": 1.55, "cumAway": 1.08, "goal": true },
+        { "minute": 68, "team": "home", "xg": 0.22, "cumHome": 1.77, "cumAway": 1.08 },
+        { "minute": 72, "team": "away", "xg": 0.19, "cumHome": 1.77, "cumAway": 1.27 },
+        { "minute": 78, "team": "home", "xg": 0.68, "cumHome": 2.45, "cumAway": 1.27, "goal": true },
+        { "minute": 83, "team": "home", "xg": 0.21, "cumHome": 2.66, "cumAway": 1.27 },
+        { "minute": 87, "team": "away", "xg": 0.15, "cumHome": 2.66, "cumAway": 1.42 },
+        { "minute": 90, "team": "home", "xg": 0.18, "cumHome": 2.84, "cumAway": 1.42 }
+      ],
+      "keyMoments": [
+        { "minute": 23, "event": "GOAL", "description": "Saka fires low into the bottom corner after Ødegaard's through ball", "team": "Arsenal" },
+        { "minute": 38, "event": "SAVE", "description": "Raya denies Palmer with a stunning low save", "team": "Arsenal" },
+        { "minute": 51, "event": "GOAL", "description": "Havertz heads home after Saka's driven cross", "team": "Arsenal" },
+        { "minute": 64, "event": "GOAL", "description": "Jackson pulls one back with a close-range finish", "team": "Chelsea" },
+        { "minute": 78, "event": "GOAL", "description": "Havertz seals it with a cool finish after Martinelli's assist", "team": "Arsenal" }
+      ]
+    },
+    {
+      "id": 2,
+      "date": "2025-03-30",
+      "homeTeam": "Fulham",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 2,
+      "competition": "Premier League",
+      "matchweek": 30,
+      "venue": "Craven Cottage",
+      "attendance": 25700,
+      "result": "W",
+      "stats": {
+        "home": {
+          "possession": 38,
+          "shots": 9,
+          "shotsOnTarget": 3,
+          "xG": 0.82,
+          "passes": 384,
+          "passAccuracy": 78,
+          "corners": 2,
+          "fouls": 12,
+          "yellowCards": 2,
+          "redCards": 0,
+          "offsides": 1,
+          "saves": 4
+        },
+        "away": {
+          "possession": 62,
+          "shots": 16,
+          "shotsOnTarget": 6,
+          "xG": 2.14,
+          "passes": 628,
+          "passAccuracy": 91,
+          "corners": 6,
+          "fouls": 7,
+          "yellowCards": 0,
+          "redCards": 0,
+          "offsides": 1,
+          "saves": 3
+        }
+      },
+      "scorers": [
+        { "player": "Gabriel Martinelli", "minute": 34, "type": "goal" },
+        { "player": "Declan Rice", "minute": 67, "type": "goal" }
+      ],
+      "xgTimeline": [
+        { "minute": 12, "team": "away", "xg": 0.14, "cumHome": 0.00, "cumAway": 0.14 },
+        { "minute": 19, "team": "home", "xg": 0.11, "cumHome": 0.11, "cumAway": 0.14 },
+        { "minute": 27, "team": "away", "xg": 0.22, "cumHome": 0.11, "cumAway": 0.36 },
+        { "minute": 34, "team": "away", "xg": 0.54, "cumHome": 0.11, "cumAway": 0.90, "goal": true },
+        { "minute": 41, "team": "home", "xg": 0.28, "cumHome": 0.39, "cumAway": 0.90 },
+        { "minute": 48, "team": "away", "xg": 0.18, "cumHome": 0.39, "cumAway": 1.08 },
+        { "minute": 55, "team": "home", "xg": 0.24, "cumHome": 0.63, "cumAway": 1.08 },
+        { "minute": 61, "team": "away", "xg": 0.32, "cumHome": 0.63, "cumAway": 1.40 },
+        { "minute": 67, "team": "away", "xg": 0.46, "cumHome": 0.63, "cumAway": 1.86, "goal": true },
+        { "minute": 74, "team": "home", "xg": 0.19, "cumHome": 0.82, "cumAway": 1.86 },
+        { "minute": 83, "team": "away", "xg": 0.28, "cumHome": 0.82, "cumAway": 2.14 }
+      ]
+    },
+    {
+      "id": 3,
+      "date": "2025-03-22",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Liverpool",
+      "homeScore": 1,
+      "awayScore": 1,
+      "competition": "Premier League",
+      "matchweek": 29,
+      "venue": "Emirates Stadium",
+      "attendance": 60360,
+      "result": "D",
+      "stats": {
+        "home": {
+          "possession": 51,
+          "shots": 14,
+          "shotsOnTarget": 5,
+          "xG": 1.64,
+          "passes": 548,
+          "passAccuracy": 86,
+          "corners": 5,
+          "fouls": 11,
+          "yellowCards": 2,
+          "redCards": 0,
+          "offsides": 3,
+          "saves": 6
+        },
+        "away": {
+          "possession": 49,
+          "shots": 16,
+          "shotsOnTarget": 7,
+          "xG": 1.92,
+          "passes": 524,
+          "passAccuracy": 84,
+          "corners": 4,
+          "fouls": 13,
+          "yellowCards": 1,
+          "redCards": 0,
+          "offsides": 2,
+          "saves": 4
+        }
+      }
+    },
+    {
+      "id": 4,
+      "date": "2025-03-15",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Man City",
+      "homeScore": 2,
+      "awayScore": 0,
+      "competition": "Premier League",
+      "matchweek": 28,
+      "venue": "Emirates Stadium",
+      "attendance": 60350,
+      "result": "W"
+    },
+    {
+      "id": 5,
+      "date": "2025-03-09",
+      "homeTeam": "Brentford",
+      "awayTeam": "Arsenal",
+      "homeScore": 1,
+      "awayScore": 3,
+      "competition": "Premier League",
+      "matchweek": 27,
+      "venue": "Gtech Community Stadium",
+      "attendance": 17250,
+      "result": "W"
+    }
+  ],
+  "seasonStats": {
+    "played": 31,
+    "won": 22,
+    "drawn": 6,
+    "lost": 3,
+    "goalsFor": 68,
+    "goalsAgainst": 24,
+    "xGFor": 64.2,
+    "xGAgainst": 22.8,
+    "points": 72,
+    "position": 1,
+    "form": ["W","W","D","W","W","W","D","W","L","W"],
+    "cleanSheets": 14,
+    "avgPossession": 56.4,
+    "avgShots": 16.8,
+    "avgShotsOnTarget": 6.2,
+    "ppda": 7.8,
+    "fieldTilt": 62.4,
+    "highPressRecoveries": 428,
+    "monthlyXG": [
+      { "month": "Aug", "xGFor": 8.4, "xGAgainst": 3.2, "goals": 9 },
+      { "month": "Sep", "xGFor": 9.2, "xGAgainst": 2.8, "goals": 11 },
+      { "month": "Oct", "xGFor": 7.8, "xGAgainst": 4.1, "goals": 8 },
+      { "month": "Nov", "xGFor": 8.6, "xGAgainst": 3.4, "goals": 10 },
+      { "month": "Dec", "xGFor": 9.8, "xGAgainst": 2.6, "goals": 12 },
+      { "month": "Jan", "xGFor": 6.4, "xGAgainst": 2.2, "goals": 7 },
+      { "month": "Feb", "xGFor": 7.2, "xGAgainst": 2.1, "goals": 6 },
+      { "month": "Mar", "xGFor": 7.8, "xGAgainst": 2.4, "goals": 5 }
+    ]
+  }
+}

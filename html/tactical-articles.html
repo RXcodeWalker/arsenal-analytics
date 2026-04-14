@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactical Articles — Arsenal Analytics</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Article-specific styles ── */
+    .article-page { display: none; }
+    .article-page.active { display: block; }
+    .articles-index.hidden { display: none; }
+
+    .prose {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      max-width: 720px;
+    }
+    .prose h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 36px 0 14px;
+      letter-spacing: -0.3px;
+    }
+    .prose h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 28px 0 10px;
+    }
+    .prose p { margin-bottom: 20px; }
+    .prose strong { color: var(--white); font-weight: 600; }
+    .prose em { color: var(--gold); font-style: normal; }
+
+    .article-hero-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .article-hero-tag::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--red);
+      padding: 20px 24px;
+      margin: 32px 0;
+      background: rgba(239,1,7,0.04);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.5;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .stat-embed {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin: 28px 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .stat-embed-item { text-align: center; }
+    .stat-embed-val {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-embed-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      position: sticky;
+      top: calc(var(--nav-height) + 20px);
+    }
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .toc-link {
+      display: block;
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .toc-link:last-child { border: none; }
+    .toc-link:hover { color: var(--white); }
+
+    .tag-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tag-btn { cursor: pointer; transition: var(--transition); }
+    .tag-btn.active { background: rgba(239,1,7,0.2); color: #FF6B6B; border-color: rgba(239,1,7,0.4); }
+
+    .diagram-embed {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin: 28px 0;
+      text-align: center;
+    }
+    .diagram-caption {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AFC</div>
+    <div><span class="nav-logo-text">Arsenal Analytics</span><span class="nav-logo-sub">Beyond the Basics</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="match-analysis.html" class="nav-link">Match Analysis</a></li>
+    <li><a href="player-dashboard.html" class="nav-link">Players</a></li>
+    <li><a href="season-statistics.html" class="nav-link">Season Stats</a></li>
+    <li><a href="transfer-radar.html" class="nav-link">Transfer Radar</a></li>
+    <li><a href="tactical-articles.html" class="nav-link active">Articles</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span class="nav-badge">2024/25</span>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="match-analysis.html" class="mobile-nav-link">Match Analysis</a>
+  <a href="player-dashboard.html" class="mobile-nav-link">Players</a>
+  <a href="season-statistics.html" class="mobile-nav-link">Season Stats</a>
+  <a href="transfer-radar.html" class="mobile-nav-link">Transfer Radar</a>
+  <a href="tactical-articles.html" class="mobile-nav-link active">Articles</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- ── INDEX VIEW ──────────────────────────────────────── -->
+    <div id="articles-index" class="articles-index">
+      <div class="page-header">
+        <div class="section-label">Editorial</div>
+        <h1 class="display-2">Tactical <span style="color:var(--red);">Articles</span></h1>
+        <p class="text-secondary" style="margin-top:8px;font-size:14px;">In-depth analysis · Data-backed breakdowns · Arteta's Arsenal decoded</p>
+      </div>
+
+      <!-- Tag Filters -->
+      <div class="tag-filter" id="tag-filters"></div>
+
+      <!-- Featured Article -->
+      <div style="margin-bottom:48px;" id="featured-article-container"></div>
+
+      <!-- Article Grid -->
+      <div class="section-label">All Articles</div>
+      <div class="grid-3" id="articles-grid-full"></div>
+    </div>
+
+    <!-- ── ARTICLE PAGES ────────────────────────────────────── -->
+    <div id="article-container"></div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;border:none;">
+      <span>© 2025 arsenal.beyondthebasics.me</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="https://beyondthebasics.me" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">beyondthebasics.me</a>
+        <a href="index.html" style="color:var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/charts.js"></script>
+<script>
+// ─── Articles Data ──────────────────────────────────────────────────────────
+const articles = [
+  {
+    id: 'half-space-invasion',
+    title: 'The Half-Space Invasion: How Arteta\'s 4-3-3 Creates Overloads',
+    excerpt: 'Arsenal\'s dominance in the half-spaces between the opposition\'s defence and midfield is no accident. We examine the positional rotations and pressing triggers that make this system devastating in transition.',
+    category: 'Tactical Analysis',
+    date: 'Apr 6, 2025',
+    readTime: '8 min',
+    emoji: '📊',
+    featured: true,
+    tags: ['Tactical', 'xG', 'Formation'],
+    content: 'half-space-invasion'
+  },
+  {
+    id: 'saka-breakdown',
+    title: 'Bukayo Saka: The Right Wing Perfected',
+    excerpt: 'A comprehensive data breakdown of Saka\'s 2024/25 season — where he shoots, how he creates, and what his progressive stats reveal about his evolution into a genuine world-class player.',
+    category: 'Player Profile',
+    date: 'Apr 2, 2025',
+    readTime: '6 min',
+    emoji: '⚡',
+    featured: false,
+    tags: ['Player Profile', 'Shot Map', 'Data'],
+    content: 'saka-breakdown'
+  },
+  {
+    id: 'ppda-analysis',
+    title: 'Measuring Arsenal\'s Press: PPDA and Beyond',
+    excerpt: 'Arsenal\'s 7.8 PPDA ranks among the elite. We examine what drives their defensive intensity and where the system gets stretched — and what that means for title contention.',
+    category: 'Press Analysis',
+    date: 'Mar 28, 2025',
+    readTime: '10 min',
+    emoji: '🔴',
+    featured: false,
+    tags: ['Press', 'Defensive', 'PPDA'],
+    content: 'ppda-analysis'
+  },
+  {
+    id: 'odegaard-vision',
+    title: 'Ødegaard\'s Vision: Mapping Arsenal\'s Creative Hub',
+    excerpt: 'How does Ødegaard create chances that shouldn\'t exist? We chart his passing networks, press-escaping movements, and the subtle positional triggers that unlock defenses.',
+    category: 'Tactical Analysis',
+    date: 'Mar 20, 2025',
+    readTime: '9 min',
+    emoji: '🎯',
+    featured: false,
+    tags: ['Tactical', 'Player Profile', 'Passing'],
+    content: 'odegaard-vision'
+  },
+  {
+    id: 'rice-engine',
+    title: 'Declan Rice: The Engine That Keeps Arsenal Running',
+    excerpt: 'Rice\'s impact on Arsenal goes far beyond tackles and interceptions. This is a full breakdown of his contribution to buildup play, press triggers, and late attacking runs.',
+    category: 'Player Profile',
+    date: 'Mar 14, 2025',
+    readTime: '7 min',
+    emoji: '⚙️',
+    featured: false,
+    tags: ['Player Profile', 'Defensive', 'Data'],
+    content: 'rice-engine'
+  },
+  {
+    id: 'chelsea-postmortem',
+    title: 'Arsenal 3-1 Chelsea: A Full xG Postmortem',
+    excerpt: 'With a 2.84 xG to 1.42, the scoreline barely told the full story. We break down every chance, every key decision, and how Arteta\'s setup exposed Chelsea\'s high defensive line.',
+    category: 'Match Analysis',
+    date: 'Apr 6, 2025',
+    readTime: '12 min',
+    emoji: '📋',
+    featured: false,
+    tags: ['Match Report', 'xG', 'Tactical'],
+    content: 'chelsea-postmortem'
+  }
+];
+
+// ─── Article Full Content ───────────────────────────────────────────────────
+const articleContent = {
+  'half-space-invasion': {
+    sections: [
+      {
+        heading: 'What Is the Half-Space?',
+        body: `<p>The half-space — the corridor between the wide channel and the central lane — is the most contested real estate in modern football. It's narrow enough to be awkward to defend, yet central enough to create genuine goal threat. Arteta's Arsenal doesn't just use it. They weaponize it.</p>
+        <p>When you chart Arsenal's touch maps from the 2024/25 season, a pattern emerges almost immediately: the highest density of progressive actions clusters between the width of the penalty area and the touchline, in that left and right channel approximately 30-50 yards from goal. That is the half-space. And Arsenal are there more than anyone.</p>`
+      },
+      {
+        heading: 'The Rotation Mechanism',
+        body: `<p>The genius of Arteta's system is its disguised fluidity. On paper it's a 4-3-3. In practice, the attacking shape is <strong>constantly shifting</strong> through a series of pre-rehearsed positional rotations that drag defenders out of shape.</p>
+        <p>The core rotation works as follows: when the ball reaches a fullback, the nearest midfielder (typically Rice or Ødegaard) drifts toward the half-space to create a triangle. Simultaneously, the wide forward pins the opposition fullback and the striker checks in to occupy the central defender. This creates a <em>3v2 situation in the half-space before the ball has even moved</em>.</p>
+        <div class="diagram-embed">
+          <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" style="width:80%;max-width:340px;">
+            <rect width="340" height="220" fill="#0D1F0D"/>
+            <rect x="4" y="4" width="332" height="212" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="170" y1="4" x2="170" y2="216" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <!-- Half-space highlight zone -->
+            <rect x="230" y="20" width="50" height="180" fill="rgba(239,1,7,0.07)" stroke="rgba(239,1,7,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="255" y="14" fill="rgba(239,1,7,0.5)" font-size="7" font-family="monospace" text-anchor="middle">HALF SPACE</text>
+            <!-- Right penalty area -->
+            <rect x="284" y="72" width="52" height="76" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <!-- Players -->
+            <circle cx="42" cy="110" r="7" fill="#EF0107" stroke="white" stroke-width="1.5"/><text x="42" y="113" fill="white" font-size="8" text-anchor="middle" font-weight="bold">FB</text>
+            <circle cx="120" cy="80" r="7" fill="#C8A84B" stroke="white" stroke-width="1.5"/><text x="120" y="83" fill="white" font-size="8" text-anchor="middle" font-weight="bold">8</text>
+            <circle cx="250" cy="90" r="7" fill="white" stroke="#EF0107" stroke-width="1.5"/><text x="250" y="93" fill="#EF0107" font-size="8" text-anchor="middle" font-weight="bold">7</text>
+            <circle cx="300" cy="110" r="7" fill="#EF0107" stroke="white" stroke-width="1.5"/><text x="300" y="113" fill="white" font-size="8" text-anchor="middle" font-weight="bold">9</text>
+            <!-- Movement arrows -->
+            <path d="M49 110 Q150 100 243 90" stroke="rgba(239,1,7,0.5)" stroke-width="1.5" fill="none" marker-end="url(#arrow-r)"/>
+            <path d="M127 80 Q190 90 243 96" stroke="rgba(200,168,75,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-g)"/>
+            <!-- Def line -->
+            <circle cx="260" cy="60" r="6" fill="rgba(74,108,247,0.8)" stroke="white" stroke-width="1"/><text x="260" y="63" fill="white" font-size="7" text-anchor="middle">D</text>
+            <circle cx="290" cy="75" r="6" fill="rgba(74,108,247,0.8)" stroke="white" stroke-width="1"/><text x="290" y="78" fill="white" font-size="7" text-anchor="middle">D</text>
+            <circle cx="260" cy="130" r="6" fill="rgba(74,108,247,0.8)" stroke="white" stroke-width="1"/><text x="260" y="133" fill="white" font-size="7" text-anchor="middle">D</text>
+            <defs>
+              <marker id="arrow-r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="rgba(239,1,7,0.8)"/></marker>
+              <marker id="arrow-g" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="rgba(200,168,75,0.8)"/></marker>
+            </defs>
+          </svg>
+          <div class="diagram-caption">Arsenal's half-space overload mechanism — fullback drives, #8 drifts, creating 3v2</div>
+        </div>
+        <p>What makes this almost impossible to defend is the timing. The midfielder's drift into the half-space is triggered by the fullback receiving possession — not by a verbal cue, but by position. The movement is automatic. By the time the defensive midfielder tracks the run, the pass has already been played.</p>`
+      },
+      {
+        heading: 'The Numbers Tell the Story',
+        body: `<div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">62.4%</div><div class="stat-embed-label">Field Tilt</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">2.84</div><div class="stat-embed-label">xG vs Chelsea</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">142</div><div class="stat-embed-label">Saka Prog. Passes</div></div>
+        </div>
+        <p>Arsenal's 62.4% field tilt is the second-best in the Premier League. But the aggregate number undersells the truth. In games where Arsenal successfully occupied the half-space — which correlates directly to positional rotations working as designed — the field tilt jumps to <strong>68–72%</strong>.</p>
+        <p>In the Chelsea match, Arsenal created 6 of their 8 shots on target from half-space entry passes. Saka's opener at 23 minutes is the perfect illustration: an Ødegaard through ball into the right half-space, arriving as Saka's run dragged the left centre-back out of position. The result was a 0.72 xG chance — practically unmissable at Premier League level.</p>`
+      },
+      {
+        heading: 'Where It Can Break Down',
+        body: `<p>No system is invulnerable. Arsenal's half-space reliance creates a specific vulnerability: the transition. When possession is lost in the half-space, the midfield triangle is already displaced, and the fullback who drove forward is exposed.</p>
+        <div class="pull-quote"><p>"The half-space is Arsenal's greatest weapon and their greatest risk. Arteta has made his bet — and it's winning."</p></div>
+        <p>Liverpool, who remain the principal title rivals, have begun specifically targeting this transition moment. In the March draw, Salah exploited the right half-space three times in the second half — in each case immediately after Arsenal lost possession in the attacking phase. The 1.92 xG conceded tells that story clearly.</p>
+        <p>The question for next season isn't whether the system works. It demonstrably does. It's whether Arteta adds a tactical layer to manage the transition risk, or trusts the press to recover the ball before damage is done. Based on the current 7.8 PPDA, he's backing the press. So far, the data agrees.</p>`
+      }
+    ]
+  },
+  'saka-breakdown': {
+    sections: [
+      {
+        heading: 'The Evolution of a World-Class Player',
+        body: `<p>It's easy to forget that Bukayo Saka is still only 23. What he has built over the last three seasons — in terms of both statistical output and positional sophistication — represents one of the most impressive individual trajectories in recent Premier League history.</p>
+        <p>In 2024/25, Saka has posted <strong>14 goals and 11 assists</strong> from 32 appearances — but the raw numbers sell him short. What the advanced metrics reveal is a player who has evolved from a high-press winger into a <em>complete attacking threat</em> capable of functioning as a genuine playmaker.</p>`
+      },
+      {
+        heading: 'Shot Profile: The Clinical Upgrade',
+        body: `<p>Saka's 2024/25 shot profile is the most telling improvement of his career. His xG per shot has risen from 0.11 in 2022/23 to 0.15 this season — a significant jump that reflects a deliberate improvement in shot selection. He's taking fewer speculative long-range attempts and arriving in higher-quality positions.</p>
+        <div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">87</div><div class="stat-embed-label">Total Shots</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">47%</div><div class="stat-embed-label">On Target %</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">12.8</div><div class="stat-embed-label">xG (Season)</div></div>
+        </div>
+        <p>Of his 14 goals, <strong>7 came from inside the six-yard box</strong> — a number that reflects his improving movement to attack second balls and crosses. This is a new dimension: Saka in 2021 was primarily a creator-then-finisher. Saka in 2025 actively hunts high-probability finishing positions.</p>`
+      },
+      {
+        heading: 'The Dribbling Map',
+        body: `<p>Saka's 58 completed dribbles from 72 attempts gives him a 80.6% success rate — placing him in the top 3% of all Premier League wide players by this metric. More importantly, <strong>the location of his dribbles has shifted</strong>. Earlier in his career, he primarily dribbled in wide positions to create crossing angles. Now the majority occur inside the penalty area or in the right half-space — where a successful dribble directly translates to a shooting or scoring opportunity.</p>
+        <div class="pull-quote"><p>"Saka doesn't just beat his man anymore. He beats his man in exactly the right place."</p></div>`
+      }
+    ]
+  },
+  'ppda-analysis': {
+    sections: [
+      {
+        heading: 'What is PPDA?',
+        body: `<p>Passes Allowed Per Defensive Action — PPDA — is the most widely used single metric for quantifying pressing intensity. The formula is simple: divide the total passes allowed by the opponent in their own half by the number of defensive actions (tackles, interceptions, pressures won) in that zone.</p>
+        <p>A lower PPDA = more aggressive press. Arsenal's 7.8 compares to a Premier League average of approximately 11.2. They are, by this measure, the most relentlessly pressing team in the country outside of Liverpool's peak moments.</p>`
+      },
+      {
+        heading: 'The Mechanism Behind the Number',
+        body: `<p>PPDA doesn't happen by accident. It's the product of every outfield player understanding their press trigger and acting on it simultaneously. Arteta uses a "counter-press" philosophy: immediately after losing the ball, the nearest 3 or 4 players swarm the ball carrier before the opposition can transition. This is why Arsenal's <strong>428 high-press recoveries</strong> lead the league.</p>
+        <div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">7.8</div><div class="stat-embed-label">Arsenal PPDA</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">11.2</div><div class="stat-embed-label">PL Average</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">428</div><div class="stat-embed-label">HP Recoveries</div></div>
+        </div>`
+      },
+      {
+        heading: 'Where the System Gets Stretched',
+        body: `<p>No press is invincible. In three specific scenarios, Arsenal's PPDA data shows vulnerability: against teams who play direct over the press, against sides with a quick technical midfielder who can play through lines under pressure, and — critically — in the 75th–90th minute window when fatigue sets in and the intensity inevitably drops.</p>
+        <div class="pull-quote"><p>"The press is only as good as the last player running. Rice runs forever. Most others don't."</p></div>
+        <p>The Liverpool draw illustrated this precisely. In the final 20 minutes, Arsenal's PPDA climbed from 6.8 to 11.1 — effectively switching off the press. Liverpool created three of their best chances in that window. The xG swing in those 20 minutes was 0.8 to 0.2 in Liverpool's favor.</p>`
+      }
+    ]
+  },
+  'odegaard-vision': {
+    sections: [
+      {
+        heading: 'Seeing What Others Don\'t',
+        body: `<p>There is a category of football player who does not score many goals, does not dribble past many defenders, does not make the highlight reel in obvious ways — yet without whom the entire team functions at a level three tiers below its ceiling. Martin Ødegaard is that player for Arsenal.</p>
+        <p>His 82 key passes lead the squad. His 198 progressive passes also lead. But the number that most clearly captures his impact is one you won't find on a stat sheet: the number of times per game that his positioning alone creates space for a teammate.</p>`
+      },
+      {
+        heading: 'The 10-Yard Rule',
+        body: `<p>Ødegaard operates in what you might call the "10-yard rule" — he is almost never more than 10 yards from the ball, and he is almost never still. His constant movement within that 10-yard bubble forces defenders to choose: track him and create space elsewhere, or stay home and let him receive freely.</p>
+        <div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">82</div><div class="stat-embed-label">Key Passes</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">88.6%</div><div class="stat-embed-label">Pass Accuracy</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">9.4</div><div class="stat-embed-label">xA (Season)</div></div>
+        </div>`
+      }
+    ]
+  },
+  'rice-engine': {
+    sections: [
+      {
+        heading: 'Beyond Box-to-Box',
+        body: `<p>When Arsenal paid £105M for Declan Rice in the summer of 2023, the debate centred on whether a defensive midfielder was worth that fee. Eighteen months later, the question has shifted: was he underpriced?</p>
+        <p>The 2024/25 season represents the fullest expression of what Rice contributes. His <strong>87 tackles</strong> lead the squad. His <strong>52 interceptions</strong> — the second-highest total in the league for central midfielders — tell only part of the story. What analytics now shows is how his defensive actions directly enable Arsenal's attacking transitions.</p>`
+      },
+      {
+        heading: 'The Transition Engine',
+        body: `<p>In 41% of Rice's ball recoveries, Arsenal transition into an attack within 8 seconds. That figure is elite. It reflects not just his ability to win the ball, but his immediate decision-making once he has it — instantly finding a forward pass rather than resetting laterally.</p>
+        <div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">87</div><div class="stat-embed-label">Tackles</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">7</div><div class="stat-embed-label">Goals</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">412</div><div class="stat-embed-label">Pressures</div></div>
+        </div>
+        <div class="pull-quote"><p>"Rice doesn't just stop attacks. He starts them."</p></div>`
+      }
+    ]
+  },
+  'chelsea-postmortem': {
+    sections: [
+      {
+        heading: 'The xG Story',
+        body: `<p>Arsenal's 3-1 victory over Chelsea on April 6th was comfortable — but the analytics show it could have been more emphatic. Arsenal's 2.84 xG against Chelsea's 1.42 represents a <strong>xG dominance ratio of 2:1</strong>, suggesting a scoreline of 4-1 or even 5-1 was within the model's expectation range.</p>
+        <p>Chelsea's lone goal came from a 0.58 xG chance — a finish that model would have expected to result in a goal less than 60% of the time. Nicolas Jackson's composure in that moment was the only thing that prevented a clean sheet.</p>`
+      },
+      {
+        heading: 'How Arsenal Destroyed the High Line',
+        body: `<p>Chelsea's persistent use of a high defensive line — which has cost them points against quicker sides all season — was systematically exploited. Of Arsenal's 18 shots, <strong>11 originated from behind Chelsea's midfield line</strong>, triggered by Ødegaard's through-balls and Saka's diagonal runs cutting across the back four.</p>
+        <div class="stat-embed">
+          <div class="stat-embed-item"><div class="stat-embed-val">2.84</div><div class="stat-embed-label">Arsenal xG</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">18</div><div class="stat-embed-label">Shots</div></div>
+          <div class="stat-embed-item"><div class="stat-embed-val">58%</div><div class="stat-embed-label">Possession</div></div>
+        </div>`
+      },
+      {
+        heading: 'Key Moments Broken Down',
+        body: `<p><strong>23' — Saka (0.72 xG):</strong> The Ødegaard through ball found the exact gap between Chelsea's centre-back and right-back as both drifted toward the ball carrier. Saka's run was perfectly timed, arriving at the ball with momentum, and his low finish into the bottom corner was composed for a high-pressure chance.</p>
+        <p><strong>51' — Havertz (0.48 xG):</strong> Saka's delivery from wide right was met with a textbook near-post run. Havertz's header — despite Chelsea's goalkeeper being well-positioned — found the far corner with placement rather than power.</p>
+        <div class="pull-quote"><p>"Arsenal didn't just beat Chelsea. They demonstrated why the gap between 1st and 4th is widening."</p></div>
+        <p><strong>78' — Havertz (0.68 xG):</strong> The most clinical finish of the night. Martinelli's disguised cut-back found Havertz in the six-yard box with a clean hit. At 0.68 xG, this was almost certain to result in a goal — and it did.</p>`
+      }
+    ]
+  }
+};
+
+// ─── Render Logic ───────────────────────────────────────────────────────────
+let activeTag = 'All';
+
+function getAllTags() {
+  const tags = new Set(['All']);
+  articles.forEach(a => a.tags.forEach(t => tags.add(t)));
+  return [...tags];
+}
+
+function renderIndex() {
+  document.getElementById('articles-index').classList.remove('hidden');
+  document.getElementById('article-container').innerHTML = '';
+
+  // Tags
+  document.getElementById('tag-filters').innerHTML = getAllTags().map(tag => `
+    <button class="badge tag-btn ${tag === activeTag ? 'badge-red active' : 'badge-gray'}" onclick="filterByTag('${tag}')">${tag}</button>
+  `).join('');
+
+  // Filter articles
+  const filtered = activeTag === 'All' ? articles : articles.filter(a => a.tags.includes(activeTag));
+  const featured = filtered.find(a => a.featured) || filtered[0];
+  const rest = filtered.filter(a => a !== featured);
+
+  // Featured
+  if (featured) {
+    document.getElementById('featured-article-container').innerHTML = `
+      <div class="article-featured" style="cursor:pointer;" onclick="openArticle('${featured.id}')">
+        <div class="article-featured-visual">
+          <div style="font-size:4rem;opacity:0.2;z-index:1;position:relative;">${featured.emoji}</div>
+          <div style="position:absolute;top:16px;left:16px;z-index:2;">
+            <span class="badge badge-red">${featured.tags[0]}</span>
+          </div>
+          <div style="position:absolute;bottom:16px;right:16px;z-index:2;">
+            <span class="badge badge-gray">${featured.readTime} read</span>
+          </div>
+        </div>
+        <div class="article-featured-content">
+          <div class="article-category">${featured.category} · ${featured.date}</div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;line-height:1.3;margin-bottom:14px;color:var(--white);">${featured.title}</h2>
+          <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">${featured.excerpt}</p>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+            ${featured.tags.map(t => `<span class="badge badge-gray">${t}</span>`).join('')}
+          </div>
+          <button class="btn btn-primary" onclick="event.stopPropagation();openArticle('${featured.id}')">Read Analysis →</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Grid
+  document.getElementById('articles-grid-full').innerHTML = rest.map(a => `
+    <div class="article-card" onclick="openArticle('${a.id}')" style="cursor:pointer;">
+      <div class="article-img">
+        <div class="article-img-placeholder">${a.emoji}</div>
+        <div style="position:absolute;top:12px;left:12px;"><span class="badge badge-red">${a.tags[0]}</span></div>
+        <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-gray">${a.readTime}</span></div>
+      </div>
+      <div class="article-body">
+        <div class="article-category">${a.category}</div>
+        <div class="article-title">${a.title}</div>
+        <p class="article-excerpt">${a.excerpt}</p>
+        <div class="article-meta">
+          <span>${a.date}</span>
+          <span>${a.readTime} read</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterByTag(tag) {
+  activeTag = tag;
+  renderIndex();
+}
+
+function openArticle(id) {
+  const article = articles.find(a => a.id === id);
+  const content = articleContent[id];
+  if (!article || !content) return;
+
+  document.getElementById('articles-index').classList.add('hidden');
+
+  // Build sections HTML
+  const sectionsHTML = content.sections.map(s => `
+    <h2>${s.heading}</h2>
+    ${s.body}
+  `).join('');
+
+  // TOC
+  const tocHTML = content.sections.map((s, i) => `
+    <span class="toc-link" onclick="scrollToSection(${i})">${s.heading}</span>
+  `).join('');
+
+  document.getElementById('article-container').innerHTML = `
+    <div style="padding-top:48px;">
+      <!-- Back button -->
+      <button class="btn btn-ghost btn-sm" onclick="goBack()" style="margin-bottom:32px;">
+        ← All Articles
+      </button>
+
+      <div style="display:grid;grid-template-columns:1fr 220px;gap:48px;align-items:start;">
+        <!-- Main content -->
+        <div>
+          <!-- Article header -->
+          <div style="margin-bottom:40px;">
+            <div class="article-hero-tag">${article.category}</div>
+            <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;line-height:1.15;letter-spacing:-0.5px;margin-bottom:20px;color:var(--white);">${article.title}</h1>
+            <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px;max-width:640px;">${article.excerpt}</p>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">${article.date}</span>
+              <span class="badge badge-gray">${article.readTime} read</span>
+              ${article.tags.map(t => `<span class="badge badge-gray">${t}</span>`).join('')}
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider"></div>
+
+          <!-- Prose content -->
+          <div class="prose" id="article-prose">
+            ${sectionsHTML}
+          </div>
+
+          <!-- Footer -->
+          <div class="divider"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:32px;">
+            <button class="btn btn-ghost" onclick="goBack()">← Back to Articles</button>
+            <div style="display:flex;gap:8px;">
+              ${article.tags.map(t => `<span class="badge badge-gray">${t}</span>`).join('')}
+            </div>
+          </div>
+
+          <!-- Related articles -->
+          <div style="margin-top:48px;">
+            <div class="section-label">Related Reading</div>
+            <div class="grid-2" style="margin-top:0;">
+              ${articles.filter(a => a.id !== id).slice(0, 2).map(a => `
+                <div class="article-card" onclick="openArticle('${a.id}')" style="cursor:pointer;">
+                  <div class="article-body">
+                    <div class="article-category">${a.category}</div>
+                    <div class="article-title">${a.title}</div>
+                    <div class="article-meta">
+                      <span>${a.date}</span>
+                      <span>${a.readTime} read</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar TOC -->
+        <div>
+          <div class="toc">
+            <div class="toc-title">In This Article</div>
+            ${tocHTML}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  document.getElementById('article-container').innerHTML = '';
+  renderIndex();
+  window.scrollTo(0, 0);
+}
+
+function scrollToSection(idx) {
+  const headings = document.querySelectorAll('#article-prose h2');
+  if (headings[idx]) {
+    headings[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Check URL param on load
+(function init() {
+  renderIndex();
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get('article');
+  if (articleId) openArticle(articleId);
+})();
+</script>
+</body>
+</html>
