@@ -190,10 +190,24 @@ let currentMatch = null;
 let matchData = null;
 let shotData = null;
 
+async function fetchJson(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`[match-analysis] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`[match-analysis] Failed to fetch ${path}:`, error);
+    return null;
+  }
+}
+
 async function loadData() {
-  matchData = await fetch('../data/matches.json').then(r=>r.json()).catch(()=>null);
-  shotData  = await fetch('../data/shots.json').then(r=>r.json()).catch(()=>null);
-  if (matchData) {
+  matchData = await fetchJson('../data/matches.json');
+  shotData  = await fetchJson('../data/shots.json');
+  if (matchData?.matches?.length) {
     renderMatchSelector(matchData.matches);
     loadMatch(matchData.matches[0]);
   }
@@ -235,8 +249,9 @@ function loadMatch(m) {
 
 function renderMatchHeader(m) {
   const isArsenalHome = m.homeTeam === 'Arsenal';
-  const resultColor = m.result==='W' ? '#4ADE80' : m.result==='D' ? 'var(--gold)' : 'var(--red)';
-  const resultLabel = m.result==='W' ? '✓ Arsenal Win' : m.result==='D' ? '= Draw' : '✗ Arsenal Defeat';
+  const result = m.resultFromArsenalView || m.result;
+  const resultColor = result==='W' ? '#4ADE80' : result==='D' ? 'var(--gold)' : 'var(--red)';
+  const resultLabel = result==='W' ? '✓ Arsenal Win' : result==='D' ? '= Draw' : '✗ Arsenal Defeat';
 
   document.getElementById('match-header-card').innerHTML = `
     <div class="match-header">
@@ -321,7 +336,9 @@ function renderXGTimeline(m) {
 
 function renderShotMap(m) {
   setTimeout(() => {
-    const matchShots = shotData?.shots?.match_1?.shots || [];
+    const matchShots = Array.isArray(shotData?.shots)
+      ? shotData.shots.filter((shot) => shot.matchId === m.id)
+      : [];
     createShotMap('shot-map-canvas', matchShots, m.homeTeam);
   }, 150);
 }

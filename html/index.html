@@ -372,17 +372,32 @@
 <script src="../js/navigation.js"></script>
 <script src="../js/charts.js"></script>
 <script>
+async function fetchJson(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`[index] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`[index] Failed to fetch ${path}:`, error);
+    return null;
+  }
+}
+
 (async () => {
   // Load data
-  const matchData  = await fetch('../data/matches.json').then(r=>r.json()).catch(()=>null);
-  const playerData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
+  const matchData  = await fetchJson('../data/matches.json');
+  const playerData = await fetchJson('../data/players.json');
 
   // ── Render Hero Match Card ──────────────────────────────
   if (matchData?.matches?.[0]) {
     const m = matchData.matches[0];
+    const result = m.resultFromArsenalView || m.result;
     const isHome = m.homeTeam === 'Arsenal';
-    const resultClass = m.result === 'W' ? 'green' : m.result === 'D' ? 'gold' : 'red';
-    const resultLabel = m.result === 'W' ? 'Victory' : m.result === 'D' ? 'Draw' : 'Defeat';
+    const resultClass = result === 'W' ? 'green' : result === 'D' ? 'gold' : 'red';
+    const resultLabel = result === 'W' ? 'Victory' : result === 'D' ? 'Draw' : 'Defeat';
 
     document.getElementById('hero-match-body').innerHTML = `
       <div style="text-align:center;">
@@ -520,14 +535,15 @@
     matchLog.innerHTML = `
       <div style="display:flex;flex-direction:column;gap:8px;">
         ${matchData.matches.map(m => {
+          const result = m.resultFromArsenalView || m.result;
           const isHome = m.homeTeam === 'Arsenal';
-          const cls = m.result === 'W' ? 'green' : m.result === 'D' ? 'gold' : 'red';
-          const badge = m.result === 'W' ? 'badge-green' : m.result === 'D' ? 'badge-gold' : 'badge-red';
+          const cls = result === 'W' ? 'green' : result === 'D' ? 'gold' : 'red';
+          const badge = result === 'W' ? 'badge-green' : result === 'D' ? 'badge-gold' : 'badge-red';
           return `
             <a href="match-analysis.html?id=${m.id}" style="text-decoration:none;">
               <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 20px;display:flex;align-items:center;gap:16px;transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-med)'" onmouseout="this.style.borderColor='var(--border)'">
                 <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);width:70px;flex-shrink:0;">${m.date}</div>
-                <span class="badge ${badge}" style="flex-shrink:0;">${m.result}</span>
+                <span class="badge ${badge}" style="flex-shrink:0;">${result}</span>
                 <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:16px;">
                   <span style="font-weight:${m.homeTeam==='Arsenal'?'700':'400'};color:${m.homeTeam==='Arsenal'?'var(--white)':'var(--text-secondary)'};font-size:13px;">${m.homeTeam}</span>
                   <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;letter-spacing:-1px;">${m.homeScore} – ${m.awayScore}</span>

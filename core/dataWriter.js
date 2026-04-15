@@ -17,18 +17,48 @@ function isInt(value) {
   return Number.isInteger(value);
 }
 
+const DEFAULT_TRANSFER_TARGETS = [
+  {
+    id: 101,
+    name: "Florian Wirtz",
+    position: "CAM",
+    age: 22,
+    club: "Bayer Leverkusen",
+    nationality: "Germany",
+    marketValue: 120,
+    stats: {
+      goals: 12,
+      assists: 14,
+      xG: 9.8,
+      xA: 11.2,
+      shots: 73,
+      keyPasses: 89,
+      dribbles: 96,
+      progressivePasses: 165,
+      progressiveCarries: 173,
+      minutesPlayed: 2870
+    },
+    radar: {
+      shooting: 79,
+      passing: 92,
+      dribbling: 90,
+      defending: 48,
+      physical: 67,
+      vision: 94
+    },
+    scouting: {
+      strengths: ["Elite final-third passing", "Press-resistant in central zones"],
+      concerns: ["High transfer fee", "Role overlap risk"],
+      fitScore: 91,
+      verdict: "Top-tier creative profile for Arsenal's left half-space.",
+      tag: "Priority Target"
+    }
+  }
+];
+
 function readDateString(value) {
   if (!isString(value)) return false;
   return /^\d{4}-\d{2}-\d{2}$/.test(value);
-}
-
-async function readJsonIfExists(filePath) {
-  try {
-    const raw = await fs.readFile(filePath, "utf8");
-    return JSON.parse(raw);
-  } catch (err) {
-    return null;
-  }
 }
 
 async function writePrettyJson(filePath, payload) {
@@ -36,204 +66,205 @@ async function writePrettyJson(filePath, payload) {
   await fs.writeFile(filePath, json, "utf8");
 }
 
-function pushError(errors, schemaName, index, field, message) {
+function pushError(errors, schemaName, field, message) {
   errors.push({
     schema: schemaName,
-    index,
     field,
     message
   });
 }
 
-function validateStatsBlock(stats) {
-  if (stats === undefined) return true;
-  if (!isObject(stats)) return false;
-  return true;
-}
-
-function validateMatch(match, index, errors) {
+function validateMatch(match, errors) {
   let valid = true;
-
-  const required = ["id", "date", "competition", "matchweek", "venue", "homeTeam", "awayTeam", "homeScore", "awayScore", "result"];
+  const required = [
+    "id",
+    "date",
+    "competition",
+    "matchweek",
+    "venue",
+    "homeTeam",
+    "awayTeam",
+    "homeScore",
+    "awayScore",
+    "resultFromArsenalView",
+    "stats",
+    "scorers",
+    "assists",
+    "xgTimeline",
+    "keyMoments"
+  ];
   for (const key of required) {
     if (match[key] === undefined || match[key] === null) {
       valid = false;
-      pushError(errors, "match", index, key, "Missing required field");
+      pushError(errors, "match", key, "Missing required field");
     }
   }
 
   if (!isInt(match.id)) {
     valid = false;
-    pushError(errors, "match", index, "id", "Must be integer");
+    pushError(errors, "match", "id", "Must be integer");
   }
   if (!readDateString(match.date)) {
     valid = false;
-    pushError(errors, "match", index, "date", "Must be YYYY-MM-DD");
+    pushError(errors, "match", "date", "Must be YYYY-MM-DD");
   }
   if (!isString(match.competition)) {
     valid = false;
-    pushError(errors, "match", index, "competition", "Must be string");
+    pushError(errors, "match", "competition", "Must be string");
   }
   if (!isInt(match.matchweek)) {
     valid = false;
-    pushError(errors, "match", index, "matchweek", "Must be integer");
+    pushError(errors, "match", "matchweek", "Must be integer");
   }
   if (!isString(match.venue)) {
     valid = false;
-    pushError(errors, "match", index, "venue", "Must be string");
+    pushError(errors, "match", "venue", "Must be string");
   }
   if (!isString(match.homeTeam) || !isString(match.awayTeam)) {
     valid = false;
-    pushError(errors, "match", index, "homeTeam/awayTeam", "Must be strings");
+    pushError(errors, "match", "homeTeam/awayTeam", "Must be strings");
   }
   if (!isInt(match.homeScore) || !isInt(match.awayScore)) {
     valid = false;
-    pushError(errors, "match", index, "homeScore/awayScore", "Must be integers");
+    pushError(errors, "match", "homeScore/awayScore", "Must be integers");
   }
-  if (!["W", "D", "L"].includes(match.result)) {
+  if (!["W", "D", "L"].includes(match.resultFromArsenalView)) {
     valid = false;
-    pushError(errors, "match", index, "result", "Must be one of W, D, L");
+    pushError(errors, "match", "resultFromArsenalView", "Must be one of W, D, L");
   }
   if (match.attendance !== undefined && !isInt(match.attendance)) {
     valid = false;
-    pushError(errors, "match", index, "attendance", "Must be integer when provided");
+    pushError(errors, "match", "attendance", "Must be integer when provided");
   }
 
-  if (match.stats !== undefined) {
-    if (!isObject(match.stats)) {
-      valid = false;
-      pushError(errors, "match", index, "stats", "Must be object");
-    } else {
-      if (!validateStatsBlock(match.stats.home)) {
-        valid = false;
-        pushError(errors, "match", index, "stats.home", "Must be object");
-      }
-      if (!validateStatsBlock(match.stats.away)) {
-        valid = false;
-        pushError(errors, "match", index, "stats.away", "Must be object");
-      }
-    }
+  if (!isObject(match.stats)) {
+    valid = false;
+    pushError(errors, "match", "stats", "Must be object");
   }
 
-  if (match.scorers !== undefined && !Array.isArray(match.scorers)) {
+  if (!Array.isArray(match.scorers)) {
     valid = false;
-    pushError(errors, "match", index, "scorers", "Must be array");
+    pushError(errors, "match", "scorers", "Must be array");
   }
-  if (match.assists !== undefined && !Array.isArray(match.assists)) {
+  if (!Array.isArray(match.assists)) {
     valid = false;
-    pushError(errors, "match", index, "assists", "Must be array");
+    pushError(errors, "match", "assists", "Must be array");
   }
-  if (match.xgTimeline !== undefined && !Array.isArray(match.xgTimeline)) {
+  if (!Array.isArray(match.xgTimeline)) {
     valid = false;
-    pushError(errors, "match", index, "xgTimeline", "Must be array");
+    pushError(errors, "match", "xgTimeline", "Must be array");
   }
-  if (match.keyMoments !== undefined && !Array.isArray(match.keyMoments)) {
+  if (!Array.isArray(match.keyMoments)) {
     valid = false;
-    pushError(errors, "match", index, "keyMoments", "Must be array");
+    pushError(errors, "match", "keyMoments", "Must be array");
   }
 
   return valid;
 }
 
-function validatePlayer(player, index, errors) {
+function validatePlayer(player, errors) {
   let valid = true;
-  const required = ["id", "name", "position", "nationality", "age", "stats", "radar"];
+  const required = ["id", "name", "position", "nationality", "stats", "radar", "form"];
   for (const key of required) {
     if (player[key] === undefined || player[key] === null) {
       valid = false;
-      pushError(errors, "player", index, key, "Missing required field");
+      pushError(errors, "player", key, "Missing required field");
     }
   }
 
   if (!isInt(player.id)) {
     valid = false;
-    pushError(errors, "player", index, "id", "Must be integer");
+    pushError(errors, "player", "id", "Must be integer");
   }
   if (!isString(player.name) || !player.name.trim()) {
     valid = false;
-    pushError(errors, "player", index, "name", "Must be non-empty string");
+    pushError(errors, "player", "name", "Must be non-empty string");
   }
   if (!isString(player.position)) {
     valid = false;
-    pushError(errors, "player", index, "position", "Must be string");
+    pushError(errors, "player", "position", "Must be string");
   }
   if (!isString(player.nationality)) {
     valid = false;
-    pushError(errors, "player", index, "nationality", "Must be string");
+    pushError(errors, "player", "nationality", "Must be string");
   }
   if (!(isInt(player.age) || player.age === null)) {
     valid = false;
-    pushError(errors, "player", index, "age", "Must be integer or null");
+    pushError(errors, "player", "age", "Must be integer or null");
   }
   if (player.number !== undefined && !(isInt(player.number) || player.number === null)) {
     valid = false;
-    pushError(errors, "player", index, "number", "Must be integer or null");
+    pushError(errors, "player", "number", "Must be integer or null");
   }
   if (player.marketValue !== undefined && !(isNumber(player.marketValue) || player.marketValue === null)) {
     valid = false;
-    pushError(errors, "player", index, "marketValue", "Must be number or null");
+    pushError(errors, "player", "marketValue", "Must be number or null");
   }
   if (!isObject(player.stats)) {
     valid = false;
-    pushError(errors, "player", index, "stats", "Must be object");
+    pushError(errors, "player", "stats", "Must be object");
   }
   if (!isObject(player.radar)) {
     valid = false;
-    pushError(errors, "player", index, "radar", "Must be object");
+    pushError(errors, "player", "radar", "Must be object");
   }
-  if (player.form !== undefined && !Array.isArray(player.form)) {
+  if (!Array.isArray(player.form)) {
     valid = false;
-    pushError(errors, "player", index, "form", "Must be array");
+    pushError(errors, "player", "form", "Must be array");
   }
 
   return valid;
 }
 
-function validateShot(shot, index, errors) {
+function validateShot(shot, errors) {
   let valid = true;
-  const required = ["id", "player", "x", "y", "xG", "outcome"];
+  const required = ["id", "matchId", "player", "team", "minute", "x", "y", "xG", "outcome"];
   for (const key of required) {
     if (shot[key] === undefined || shot[key] === null) {
       valid = false;
-      pushError(errors, "shot", index, key, "Missing required field");
+      pushError(errors, "shot", key, "Missing required field");
     }
   }
 
   if (!isInt(shot.id)) {
     valid = false;
-    pushError(errors, "shot", index, "id", "Must be integer");
+    pushError(errors, "shot", "id", "Must be integer");
   }
-  if (shot.matchId !== undefined && !isInt(shot.matchId)) {
+  if (!isInt(shot.matchId)) {
     valid = false;
-    pushError(errors, "shot", index, "matchId", "Must be integer");
+    pushError(errors, "shot", "matchId", "Must be integer");
   }
   if (shot.playerId !== undefined && !isInt(shot.playerId)) {
     valid = false;
-    pushError(errors, "shot", index, "playerId", "Must be integer");
+    pushError(errors, "shot", "playerId", "Must be integer");
   }
   if (!isString(shot.player) || !shot.player.trim()) {
     valid = false;
-    pushError(errors, "shot", index, "player", "Must be non-empty string");
+    pushError(errors, "shot", "player", "Must be non-empty string");
   }
-  if (shot.minute !== undefined && !isInt(shot.minute)) {
+  if (!isString(shot.team) || !shot.team.trim()) {
     valid = false;
-    pushError(errors, "shot", index, "minute", "Must be integer");
+    pushError(errors, "shot", "team", "Must be non-empty string");
+  }
+  if (!isInt(shot.minute)) {
+    valid = false;
+    pushError(errors, "shot", "minute", "Must be integer");
   }
   if (!isNumber(shot.x) || shot.x < 0 || shot.x > 100) {
     valid = false;
-    pushError(errors, "shot", index, "x", "Must be number between 0 and 100");
+    pushError(errors, "shot", "x", "Must be number between 0 and 100");
   }
   if (!isNumber(shot.y) || shot.y < 0 || shot.y > 100) {
     valid = false;
-    pushError(errors, "shot", index, "y", "Must be number between 0 and 100");
+    pushError(errors, "shot", "y", "Must be number between 0 and 100");
   }
   if (!isNumber(shot.xG)) {
     valid = false;
-    pushError(errors, "shot", index, "xG", "Must be number");
+    pushError(errors, "shot", "xG", "Must be number");
   }
   if (!isString(shot.outcome)) {
     valid = false;
-    pushError(errors, "shot", index, "outcome", "Must be string");
+    pushError(errors, "shot", "outcome", "Must be string");
   }
 
   return valid;
@@ -242,122 +273,372 @@ function validateShot(shot, index, errors) {
 function validateCollection(items, validator, schemaName) {
   const errors = [];
   if (!Array.isArray(items)) {
-    errors.push({
-      schema: schemaName,
-      index: -1,
-      field: schemaName,
-      message: "Payload must be an array"
-    });
+    pushError(errors, schemaName, schemaName, "Payload must be an array");
     return { valid: false, errors };
   }
 
-  let valid = true;
-  items.forEach((item, index) => {
-    if (!validator(item, index, errors)) valid = false;
-  });
+  const valid = items.every((item) => validator(item, errors));
 
   return { valid: valid && errors.length === 0, errors };
 }
 
-function logValidationErrors(errors) {
-  if (!errors.length) return;
-  console.error("[dataWriter] Validation failed with errors:");
-  for (const err of errors) {
-    console.error(
-      `[${err.schema}] index=${err.index} field=${err.field} message=${err.message}`
-    );
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
   }
 }
 
-async function writeCollectionOrFallback({
-  filePath,
-  nextData,
-  existingFallback,
-  validator,
-  schemaName
-}) {
-  const { valid, errors } = validateCollection(nextData, validator, schemaName);
-
-  if (!valid) {
-    logValidationErrors(errors);
-    if (existingFallback !== null) {
-      await writePrettyJson(filePath, existingFallback);
-      return { usedFallback: true, written: false, errors };
+function validateSourceMeta(sourceMeta, errors) {
+  if (!isObject(sourceMeta)) {
+    pushError(errors, "meta", "sourceMeta", "Must be object");
+    return false;
+  }
+  if (!Array.isArray(sourceMeta.statuses)) {
+    pushError(errors, "meta", "sourceMeta.statuses", "Must be array");
+    return false;
+  }
+  for (const status of sourceMeta.statuses) {
+    if (!isObject(status)) {
+      pushError(errors, "meta", "sourceMeta.statuses[]", "Status must be object");
+      continue;
     }
-    return { usedFallback: false, written: false, errors };
+    if (!isString(status.provider) || !status.provider) {
+      pushError(errors, "meta", "sourceMeta.statuses[].provider", "Must be string");
+    }
+    if (!isString(status.fetchedAt) || !status.fetchedAt) {
+      pushError(errors, "meta", "sourceMeta.statuses[].fetchedAt", "Must be string");
+    }
+    if (typeof status.ok !== "boolean") {
+      pushError(errors, "meta", "sourceMeta.statuses[].ok", "Must be boolean");
+    }
   }
-
-  await writePrettyJson(filePath, nextData);
-  return { usedFallback: false, written: true, errors: [] };
+  return true;
 }
 
-/**
- * Writes normalized canonical data into data/*.json.
- * On validation or API data failure, keeps last known good files.
- */
+function normalizeMatch(input) {
+  return {
+    id: input.id,
+    externalIds: isObject(input.externalIds) ? input.externalIds : undefined,
+    date: input.date,
+    kickoffUtc: input.kickoffUtc,
+    competition: input.competition,
+    matchweek: input.matchweek,
+    venue: input.venue,
+    homeTeam: input.homeTeam,
+    awayTeam: input.awayTeam,
+    homeScore: input.homeScore,
+    awayScore: input.awayScore,
+    resultFromArsenalView: input.resultFromArsenalView || input.result,
+    attendance: input.attendance,
+    stats: isObject(input.stats) ? input.stats : {},
+    scorers: Array.isArray(input.scorers) ? input.scorers : [],
+    assists: Array.isArray(input.assists) ? input.assists : [],
+    xgTimeline: Array.isArray(input.xgTimeline) ? input.xgTimeline : [],
+    keyMoments: Array.isArray(input.keyMoments) ? input.keyMoments : []
+  };
+}
+
+function normalizePlayer(input) {
+  const player = { ...input };
+  player.form = Array.isArray(player.form) ? player.form : [];
+  return player;
+}
+
+function normalizeShot(input) {
+  return {
+    id: input.id,
+    matchId: input.matchId,
+    playerId: input.playerId,
+    player: input.player,
+    team: input.team || "Arsenal",
+    minute: input.minute ?? 0,
+    x: input.x,
+    y: input.y,
+    xG: input.xG,
+    outcome: input.outcome,
+    bodyPart: input.bodyPart,
+    playType: input.playType || input.type,
+    period: input.period
+  };
+}
+
+function normalizeSeasonStats(input) {
+  const base = isObject(input) ? input : {};
+  return {
+    played: toInt(base.played),
+    won: toInt(base.won),
+    drawn: toInt(base.drawn),
+    lost: toInt(base.lost),
+    goalsFor: toInt(base.goalsFor),
+    goalsAgainst: toInt(base.goalsAgainst),
+    points: toInt(base.points),
+    position: toInt(base.position),
+    cleanSheets: toInt(base.cleanSheets),
+    xGFor: toNum(base.xGFor),
+    xGAgainst: toNum(base.xGAgainst),
+    avgPossession: toNum(base.avgPossession),
+    ppda: toNum(base.ppda),
+    fieldTilt: toNum(base.fieldTilt),
+    form: Array.isArray(base.form) ? base.form.filter((r) => ["W", "D", "L"].includes(r)) : [],
+    monthlyXG: Array.isArray(base.monthlyXG) ? base.monthlyXG : []
+  };
+}
+
+function toInt(value) {
+  return Number.isInteger(value) ? value : 0;
+}
+
+function toNum(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function buildPlayerShotSummary(shots) {
+  const byPlayer = new Map();
+  for (const shot of shots) {
+    const playerKey = `${shot.playerId ?? "na"}|${shot.player}`;
+    if (!byPlayer.has(playerKey)) {
+      byPlayer.set(playerKey, {
+        playerId: shot.playerId ?? -1,
+        player: shot.player,
+        shots: 0,
+        goals: 0,
+        totalXG: 0
+      });
+    }
+    const row = byPlayer.get(playerKey);
+    row.shots += 1;
+    row.totalXG += toNum(shot.xG);
+    if (shot.outcome === "Goal") row.goals += 1;
+  }
+
+  return [...byPlayer.values()].map((row) => ({
+    ...row,
+    avgXGPerShot: row.shots > 0 ? Number((row.totalXG / row.shots).toFixed(3)) : 0,
+    totalXG: Number(row.totalXG.toFixed(3))
+  }));
+}
+
+function buildMatchShotSummary(shots) {
+  const byMatch = new Map();
+  for (const shot of shots) {
+    if (!byMatch.has(shot.matchId)) {
+      byMatch.set(shot.matchId, {
+        matchId: shot.matchId,
+        totalShots: 0,
+        totalGoals: 0,
+        totalXG: 0
+      });
+    }
+    const row = byMatch.get(shot.matchId);
+    row.totalShots += 1;
+    row.totalXG += toNum(shot.xG);
+    if (shot.outcome === "Goal") row.totalGoals += 1;
+  }
+  return [...byMatch.values()].map((row) => ({
+    ...row,
+    totalXG: Number(row.totalXG.toFixed(3))
+  }));
+}
+
+function validateSeasonStats(stats, errors) {
+  let valid = true;
+  const requiredNumeric = [
+    "played",
+    "won",
+    "drawn",
+    "lost",
+    "goalsFor",
+    "goalsAgainst",
+    "points",
+    "position",
+    "cleanSheets",
+    "xGFor",
+    "xGAgainst",
+    "avgPossession",
+    "ppda",
+    "fieldTilt"
+  ];
+
+  for (const key of requiredNumeric) {
+    if (!isNumber(stats[key]) && !isInt(stats[key])) {
+      valid = false;
+      pushError(errors, "seasonStats", key, "Must be numeric");
+    }
+  }
+
+  if (!Array.isArray(stats.form)) {
+    valid = false;
+    pushError(errors, "seasonStats", "form", "Must be array");
+  }
+  if (!Array.isArray(stats.monthlyXG)) {
+    valid = false;
+    pushError(errors, "seasonStats", "monthlyXG", "Must be array");
+  }
+  return valid;
+}
+
+function validateEnvelopeBase(file, errors) {
+  let valid = true;
+  if (!isObject(file)) {
+    pushError(errors, "meta", "file", "Must be object");
+    return false;
+  }
+  if (!isString(file.schemaVersion) || !file.schemaVersion) {
+    valid = false;
+    pushError(errors, "meta", "schemaVersion", "Must be non-empty string");
+  }
+  if (!isString(file.generatedAt) || !file.generatedAt) {
+    valid = false;
+    pushError(errors, "meta", "generatedAt", "Must be non-empty string");
+  }
+  if (!isString(file.season) || !file.season) {
+    valid = false;
+    pushError(errors, "meta", "season", "Must be non-empty string");
+  }
+  if (!validateSourceMeta(file.sourceMeta, errors)) {
+    valid = false;
+  }
+  return valid;
+}
+
+function validatePlayersFile(file) {
+  const errors = [];
+  const baseOk = validateEnvelopeBase(file, errors);
+  const collection = validateCollection(file.players, validatePlayer, "player");
+  return { valid: baseOk && collection.valid, errors: [...errors, ...collection.errors] };
+}
+
+function validateMatchesFile(file) {
+  const errors = [];
+  const baseOk = validateEnvelopeBase(file, errors);
+  const matchResult = validateCollection(file.matches, validateMatch, "match");
+  const seasonOk = validateSeasonStats(file.seasonStats, errors);
+  return { valid: baseOk && seasonOk && matchResult.valid, errors: [...errors, ...matchResult.errors] };
+}
+
+function validateShotsFile(file) {
+  const errors = [];
+  const baseOk = validateEnvelopeBase(file, errors);
+  const shotResult = validateCollection(file.shots, validateShot, "shot");
+
+  if (!Array.isArray(file.playerShotSummary)) {
+    pushError(errors, "shots", "playerShotSummary", "Must be array");
+  }
+  if (!Array.isArray(file.matchShotSummary)) {
+    pushError(errors, "shots", "matchShotSummary", "Must be array");
+  }
+  if (!Array.isArray(file.transferTargets)) {
+    pushError(errors, "shots", "transferTargets", "Must be array");
+  } else {
+    for (const target of file.transferTargets) {
+      if (!isObject(target)) {
+        pushError(errors, "shots", "transferTargets[]", "Each target must be object");
+        continue;
+      }
+      if (!isInt(target.id)) pushError(errors, "shots", "transferTargets[].id", "Must be integer");
+      if (!isString(target.name) || !target.name) pushError(errors, "shots", "transferTargets[].name", "Must be non-empty string");
+      if (!isObject(target.stats)) pushError(errors, "shots", "transferTargets[].stats", "Must be object");
+      if (!isObject(target.radar)) pushError(errors, "shots", "transferTargets[].radar", "Must be object");
+      if (!isObject(target.scouting)) pushError(errors, "shots", "transferTargets[].scouting", "Must be object");
+    }
+  }
+
+  return {
+    valid: baseOk && shotResult.valid && errors.length === 0,
+    errors: [...errors, ...shotResult.errors]
+  };
+}
+
+function throwIfInvalid(result, fileName) {
+  if (result.valid) return;
+  const detail = result.errors
+    .map((err) => `[${err.schema}] field=${err.field} message=${err.message}`)
+    .join("\n");
+  throw new Error(`[dataWriter] ${fileName} schema validation failed:\n${detail}`);
+}
+
 async function writeCanonicalData({
   players,
   matches,
   shots,
+  seasonStats,
+  sourceMeta,
+  generatedAt,
+  season,
+  transferTargets = [],
   dataDir = path.resolve(process.cwd(), "data")
 }) {
+  assert(generatedAt && season && isObject(sourceMeta), "generatedAt, season, sourceMeta are required");
+
+  const normalizedPlayersRaw = Array.isArray(players)
+    ? players
+    : isObject(players) && Array.isArray(players.players)
+      ? players.players
+      : [];
+  const normalizedMatchesRaw = Array.isArray(matches)
+    ? matches
+    : isObject(matches) && Array.isArray(matches.matches)
+      ? matches.matches
+      : [];
+  const normalizedShotsRaw = Array.isArray(shots)
+    ? shots
+    : isObject(shots) && Array.isArray(shots.shots)
+      ? shots.shots
+      : [];
+
+  const normalizedPlayers = normalizedPlayersRaw.map(normalizePlayer);
+  const normalizedMatches = normalizedMatchesRaw.map(normalizeMatch);
+  const normalizedShots = normalizedShotsRaw.map(normalizeShot);
+  const normalizedSeasonStats = normalizeSeasonStats(seasonStats);
+
+  const playersFile = {
+    schemaVersion: "2.0.0",
+    generatedAt,
+    season,
+    sourceMeta,
+    players: normalizedPlayers
+  };
+
+  const matchesFile = {
+    schemaVersion: "2.0.0",
+    generatedAt,
+    season,
+    sourceMeta,
+    seasonStats: normalizedSeasonStats,
+    matches: normalizedMatches
+  };
+
+  const shotsFile = {
+    schemaVersion: "2.0.0",
+    generatedAt,
+    season,
+    sourceMeta,
+    shots: normalizedShots,
+    playerShotSummary: buildPlayerShotSummary(normalizedShots),
+    matchShotSummary: buildMatchShotSummary(normalizedShots),
+    transferTargets: Array.isArray(transferTargets) && transferTargets.length > 0 ? transferTargets : DEFAULT_TRANSFER_TARGETS
+  };
+
+  throwIfInvalid(validatePlayersFile(playersFile), "players.json");
+  throwIfInvalid(validateMatchesFile(matchesFile), "matches.json");
+  throwIfInvalid(validateShotsFile(shotsFile), "shots.json");
+
   const playersPath = path.join(dataDir, "players.json");
   const matchesPath = path.join(dataDir, "matches.json");
   const shotsPath = path.join(dataDir, "shots.json");
-
   await fs.mkdir(dataDir, { recursive: true });
 
-  const [existingPlayers, existingMatches, existingShots] = await Promise.all([
-    readJsonIfExists(playersPath),
-    readJsonIfExists(matchesPath),
-    readJsonIfExists(shotsPath)
+  await Promise.all([
+    writePrettyJson(playersPath, playersFile),
+    writePrettyJson(matchesPath, matchesFile),
+    writePrettyJson(shotsPath, shotsFile)
   ]);
 
-  const incomingPlayers = Array.isArray(players) ? players : null;
-  const incomingMatches = Array.isArray(matches) ? matches : null;
-  const incomingShots = Array.isArray(shots) ? shots : null;
-
-  const playerResult = incomingPlayers
-    ? await writeCollectionOrFallback({
-        filePath: playersPath,
-        nextData: incomingPlayers,
-        existingFallback: existingPlayers,
-        validator: validatePlayer,
-        schemaName: "player"
-      })
-    : { usedFallback: existingPlayers !== null, written: false, errors: [{ schema: "player", index: -1, field: "players", message: "Incoming players missing (API failure)" }] };
-
-  const matchResult = incomingMatches
-    ? await writeCollectionOrFallback({
-        filePath: matchesPath,
-        nextData: incomingMatches,
-        existingFallback: existingMatches,
-        validator: validateMatch,
-        schemaName: "match"
-      })
-    : { usedFallback: existingMatches !== null, written: false, errors: [{ schema: "match", index: -1, field: "matches", message: "Incoming matches missing (API failure)" }] };
-
-  const shotResult = incomingShots
-    ? await writeCollectionOrFallback({
-        filePath: shotsPath,
-        nextData: incomingShots,
-        existingFallback: existingShots,
-        validator: validateShot,
-        schemaName: "shot"
-      })
-    : { usedFallback: existingShots !== null, written: false, errors: [{ schema: "shot", index: -1, field: "shots", message: "Incoming shots missing (API failure)" }] };
-
-  // Log explicit API-failure fallbacks.
-  [...playerResult.errors, ...matchResult.errors, ...shotResult.errors].forEach((err) => {
-    if (err.message.includes("API failure")) {
-      console.error(`[dataWriter] ${err.schema}: ${err.message}`);
-    }
-  });
-
   return {
-    players: playerResult,
-    matches: matchResult,
-    shots: shotResult
+    players: { written: true, usedFallback: false, errors: [] },
+    matches: { written: true, usedFallback: false, errors: [] },
+    shots: { written: true, usedFallback: false, errors: [] }
   };
 }
 

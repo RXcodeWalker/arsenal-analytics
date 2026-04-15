@@ -167,11 +167,25 @@
 <script src="../js/navigation.js"></script>
 <script src="../js/charts.js"></script>
 <script>
-async function loadData() {
-  const matchData  = await fetch('../data/matches.json').then(r=>r.json()).catch(()=>null);
-  const playerData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
+async function fetchJson(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`[season-statistics] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`[season-statistics] Failed to fetch ${path}:`, error);
+    return null;
+  }
+}
 
-  if (!matchData) return;
+async function loadData() {
+  const matchData  = await fetchJson('../data/matches.json');
+  const playerData = await fetchJson('../data/players.json');
+
+  if (!matchData?.seasonStats) return;
   const ss = matchData.seasonStats;
 
   // Summary strip

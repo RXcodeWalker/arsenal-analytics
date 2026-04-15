@@ -1,1 +1,73 @@
-[]
+{
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-04-14T09:06:40.064Z",
+  "season": "2025/26",
+  "sourceMeta": {
+    "statuses": [
+      {
+        "provider": "fpl",
+        "fetchedAt": "2026-04-14T09:06:27.517Z",
+        "ok": true
+      },
+      {
+        "provider": "footballData",
+        "fetchedAt": "2026-04-14T09:06:27.519Z",
+        "ok": false,
+        "message": "FOOTBALL_DATA_API_KEY is required."
+      },
+      {
+        "provider": "fbref",
+        "fetchedAt": "2026-04-14T09:06:27.520Z",
+        "ok": false,
+        "message": "FBref fetch failed: 403 Forbidden"
+      }
+    ]
+  },
+  "shots": [],
+  "playerShotSummary": [],
+  "matchShotSummary": [],
+  "transferTargets": [
+    {
+      "id": 101,
+      "name": "Florian Wirtz",
+      "position": "CAM",
+      "age": 22,
+      "club": "Bayer Leverkusen",
+      "nationality": "Germany",
+      "marketValue": 120,
+      "stats": {
+        "goals": 12,
+        "assists": 14,
+        "xG": 9.8,
+        "xA": 11.2,
+        "shots": 73,
+        "keyPasses": 89,
+        "dribbles": 96,
+        "progressivePasses": 165,
+        "progressiveCarries": 173,
+        "minutesPlayed": 2870
+      },
+      "radar": {
+        "shooting": 79,
+        "passing": 92,
+        "dribbling": 90,
+        "defending": 48,
+        "physical": 67,
+        "vision": 94
+      },
+      "scouting": {
+        "strengths": [
+          "Elite final-third passing",
+          "Press-resistant in central zones"
+        ],
+        "concerns": [
+          "High transfer fee",
+          "Role overlap risk"
+        ],
+        "fitScore": 91,
+        "verdict": "Top-tier creative profile for Arsenal's left half-space.",
+        "tag": "Priority Target"
+      }
+    }
+  ]
+}

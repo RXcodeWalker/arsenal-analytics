@@ -277,8 +277,8 @@ const scoutingNotes = {
 };
 
 async function loadData() {
-  const playerData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
-  const shotData   = await fetch('../data/shots.json').then(r=>r.json()).catch(()=>null);
+  const playerData = await fetchJson('../data/players.json');
+  const shotData   = await fetchJson('../data/shots.json');
 
   if (playerData?.players) {
     allPlayers = playerData.players;
@@ -295,6 +295,20 @@ async function loadData() {
   // Default selection: Saka vs Wirtz
   setPlayerA(combined.find(p => p.id === 1));
   setPlayerB(combined.find(p => p.id === 101));
+}
+
+async function fetchJson(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`[transfer-radar] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`[transfer-radar] Failed to fetch ${path}:`, error);
+    return null;
+  }
 }
 
 function renderWindowTargets() {

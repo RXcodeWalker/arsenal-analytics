@@ -183,9 +183,23 @@ let playersData = null;
 let shotsData = null;
 let currentPlayer = null;
 
+async function fetchJson(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`[player-dashboard] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`[player-dashboard] Failed to fetch ${path}:`, error);
+    return null;
+  }
+}
+
 async function loadData() {
-  playersData = await fetch('../data/players.json').then(r=>r.json()).catch(()=>null);
-  shotsData   = await fetch('../data/shots.json').then(r=>r.json()).catch(()=>null);
+  playersData = await fetchJson('../data/players.json');
+  shotsData   = await fetchJson('../data/shots.json');
 
   if (playersData?.players) {
     renderPlayerSelector(playersData.players);
@@ -361,7 +375,13 @@ function renderStatsTable(p) {
 
 function renderShotMap(p) {
   setTimeout(() => {
-    const shots = shotsData?.shots?.player_saka?.shots || [];
+    const shots = Array.isArray(shotsData?.shots)
+      ? shotsData.shots.filter(shot => {
+          if (Number.isInteger(shot.playerId)) return shot.playerId === p.id;
+          if (typeof shot.player === 'string') return shot.player === p.name;
+          return false;
+        })
+      : [];
     const canvas = document.getElementById('player-shot-map');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');

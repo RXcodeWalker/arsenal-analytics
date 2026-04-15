@@ -85,6 +85,10 @@ const SOURCE_PRIORITY = {
   fpl: 1
 };
 
+function asArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+
 function sortSourcesByQuality(sourcePayloads) {
   return Object.entries(sourcePayloads).sort(
     (a, b) => (SOURCE_PRIORITY[b[0]] || 0) - (SOURCE_PRIORITY[a[0]] || 0)
@@ -139,7 +143,7 @@ function mergePlayers(sourcePayloads) {
   const unified = [];
 
   for (const [, payload] of sorted) {
-    const players = payload?.players || [];
+    const players = asArray(payload?.players);
 
     for (const player of players) {
       const clean = sanitizePlayer(player);
@@ -201,7 +205,7 @@ function mergeMatches(sourcePayloads) {
   const byIdentity = new Map();
 
   for (const [, payload] of sorted) {
-    const matches = payload?.matches || [];
+    const matches = asArray(payload?.matches);
     for (const match of matches) {
       const clean = sanitizeMatch(match);
       const identity = normalizeMatchIdentity(clean);
@@ -223,7 +227,7 @@ function mergeShots(sourcePayloads) {
   const byIdentity = new Map();
 
   for (const [, payload] of sorted) {
-    const shots = payload?.shots || [];
+    const shots = asArray(payload?.shots);
     for (const shot of shots) {
       const identity = [
         shot.matchId ?? "",
@@ -245,12 +249,48 @@ function mergeShots(sourcePayloads) {
   return [...byIdentity.values()];
 }
 
+function buildDefaultSeasonStats() {
+  return {
+    played: 0,
+    won: 0,
+    drawn: 0,
+    lost: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    points: 0,
+    position: 0,
+    cleanSheets: 0,
+    xGFor: 0,
+    xGAgainst: 0,
+    avgPossession: 0,
+    ppda: 0,
+    fieldTilt: 0,
+    form: [],
+    monthlyXG: []
+  };
+}
+
+function mergeSeasonStats(sourcePayloads) {
+  const sorted = sortSourcesByQuality(sourcePayloads);
+  const merged = buildDefaultSeasonStats();
+
+  for (const [, payload] of sorted) {
+    if (!isObject(payload?.seasonStats)) continue;
+    Object.assign(merged, deepMerge(merged, payload.seasonStats));
+  }
+
+  if (!Array.isArray(merged.form)) merged.form = [];
+  if (!Array.isArray(merged.monthlyXG)) merged.monthlyXG = [];
+  return merged;
+}
+
 function mergeProviderData(sourcePayloads) {
   const players = mergePlayers(sourcePayloads);
   const matches = mergeMatches(sourcePayloads);
   const shots = mergeShots(sourcePayloads);
+  const seasonStats = mergeSeasonStats(sourcePayloads);
 
-  return { players, matches, shots };
+  return { players, matches, shots, seasonStats };
 }
 
 module.exports = {
@@ -258,6 +298,7 @@ module.exports = {
   mergePlayers,
   mergeMatches,
   mergeShots,
+  mergeSeasonStats,
   // Export helpers for testing.
   normalizePlayerName,
   normalizeTeamName,
