@@ -189,6 +189,21 @@
 let currentMatch = null;
 let matchData = null;
 let shotData = null;
+const debugRunId = `post-fix-${Date.now()}`;
+
+function emitDebug(hypothesisId, location, message, data = {}) {
+  fetch('http://127.0.0.1:7354/ingest/cd7d3687-0afc-444e-9938-abe660eb595b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'213650'},body:JSON.stringify({sessionId:'213650',runId:debugRunId,hypothesisId,location,message,data,timestamp:Date.now()})}).catch(()=>{});
+}
+
+window.addEventListener('error', (event) => {
+  // #region agent log
+  emitDebug('H2', 'html/match-analysis.html:window.error', 'Unhandled runtime error', {
+    message: event.message,
+    source: event.filename,
+    line: event.lineno
+  });
+  // #endregion
+});
 
 async function fetchJson(path) {
   try {
@@ -205,8 +220,20 @@ async function fetchJson(path) {
 }
 
 async function loadData() {
+  // #region agent log
+  emitDebug('H3', 'html/match-analysis.html:loadData:start', 'Starting loadData');
+  // #endregion
   matchData = await fetchJson('../data/matches.json');
   shotData  = await fetchJson('../data/shots.json');
+  // #region agent log
+  emitDebug('H3', 'html/match-analysis.html:loadData:afterFetch', 'Fetched data envelopes', {
+    hasMatchData: !!matchData,
+    hasMatchesArray: Array.isArray(matchData?.matches),
+    matchesLength: Array.isArray(matchData?.matches) ? matchData.matches.length : null,
+    hasShotData: !!shotData,
+    hasShotsArray: Array.isArray(shotData?.shots)
+  });
+  // #endregion
   if (matchData?.matches?.length) {
     renderMatchSelector(matchData.matches);
     loadMatch(matchData.matches[0]);
@@ -236,15 +263,42 @@ function loadMatchById(id) {
 }
 
 function loadMatch(m) {
+  // #region agent log
+  emitDebug('H4', 'html/match-analysis.html:loadMatch', 'Loading selected match', {
+    matchId: m?.id,
+    homeTeam: m?.homeTeam,
+    awayTeam: m?.awayTeam,
+    hasStatsObject: !!m?.stats,
+    hasHomeStats: !!m?.stats?.home,
+    hasAwayStats: !!m?.stats?.away
+  });
+  // #endregion
   currentMatch = m;
-  renderMatchHeader(m);
-  renderKeyStats(m);
-  renderXGTimeline(m);
-  renderShotMap(m);
-  renderStatsComparison(m);
-  renderMatchTimeline(m);
-  renderPossession(m);
-  renderXGBreakdown(m);
+  const renderSteps = [
+    ['renderMatchHeader',    () => renderMatchHeader(m)],
+    ['renderKeyStats',       () => renderKeyStats(m)],
+    ['renderXGTimeline',     () => renderXGTimeline(m)],
+    ['renderShotMap',        () => renderShotMap(m)],
+    ['renderStatsComparison',() => renderStatsComparison(m)],
+    ['renderMatchTimeline',  () => renderMatchTimeline(m)],
+    ['renderPossession',     () => renderPossession(m)],
+    ['renderXGBreakdown',    () => renderXGBreakdown(m)],
+  ];
+  // #region agent log
+  emitDebug('H2', 'html/match-analysis.html:loadMatch:renderStart', 'Beginning render steps', { matchId: m?.id });
+  // #endregion
+  for (const [name, fn] of renderSteps) {
+    try {
+      fn();
+      // #region agent log
+      emitDebug('H2', `html/match-analysis.html:loadMatch:${name}`, `${name} completed OK`);
+      // #endregion
+    } catch (err) {
+      // #region agent log
+      emitDebug('H2', `html/match-analysis.html:loadMatch:${name}`, `${name} THREW`, { error: err.message, stack: err.stack?.slice(0,300) });
+      // #endregion
+    }
+  }
 }
 
 function renderMatchHeader(m) {
@@ -293,8 +347,18 @@ function renderMatchHeader(m) {
 }
 
 function renderKeyStats(m) {
-  if (!m.stats) {
+  // #region agent log
+  emitDebug('H1', 'html/match-analysis.html:renderKeyStats:entry', 'Entering renderKeyStats', {
+    hasStatsObject: !!m?.stats,
+    hasHomeStats: !!m?.stats?.home,
+    hasAwayStats: !!m?.stats?.away
+  });
+  // #endregion
+  if (!m.stats?.home || !m.stats?.away) {
     document.getElementById('key-stats-strip').innerHTML = '';
+    // #region agent log
+    emitDebug('H1', 'html/match-analysis.html:renderKeyStats:noStats', 'No home/away stats; cleared key-stats-strip', { statsKeys: Object.keys(m.stats||{}) });
+    // #endregion
     return;
   }
   const h = m.stats.home, a = m.stats.away;
@@ -311,14 +375,20 @@ function renderKeyStats(m) {
   document.getElementById('key-stats-strip').innerHTML = stats.map(s => `
     <div class="stat-card">
       <div class="stat-label">${s.label}</div>
-      <div class="stat-value ${s.color ? '' : ''}" style="${s.color ? 'color:'+s.color : ''}">${s.val}</div>
+      <div class="stat-value" style="${s.color ? 'color:'+s.color : ''}">${s.val}</div>
       <div class="stat-change neutral">${s.sub}</div>
     </div>
   `).join('');
 }
 
 function renderXGTimeline(m) {
-  if (!m.xgTimeline) return;
+  if (!m.xgTimeline?.length) {
+    document.querySelector('#xg-timeline-chart')?.closest('.chart-body')
+      && (document.querySelector('#xg-timeline-chart').closest('.chart-body').innerHTML =
+        '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">xG timeline not available for this match.</p>');
+    document.getElementById('xg-legend').innerHTML = '';
+    return;
+  }
   setTimeout(() => {
     createXGTimeline('xg-timeline-chart', m.xgTimeline, m.homeTeam, m.awayTeam);
   }, 100);
@@ -344,7 +414,11 @@ function renderShotMap(m) {
 }
 
 function renderStatsComparison(m) {
-  if (!m.stats) return;
+  if (!m.stats?.home || !m.stats?.away) {
+    document.getElementById('stats-comparison').innerHTML =
+      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">Stats not available for this match.</p>';
+    return;
+  }
   const h = m.stats.home, a = m.stats.away;
   const isHome = m.homeTeam === 'Arsenal';
 
@@ -386,7 +460,7 @@ function renderStatsComparison(m) {
 }
 
 function renderMatchTimeline(m) {
-  if (!m.keyMoments) {
+  if (!m.keyMoments?.length) {
     document.getElementById('match-timeline').innerHTML = '<p class="text-muted" style="text-align:center;padding:20px;">Timeline not available for this match.</p>';
     return;
   }
@@ -416,7 +490,12 @@ function renderMatchTimeline(m) {
 }
 
 function renderPossession(m) {
-  if (!m.stats) return;
+  if (!m.stats?.home || !m.stats?.away) {
+    document.getElementById('poss-home-val').textContent = '—';
+    document.getElementById('poss-breakdown').innerHTML =
+      '<p style="color:var(--text-muted);font-size:13px;">Possession data not available.</p>';
+    return;
+  }
   const h = m.stats.home, a = m.stats.away;
   setTimeout(() => {
     createPossessionChart('possession-chart', h.possession, a.possession, m.homeTeam, m.awayTeam);
@@ -454,7 +533,11 @@ function renderPossession(m) {
 }
 
 function renderXGBreakdown(m) {
-  if (!m.stats) return;
+  if (!m.stats?.home || !m.stats?.away) {
+    document.getElementById('xg-breakdown').innerHTML =
+      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">xG breakdown not available for this match.</p>';
+    return;
+  }
   const h = m.stats.home, a = m.stats.away;
   const isHome = m.homeTeam === 'Arsenal';
   const arsXG = (isHome ? h.xG : a.xG) || 0;
