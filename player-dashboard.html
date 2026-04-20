@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
-  <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
-  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
-  <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-  <link rel="manifest" href="../site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <title>Player Dashboard — Arsenal Analytics</title>
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -176,8 +176,8 @@
   </div>
 </footer>
 
-<script src="../js/navigation.js"></script>
-<script src="../js/charts.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/charts.js"></script>
 <script>
 let playersData = null;
 let shotsData = null;
@@ -198,8 +198,8 @@ async function fetchJson(path) {
 }
 
 async function loadData() {
-  playersData = await fetchJson('../data/players.json');
-  shotsData   = await fetchJson('../data/shots.json');
+  playersData = await fetchJson('data/players.json');
+  shotsData   = await fetchJson('data/shots.json');
 
   if (playersData?.players) {
     renderPlayerSelector(playersData.players);

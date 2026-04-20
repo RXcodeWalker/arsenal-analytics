@@ -12,7 +12,7 @@ test.describe("page smoke — data-driven UI", () => {
   test("fixtures feed (home): match log and hero card populate from data", async ({
     page
   }) => {
-    await page.goto("/html/index.html", { waitUntil: "domcontentloaded" });
+    await page.goto("/index.html", { waitUntil: "domcontentloaded" });
 
     const matchLog = page.locator("#match-log");
     await expect(matchLog).toBeVisible();
@@ -37,7 +37,7 @@ test.describe("page smoke — data-driven UI", () => {
   test("squad page: selectors, profile header, and stat strip from players.json", async ({
     page
   }) => {
-    await page.goto("/html/player-dashboard.html", { waitUntil: "domcontentloaded" });
+    await page.goto("/player-dashboard.html", { waitUntil: "domcontentloaded" });
 
     const selector = page.locator("#player-selector");
     await expect(selector).toBeVisible();
@@ -65,7 +65,7 @@ test.describe("page smoke — data-driven UI", () => {
   test("match center: fixture buttons, header, and key stats from matches.json", async ({
     page
   }) => {
-    await page.goto("/html/match-analysis.html", { waitUntil: "domcontentloaded" });
+    await page.goto("/match-analysis.html", { waitUntil: "domcontentloaded" });
 
     const matchSelector = page.locator("#match-selector");
     await expect(matchSelector).toBeVisible();
@@ -91,7 +91,7 @@ test.describe("page smoke — data-driven UI", () => {
   });
 
   test("contact page: header, mailto link, and form", async ({ page }) => {
-    await page.goto("/html/contact.html", { waitUntil: "domcontentloaded" });
+    await page.goto("/contact.html", { waitUntil: "domcontentloaded" });
 
     await expect(page.locator(".page-header")).toBeVisible();
     await expect(page.locator(".page-header h1")).toContainText(/Touch/i);
