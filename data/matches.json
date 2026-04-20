@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-04-16T07:21:34.231Z",
+  "generatedAt": "2026-04-20T12:08:57.482Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-04-16T07:21:25.406Z",
+        "fetchedAt": "2026-04-20T12:08:48.634Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-04-16T07:21:25.407Z",
+        "fetchedAt": "2026-04-20T12:08:48.635Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-04-16T07:21:25.407Z",
+        "fetchedAt": "2026-04-20T12:08:48.635Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden"
       }
@@ -127,16 +127,16 @@
       "keyMoments": []
     },
     {
-      "id": 327,
+      "id": 538111,
       "date": "2026-04-19",
       "competition": "Premier League",
       "matchweek": 33,
-      "venue": "Man City",
-      "homeTeam": "Man City",
-      "awayTeam": "Arsenal",
-      "homeScore": 0,
-      "awayScore": 0,
-      "resultFromArsenalView": "D",
+      "venue": "Manchester City FC",
+      "homeTeam": "Manchester City FC",
+      "awayTeam": "Arsenal FC",
+      "homeScore": 2,
+      "awayScore": 1,
+      "resultFromArsenalView": "L",
       "stats": {},
       "scorers": [],
       "assists": [],
