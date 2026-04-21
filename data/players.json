@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-04-21T01:52:29.772Z",
+  "generatedAt": "2026-04-21T07:24:15.397Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-04-21T01:52:20.622Z",
+        "fetchedAt": "2026-04-21T07:24:05.805Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-04-21T01:52:20.623Z",
+        "fetchedAt": "2026-04-21T07:24:05.806Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-04-21T01:52:20.623Z",
+        "fetchedAt": "2026-04-21T07:24:05.806Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden"
       }
