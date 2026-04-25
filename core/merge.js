@@ -52,6 +52,7 @@ function normalizeString(input) {
 
 function normalizeTeamName(team) {
   const cleaned = normalizeString(team)
+    .replace(/\bafc\b/g, "")
     .replace(/\bfc\b/g, "")
     .replace(/\bfootball club\b/g, "")
     .replace(/\s+/g, " ")
@@ -60,6 +61,8 @@ function normalizeTeamName(team) {
   const aliases = {
     arsenal: "arsenal",
     "arsenal women": "arsenal",
+    "afc bournemouth": "bournemouth",
+    bournemouth: "bournemouth",
     "manchester city": "man city",
     "man city": "man city",
     "manchester united": "man united",

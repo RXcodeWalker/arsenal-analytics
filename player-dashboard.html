@@ -33,7 +33,7 @@
     <li><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <span class="nav-badge">2024/25</span>
+    <span class="nav-badge">NA</span>
     <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -89,7 +89,7 @@
       <div class="chart-wrapper">
         <div class="chart-header">
           <span class="card-title">Season Statistics</span>
-          <span class="badge badge-gray">2024/25</span>
+          <span class="badge badge-gray">NA</span>
         </div>
         <div class="chart-body p-0" id="player-stats-table" style="max-height:360px;overflow-y:auto;padding:0;"></div>
       </div>
@@ -144,7 +144,7 @@
       <div class="card">
         <div class="card-header">
           <span class="card-title">Recent Form</span>
-          <span class="badge badge-gray">Last 10 Matches</span>
+          <span class="badge badge-gray">Recent Matches</span>
         </div>
         <div class="card-body" id="player-form-section">
         </div>
@@ -208,11 +208,11 @@ function safeInt(value, fallback = 0) {
 }
 
 function displayNumber(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
 function displayAge(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
 function displayText(value, fallback = "N/A") {

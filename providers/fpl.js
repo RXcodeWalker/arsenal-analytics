@@ -178,6 +178,7 @@ async function fetchFplData(options = {}) {
   const teamById = Object.fromEntries((bootstrap.teams || []).map((team) => [team.id, team.name]));
   const players = (bootstrap.elements || []).map((element) => normalizePlayer(element, teamById));
   const matches = (fixtures || [])
+    .filter((f) => f && f.finished === true)
     .filter((f) => teamById[f.team_h] === config.arsenalName || teamById[f.team_a] === config.arsenalName)
     .map((fixture) => normalizeMatch(fixture, teamById, config.arsenalName));
 

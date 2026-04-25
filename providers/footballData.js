@@ -91,7 +91,11 @@ function normalizeMatch(match, arsenalTeamId) {
 }
 
 function normalizeSeasonStats(standingsTable, arsenalName) {
-  const row = (standingsTable || []).find((entry) => entry.team?.name === arsenalName);
+  const normalizedArsenal = normalizeTeamLabel(arsenalName);
+  const row = (standingsTable || []).find((entry) => {
+    const teamName = normalizeTeamLabel(entry.team?.name || "");
+    return teamName === normalizedArsenal;
+  });
   if (!row) return null;
 
   return {
