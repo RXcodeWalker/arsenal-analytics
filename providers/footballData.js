@@ -9,6 +9,14 @@ function toNumber(value, fallback = 0) {
   return Number.isFinite(n) ? n : fallback;
 }
 
+function normalizeTeamLabel(name) {
+  return String(name || "")
+    .replace(/\bFC\b/g, "")
+    .replace(/\bAFC\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 class Throttler {
   constructor(minIntervalMs) {
     this.minIntervalMs = minIntervalMs;
@@ -72,12 +80,13 @@ function normalizeMatch(match, arsenalTeamId) {
     date: String(match.utcDate || "").slice(0, 10),
     competition: match.competition?.name || "Premier League",
     matchweek: toNumber(match.matchday, 0),
-    venue: match.venue || match.homeTeam?.name || "",
-    homeTeam: match.homeTeam?.name || "",
-    awayTeam: match.awayTeam?.name || "",
+    venue: normalizeTeamLabel(match.venue || match.homeTeam?.name || ""),
+    homeTeam: normalizeTeamLabel(match.homeTeam?.name || ""),
+    awayTeam: normalizeTeamLabel(match.awayTeam?.name || ""),
     homeScore,
     awayScore,
-    result: computeResultFromArsenalPerspective(match, arsenalTeamId)
+    result: computeResultFromArsenalPerspective(match, arsenalTeamId),
+    resultFromArsenalView: computeResultFromArsenalPerspective(match, arsenalTeamId)
   };
 }
 

@@ -209,6 +209,20 @@ let allTargets = [];    // transfer targets
 let playerA = null;
 let playerB = null;
 
+function displayText(value, fallback = "N/A") {
+  const text = String(value || "").trim();
+  if (!text || text.toLowerCase() === "unknown") return fallback;
+  return text;
+}
+
+function displayNumber(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
+function displayAge(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
 // Scouting notes per player
 const scoutingNotes = {
   1: {
@@ -341,7 +355,7 @@ function renderSelectors(players) {
       <div style="padding:10px 6px;">
         <div class="player-position-badge" style="font-size:8px;padding:2px 5px;margin-bottom:4px;">${p.position}</div>
         <div style="font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--white);line-height:1.2;">${p.name.split(' ').pop()}</div>
-        ${p.marketValue ? `<div style="font-size:9px;color:var(--gold);font-family:var(--font-mono);margin-top:2px;">€${p.marketValue}M</div>` : `<div style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px;">#${p.number}</div>`}
+        ${p.marketValue ? `<div style="font-size:9px;color:var(--gold);font-family:var(--font-mono);margin-top:2px;">€${p.marketValue}M</div>` : `<div style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px;">#${displayNumber(p.number)}</div>`}
       </div>
     </button>
   `;
@@ -396,9 +410,9 @@ function renderComparisonHeader() {
             <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--red);text-transform:uppercase;">${aIsTarget ? 'Transfer Target' : 'Arsenal Squad'}</div>
             <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;">${playerA.name}</div>
             <div style="display:flex;gap:6px;margin-top:4px;">
-              <span class="badge badge-red">${playerA.position}</span>
-              <span class="badge badge-gray">${playerA.nationality}</span>
-              <span class="badge badge-gray">Age ${playerA.age}</span>
+              <span class="badge badge-red">${displayText(playerA.position, 'UNK')}</span>
+              <span class="badge badge-gray">${displayText(playerA.nationality)}</span>
+              <span class="badge badge-gray">Age ${displayAge(playerA.age)}</span>
               ${aIsTarget ? `<span class="badge badge-gold">€${playerA.marketValue}M</span>` : ''}
             </div>
           </div>
@@ -421,9 +435,9 @@ function renderComparisonHeader() {
             <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:#4A6CF7;text-transform:uppercase;">${bIsTarget ? 'Transfer Target' : 'Arsenal Squad'}</div>
             <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;">${playerB.name}</div>
             <div style="display:flex;gap:6px;margin-top:4px;justify-content:flex-end;">
-              <span class="badge badge-blue">${playerB.position}</span>
-              <span class="badge badge-gray">${playerB.nationality}</span>
-              <span class="badge badge-gray">Age ${playerB.age}</span>
+              <span class="badge badge-blue">${displayText(playerB.position, 'UNK')}</span>
+              <span class="badge badge-gray">${displayText(playerB.nationality)}</span>
+              <span class="badge badge-gray">Age ${displayAge(playerB.age)}</span>
               ${bIsTarget ? `<span class="badge badge-gold">€${playerB.marketValue}M</span>` : ''}
             </div>
           </div>
@@ -648,7 +662,7 @@ function renderTransferGrid() {
           </div>
           <div style="text-align:right;">
             <span class="badge badge-gold">€${t.marketValue}M</span>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">${t.position} · Age ${t.age}</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">${displayText(t.position, 'UNK')} · Age ${displayAge(t.age)}</div>
           </div>
         </div>
         <div class="card-body">

@@ -195,6 +195,15 @@ function emitDebug(hypothesisId, location, message, data = {}) {
   fetch('http://127.0.0.1:7354/ingest/cd7d3687-0afc-444e-9938-abe660eb595b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'213650'},body:JSON.stringify({sessionId:'213650',runId:debugRunId,hypothesisId,location,message,data,timestamp:Date.now()})}).catch(()=>{});
 }
 
+function renderEmptyState(message) {
+  return `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;text-align:center;gap:8px;">
+      <span class="badge badge-gray">Limited Data</span>
+      <p style="margin:0;color:var(--text-secondary);font-size:13px;">${message}</p>
+    </div>
+  `;
+}
+
 window.addEventListener('error', (event) => {
   // #region agent log
   emitDebug('H2', 'html/match-analysis.html:window.error', 'Unhandled runtime error', {
@@ -385,7 +394,7 @@ function renderXGTimeline(m) {
   if (!m.xgTimeline?.length) {
     document.querySelector('#xg-timeline-chart')?.closest('.chart-body')
       && (document.querySelector('#xg-timeline-chart').closest('.chart-body').innerHTML =
-        '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">xG timeline not available for this match.</p>');
+        renderEmptyState('xG timeline is not available for this fixture yet.'));
     document.getElementById('xg-legend').innerHTML = '';
     return;
   }
@@ -416,7 +425,7 @@ function renderShotMap(m) {
 function renderStatsComparison(m) {
   if (!m.stats?.home || !m.stats?.away) {
     document.getElementById('stats-comparison').innerHTML =
-      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">Stats not available for this match.</p>';
+      renderEmptyState('Detailed team stats are not available for this fixture yet.');
     return;
   }
   const h = m.stats.home, a = m.stats.away;
@@ -461,7 +470,7 @@ function renderStatsComparison(m) {
 
 function renderMatchTimeline(m) {
   if (!m.keyMoments?.length) {
-    document.getElementById('match-timeline').innerHTML = '<p class="text-muted" style="text-align:center;padding:20px;">Timeline not available for this match.</p>';
+    document.getElementById('match-timeline').innerHTML = renderEmptyState('Timeline events are not available for this fixture yet.');
     return;
   }
 
@@ -493,7 +502,7 @@ function renderPossession(m) {
   if (!m.stats?.home || !m.stats?.away) {
     document.getElementById('poss-home-val').textContent = '—';
     document.getElementById('poss-breakdown').innerHTML =
-      '<p style="color:var(--text-muted);font-size:13px;">Possession data not available.</p>';
+      renderEmptyState('Possession data is not available for this fixture yet.');
     return;
   }
   const h = m.stats.home, a = m.stats.away;
@@ -535,7 +544,7 @@ function renderPossession(m) {
 function renderXGBreakdown(m) {
   if (!m.stats?.home || !m.stats?.away) {
     document.getElementById('xg-breakdown').innerHTML =
-      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0;">xG breakdown not available for this match.</p>';
+      renderEmptyState('xG breakdown is not available for this fixture yet.');
     return;
   }
   const h = m.stats.home, a = m.stats.away;

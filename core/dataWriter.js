@@ -441,6 +441,42 @@ function buildMatchShotSummary(shots) {
   }));
 }
 
+function computeQualityReport({ players, matches, shots, sourceMeta }) {
+  const playersSafe = Array.isArray(players) ? players : [];
+  const matchesSafe = Array.isArray(matches) ? matches : [];
+  const shotsSafe = Array.isArray(shots) ? shots : [];
+  const statuses = Array.isArray(sourceMeta?.statuses) ? sourceMeta.statuses : [];
+
+  const playersWithNullNumber = playersSafe.filter((p) => p.number === null || p.number === undefined).length;
+  const playersWithNullAge = playersSafe.filter((p) => p.age === null || p.age === undefined).length;
+  const playersWithUnknownNationality = playersSafe.filter(
+    (p) => String(p.nationality || "").trim().toLowerCase() === "unknown"
+  ).length;
+  const matchesMissingStats = matchesSafe.filter((m) => !isObject(m.stats?.home) || !isObject(m.stats?.away)).length;
+  const matchesMissingTimeline = matchesSafe.filter((m) => !Array.isArray(m.xgTimeline) || m.xgTimeline.length === 0).length;
+  const failedProviders = statuses.filter((s) => s && s.ok === false).map((s) => s.provider);
+
+  return {
+    players: {
+      total: playersSafe.length,
+      withNullNumber: playersWithNullNumber,
+      withNullAge: playersWithNullAge,
+      withUnknownNationality: playersWithUnknownNationality
+    },
+    matches: {
+      total: matchesSafe.length,
+      missingStats: matchesMissingStats,
+      missingTimeline: matchesMissingTimeline
+    },
+    shots: {
+      total: shotsSafe.length
+    },
+    providers: {
+      failed: failedProviders
+    }
+  };
+}
+
 function validateSeasonStats(stats, errors) {
   let valid = true;
   const requiredNumeric = [
@@ -646,6 +682,7 @@ module.exports = {
   writeCanonicalData,
   validateMatch,
   validatePlayer,
-  validateShot
+  validateShot,
+  computeQualityReport
 };
 

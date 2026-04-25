@@ -386,6 +386,24 @@ async function fetchJson(path) {
   }
 }
 
+function fmtNumberBadge(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
+function fmtAge(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
+function fmtText(value, fallback = "N/A") {
+  const text = String(value || "").trim();
+  if (!text || text.toLowerCase() === "unknown") return fallback;
+  return text;
+}
+
+function fmtStat(value, fallback = "—") {
+  return value === undefined || value === null || Number.isNaN(Number(value)) ? fallback : value;
+}
+
 (async () => {
   // Load data
   const matchData  = await fetchJson('data/matches.json');
@@ -502,27 +520,27 @@ async function fetchJson(path) {
     grid.innerHTML = top3.map(p => `
       <a href="player-dashboard.html?id=${p.id}" class="player-card" style="text-decoration:none;">
         <div class="player-card-header">
-          <span class="player-position-badge">${p.position}</span>
-          <span class="player-number">${p.number}</span>
+          <span class="player-position-badge">${fmtText(p.position, 'UNK')}</span>
+          <span class="player-number">${fmtNumberBadge(p.number)}</span>
           <div class="player-card-name">${p.name}</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">${p.nationality} · Age ${p.age}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">${fmtText(p.nationality)} · Age ${fmtAge(p.age)}</div>
         </div>
         <div class="player-card-body">
           <div class="player-stat-row">
             <span class="player-stat-name">Goals</span>
-            <span class="player-stat-val" style="color:var(--red);">${p.stats.goals}</span>
+            <span class="player-stat-val" style="color:var(--red);">${fmtStat(p.stats?.goals, 0)}</span>
           </div>
           <div class="player-stat-row">
             <span class="player-stat-name">Assists</span>
-            <span class="player-stat-val">${p.stats.assists}</span>
+            <span class="player-stat-val">${fmtStat(p.stats?.assists, 0)}</span>
           </div>
           <div class="player-stat-row">
             <span class="player-stat-name">xG</span>
-            <span class="player-stat-val" style="color:var(--gold);">${p.stats.xG}</span>
+            <span class="player-stat-val" style="color:var(--gold);">${fmtStat(p.stats?.xG, 0)}</span>
           </div>
           <div class="player-stat-row">
             <span class="player-stat-name">Key Passes</span>
-            <span class="player-stat-val">${p.stats.keyPasses}</span>
+            <span class="player-stat-val">${fmtStat(p.stats?.keyPasses, 0)}</span>
           </div>
         </div>
       </a>

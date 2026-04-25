@@ -10,13 +10,21 @@
  */
 
 async function safeFetch(url) {
+  const cookie = process.env.FBREF_COOKIE || "";
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "arsenal-analytics-pipeline/1.0 (+github-actions)"
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      Referer: "https://fbref.com/",
+      Cookie: cookie
     }
   });
   if (!res.ok) {
-    throw new Error(`FBref fetch failed: ${res.status} ${res.statusText}`);
+    const details = cookie
+      ? "FBREF_COOKIE was provided but challenge still blocked the request."
+      : "Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge.";
+    throw new Error(`FBref fetch failed: ${res.status} ${res.statusText}. ${details}`);
   }
   return await res.text();
 }

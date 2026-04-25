@@ -13,6 +13,16 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+function mapPosition(elementType) {
+  const mapping = {
+    1: "GK",
+    2: "DEF",
+    3: "MID",
+    4: "FWD"
+  };
+  return mapping[toNumber(elementType, 0)] || "UNK";
+}
+
 function buildResult(homeTeam, awayTeam, homeScore, awayScore, arsenalName) {
   const arsenalIsHome = homeTeam === arsenalName;
   const gf = arsenalIsHome ? homeScore : awayScore;
@@ -66,19 +76,30 @@ function normalizePlayer(element, teamById) {
   const xg = toNumber(element.expected_goals);
   const xa = toNumber(element.expected_assists);
   const shots = toNumber(element.shots);
-  const shotsOnTarget = toNumber(element.saves); // FPL has no universal shots-on-target by player; kept as fallback.
+  const shotsOnTarget = 0;
   const minutesPlayed = toNumber(element.minutes);
   const appearances = toNumber(element.starts);
   const creativity = toNumber(element.creativity);
   const influence = toNumber(element.influence);
   const threat = toNumber(element.threat);
+  const completedPasses = toNumber(element.passes_completed);
+  const attemptedPasses = toNumber(element.passes);
+  const passAccuracy =
+    attemptedPasses > 0
+      ? Number(((completedPasses / attemptedPasses) * 100).toFixed(1))
+      : 0;
+  const dribbles = toNumber(element.dribbles);
+  const successfulDribbles = toNumber(element.dribbles_successful);
+  const dribbleSuccess = Math.min(successfulDribbles, dribbles);
+  const shirtNumberRaw = toNumber(element.squad_number, 0);
+  const shirtNumber = shirtNumberRaw > 0 ? shirtNumberRaw : null;
 
   return {
     id: toNumber(element.id),
     name: `${element.first_name} ${element.second_name}`.trim(),
-    position: String(element.element_type || ""),
-    number: null,
-    nationality: "Unknown",
+    position: mapPosition(element.element_type),
+    number: shirtNumber,
+    nationality: "N/A",
     age: null,
     image: null,
     club: teamById[element.team] || "Unknown",
@@ -93,15 +114,15 @@ function normalizePlayer(element, teamById) {
       keyPasses: Math.round(creativity),
       progressivePasses: 0,
       progressiveCarries: 0,
-      dribbles: 0,
-      dribbleSuccess: 0,
+      dribbles,
+      dribbleSuccess,
       aerialWon: 0,
       aerialLost: 0,
       tackles: 0,
       interceptions: 0,
       minutesPlayed,
       touches: 0,
-      passAccuracy: 0,
+      passAccuracy,
       pressures: 0,
       pressureSuccess: 0
     },

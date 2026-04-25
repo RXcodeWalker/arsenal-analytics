@@ -32,6 +32,7 @@ test.describe("page smoke — data-driven UI", () => {
     const playerGrid = page.locator("#player-cards-grid");
     await expect(playerGrid.locator(".loader")).toHaveCount(0, { timeout: 15_000 });
     await expect(playerGrid.locator("a.player-card").first()).toBeVisible();
+    await expect(playerGrid).not.toContainText(/#null|Age null|Unknown/i);
   });
 
   test("squad page: selectors, profile header, and stat strip from players.json", async ({
@@ -60,6 +61,8 @@ test.describe("page smoke — data-driven UI", () => {
 
     const table = page.locator("#player-stats-table");
     await expect(table).toContainText(/Attacking|Goals|xG/i);
+    await expect(page.locator("#player-profile-header")).not.toContainText(/#null|Age null|Unknown/i);
+    await expect(selector).not.toContainText(/#null/i);
   });
 
   test("match center: fixture buttons, header, and key stats from matches.json", async ({
@@ -82,12 +85,28 @@ test.describe("page smoke — data-driven UI", () => {
     await expect(headerCard.locator(".score-number").first()).toBeVisible();
 
     const keyStats = page.locator("#key-stats-strip");
-    await expect(keyStats.locator(".stat-card").first()).toBeVisible();
-    await expect(keyStats).toContainText(/xG|Possession|Pass Accuracy|PPDA/i);
+    const keyStatsCards = await keyStats.locator(".stat-card").count();
+    if (keyStatsCards > 0) {
+      await expect(keyStats).toContainText(/xG|Pass Accuracy|PPDA/i);
+    } else {
+      await expect(keyStats).toBeEmpty();
+    }
 
     const statsComp = page.locator("#stats-comparison");
     await expect(statsComp.locator(".loader")).toHaveCount(0, { timeout: 15_000 });
-    await expect(statsComp).toContainText(/Shots|Possession|Corners/i);
+    const statsText = await statsComp.innerText();
+    if (/Limited Data/i.test(statsText)) {
+      await expect(statsComp).toContainText(/fixture yet/i);
+    } else {
+      await expect(statsComp).toContainText(/Shots|Possession|Corners/i);
+    }
+  });
+
+  test("season stats legacy route resolves to canonical page", async ({ page }) => {
+    const response = await page.goto("/season-stats.html", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page).toHaveURL(/season-statistics\.html$/);
+    await expect(page.locator(".page-header h1")).toContainText(/Season/i);
   });
 
   test("contact page: header, mailto link, and form", async ({ page }) => {

@@ -6,6 +6,21 @@ function deepClone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
+function isUnknownLike(value) {
+  if (value === undefined || value === null) return true;
+  if (typeof value !== "string") return false;
+  const normalized = value.trim().toLowerCase();
+  return normalized === "" || normalized === "unknown" || normalized === "n/a" || normalized === "na";
+}
+
+function hasMeaningfulValue(value) {
+  if (value === undefined || value === null) return false;
+  if (typeof value === "string") return !isUnknownLike(value);
+  if (Array.isArray(value)) return value.length > 0;
+  if (isObject(value)) return Object.keys(value).length > 0;
+  return true;
+}
+
 function deepMerge(base, incoming) {
   const out = deepClone(base);
   for (const [key, value] of Object.entries(incoming || {})) {
@@ -18,7 +33,7 @@ function deepMerge(base, incoming) {
       out[key] = deepMerge(isObject(out[key]) ? out[key] : {}, value);
       continue;
     }
-    if (out[key] === undefined || out[key] === null || out[key] === "") {
+    if (!hasMeaningfulValue(out[key]) && hasMeaningfulValue(value)) {
       out[key] = value;
     }
   }
@@ -123,6 +138,8 @@ function sanitizePlayer(player) {
   if (!p.stats) p.stats = {};
   if (!p.radar) p.radar = {};
   if (!Array.isArray(p.form)) p.form = [];
+  if (!hasMeaningfulValue(p.nationality)) p.nationality = "N/A";
+  if (!hasMeaningfulValue(p.position)) p.position = "UNK";
   return p;
 }
 
@@ -189,12 +206,31 @@ function normalizeMatchIdentity(match) {
 function sanitizeMatch(match) {
   const m = deepClone(match);
   if (!m.stats) m.stats = {};
+  if (!Array.isArray(m.xgTimeline)) m.xgTimeline = [];
+  if (!Array.isArray(m.keyMoments)) m.keyMoments = [];
+  if (!Array.isArray(m.scorers)) m.scorers = [];
+  if (!Array.isArray(m.assists)) m.assists = [];
   return m;
 }
 
+function matchCompletenessScore(match) {
+  const m = sanitizeMatch(match);
+  let score = 0;
+  if (hasMeaningfulValue(m.homeTeam) && hasMeaningfulValue(m.awayTeam)) score += 1;
+  if (isObject(m.stats.home) && isObject(m.stats.away)) score += 3;
+  if (Array.isArray(m.xgTimeline) && m.xgTimeline.length > 0) score += 2;
+  if (Array.isArray(m.keyMoments) && m.keyMoments.length > 0) score += 2;
+  if (Array.isArray(m.scorers) && m.scorers.length > 0) score += 1;
+  if (Array.isArray(m.assists) && m.assists.length > 0) score += 1;
+  if (m.attendance !== undefined && m.attendance !== null) score += 1;
+  return score;
+}
+
 function mergeTwoMatches(preferred, secondary) {
-  const base = sanitizeMatch(preferred);
-  const incoming = sanitizeMatch(secondary);
+  const preferredScore = matchCompletenessScore(preferred);
+  const secondaryScore = matchCompletenessScore(secondary);
+  const base = sanitizeMatch(preferredScore >= secondaryScore ? preferred : secondary);
+  const incoming = sanitizeMatch(preferredScore >= secondaryScore ? secondary : preferred);
   const merged = deepMerge(base, incoming);
   merged.id = base.id ?? incoming.id;
   return merged;

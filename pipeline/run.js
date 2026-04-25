@@ -5,7 +5,7 @@ const { fetchFootballData } = require("../providers/footballData");
 const { fetchFbrefData } = require("../providers/fbref");
 const fbrefScraper = require("../providers/fbrefScraper");
 const { mergeProviderData } = require("../core/merge");
-const { writeCanonicalData } = require("../core/dataWriter");
+const { writeCanonicalData, computeQualityReport } = require("../core/dataWriter");
 
 async function runProvider(name, runner) {
   const fetchedAt = new Date().toISOString();
@@ -46,6 +46,24 @@ function getSeasonLabel(referenceDate = new Date()) {
   return `${startYear}/${endYearShort}`;
 }
 
+function assertQualityThresholds(report) {
+  const thresholds = {
+    maxMissingStatsRatio: 0.75,
+    maxMissingTimelineRatio: 0.95
+  };
+  const statsRatio = report.matches.total > 0 ? report.matches.missingStats / report.matches.total : 0;
+  const timelineRatio = report.matches.total > 0 ? report.matches.missingTimeline / report.matches.total : 0;
+
+  const failures = [];
+  if (statsRatio > thresholds.maxMissingStatsRatio) {
+    failures.push(`missingStats ratio ${statsRatio.toFixed(2)} exceeds ${thresholds.maxMissingStatsRatio}`);
+  }
+  if (timelineRatio > thresholds.maxMissingTimelineRatio) {
+    failures.push(`missingTimeline ratio ${timelineRatio.toFixed(2)} exceeds ${thresholds.maxMissingTimelineRatio}`);
+  }
+  return failures;
+}
+
 async function runPipeline() {
   console.log("[pipeline] starting refresh...");
 
@@ -73,6 +91,24 @@ async function runPipeline() {
     footballData,
     fbref
   });
+
+  const qualityReport = computeQualityReport({
+    players: merged.players,
+    matches: merged.matches,
+    shots: merged.shots,
+    sourceMeta: { statuses }
+  });
+  const qualityFailures = assertQualityThresholds(qualityReport);
+  console.log(`[pipeline] quality ${JSON.stringify(qualityReport)}`);
+  if (qualityReport.providers.failed.length > 0) {
+    console.warn(`[pipeline] providers failed: ${qualityReport.providers.failed.join(", ")}`);
+  }
+  if (qualityFailures.length > 0) {
+    console.warn(`[pipeline] quality warnings: ${qualityFailures.join("; ")}`);
+    if (process.env.CI === "true" || process.env.STRICT_DATA_QUALITY === "1") {
+      throw new Error(`[pipeline] quality gate failed: ${qualityFailures.join("; ")}`);
+    }
+  }
 
   const writeResult = await writeCanonicalData({
     players: merged.players,

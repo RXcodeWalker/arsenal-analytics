@@ -197,6 +197,36 @@ async function fetchJson(path) {
   }
 }
 
+function safeNumber(value, fallback = 0) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function safeInt(value, fallback = 0) {
+  const n = parseInt(value, 10);
+  return Number.isInteger(n) ? n : fallback;
+}
+
+function displayNumber(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
+function displayAge(value) {
+  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+}
+
+function displayText(value, fallback = "N/A") {
+  const text = String(value || "").trim();
+  if (!text || text.toLowerCase() === "unknown") return fallback;
+  return text;
+}
+
+function pct(part, whole) {
+  const denominator = safeNumber(whole, 0);
+  if (denominator <= 0) return 0;
+  return Math.round((safeNumber(part, 0) / denominator) * 100);
+}
+
 async function loadData() {
   playersData = await fetchJson('data/players.json');
   shotsData   = await fetchJson('data/shots.json');
@@ -229,9 +259,9 @@ function renderPlayerSelector(players) {
   el.innerHTML = players.map(p => `
     <button class="player-card" style="width:120px;flex-shrink:0;text-align:center;" id="psel-${p.id}" onclick="selectPlayer(playersData.players.find(x=>x.id===${p.id}))">
       <div style="padding:12px 8px;">
-        <div class="player-position-badge" style="font-size:9px;padding:2px 6px;">${p.position}</div>
+        <div class="player-position-badge" style="font-size:9px;padding:2px 6px;">${displayText(p.position, 'UNK')}</div>
         <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--white);margin-top:6px;line-height:1.2;">${p.name}</div>
-        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">#${p.number}</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">#${displayNumber(p.number)}</div>
       </div>
     </button>
   `).join('');
@@ -265,27 +295,27 @@ function renderProfileHeader(p) {
       </div>
 
       <div style="flex:1;">
-        <div class="section-label" style="margin-bottom:6px;">${p.position} · #${p.number}</div>
+        <div class="section-label" style="margin-bottom:6px;">${displayText(p.position, 'UNK')} · #${displayNumber(p.number)}</div>
         <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;line-height:1;letter-spacing:-0.5px;">${p.name}</h2>
         <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
-          <span class="badge badge-gray">${p.nationality}</span>
-          <span class="badge badge-gray">Age ${p.age}</span>
-          <span class="badge badge-red">${p.stats.appearances} Apps</span>
-          <span class="badge badge-gold">${p.stats.minutesPlayed.toLocaleString()} mins</span>
+          <span class="badge badge-gray">${displayText(p.nationality)}</span>
+          <span class="badge badge-gray">Age ${displayAge(p.age)}</span>
+          <span class="badge badge-red">${safeInt(p.stats.appearances)} Apps</span>
+          <span class="badge badge-gold">${safeInt(p.stats.minutesPlayed).toLocaleString()} mins</span>
         </div>
       </div>
 
       <div style="display:flex;gap:24px;flex-shrink:0;">
         <div style="text-align:center;">
-          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--red);line-height:1;">${p.stats.goals}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--red);line-height:1;">${safeInt(p.stats.goals)}</div>
           <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">Goals</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;line-height:1;">${p.stats.assists}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;line-height:1;">${safeInt(p.stats.assists)}</div>
           <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">Assists</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1;">${p.stats.xG}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1;">${safeNumber(p.stats.xG).toFixed(1)}</div>
           <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;">xG</div>
         </div>
       </div>
@@ -294,13 +324,17 @@ function renderProfileHeader(p) {
 }
 
 function renderStatsStrip(p) {
+  const keyPassesPerGame = safeInt(p.stats.appearances) > 0
+    ? (safeNumber(p.stats.keyPasses) / safeInt(p.stats.appearances)).toFixed(1)
+    : "0.0";
+  const dribblePct = pct(p.stats.dribbleSuccess, p.stats.dribbles);
   const strip = [
-    { label: 'Shots', value: p.stats.shots, sub: `${p.stats.shotsOnTarget} on target` },
-    { label: 'Key Passes', value: p.stats.keyPasses, sub: 'per game: ' + (p.stats.keyPasses/p.stats.appearances).toFixed(1) },
-    { label: 'Prog. Passes', value: p.stats.progressivePasses, sub: 'Total progressive' },
-    { label: 'Dribbles', value: `${p.stats.dribbleSuccess}/${p.stats.dribbles}`, sub: `${Math.round(p.stats.dribbleSuccess/p.stats.dribbles*100)}% success` },
-    { label: 'Pass Acc.', value: p.stats.passAccuracy + '%', sub: 'Season average' },
-    { label: 'xA', value: p.stats.xA, sub: 'Expected assists' },
+    { label: 'Shots', value: safeInt(p.stats.shots), sub: `${safeInt(p.stats.shotsOnTarget)} on target` },
+    { label: 'Key Passes', value: safeInt(p.stats.keyPasses), sub: `per game: ${keyPassesPerGame}` },
+    { label: 'Prog. Passes', value: safeInt(p.stats.progressivePasses), sub: 'Total progressive' },
+    { label: 'Dribbles', value: `${safeInt(p.stats.dribbleSuccess)}/${safeInt(p.stats.dribbles)}`, sub: `${dribblePct}% success` },
+    { label: 'Pass Acc.', value: safeNumber(p.stats.passAccuracy).toFixed(1) + '%', sub: 'Season average' },
+    { label: 'xA', value: safeNumber(p.stats.xA).toFixed(1), sub: 'Expected assists' },
   ];
 
   document.getElementById('player-stats-strip').innerHTML = strip.map(s => `
@@ -337,7 +371,7 @@ function renderStatsTable(p) {
       { name: 'xG', val: p.stats.xG },
       { name: 'Shots', val: p.stats.shots },
       { name: 'Shots on Target', val: p.stats.shotsOnTarget },
-      { name: 'Shot Accuracy', val: `${Math.round(p.stats.shotsOnTarget/p.stats.shots*100)}%` },
+      { name: 'Shot Accuracy', val: `${pct(p.stats.shotsOnTarget, p.stats.shots)}%` },
     ]},
     { cat: 'Creating', stats: [
       { name: 'Assists', val: p.stats.assists },
@@ -348,7 +382,7 @@ function renderStatsTable(p) {
     ]},
     { cat: 'Duels', stats: [
       { name: 'Dribbles Attempted', val: p.stats.dribbles },
-      { name: 'Dribbles Completed', val: `${p.stats.dribbleSuccess} (${Math.round(p.stats.dribbleSuccess/p.stats.dribbles*100)}%)` },
+      { name: 'Dribbles Completed', val: `${safeInt(p.stats.dribbleSuccess)} (${pct(p.stats.dribbleSuccess, p.stats.dribbles)}%)` },
       { name: 'Aerial Won', val: p.stats.aerialWon },
       { name: 'Aerial Lost', val: p.stats.aerialLost },
     ]},
@@ -420,7 +454,11 @@ function renderShotMap(p) {
 }
 
 function renderForm(p) {
-  const form = p.form;
+  const form = Array.isArray(p.form) ? p.form : [];
+  if (form.length === 0) {
+    document.getElementById('player-form-section').innerHTML = '<p class="text-muted" style="margin:0;">Recent form unavailable.</p>';
+    return;
+  }
   const results = form.map(r => r===1 ? 'W' : r===0 ? 'D' : 'L');
   document.getElementById('player-form-section').innerHTML = `
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
@@ -449,19 +487,21 @@ function renderForm(p) {
 }
 
 function renderSeasonOverview(p) {
-  const per90Goals = (p.stats.goals / (p.stats.minutesPlayed/90)).toFixed(2);
-  const per90Assists = (p.stats.assists / (p.stats.minutesPlayed/90)).toFixed(2);
-  const shotConversion = Math.round((p.stats.goals / p.stats.shots) * 100);
+  const minutesPlayed = safeNumber(p.stats.minutesPlayed);
+  const per90Goals = minutesPlayed > 0 ? (safeNumber(p.stats.goals) / (minutesPlayed / 90)).toFixed(2) : "0.00";
+  const per90Assists = minutesPlayed > 0 ? (safeNumber(p.stats.assists) / (minutesPlayed / 90)).toFixed(2) : "0.00";
+  const shotConversion = pct(p.stats.goals, p.stats.shots);
+  const appearanceMinutes = Math.max(safeInt(p.stats.appearances) * 90, 1);
 
   document.getElementById('player-season-overview').innerHTML = `
     <div style="display:flex;flex-direction:column;gap:16px;">
       <div>
         <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
           <span style="font-size:12px;color:var(--text-secondary);">Minutes Played</span>
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;">${p.stats.minutesPlayed.toLocaleString()}</span>
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;">${safeInt(minutesPlayed).toLocaleString()}</span>
         </div>
         <div class="progress-bar">
-          <div class="progress-fill" style="width:${Math.round(p.stats.minutesPlayed/(p.stats.appearances*90)*100)}%;background:var(--red);"></div>
+          <div class="progress-fill" style="width:${Math.round((minutesPlayed / appearanceMinutes) * 100)}%;background:var(--red);"></div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
@@ -478,7 +518,7 @@ function renderSeasonOverview(p) {
           <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Shot Conv.</div>
         </div>
         <div style="background:var(--bg-raised);padding:12px;border-radius:var(--radius-md);text-align:center;">
-          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;">${p.stats.passAccuracy}%</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;">${safeNumber(p.stats.passAccuracy).toFixed(1)}%</div>
           <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Pass Acc.</div>
         </div>
       </div>
