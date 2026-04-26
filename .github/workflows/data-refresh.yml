@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+      PR_TOKEN: ${{ secrets.BOT_GH_TOKEN != '' && secrets.BOT_GH_TOKEN || secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -31,9 +32,10 @@ jobs:
 
       - name: Create or update bot data PR
         id: cpr
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ env.PR_TOKEN }}
           commit-message: "chore: refresh football data"
           branch: bot-updates
           base: main
@@ -49,10 +51,17 @@ jobs:
             data/*.json
 
       - name: Enable auto-merge for bot PR
-        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        if: ${{ steps.cpr.outcome == 'success' && steps.cpr.outputs.pull-request-number != '' }}
+        continue-on-error: true
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ env.PR_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
+
+      - name: Report pull request automation status
+        if: ${{ always() && steps.cpr.outcome != 'success' }}
+        run: |
+          echo "::warning::Data refresh succeeded but PR automation failed."
+          echo "::warning::Set repository setting 'Allow GitHub Actions to create and approve pull requests', or add a BOT_GH_TOKEN secret (PAT with repo permissions)."
 
