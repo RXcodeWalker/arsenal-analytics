@@ -37,7 +37,7 @@
   </ul>
 
   <div class="nav-actions">
-    <span class="nav-badge">2024/25</span>
+    <span class="nav-badge">NA</span>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -69,7 +69,7 @@
     <div class="container" style="position:relative;z-index:2;width:100%;">
       <div style="display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center;">
         <div class="hero-content">
-          <div class="hero-eyebrow">Arsenal Analytics · Season 2024/25</div>
+          <div class="hero-eyebrow">Arsenal Analytics · Season <span id="hero-season-label">NA</span></div>
 
           <h1 class="hero-title">
             Football Data.
@@ -91,19 +91,19 @@
           <!-- Quick stats grid -->
           <div class="hero-stats" style="margin-top:48px;" data-animate>
             <div class="hero-stat">
-              <span class="hero-stat-value" data-count="72">72</span>
+              <span class="hero-stat-value" id="hero-points-stat">NA</span>
               <span class="hero-stat-label">Points</span>
             </div>
             <div class="hero-stat">
-              <span class="hero-stat-value" data-count="68">68</span>
+              <span class="hero-stat-value" id="hero-goals-stat">NA</span>
               <span class="hero-stat-label">Goals</span>
             </div>
             <div class="hero-stat" style="position:relative;">
-              <span class="hero-stat-value" style="color:var(--gold);" data-count="64" data-decimals="1">64.2</span>
+              <span class="hero-stat-value" style="color:var(--gold);" id="hero-xg-stat">NA</span>
               <span class="hero-stat-label">xG For</span>
             </div>
             <div class="hero-stat">
-              <span class="hero-stat-value" data-count="14">14</span>
+              <span class="hero-stat-value" id="hero-clean-sheet-stat">NA</span>
               <span class="hero-stat-label">Clean Sheets</span>
             </div>
           </div>
@@ -129,27 +129,27 @@
   <!-- ── QUICK STAT CARDS ──────────────────────────────────── -->
   <section class="section-sm" style="padding-top:0;">
     <div class="container">
-      <div class="section-label">Season at a Glance · GW31</div>
+          <div class="section-label">Season at a Glance</div>
       <div class="grid-4" id="quick-stats">
         <div class="stat-card animate-up stagger-1">
           <div class="stat-label">Position</div>
-          <div class="stat-value red" data-count="1">1</div>
-          <div class="stat-change up">↑ Top of League</div>
+              <div class="stat-value red" id="glance-position-stat">NA</div>
+              <div class="stat-change up" id="glance-position-note">NA</div>
         </div>
         <div class="stat-card animate-up stagger-2">
           <div class="stat-label">xG Difference</div>
-          <div class="stat-value gold" data-count="41" data-decimals="1">+41.4</div>
-          <div class="stat-change up">↑ Best in PL</div>
+              <div class="stat-value gold" id="glance-xgdiff-stat">NA</div>
+              <div class="stat-change up" id="glance-xgdiff-note">NA</div>
         </div>
         <div class="stat-card animate-up stagger-3">
           <div class="stat-label">Avg Possession</div>
-          <div class="stat-value" data-count="56" data-decimals="1">56.4%</div>
-          <div class="stat-change up">↑ 3rd in PL</div>
+              <div class="stat-value" id="glance-possession-stat">NA</div>
+              <div class="stat-change up" id="glance-possession-note">NA</div>
         </div>
         <div class="stat-card animate-up stagger-4">
           <div class="stat-label">PPDA (Press)</div>
-          <div class="stat-value" data-count="7" data-decimals="1">7.8</div>
-          <div class="stat-change up">↑ Intense press</div>
+              <div class="stat-value" id="glance-ppda-stat">NA</div>
+              <div class="stat-change up" id="glance-ppda-note">NA</div>
         </div>
       </div>
     </div>
@@ -224,34 +224,10 @@
             <div class="card-body p-0" id="standings-mini">
               <div style="padding:8px 0;">
                 <div class="standing-row highlight">
-                  <span class="standing-pos top">1</span>
+                  <span class="standing-pos top" id="standings-arsenal-pos">NA</span>
                   <span class="standing-team" style="color:var(--red);">Arsenal</span>
                   <div style="display:flex;gap:3px;margin-right:8px;" id="arsenal-form-mini"></div>
-                  <span class="standing-pts">72</span>
-                </div>
-                <div class="standing-row">
-                  <span class="standing-pos">2</span>
-                  <span class="standing-team">Liverpool</span>
-                  <span style="flex:1;"></span>
-                  <span class="standing-pts">70</span>
-                </div>
-                <div class="standing-row">
-                  <span class="standing-pos">3</span>
-                  <span class="standing-team">Man City</span>
-                  <span style="flex:1;"></span>
-                  <span class="standing-pts">63</span>
-                </div>
-                <div class="standing-row">
-                  <span class="standing-pos">4</span>
-                  <span class="standing-team">Chelsea</span>
-                  <span style="flex:1;"></span>
-                  <span class="standing-pts">59</span>
-                </div>
-                <div class="standing-row">
-                  <span class="standing-pos">5</span>
-                  <span class="standing-team">Aston Villa</span>
-                  <span style="flex:1;"></span>
-                  <span class="standing-pts">57</span>
+                  <span class="standing-pts" id="standings-arsenal-pts">NA</span>
                 </div>
               </div>
             </div>
@@ -387,11 +363,11 @@ async function fetchJson(path) {
 }
 
 function fmtNumberBadge(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
 function fmtAge(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
 function fmtText(value, fallback = "N/A") {
@@ -400,18 +376,42 @@ function fmtText(value, fallback = "N/A") {
   return text;
 }
 
-function fmtStat(value, fallback = "—") {
+function fmtStat(value, fallback = "NA") {
   return value === undefined || value === null || Number.isNaN(Number(value)) ? fallback : value;
+}
+
+function getCompletedMatches(matches) {
+  if (!Array.isArray(matches)) return [];
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  return matches.filter((m) => typeof m?.date === 'string' && m.date <= todayStr);
 }
 
 (async () => {
   // Load data
   const matchData  = await fetchJson('data/matches.json');
   const playerData = await fetchJson('data/players.json');
+  const completedMatches = getCompletedMatches(matchData?.matches);
+  const ss = matchData?.seasonStats || {};
+  document.getElementById('hero-season-label').textContent = matchData?.season || 'NA';
+  document.getElementById('hero-points-stat').textContent = fmtStat(ss.points, 'NA');
+  document.getElementById('hero-goals-stat').textContent = fmtStat(ss.goalsFor, 'NA');
+  document.getElementById('hero-xg-stat').textContent = ss.xGFor != null ? Number(ss.xGFor).toFixed(1) : 'NA';
+  document.getElementById('hero-clean-sheet-stat').textContent = fmtStat(ss.cleanSheets, 'NA');
+  document.getElementById('glance-position-stat').textContent = ss.position ? `#${ss.position}` : 'NA';
+  document.getElementById('glance-position-note').textContent = ss.position ? 'Data received' : 'NA';
+  document.getElementById('glance-xgdiff-stat').textContent = (ss.xGFor != null && ss.xGAgainst != null) ? `${(Number(ss.xGFor) - Number(ss.xGAgainst)).toFixed(1)}` : 'NA';
+  document.getElementById('glance-xgdiff-note').textContent = (ss.xGFor != null && ss.xGAgainst != null) ? 'Data received' : 'NA';
+  document.getElementById('glance-possession-stat').textContent = ss.avgPossession != null ? `${Number(ss.avgPossession).toFixed(1)}%` : 'NA';
+  document.getElementById('glance-possession-note').textContent = ss.avgPossession != null ? 'Data received' : 'NA';
+  document.getElementById('glance-ppda-stat').textContent = ss.ppda != null ? Number(ss.ppda).toFixed(1) : 'NA';
+  document.getElementById('glance-ppda-note').textContent = ss.ppda != null ? 'Data received' : 'NA';
+  document.getElementById('standings-arsenal-pos').textContent = ss.position || 'NA';
+  document.getElementById('standings-arsenal-pts').textContent = ss.points || 'NA';
 
   // ── Render Hero Match Card ──────────────────────────────
-  if (matchData?.matches?.[0]) {
-    const m = matchData.matches[0];
+  if (completedMatches[0]) {
+    const m = completedMatches[0];
     const result = m.resultFromArsenalView || m.result;
     const isHome = m.homeTeam === 'Arsenal';
     const resultClass = result === 'W' ? 'green' : result === 'D' ? 'gold' : 'red';
@@ -447,11 +447,11 @@ function fmtStat(value, fallback = "—") {
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <div style="background:var(--bg-raised);padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--red);">${m.stats?.home?.xG?.toFixed(2) || '—'}</div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--red);">${m.stats?.home?.xG?.toFixed(2) || 'NA'}</div>
             <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">xG</div>
           </div>
           <div style="background:var(--bg-raised);padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--text-primary);">${m.stats?.home?.possession || '—'}%</div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--text-primary);">${m.stats?.home?.possession != null ? `${m.stats.home.possession}%` : 'NA'}</div>
             <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Poss</div>
           </div>
         </div>
@@ -549,10 +549,11 @@ function fmtStat(value, fallback = "—") {
 
   // ── Match Log ───────────────────────────────────────────
   const matchLog = document.getElementById('match-log');
-  if (matchData?.matches && matchLog) {
+  if (completedMatches.length && matchLog) {
+    const recentFive = completedMatches.slice(0, 5);
     matchLog.innerHTML = `
       <div style="display:flex;flex-direction:column;gap:8px;">
-        ${matchData.matches.map(m => {
+        ${recentFive.map(m => {
           const result = m.resultFromArsenalView || m.result;
           const isHome = m.homeTeam === 'Arsenal';
           const cls = result === 'W' ? 'green' : result === 'D' ? 'gold' : 'red';
@@ -569,11 +570,11 @@ function fmtStat(value, fallback = "—") {
                 </div>
                 <div style="display:flex;gap:16px;flex-shrink:0;">
                   <div style="text-align:center;">
-                    <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--${isHome?'red':'text-secondary'});">${isHome ? m.stats?.home?.xG?.toFixed(2)||'—' : m.stats?.away?.xG?.toFixed(2)||'—'}</div>
+                    <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--${isHome?'red':'text-secondary'});">${isHome ? m.stats?.home?.xG?.toFixed(2)||'NA' : m.stats?.away?.xG?.toFixed(2)||'NA'}</div>
                     <div style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);">xG</div>
                   </div>
                   <div style="text-align:center;">
-                    <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;">${isHome ? m.stats?.home?.possession||'—' : m.stats?.away?.possession||'—'}%</div>
+                    <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;">${isHome ? (m.stats?.home?.possession != null ? `${m.stats.home.possession}%` : 'NA') : (m.stats?.away?.possession != null ? `${m.stats.away.possession}%` : 'NA')}</div>
                     <div style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);">Poss</div>
                   </div>
                 </div>

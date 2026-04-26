@@ -2,11 +2,12 @@ name: Data Refresh Pipeline
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */12 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   refresh-data:
@@ -17,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,15 +29,30 @@ jobs:
       - name: Run data pipeline
         run: node pipeline/run.js
 
-      - name: Commit and push updated data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/*.json
-          if git diff --cached --quiet; then
-            echo "No data changes to commit."
-            exit 0
-          fi
-          git commit -m "chore: refresh football data"
-          git push
+      - name: Create or update bot data PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: refresh football data"
+          branch: bot-updates
+          base: main
+          delete-branch: false
+          title: "chore: refresh football data"
+          body: |
+            Automated data refresh from pipeline.
+
+            - Source: scheduled GitHub Action
+            - Scope: `data/*.json` only
+            - Review before merge into `main`
+          add-paths: |
+            data/*.json
+
+      - name: Enable auto-merge for bot PR
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
 

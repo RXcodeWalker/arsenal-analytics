@@ -33,7 +33,7 @@
     <li><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <span class="nav-badge">2024/25</span>
+    <span class="nav-badge">NA</span>
     <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -150,7 +150,7 @@
           <div style="width:140px;height:140px;position:relative;">
             <canvas id="possession-chart"></canvas>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-              <span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;" id="poss-home-val">58%</span>
+              <span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;" id="poss-home-val">NA</span>
               <span style="font-size:9px;color:var(--text-muted);font-family:var(--font-mono);">ARSENAL</span>
             </div>
           </div>
@@ -325,7 +325,7 @@ function renderMatchHeader(m) {
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
           <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:${resultColor};">${resultLabel}</span>
-          <span class="badge badge-gray">${m.attendance?.toLocaleString()||'—'} attendance</span>
+          <span class="badge badge-gray">${m.attendance?.toLocaleString()||'NA'} attendance</span>
         </div>
       </div>
 
@@ -375,10 +375,10 @@ function renderKeyStats(m) {
   const ars = isHome ? h : a, opp = isHome ? a : h;
 
   const stats = [
-    { label: 'xG', val: ars.xG?.toFixed(2)||'—', sub: `vs ${opp.xG?.toFixed(2)||'—'} opp`, color: 'var(--red)' },
-    { label: 'Shots on Target', val: ars.shotsOnTarget||'—', sub: `${ars.shots} total shots`, color: '' },
+    { label: 'xG', val: ars.xG?.toFixed(2)||'NA', sub: `vs ${opp.xG?.toFixed(2)||'NA'} opp`, color: 'var(--red)' },
+    { label: 'Shots on Target', val: ars.shotsOnTarget ?? 'NA', sub: `${ars.shots ?? 'NA'} total shots`, color: '' },
     { label: 'Pass Accuracy', val: `${ars.passAccuracy}%`, sub: `${ars.passes} passes`, color: 'var(--gold)' },
-    { label: 'PPDA', val: ars.ppda||'—', sub: 'Passes allowed per def. action', color: '' },
+    { label: 'PPDA', val: ars.ppda ?? 'NA', sub: 'Passes allowed per def. action', color: '' },
   ];
 
   document.getElementById('key-stats-strip').innerHTML = stats.map(s => `
@@ -500,7 +500,7 @@ function renderMatchTimeline(m) {
 
 function renderPossession(m) {
   if (!m.stats?.home || !m.stats?.away) {
-    document.getElementById('poss-home-val').textContent = '—';
+    document.getElementById('poss-home-val').textContent = 'NA';
     document.getElementById('poss-breakdown').innerHTML =
       renderEmptyState('Possession data is not available for this fixture yet.');
     return;

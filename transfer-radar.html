@@ -33,7 +33,7 @@
     <li><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <span class="nav-badge">2024/25</span>
+    <span class="nav-badge">NA</span>
     <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -63,8 +63,8 @@
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="font-size:1.4rem;">🔍</span>
         <div>
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--red);text-transform:uppercase;">Summer 2025 Window</div>
-          <div style="font-size:14px;color:var(--text-secondary);margin-top:2px;">3 transfer targets scouted · Data-driven profiling · Arsenal system fit analysis</div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--red);text-transform:uppercase;">Current Window</div>
+          <div style="font-size:14px;color:var(--text-secondary);margin-top:2px;"><span id="targets-count-label">NA</span> transfer targets scouted · Data-driven profiling · Arsenal system fit analysis</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;" id="window-targets">
@@ -150,7 +150,7 @@
     <div class="chart-wrapper" style="margin-bottom:32px;">
       <div class="chart-header">
         <span class="card-title">Statistical Face-Off</span>
-        <span class="badge badge-gray">2024/25 Season</span>
+        <span class="badge badge-gray">NA</span>
       </div>
       <div class="card-body" id="stats-faceoff" style="padding:24px;"></div>
     </div>
@@ -177,7 +177,7 @@
     <div>
       <div class="flex-between mb-24">
         <div>
-          <div class="section-label">Summer 2025 Targets</div>
+          <div class="section-label">Transfer Targets</div>
           <h2 class="heading-1">Scouted Players</h2>
         </div>
       </div>
@@ -216,79 +216,14 @@ function displayText(value, fallback = "N/A") {
 }
 
 function displayNumber(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
 function displayAge(value) {
-  return Number.isInteger(value) && value > 0 ? String(value) : "—";
+  return Number.isInteger(value) && value > 0 ? String(value) : "NA";
 }
 
-// Scouting notes per player
-const scoutingNotes = {
-  1: {
-    strengths: ['Elite dribbler in tight spaces', 'Two-footed — impossible to predict', 'Exceptional pressing work rate', 'Consistent penalty box threat'],
-    concerns: ['Aerial duels — limited at 5\'10"', 'Heavy workload risk over long season'],
-    fit: 98,
-    verdict: 'Irreplaceable. A system cornerstone who defines the right-flank structure. Contract renewal priority.',
-    tag: 'Squad Pillar'
-  },
-  2: {
-    strengths: ['Premier League\'s best orchestrator', 'Half-space positioning is elite', 'Set-piece delivery at top level', 'Leadership and press triggers'],
-    concerns: ['Recurring injury risk', 'Limited output when pressed high'],
-    fit: 97,
-    verdict: 'The engine of Arteta\'s system. No direct replacement exists in current market.',
-    tag: 'Captain'
-  },
-  3: {
-    strengths: ['Most complete midfielder in PL', 'Box-to-box stamina unmatched', 'Presses and wins aerial duels', 'Late runs into box — 7 goals'],
-    concerns: ['Could demand even higher ceiling than current contract'],
-    fit: 96,
-    verdict: 'Defensive linchpin and set-piece weapon. The Rodri comparison is now credible.',
-    tag: 'Key Player'
-  },
-  4: {
-    strengths: ['Explosive acceleration — top 5% PL', 'High dribble completion (74%)', 'Link-up play improving season-on-season'],
-    concerns: ['Decision-making in final third inconsistent', 'Wasteful with chance creation at times'],
-    fit: 88,
-    verdict: 'Electric on his day. Needs more consistent output but undeniable talent.',
-    tag: 'Talent'
-  },
-  5: {
-    strengths: ['Relentless presser — 348 pressures', 'Aerially dominant — 38 won', 'Excellent link play and hold-up'],
-    concerns: ['Injury absences limiting consistency', 'Conversion rate vs xG gap widening'],
-    fit: 82,
-    verdict: 'Fits the system perfectly but fitness concerns reduce planning certainty.',
-    tag: 'Rotation Risk'
-  },
-  6: {
-    strengths: ['Two goals vs Chelsea showing clutch gene', 'Versatile — can play 9, 10, or wide', 'Excellent aerial threat from set pieces'],
-    concerns: ['xG underperformance in first half of season', 'Creative output below top-tier 10s'],
-    fit: 85,
-    verdict: 'Growing into his best Arsenal form. The late-season goal tally is decisive.',
-    tag: 'Emerging'
-  },
-  101: {
-    strengths: ['Best U-22 creative player in Europe', 'Vision to unlock any defensive line', 'Dribble success rate of 91% — extraordinary', 'Creates chance from nothing'],
-    concerns: ['€130M fee is club-record territory', 'Leverkusen unlikely to sell easily', 'Settling to PL physicality takes time'],
-    fit: 94,
-    verdict: 'Generational talent. Would be the most exciting signing since Cesc. Budget must be found.',
-    tag: 'Dream Target'
-  },
-  102: {
-    strengths: ['38 goals — best conversion rate in Europe', 'Aerial dominance in box', 'Relentless presser (318 pressures)', 'Clinical from any angle'],
-    concerns: ['€95M — requires selling Jesus', 'Adapting from Portuguese league pace', 'Style may overlap with Havertz'],
-    fit: 88,
-    verdict: 'A genuine 30-goal PL striker. Will end the annual striker debate permanently.',
-    tag: 'Priority Target'
-  },
-  103: {
-    strengths: ['18 years old — decade of peak ahead', 'Dribble success highest of any wide player', 'Already operating at top-1% chance creation', 'Fearless in 1v1 situations'],
-    concerns: ['€180M — unrealistic without UCL revenue boost', 'Barcelona will never sell willingly', 'Physicality still developing'],
-    fit: 91,
-    verdict: 'The most exciting player on the planet. Would be the signing of the decade. Pipe dream.',
-    tag: 'Marquee Signing'
-  }
-};
+const scoutingNotes = {};
 
 async function loadData() {
   const playerData = await fetchJson('data/players.json');
@@ -300,6 +235,7 @@ async function loadData() {
   if (shotData?.transferTargets) {
     allTargets = shotData.transferTargets;
   }
+  document.getElementById('targets-count-label').textContent = String(allTargets.length || 'NA');
 
   const combined = [...allPlayers, ...allTargets];
   renderSelectors(combined);
@@ -523,7 +459,7 @@ function renderFaceoff() {
     { label: 'Key Passes', a: sA.keyPasses, b: sB.keyPasses, format: v => v },
     { label: 'Prog. Passes', a: sA.progressivePasses, b: sB.progressivePasses, format: v => v },
     { label: 'Dribbles', a: sA.dribbles, b: sB.dribbles, format: v => v },
-    { label: 'Dribble Success', a: Math.round(sA.dribbleSuccess/sA.dribbles*100), b: Math.round(sB.dribbleSuccess/sB.dribbles*100), format: v => v+'%' },
+    { label: 'Dribble Success', a: sA.dribbles > 0 ? Math.round(sA.dribbleSuccess/sA.dribbles*100) : null, b: sB.dribbles > 0 ? Math.round(sB.dribbleSuccess/sB.dribbles*100) : null, format: v => (v == null ? 'NA' : v+'%') },
     { label: 'Pressures', a: sA.pressures, b: sB.pressures, format: v => v },
     { label: 'Pass Accuracy', a: sA.passAccuracy, b: sB.passAccuracy, format: v => parseFloat(v).toFixed(1)+'%' },
   ];
@@ -595,9 +531,9 @@ function renderFaceoff() {
 
 function renderScoutReports() {
   const renderReport = (player, side) => {
-    const notes = scoutingNotes[player.id] || {
-      strengths: ['Data analysis pending'], concerns: ['Scouting report in progress'],
-      fit: 75, verdict: 'Under evaluation.', tag: 'Under Review'
+    const notes = player?.scouting || scoutingNotes[player.id] || {
+      strengths: ['NA'], concerns: ['NA'],
+      fitScore: null, verdict: 'NA', tag: 'NA'
     };
     const color = side === 'left' ? 'var(--red)' : '#4A6CF7';
     const badgeClass = side === 'left' ? 'badge-red' : 'badge-blue';
@@ -609,17 +545,17 @@ function renderScoutReports() {
       <div style="margin-bottom:20px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <span style="font-size:12px;color:var(--text-secondary);">Arsenal System Fit</span>
-          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:${color};">${notes.fit}/100</span>
+          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:${color};">${notes.fitScore == null ? 'NA' : `${notes.fitScore}/100`}</span>
         </div>
         <div class="progress-bar">
-          <div class="progress-fill" style="width:${notes.fit}%;background:${color};"></div>
+          <div class="progress-fill" style="width:${notes.fitScore == null ? 0 : notes.fitScore}%;background:${color};"></div>
         </div>
       </div>
 
       <!-- Strengths -->
       <div style="margin-bottom:16px;">
         <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:#4ADE80;text-transform:uppercase;margin-bottom:8px;">Strengths</div>
-        ${notes.strengths.map(s => `
+        ${(notes.strengths || ['NA']).map(s => `
           <div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03);">
             <span style="color:#4ADE80;flex-shrink:0;margin-top:1px;">+</span>
             <span style="font-size:12px;color:var(--text-secondary);">${s}</span>
@@ -630,7 +566,7 @@ function renderScoutReports() {
       <!-- Concerns -->
       <div style="margin-bottom:16px;">
         <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Concerns</div>
-        ${notes.concerns.map(c => `
+        ${(notes.concerns || ['NA']).map(c => `
           <div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03);">
             <span style="color:var(--gold);flex-shrink:0;margin-top:1px;">△</span>
             <span style="font-size:12px;color:var(--text-secondary);">${c}</span>
@@ -640,8 +576,8 @@ function renderScoutReports() {
 
       <!-- Verdict -->
       <div class="callout gold" style="margin:0;">
-        <div class="callout-title">Scout Verdict · <span class="badge badge-gold" style="vertical-align:middle;">${notes.tag}</span></div>
-        <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-top:6px;">${notes.verdict}</p>
+        <div class="callout-title">Scout Verdict · <span class="badge badge-gold" style="vertical-align:middle;">${notes.tag || 'NA'}</span></div>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-top:6px;">${notes.verdict || 'NA'}</p>
       </div>
     `;
   };
@@ -652,7 +588,7 @@ function renderScoutReports() {
 
 function renderTransferGrid() {
   document.getElementById('transfer-targets-grid').innerHTML = allTargets.map(t => {
-    const notes = scoutingNotes[t.id];
+    const notes = t.scouting || scoutingNotes[t.id];
     return `
       <div class="card" style="cursor:pointer;transition:var(--transition);" onclick="quickCompare(${t.id})" onmouseover="this.style.borderColor='var(--border-red)'" onmouseout="this.style.borderColor='var(--border)'">
         <div class="card-header" style="background:linear-gradient(135deg,rgba(200,168,75,0.08),transparent);">
@@ -685,10 +621,10 @@ function renderTransferGrid() {
               <div>
                 <div style="font-size:11px;color:var(--text-muted);">System Fit</div>
                 <div class="progress-bar" style="width:120px;margin-top:4px;">
-                  <div class="progress-fill" style="width:${notes.fit}%;background:var(--gold);"></div>
+                  <div class="progress-fill" style="width:${notes.fitScore == null ? 0 : notes.fitScore}%;background:var(--gold);"></div>
                 </div>
               </div>
-              <span class="badge badge-gold">${notes.tag}</span>
+              <span class="badge badge-gold">${notes.tag || 'NA'}</span>
             </div>
           ` : ''}
           <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">

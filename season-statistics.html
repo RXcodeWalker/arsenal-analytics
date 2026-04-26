@@ -33,7 +33,7 @@
     <li><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <span class="nav-badge">2024/25</span>
+    <span class="nav-badge">NA</span>
     <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -52,7 +52,7 @@
   <div class="container">
     <div class="page-header">
       <div class="section-label">Season Statistics</div>
-      <h1 class="display-2">2024/25 <span style="color:var(--red);">Season</span></h1>
+      <h1 class="display-2"><span id="season-title-label">NA</span> <span style="color:var(--red);">Season</span></h1>
       <p class="text-secondary" style="margin-top:8px;font-size:14px;">Full season metrics, trends and team analysis</p>
     </div>
 
@@ -187,6 +187,7 @@ async function loadData() {
 
   if (!matchData?.seasonStats) return;
   const ss = matchData.seasonStats;
+  document.getElementById('season-title-label').textContent = matchData?.season || 'NA';
 
   // Summary strip
   const strip = [
@@ -259,17 +260,22 @@ async function loadData() {
   // Team radar
   setTimeout(() => {
     const labels = ['xG For', 'Press (PPDA)', 'Possession', 'Pass Acc.', 'Clean Sheets', 'Field Tilt'];
-    // Normalize to 0-100 scale vs PL max
+    const passAcc = Number(ss.passAccuracy);
+    if (!Number.isFinite(passAcc)) {
+      const parent = document.getElementById('team-radar-chart')?.parentElement;
+      if (parent) parent.innerHTML = '<p class="text-muted" style="text-align:center;padding-top:80px;">NA</p>';
+      return;
+    }
     const vals = [
       Math.round((ss.xGFor / 75) * 100),
       Math.round(((14 - ss.ppda) / 8) * 100),
       Math.round((ss.avgPossession / 65) * 100),
-      88,
+      Math.round((passAcc / 100) * 100),
       Math.round((ss.cleanSheets / 18) * 100),
       Math.round((ss.fieldTilt / 70) * 100),
     ];
     createRadarChart('team-radar-chart', labels, [{
-      label: 'Arsenal 24/25',
+      label: matchData?.season || 'NA',
       data: vals,
       borderColor: '#EF0107',
       backgroundColor: 'rgba(239,1,7,0.1)',
@@ -327,15 +333,15 @@ async function loadData() {
           <span style="font-size:12px;color:var(--text-secondary);">PPDA (lower = more intense)</span>
           <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--red);">${ss.ppda}</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:${Math.round((14-ss.ppda)/10*100)}%;background:var(--red);"></div></div>
-        <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">PL Average: ~11.2 · Elite threshold: <8.0</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${Number.isFinite(Number(ss.ppda)) ? Math.round((14-ss.ppda)/10*100) : 0}%;background:var(--red);"></div></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">${Number.isFinite(Number(ss.ppda)) ? 'Data received' : 'NA'}</div>
       </div>
       <div>
         <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
           <span style="font-size:12px;color:var(--text-secondary);">High Press Recoveries</span>
-          <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;">${ss.highPressRecoveries}</span>
+          <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;">${ss.highPressRecoveries ?? 'NA'}</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:82%;"></div></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${Number.isFinite(Number(ss.highPressRecoveries)) ? Math.min(100, Number(ss.highPressRecoveries)) : 0}%;"></div></div>
       </div>
       <div>
         <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
@@ -371,11 +377,10 @@ async function loadData() {
 
   // Season polar
   setTimeout(() => {
-    createPolarChart('season-polar-chart',
-      ['Attack (xG)', 'Defending', 'Pressing', 'Possession', 'Set Pieces', 'Transition'],
-      [86, 88, 82, 78, 72, 84],
-      'Arsenal 24/25'
-    );
+    const polarContainer = document.getElementById('season-polar-chart')?.parentElement;
+    if (polarContainer) {
+      polarContainer.innerHTML = '<p class="text-muted" style="text-align:center;padding-top:120px;">NA</p>';
+    }
   }, 400);
 }
 
