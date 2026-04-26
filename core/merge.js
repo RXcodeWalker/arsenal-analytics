@@ -2,6 +2,11 @@ function isObject(value) {
   return value && typeof value === "object" && !Array.isArray(value);
 }
 
+function toNumber(value, fallback = 0) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
 function deepClone(value) {
   return JSON.parse(JSON.stringify(value));
 }
@@ -309,13 +314,187 @@ function buildDefaultSeasonStats() {
   };
 }
 
-function mergeSeasonStats(sourcePayloads) {
+function monthLabelFromDate(dateStr) {
+  const date = new Date(`${String(dateStr || "").slice(0, 10)}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+}
+
+function deriveSeasonStatsFromMatches(matches) {
+  const targetTeam = "arsenal";
+  const sorted = asArray(matches).slice().sort((a, b) => String(a.date).localeCompare(String(b.date)));
+
+  let played = 0;
+  let won = 0;
+  let drawn = 0;
+  let lost = 0;
+  let goalsFor = 0;
+  let goalsAgainst = 0;
+  let cleanSheets = 0;
+  let xGFor = 0;
+  let xGAgainst = 0;
+  let xgForCount = 0;
+  let xgAgainstCount = 0;
+  let possTotal = 0;
+  let possCount = 0;
+  let ppdaTotal = 0;
+  let ppdaCount = 0;
+  const form = [];
+  const monthly = new Map();
+
+  for (const match of sorted) {
+    const home = normalizeTeamName(match.homeTeam);
+    const away = normalizeTeamName(match.awayTeam);
+    const isHome = home === targetTeam;
+    const isAway = away === targetTeam;
+    if (!isHome && !isAway) continue;
+
+    const gf = isHome ? toNumber(match.homeScore) : toNumber(match.awayScore);
+    const ga = isHome ? toNumber(match.awayScore) : toNumber(match.homeScore);
+    played += 1;
+    goalsFor += gf;
+    goalsAgainst += ga;
+    if (ga === 0) cleanSheets += 1;
+
+    const result = match.resultFromArsenalView || (gf > ga ? "W" : gf < ga ? "L" : "D");
+    if (result === "W") won += 1;
+    else if (result === "D") drawn += 1;
+    else lost += 1;
+    form.push(result);
+
+    const homeStats = isObject(match.stats?.home) ? match.stats.home : null;
+    const awayStats = isObject(match.stats?.away) ? match.stats.away : null;
+    const arsStats = isHome ? homeStats : awayStats;
+    const oppStats = isHome ? awayStats : homeStats;
+
+    if (Number.isFinite(Number(arsStats?.xG))) {
+      xGFor += Number(arsStats.xG);
+      xgForCount += 1;
+    }
+    if (Number.isFinite(Number(oppStats?.xG))) {
+      xGAgainst += Number(oppStats.xG);
+      xgAgainstCount += 1;
+    }
+    if (Number.isFinite(Number(arsStats?.possession))) {
+      possTotal += Number(arsStats.possession);
+      possCount += 1;
+    }
+    if (Number.isFinite(Number(arsStats?.ppda))) {
+      ppdaTotal += Number(arsStats.ppda);
+      ppdaCount += 1;
+    }
+
+    const month = monthLabelFromDate(match.date);
+    if (!month) continue;
+    if (!monthly.has(month)) {
+      monthly.set(month, {
+        month,
+        xGFor: 0,
+        xGAgainst: 0,
+        goalsFor: 0,
+        goalsAgainst: 0
+      });
+    }
+    const row = monthly.get(month);
+    row.goalsFor += gf;
+    row.goalsAgainst += ga;
+    if (Number.isFinite(Number(arsStats?.xG))) row.xGFor += Number(arsStats.xG);
+    if (Number.isFinite(Number(oppStats?.xG))) row.xGAgainst += Number(oppStats.xG);
+  }
+
+  const points = won * 3 + drawn;
+  const monthlyXG = [...monthly.values()].map((row) => ({
+    ...row,
+    xGFor: Number(row.xGFor.toFixed(2)),
+    xGAgainst: Number(row.xGAgainst.toFixed(2))
+  }));
+
+  return {
+    played,
+    won,
+    drawn,
+    lost,
+    goalsFor,
+    goalsAgainst,
+    points,
+    position: 0,
+    cleanSheets,
+    xGFor: Number((xgForCount > 0 ? xGFor : 0).toFixed(2)),
+    xGAgainst: Number((xgAgainstCount > 0 ? xGAgainst : 0).toFixed(2)),
+    avgPossession: Number((possCount > 0 ? possTotal / possCount : 0).toFixed(2)),
+    ppda: Number((ppdaCount > 0 ? ppdaTotal / ppdaCount : 0).toFixed(2)),
+    fieldTilt: 0,
+    form,
+    monthlyXG
+  };
+}
+
+function mergeSeasonStats(sourcePayloads, matches) {
   const sorted = sortSourcesByQuality(sourcePayloads);
   const merged = buildDefaultSeasonStats();
+  const seenAny = new Set();
+  const seenNonZero = new Set();
+  const numericFields = [
+    "played",
+    "won",
+    "drawn",
+    "lost",
+    "goalsFor",
+    "goalsAgainst",
+    "points",
+    "position",
+    "cleanSheets",
+    "xGFor",
+    "xGAgainst",
+    "avgPossession",
+    "ppda",
+    "fieldTilt"
+  ];
 
   for (const [, payload] of sorted) {
     if (!isObject(payload?.seasonStats)) continue;
-    Object.assign(merged, deepMerge(merged, payload.seasonStats));
+    const incoming = payload.seasonStats;
+
+    for (const field of numericFields) {
+      const n = Number(incoming[field]);
+      if (!Number.isFinite(n)) continue;
+
+      if (!seenAny.has(field)) {
+        merged[field] = n;
+        seenAny.add(field);
+        if (n !== 0) seenNonZero.add(field);
+        continue;
+      }
+
+      if (!seenNonZero.has(field) && n !== 0) {
+        merged[field] = n;
+        seenNonZero.add(field);
+      }
+    }
+
+    if (Array.isArray(incoming.form) && incoming.form.length > 0 && merged.form.length === 0) {
+      merged.form = deepClone(incoming.form);
+    }
+    if (
+      Array.isArray(incoming.monthlyXG) &&
+      incoming.monthlyXG.length > 0 &&
+      merged.monthlyXG.length === 0
+    ) {
+      merged.monthlyXG = deepClone(incoming.monthlyXG);
+    }
+  }
+
+  const derived = deriveSeasonStatsFromMatches(matches);
+  for (const field of numericFields) {
+    if (Number(merged[field]) === 0 && Number(derived[field]) !== 0) {
+      merged[field] = derived[field];
+    }
+  }
+  if (merged.form.length === 0 && derived.form.length > 0) {
+    merged.form = derived.form;
+  }
+  if (merged.monthlyXG.length === 0 && derived.monthlyXG.length > 0) {
+    merged.monthlyXG = derived.monthlyXG;
   }
 
   if (!Array.isArray(merged.form)) merged.form = [];
@@ -327,7 +506,7 @@ function mergeProviderData(sourcePayloads) {
   const players = mergePlayers(sourcePayloads);
   const matches = mergeMatches(sourcePayloads);
   const shots = mergeShots(sourcePayloads);
-  const seasonStats = mergeSeasonStats(sourcePayloads);
+  const seasonStats = mergeSeasonStats(sourcePayloads, matches);
 
   return { players, matches, shots, seasonStats };
 }
@@ -343,4 +522,3 @@ module.exports = {
   normalizeTeamName,
   canBeSamePlayer
 };
-

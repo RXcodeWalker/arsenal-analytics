@@ -138,6 +138,23 @@ function normalizePlayer(element, teamById) {
   };
 }
 
+function getArsenalPerspectiveScores(fixture, arsenalTeamName, teamById) {
+  const homeTeam = teamById[fixture.team_h] || `Team-${fixture.team_h}`;
+  const awayTeam = teamById[fixture.team_a] || `Team-${fixture.team_a}`;
+  const isHome = homeTeam === arsenalTeamName;
+  const homeScore = toNumber(fixture.team_h_score, 0);
+  const awayScore = toNumber(fixture.team_a_score, 0);
+  return {
+    isHome,
+    homeTeam,
+    awayTeam,
+    homeScore,
+    awayScore,
+    gf: isHome ? homeScore : awayScore,
+    ga: isHome ? awayScore : homeScore
+  };
+}
+
 function normalizeMatch(fixture, teamById, arsenalName) {
   const homeTeam = teamById[fixture.team_h] || `Team-${fixture.team_h}`;
   const awayTeam = teamById[fixture.team_a] || `Team-${fixture.team_a}`;
@@ -155,7 +172,130 @@ function normalizeMatch(fixture, teamById, arsenalName) {
     awayTeam,
     homeScore,
     awayScore,
-    result
+    result,
+    resultFromArsenalView: result,
+    kickoffUtc: fixture.kickoff_time || undefined
+  };
+}
+
+function buildTableFromFixtures(fixtures, teamById) {
+  const table = new Map();
+  const ensure = (teamName) => {
+    if (!table.has(teamName)) {
+      table.set(teamName, {
+        team: teamName,
+        played: 0,
+        won: 0,
+        drawn: 0,
+        lost: 0,
+        goalsFor: 0,
+        goalsAgainst: 0,
+        points: 0
+      });
+    }
+    return table.get(teamName);
+  };
+
+  for (const fixture of fixtures) {
+    const homeTeam = teamById[fixture.team_h] || `Team-${fixture.team_h}`;
+    const awayTeam = teamById[fixture.team_a] || `Team-${fixture.team_a}`;
+    const homeScore = toNumber(fixture.team_h_score, 0);
+    const awayScore = toNumber(fixture.team_a_score, 0);
+
+    const home = ensure(homeTeam);
+    const away = ensure(awayTeam);
+
+    home.played += 1;
+    away.played += 1;
+    home.goalsFor += homeScore;
+    home.goalsAgainst += awayScore;
+    away.goalsFor += awayScore;
+    away.goalsAgainst += homeScore;
+
+    if (homeScore > awayScore) {
+      home.won += 1;
+      away.lost += 1;
+      home.points += 3;
+    } else if (homeScore < awayScore) {
+      away.won += 1;
+      home.lost += 1;
+      away.points += 3;
+    } else {
+      home.drawn += 1;
+      away.drawn += 1;
+      home.points += 1;
+      away.points += 1;
+    }
+  }
+
+  return [...table.values()].sort((a, b) => {
+    const pointsDiff = b.points - a.points;
+    if (pointsDiff !== 0) return pointsDiff;
+    const gdA = a.goalsFor - a.goalsAgainst;
+    const gdB = b.goalsFor - b.goalsAgainst;
+    const gdDiff = gdB - gdA;
+    if (gdDiff !== 0) return gdDiff;
+    const gfDiff = b.goalsFor - a.goalsFor;
+    if (gfDiff !== 0) return gfDiff;
+    return a.team.localeCompare(b.team);
+  });
+}
+
+function sumTeamXG(players, teamName) {
+  return Number(
+    players
+      .filter((player) => player.club === teamName)
+      .reduce((sum, player) => sum + toNumber(player.stats?.xG, 0), 0)
+      .toFixed(2)
+  );
+}
+
+function buildSeasonStatsFromFpl({ fixtures, players, teamById, arsenalName }) {
+  const finished = (fixtures || []).filter(
+    (fixture) =>
+      fixture &&
+      fixture.finished === true &&
+      Number.isFinite(Number(fixture.team_h_score)) &&
+      Number.isFinite(Number(fixture.team_a_score))
+  );
+  const arsenalFixtures = finished.filter(
+    (fixture) => teamById[fixture.team_h] === arsenalName || teamById[fixture.team_a] === arsenalName
+  );
+  const table = buildTableFromFixtures(finished, teamById);
+  const arsenalRow = table.find((row) => row.team === arsenalName);
+
+  const form = arsenalFixtures
+    .slice()
+    .sort((a, b) => String(a.kickoff_time || "").localeCompare(String(b.kickoff_time || "")))
+    .map((fixture) => {
+      const { gf, ga } = getArsenalPerspectiveScores(fixture, arsenalName, teamById);
+      if (gf > ga) return "W";
+      if (gf < ga) return "L";
+      return "D";
+    });
+
+  const cleanSheets = arsenalFixtures.reduce((count, fixture) => {
+    const { ga } = getArsenalPerspectiveScores(fixture, arsenalName, teamById);
+    return ga === 0 ? count + 1 : count;
+  }, 0);
+
+  return {
+    played: toNumber(arsenalRow?.played, arsenalFixtures.length),
+    won: toNumber(arsenalRow?.won),
+    drawn: toNumber(arsenalRow?.drawn),
+    lost: toNumber(arsenalRow?.lost),
+    goalsFor: toNumber(arsenalRow?.goalsFor),
+    goalsAgainst: toNumber(arsenalRow?.goalsAgainst),
+    points: toNumber(arsenalRow?.points),
+    position: arsenalRow ? table.indexOf(arsenalRow) + 1 : 0,
+    cleanSheets,
+    xGFor: sumTeamXG(players, arsenalName),
+    xGAgainst: 0,
+    avgPossession: 0,
+    ppda: 0,
+    fieldTilt: 0,
+    form,
+    monthlyXG: []
   };
 }
 
@@ -176,16 +316,23 @@ async function fetchFplData(options = {}) {
   ]);
 
   const teamById = Object.fromEntries((bootstrap.teams || []).map((team) => [team.id, team.name]));
-  const players = (bootstrap.elements || []).map((element) => normalizePlayer(element, teamById));
+  const players = (bootstrap.elements || [])
+    .filter((element) => teamById[element.team] === config.arsenalName)
+    .map((element) => normalizePlayer(element, teamById));
   const matches = (fixtures || [])
     .filter((f) => f && f.finished === true)
     .filter((f) => teamById[f.team_h] === config.arsenalName || teamById[f.team_a] === config.arsenalName)
     .map((fixture) => normalizeMatch(fixture, teamById, config.arsenalName));
+  const seasonStats = buildSeasonStatsFromFpl({
+    fixtures,
+    players,
+    teamById,
+    arsenalName: config.arsenalName
+  });
 
-  return { players, matches, shots: [] };
+  return { players, matches, seasonStats, shots: [] };
 }
 
 module.exports = {
   fetchFplData
 };
-
