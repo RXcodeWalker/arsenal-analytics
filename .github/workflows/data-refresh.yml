@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+      BOT_GH_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -29,13 +30,22 @@ jobs:
       - name: Run data pipeline
         run: node pipeline/run.js
 
+      - name: Detect bot token availability
+        id: token_check
+        run: |
+          if [ -n "${BOT_GH_TOKEN}" ]; then
+            echo "has_bot_token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_bot_token=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create or update bot data PR
         id: cpr
-        if: ${{ secrets.BOT_GH_TOKEN != '' }}
+        if: ${{ steps.token_check.outputs.has_bot_token == 'true' }}
         continue-on-error: true
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.BOT_GH_TOKEN }}
+          token: ${{ env.BOT_GH_TOKEN }}
           commit-message: "chore: refresh football data"
           branch: bot-updates
           base: main
@@ -51,22 +61,22 @@ jobs:
             data/*.json
 
       - name: Enable auto-merge for bot PR
-        if: ${{ secrets.BOT_GH_TOKEN != '' && steps.cpr.outcome == 'success' && steps.cpr.outputs.pull-request-number != '' }}
+        if: ${{ steps.token_check.outputs.has_bot_token == 'true' && steps.cpr.outcome == 'success' && steps.cpr.outputs.pull-request-number != '' }}
         continue-on-error: true
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          token: ${{ secrets.BOT_GH_TOKEN }}
+          token: ${{ env.BOT_GH_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
 
       - name: Report pull request automation status
-        if: ${{ always() && secrets.BOT_GH_TOKEN != '' && steps.cpr.outcome != 'success' }}
+        if: ${{ always() && steps.token_check.outputs.has_bot_token == 'true' && steps.cpr.outcome != 'success' }}
         run: |
           echo "::warning::Data refresh succeeded but PR automation failed."
           echo "::warning::Set repository setting 'Allow GitHub Actions to create and approve pull requests', or add a BOT_GH_TOKEN secret (PAT with repo permissions)."
 
       - name: Report pull request automation disabled
-        if: ${{ secrets.BOT_GH_TOKEN == '' }}
+        if: ${{ steps.token_check.outputs.has_bot_token != 'true' }}
         run: |
           echo "::notice::PR automation skipped because BOT_GH_TOKEN is not configured."
           echo "::notice::Add BOT_GH_TOKEN (PAT with repo permissions) to enable create-pull-request and auto-merge."
