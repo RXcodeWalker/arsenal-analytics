@@ -40,18 +40,22 @@ jobs:
           fi
 
       - name: Direct commit fallback (no BOT_GH_TOKEN)
+        id: direct_fallback
         if: ${{ steps.token_check.outputs.has_bot_token != 'true' }}
-        continue-on-error: true
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- data/*.json; then
             echo "::notice::No data changes to commit."
+            echo "publish_status=no_changes" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git add data/*.json
           git commit -m "chore: refresh football data"
+          echo "::notice::Attempting to push refreshed data directly to main."
           git push origin HEAD:main
+          echo "publish_status=pushed" >> "$GITHUB_OUTPUT"
 
       - name: Create or update bot data PR
         id: cpr
@@ -93,5 +97,6 @@ jobs:
         if: ${{ steps.token_check.outputs.has_bot_token != 'true' }}
         run: |
           echo "::notice::PR automation skipped because BOT_GH_TOKEN is not configured."
-          echo "::notice::Tried direct commit fallback to main. If branch rules block pushes, add BOT_GH_TOKEN to re-enable PR-based updates."
+          echo "::notice::Direct publish status: ${{ steps.direct_fallback.outputs.publish_status || 'unknown' }}."
+          echo "::notice::If branch rules block direct pushes, add BOT_GH_TOKEN to re-enable PR-based updates."
 
