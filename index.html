@@ -350,7 +350,7 @@
 <script>
 async function fetchJson(path) {
   try {
-    const response = await fetch(path);
+    const response = await fetch(path, { cache: 'no-store' });
     if (!response.ok) {
       console.error(`[index] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
       return null;

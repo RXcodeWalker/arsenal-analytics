@@ -185,7 +185,7 @@ let currentPlayer = null;
 
 async function fetchJson(path) {
   try {
-    const response = await fetch(path);
+    const response = await fetch(path, { cache: 'no-store' });
     if (!response.ok) {
       console.error(`[player-dashboard] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
       return null;
