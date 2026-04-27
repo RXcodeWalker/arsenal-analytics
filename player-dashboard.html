@@ -234,14 +234,20 @@ function hasPlayedThisSeason(player) {
   return appearances > 0 || minutesPlayed > 0;
 }
 
+function isArsenalPlayer(player) {
+  return String(player?.club || "").trim().toLowerCase() === "arsenal";
+}
+
 async function loadData() {
   playersData = await fetchJson('data/players.json');
   shotsData   = await fetchJson('data/shots.json');
 
   if (playersData?.players?.length) {
-    const playedPlayers = playersData.players.filter(hasPlayedThisSeason);
+    const arsenalPlayers = playersData.players.filter(isArsenalPlayer);
+    const playedPlayers = arsenalPlayers.filter(hasPlayedThisSeason);
     // Keep page functional even if upstream data has no appearances/minutes yet.
-    playersData.players = playedPlayers.length > 0 ? playedPlayers : playersData.players;
+    playersData.players = playedPlayers.length > 0 ? playedPlayers : arsenalPlayers;
+    if (!playersData.players.length) return;
 
     renderPlayerSelector(playersData.players);
 

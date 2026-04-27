@@ -181,12 +181,76 @@ async function fetchJson(path) {
   }
 }
 
+function toNumberOrNull(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function normalizeTeam(name) {
+  return String(name || '').trim().toLowerCase();
+}
+
+function isArsenalPlayer(player) {
+  return normalizeTeam(player?.club) === 'arsenal';
+}
+
+function deriveSeasonFromMatches(matches) {
+  const out = {
+    played: 0,
+    won: 0,
+    drawn: 0,
+    lost: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    points: 0,
+    cleanSheets: 0
+  };
+  for (const m of matches || []) {
+    const isHome = normalizeTeam(m.homeTeam) === 'arsenal';
+    const isAway = normalizeTeam(m.awayTeam) === 'arsenal';
+    if (!isHome && !isAway) continue;
+    const homeScore = toNumberOrNull(m.homeScore) ?? 0;
+    const awayScore = toNumberOrNull(m.awayScore) ?? 0;
+    const gf = isHome ? homeScore : awayScore;
+    const ga = isHome ? awayScore : homeScore;
+    out.played += 1;
+    out.goalsFor += gf;
+    out.goalsAgainst += ga;
+    if (ga === 0) out.cleanSheets += 1;
+    if (gf > ga) out.won += 1;
+    else if (gf < ga) out.lost += 1;
+    else out.drawn += 1;
+  }
+  out.points = (out.won * 3) + out.drawn;
+  return out;
+}
+
+function useFallback(primary, fallback, { allowZero = true } = {}) {
+  const p = toNumberOrNull(primary);
+  if (p !== null && (allowZero || p !== 0)) return p;
+  const f = toNumberOrNull(fallback);
+  if (f !== null && (allowZero || f !== 0)) return f;
+  return allowZero ? 0 : null;
+}
+
 async function loadData() {
   const matchData  = await fetchJson('data/matches.json');
   const playerData = await fetchJson('data/players.json');
 
   if (!matchData?.seasonStats) return;
-  const ss = matchData.seasonStats;
+  const raw = matchData.seasonStats;
+  const derived = deriveSeasonFromMatches(matchData?.matches);
+  const ss = {
+    ...raw,
+    played: useFallback(raw.played, derived.played),
+    won: useFallback(raw.won, derived.won),
+    drawn: useFallback(raw.drawn, derived.drawn),
+    lost: useFallback(raw.lost, derived.lost),
+    goalsFor: useFallback(raw.goalsFor, derived.goalsFor),
+    goalsAgainst: useFallback(raw.goalsAgainst, derived.goalsAgainst),
+    points: useFallback(raw.points, derived.points),
+    cleanSheets: useFallback(raw.cleanSheets, derived.cleanSheets)
+  };
   document.getElementById('season-title-label').textContent = matchData?.season || 'NA';
 
   // Summary strip
@@ -287,7 +351,9 @@ async function loadData() {
 
   // Player contributions
   if (playerData?.players) {
-    const sorted = [...playerData.players].sort((a,b) => (b.stats.goals+b.stats.assists) - (a.stats.goals+a.stats.assists));
+    const sorted = [...playerData.players]
+      .filter(isArsenalPlayer)
+      .sort((a,b) => (b.stats.goals+b.stats.assists) - (a.stats.goals+a.stats.assists));
     document.getElementById('player-contributions-table').innerHTML = `
       <table style="width:100%;border-collapse:collapse;">
         <thead>

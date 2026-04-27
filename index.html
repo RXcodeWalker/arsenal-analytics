@@ -497,6 +497,10 @@ function hasSeasonContribution(player) {
   return (toNumberOrNull(stats.appearances) ?? 0) > 0 || (toNumberOrNull(stats.minutesPlayed) ?? 0) > 0;
 }
 
+function isArsenalPlayer(player) {
+  return normalizeTeam(player?.club) === 'arsenal';
+}
+
 (async () => {
   // Load data
   const matchData  = await fetchJson('data/matches.json');
@@ -642,11 +646,12 @@ function hasSeasonContribution(player) {
   // ── Player Cards ────────────────────────────────────────
   const grid = document.getElementById('player-cards-grid');
   if (playerData?.players && grid) {
-    const rankedTop3 = [...playerData.players]
+    const arsenalPlayers = [...playerData.players].filter(isArsenalPlayer);
+    const rankedTop3 = arsenalPlayers
       .filter(hasSeasonContribution)
       .sort((a, b) => performanceScore(b) - performanceScore(a))
       .slice(0, 3);
-    const top3 = rankedTop3.length > 0 ? rankedTop3 : playerData.players.slice(0, 3);
+    const top3 = rankedTop3.length > 0 ? rankedTop3 : arsenalPlayers.slice(0, 3);
     grid.innerHTML = top3.map(p => `
       <a href="player-dashboard.html?id=${p.id}" class="player-card" style="text-decoration:none;">
         <div class="player-card-header">

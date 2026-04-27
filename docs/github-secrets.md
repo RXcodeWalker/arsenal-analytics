@@ -26,4 +26,9 @@ If you prefer using only `GITHUB_TOKEN`, enable this repo setting:
 
 - **Settings -> Actions -> General -> Workflow permissions -> Allow GitHub Actions to create and approve pull requests**
 
+Current workflow behavior without `BOT_GH_TOKEN`:
+
+- It skips PR automation and attempts a direct commit/push of `data/*.json` to `main`.
+- If branch protection blocks direct pushes, configure `BOT_GH_TOKEN` to use the PR path.
+
 No API key is stored in committed source files.
