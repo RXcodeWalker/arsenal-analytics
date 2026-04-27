@@ -227,11 +227,22 @@ function pct(part, whole) {
   return Math.round((safeNumber(part, 0) / denominator) * 100);
 }
 
+function hasPlayedThisSeason(player) {
+  const stats = player?.stats || {};
+  const appearances = safeInt(stats.appearances, 0);
+  const minutesPlayed = safeInt(stats.minutesPlayed, 0);
+  return appearances > 0 || minutesPlayed > 0;
+}
+
 async function loadData() {
   playersData = await fetchJson('data/players.json');
   shotsData   = await fetchJson('data/shots.json');
 
-  if (playersData?.players) {
+  if (playersData?.players?.length) {
+    const playedPlayers = playersData.players.filter(hasPlayedThisSeason);
+    // Keep page functional even if upstream data has no appearances/minutes yet.
+    playersData.players = playedPlayers.length > 0 ? playedPlayers : playersData.players;
+
     renderPlayerSelector(playersData.players);
 
     // Check URL param
