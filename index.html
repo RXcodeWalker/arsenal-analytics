@@ -380,11 +380,121 @@ function fmtStat(value, fallback = "NA") {
   return value === undefined || value === null || Number.isNaN(Number(value)) ? fallback : value;
 }
 
+function toNumberOrNull(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function valueOrFallback(primary, fallback, { allowZero = true } = {}) {
+  const p = toNumberOrNull(primary);
+  if (p !== null && (allowZero || p !== 0)) return p;
+  const f = toNumberOrNull(fallback);
+  if (f !== null && (allowZero || f !== 0)) return f;
+  return null;
+}
+
 function getCompletedMatches(matches) {
   if (!Array.isArray(matches)) return [];
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
   return matches.filter((m) => typeof m?.date === 'string' && m.date <= todayStr);
+}
+
+function normalizeTeam(name) {
+  return String(name || '').trim().toLowerCase();
+}
+
+function deriveSeasonFromMatches(matches) {
+  const out = {
+    played: 0,
+    won: 0,
+    drawn: 0,
+    lost: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    points: 0,
+    cleanSheets: 0,
+    xGFor: 0,
+    xGAgainst: 0,
+    avgPossession: null,
+    ppda: null,
+    form: []
+  };
+  let possTotal = 0;
+  let possCount = 0;
+  let ppdaTotal = 0;
+  let ppdaCount = 0;
+  let xgForCount = 0;
+  let xgAgainstCount = 0;
+
+  for (const match of matches || []) {
+    const isHome = normalizeTeam(match.homeTeam) === 'arsenal';
+    const isAway = normalizeTeam(match.awayTeam) === 'arsenal';
+    if (!isHome && !isAway) continue;
+
+    const homeScore = toNumberOrNull(match.homeScore) ?? 0;
+    const awayScore = toNumberOrNull(match.awayScore) ?? 0;
+    const gf = isHome ? homeScore : awayScore;
+    const ga = isHome ? awayScore : homeScore;
+    out.played += 1;
+    out.goalsFor += gf;
+    out.goalsAgainst += ga;
+    if (ga === 0) out.cleanSheets += 1;
+
+    const result = match.resultFromArsenalView || (gf > ga ? 'W' : gf < ga ? 'L' : 'D');
+    if (result === 'W') out.won += 1;
+    if (result === 'D') out.drawn += 1;
+    if (result === 'L') out.lost += 1;
+    out.form.push(result);
+
+    const arsStats = isHome ? match.stats?.home : match.stats?.away;
+    const oppStats = isHome ? match.stats?.away : match.stats?.home;
+    const arsPoss = toNumberOrNull(arsStats?.possession);
+    const arsPpda = toNumberOrNull(arsStats?.ppda);
+    const arsXg = toNumberOrNull(arsStats?.xG);
+    const oppXg = toNumberOrNull(oppStats?.xG);
+    if (arsPoss !== null) {
+      possTotal += arsPoss;
+      possCount += 1;
+    }
+    if (arsPpda !== null) {
+      ppdaTotal += arsPpda;
+      ppdaCount += 1;
+    }
+    if (arsXg !== null) {
+      out.xGFor += arsXg;
+      xgForCount += 1;
+    }
+    if (oppXg !== null) {
+      out.xGAgainst += oppXg;
+      xgAgainstCount += 1;
+    }
+  }
+  out.points = out.won * 3 + out.drawn;
+  out.avgPossession = possCount > 0 ? Number((possTotal / possCount).toFixed(1)) : null;
+  out.ppda = ppdaCount > 0 ? Number((ppdaTotal / ppdaCount).toFixed(1)) : null;
+  out.xGFor = xgForCount > 0 ? Number(out.xGFor.toFixed(1)) : null;
+  out.xGAgainst = xgAgainstCount > 0 ? Number(out.xGAgainst.toFixed(1)) : null;
+  return out;
+}
+
+function performanceScore(player) {
+  const stats = player?.stats || {};
+  const goals = toNumberOrNull(stats.goals) ?? 0;
+  const assists = toNumberOrNull(stats.assists) ?? 0;
+  const xG = toNumberOrNull(stats.xG) ?? 0;
+  const xA = toNumberOrNull(stats.xA) ?? 0;
+  const keyPasses = toNumberOrNull(stats.keyPasses) ?? 0;
+  const dribbles = toNumberOrNull(stats.dribbleSuccess) ?? 0;
+  const minutes = toNumberOrNull(stats.minutesPlayed) ?? 0;
+  const involvement = (goals * 5) + (assists * 4) + (xG * 2) + (xA * 1.5) + (keyPasses * 0.05) + (dribbles * 0.08);
+  const minutesBoost = Math.min(1.25, Math.max(0.65, minutes / 1400));
+  return involvement * minutesBoost;
+}
+
+function hasSeasonContribution(player) {
+  const stats = player?.stats || {};
+  return (toNumberOrNull(stats.appearances) ?? 0) > 0 || (toNumberOrNull(stats.minutesPlayed) ?? 0) > 0;
 }
 
 (async () => {
@@ -393,27 +503,40 @@ function getCompletedMatches(matches) {
   const playerData = await fetchJson('data/players.json');
   const completedMatches = getCompletedMatches(matchData?.matches);
   const ss = matchData?.seasonStats || {};
+  const derived = deriveSeasonFromMatches(completedMatches);
+  const resolved = {
+    points: valueOrFallback(ss.points, derived.points),
+    goalsFor: valueOrFallback(ss.goalsFor, derived.goalsFor),
+    cleanSheets: valueOrFallback(ss.cleanSheets, derived.cleanSheets),
+    xGFor: valueOrFallback(ss.xGFor, derived.xGFor, { allowZero: false }),
+    xGAgainst: valueOrFallback(ss.xGAgainst, derived.xGAgainst, { allowZero: false }),
+    avgPossession: valueOrFallback(ss.avgPossession, derived.avgPossession, { allowZero: false }),
+    ppda: valueOrFallback(ss.ppda, derived.ppda, { allowZero: false }),
+    position: valueOrFallback(ss.position, null, { allowZero: false }),
+    form: Array.isArray(ss.form) && ss.form.length > 0 ? ss.form : derived.form
+  };
   document.getElementById('hero-season-label').textContent = matchData?.season || 'NA';
-  document.getElementById('hero-points-stat').textContent = fmtStat(ss.points, 'NA');
-  document.getElementById('hero-goals-stat').textContent = fmtStat(ss.goalsFor, 'NA');
-  document.getElementById('hero-xg-stat').textContent = ss.xGFor != null ? Number(ss.xGFor).toFixed(1) : 'NA';
-  document.getElementById('hero-clean-sheet-stat').textContent = fmtStat(ss.cleanSheets, 'NA');
-  document.getElementById('glance-position-stat').textContent = ss.position ? `#${ss.position}` : 'NA';
-  document.getElementById('glance-position-note').textContent = ss.position ? 'Data received' : 'NA';
-  document.getElementById('glance-xgdiff-stat').textContent = (ss.xGFor != null && ss.xGAgainst != null) ? `${(Number(ss.xGFor) - Number(ss.xGAgainst)).toFixed(1)}` : 'NA';
-  document.getElementById('glance-xgdiff-note').textContent = (ss.xGFor != null && ss.xGAgainst != null) ? 'Data received' : 'NA';
-  document.getElementById('glance-possession-stat').textContent = ss.avgPossession != null ? `${Number(ss.avgPossession).toFixed(1)}%` : 'NA';
-  document.getElementById('glance-possession-note').textContent = ss.avgPossession != null ? 'Data received' : 'NA';
-  document.getElementById('glance-ppda-stat').textContent = ss.ppda != null ? Number(ss.ppda).toFixed(1) : 'NA';
-  document.getElementById('glance-ppda-note').textContent = ss.ppda != null ? 'Data received' : 'NA';
-  document.getElementById('standings-arsenal-pos').textContent = ss.position || 'NA';
-  document.getElementById('standings-arsenal-pts').textContent = ss.points || 'NA';
+  document.getElementById('hero-points-stat').textContent = resolved.points != null ? String(resolved.points) : 'NA';
+  document.getElementById('hero-goals-stat').textContent = resolved.goalsFor != null ? String(resolved.goalsFor) : 'NA';
+  document.getElementById('hero-xg-stat').textContent = resolved.xGFor != null ? Number(resolved.xGFor).toFixed(1) : 'NA';
+  document.getElementById('hero-clean-sheet-stat').textContent = resolved.cleanSheets != null ? String(resolved.cleanSheets) : 'NA';
+  document.getElementById('glance-position-stat').textContent = resolved.position ? `#${resolved.position}` : 'NA';
+  document.getElementById('glance-position-note').textContent = resolved.position ? 'Data received' : 'NA';
+  document.getElementById('glance-xgdiff-stat').textContent = (resolved.xGFor != null && resolved.xGAgainst != null) ? `${(Number(resolved.xGFor) - Number(resolved.xGAgainst)).toFixed(1)}` : 'NA';
+  document.getElementById('glance-xgdiff-note').textContent = (resolved.xGFor != null && resolved.xGAgainst != null) ? 'Data received' : 'NA';
+  document.getElementById('glance-possession-stat').textContent = resolved.avgPossession != null ? `${Number(resolved.avgPossession).toFixed(1)}%` : 'NA';
+  document.getElementById('glance-possession-note').textContent = resolved.avgPossession != null ? 'Data received' : 'NA';
+  document.getElementById('glance-ppda-stat').textContent = resolved.ppda != null ? Number(resolved.ppda).toFixed(1) : 'NA';
+  document.getElementById('glance-ppda-note').textContent = resolved.ppda != null ? 'Data received' : 'NA';
+  document.getElementById('standings-arsenal-pos').textContent = resolved.position || 'NA';
+  document.getElementById('standings-arsenal-pts').textContent = resolved.points != null ? String(resolved.points) : 'NA';
 
   // ── Render Hero Match Card ──────────────────────────────
   if (completedMatches[0]) {
     const m = completedMatches[0];
     const result = m.resultFromArsenalView || m.result;
     const isHome = m.homeTeam === 'Arsenal';
+    const arsenalStats = isHome ? m.stats?.home : m.stats?.away;
     const resultClass = result === 'W' ? 'green' : result === 'D' ? 'gold' : 'red';
     const resultLabel = result === 'W' ? 'Victory' : result === 'D' ? 'Draw' : 'Defeat';
 
@@ -447,11 +570,11 @@ function getCompletedMatches(matches) {
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <div style="background:var(--bg-raised);padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--red);">${m.stats?.home?.xG?.toFixed(2) || 'NA'}</div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--red);">${arsenalStats?.xG?.toFixed(2) || 'NA'}</div>
             <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">xG</div>
           </div>
           <div style="background:var(--bg-raised);padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--text-primary);">${m.stats?.home?.possession != null ? `${m.stats.home.possession}%` : 'NA'}</div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--text-primary);">${arsenalStats?.possession != null ? `${arsenalStats.possession}%` : 'NA'}</div>
             <div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);">Poss</div>
           </div>
         </div>
@@ -465,8 +588,8 @@ function getCompletedMatches(matches) {
 
   // ── Arsenal Form Mini ───────────────────────────────────
   const formContainer = document.getElementById('arsenal-form-mini');
-  if (formContainer && matchData?.seasonStats?.form) {
-    const last5 = matchData.seasonStats.form.slice(-5);
+  if (formContainer && Array.isArray(resolved.form)) {
+    const last5 = resolved.form.slice(-5);
     formContainer.innerHTML = last5.map(r => {
       const cls = r === 'W' ? 'w' : r === 'D' ? 'd' : 'l';
       return `<span class="form-dot ${cls}">${r}</span>`;
@@ -474,8 +597,10 @@ function getCompletedMatches(matches) {
   }
 
   // ── Mini xG Chart ───────────────────────────────────────
-  if (matchData?.seasonStats?.monthlyXG) {
+  if (Array.isArray(matchData?.seasonStats?.monthlyXG) && matchData.seasonStats.monthlyXG.length > 0) {
     const data = matchData.seasonStats.monthlyXG;
+    const hasRealXg = data.some(d => (toNumberOrNull(d?.xGFor) ?? 0) > 0 || (toNumberOrNull(d?.xGAgainst) ?? 0) > 0);
+    if (hasRealXg) {
     setTimeout(() => {
       const ctx = document.getElementById('mini-xg-chart');
       if (!ctx) return;
@@ -511,12 +636,17 @@ function getCompletedMatches(matches) {
         }
       });
     }, 200);
+    }
   }
 
   // ── Player Cards ────────────────────────────────────────
   const grid = document.getElementById('player-cards-grid');
   if (playerData?.players && grid) {
-    const top3 = playerData.players.slice(0, 3);
+    const rankedTop3 = [...playerData.players]
+      .filter(hasSeasonContribution)
+      .sort((a, b) => performanceScore(b) - performanceScore(a))
+      .slice(0, 3);
+    const top3 = rankedTop3.length > 0 ? rankedTop3 : playerData.players.slice(0, 3);
     grid.innerHTML = top3.map(p => `
       <a href="player-dashboard.html?id=${p.id}" class="player-card" style="text-decoration:none;">
         <div class="player-card-header">
