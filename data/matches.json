@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-09T04:51:51.831Z",
+  "generatedAt": "2026-05-09T07:33:59.532Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-09T04:50:24.451Z",
+        "fetchedAt": "2026-05-09T07:32:32.036Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-09T04:50:24.451Z",
+        "fetchedAt": "2026-05-09T07:32:32.037Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-09T04:50:24.452Z",
+        "fetchedAt": "2026-05-09T07:32:32.037Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-09T04:50:24.452Z",
+        "fetchedAt": "2026-05-09T07:32:32.037Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-09T04:50:24.507Z",
+        "fetchedAt": "2026-05-09T07:32:32.095Z",
         "ok": true
       }
     ]
@@ -43,7 +43,7 @@
     "position": 1,
     "cleanSheets": 26,
     "xGFor": 61.97,
-    "xGAgainst": 31.21,
+    "xGAgainst": 30.6,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
@@ -108,9 +108,9 @@
       },
       {
         "month": "Sep",
-        "xGFor": 8.55,
-        "xGAgainst": 2.44,
-        "goalsFor": 11,
+        "xGFor": 5.67,
+        "xGAgainst": 2.15,
+        "goalsFor": 8,
         "goalsAgainst": 2
       },
       {
@@ -136,8 +136,8 @@
       },
       {
         "month": "Jan",
-        "xGFor": 12.66,
-        "xGAgainst": 2.73,
+        "xGFor": 9.8,
+        "xGAgainst": 2.41,
         "goalsFor": 15,
         "goalsAgainst": 8
       },
@@ -2205,34 +2205,6 @@
       "keyMoments": []
     },
     {
-      "id": 217,
-      "externalIds": {
-        "understat": 28994
-      },
-      "date": "2026-01-17",
-      "kickoffUtc": "2026-01-17T17:30:00Z",
-      "competition": "Premier League",
-      "matchweek": 22,
-      "venue": "Nott'm Forest",
-      "homeTeam": "Nott'm Forest",
-      "awayTeam": "Arsenal",
-      "homeScore": 0,
-      "awayScore": 0,
-      "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.32
-        },
-        "away": {
-          "xG": 2.86
-        }
-      },
-      "scorers": [],
-      "assists": [],
-      "xgTimeline": [],
-      "keyMoments": []
-    },
-    {
       "id": 537987,
       "externalIds": {
         "understat": 28980
@@ -2818,34 +2790,6 @@
     },
     {
       "id": 537817,
-      "externalIds": {
-        "understat": 28808
-      },
-      "date": "2025-09-13",
-      "kickoffUtc": "2025-09-13T11:30:00Z",
-      "competition": "Premier League",
-      "matchweek": 4,
-      "venue": "Arsenal",
-      "homeTeam": "Arsenal",
-      "awayTeam": "Nott'm Forest",
-      "homeScore": 3,
-      "awayScore": 0,
-      "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.88
-        },
-        "away": {
-          "xG": 0.29
-        }
-      },
-      "scorers": [],
-      "assists": [],
-      "xgTimeline": [],
-      "keyMoments": []
-    },
-    {
-      "id": 31,
       "externalIds": {
         "understat": 28808
       },
