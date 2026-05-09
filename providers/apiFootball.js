@@ -1,7 +1,7 @@
 const { toNumber, toInt, isObject, normalizeTeamLabel, sleep } = require("../core/utils");
 
-const RAPIDAPI_HOST = "api-football-v1.p.rapidapi.com";
-const BASE_URL = `https://${RAPIDAPI_HOST}/v3`;
+const API_SPORTS_HOST = "v3.football.api-sports.io";
+const BASE_URL = `https://${API_SPORTS_HOST}`;
 const ARSENAL_TEAM_ID = 42;
 // Each fixture costs 3 requests (stats + events + players); reserve headroom below 100/day free cap
 const REQUEST_LIMIT = 87;
@@ -209,8 +209,7 @@ async function apiRequest(path, apiKey) {
   const url = `${BASE_URL}${path}`;
   const response = await fetch(url, {
     headers: {
-      "X-RapidAPI-Key": apiKey,
-      "X-RapidAPI-Host": RAPIDAPI_HOST
+      "x-apisports-key": apiKey
     }
   });
 
