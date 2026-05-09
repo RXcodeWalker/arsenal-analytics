@@ -382,7 +382,7 @@ async function fetchFootballData(options = {}) {
     arsenalName: options.arsenalName || "Arsenal FC",
     minIntervalMs: options.minIntervalMs ?? 6200, // free tier: 10 req/min
     matchLimit: options.matchLimit ?? 50,
-    detailMatchCount: options.detailMatchCount ?? 50,
+    detailMatchCount: options.detailMatchCount ?? 12,
     retries: options.retries ?? 3,
     backoffMs: options.backoffMs ?? 700
   };
