@@ -57,7 +57,7 @@
     </div>
 
     <!-- Match Selector -->
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;" id="match-selector">
+    <div style="margin-bottom:40px;" id="match-selector">
       <!-- Rendered by JS -->
     </div>
 
@@ -189,6 +189,10 @@
 let currentMatch = null;
 let matchData = null;
 let shotData = null;
+let allMatches = [];
+let activeFilter = 'All';
+let showAllMatches = false;
+const INITIAL_VISIBLE = 3;
 const debugRunId = `post-fix-${Date.now()}`;
 
 function emitDebug(hypothesisId, location, message, data = {}) {
@@ -246,29 +250,74 @@ async function loadData() {
   if (matchData?.matches?.length) {
     renderMatchSelector(matchData.matches);
     loadMatch(matchData.matches[0]);
+    updateMatchSelector();
   }
 }
 
+function getCompetitionLabel(comp) {
+  const c = (comp || '').toLowerCase();
+  if (c.includes('champions league')) return 'UCL';
+  if (c.includes('europa league')) return 'Europa League';
+  if (c.includes('carabao') || c.includes('efl cup') || c.includes('league cup')) return 'Carabao Cup';
+  if (c.includes('fa cup')) return 'FA Cup';
+  if (c.includes('premier league')) return 'Premier League';
+  return comp;
+}
+
 function renderMatchSelector(matches) {
+  allMatches = matches;
+  updateMatchSelector();
+}
+
+function updateMatchSelector() {
   const el = document.getElementById('match-selector');
-  el.innerHTML = matches.map((m, i) => `
-    <button class="btn ${i===0?'btn-primary':'btn-ghost'} btn-sm" onclick="loadMatchById(${m.id})" id="match-btn-${m.id}">
-      ${m.homeTeam} ${m.homeScore}–${m.awayScore} ${m.awayTeam}
-      <span style="font-size:10px;opacity:0.6;margin-left:4px;">${m.date}</span>
-    </button>
-  `).join('');
+  const competitions = ['All', ...new Set(allMatches.map(m => m.competition).filter(Boolean))];
+  const filtered = activeFilter === 'All' ? allMatches : allMatches.filter(m => m.competition === activeFilter);
+  const visible = showAllMatches ? filtered : filtered.slice(0, INITIAL_VISIBLE);
+  const hiddenCount = filtered.length - INITIAL_VISIBLE;
+
+  el.innerHTML = `
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+      ${competitions.map(comp => `
+        <button
+          class="btn ${activeFilter === comp ? 'btn-primary' : 'btn-outline'} btn-sm"
+          onclick="setCompetitionFilter(${JSON.stringify(comp)})"
+          style="font-size:11px;letter-spacing:0.5px;"
+        >${comp === 'All' ? 'All Competitions' : getCompetitionLabel(comp)}</button>
+      `).join('')}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      ${visible.map(m => `
+        <button class="btn ${m.id === currentMatch?.id ? 'btn-primary' : 'btn-ghost'} btn-sm" onclick="loadMatchById(${m.id})" id="match-btn-${m.id}">
+          ${m.homeTeam} ${m.homeScore}–${m.awayScore} ${m.awayTeam}
+          <span style="font-size:10px;opacity:0.6;margin-left:4px;">${m.date}</span>
+        </button>
+      `).join('')}
+      ${!showAllMatches && hiddenCount > 0 ? `
+        <button class="btn btn-outline btn-sm" onclick="toggleShowAll()" style="font-size:11px;">Show ${hiddenCount} more ▾</button>
+      ` : showAllMatches && filtered.length > INITIAL_VISIBLE ? `
+        <button class="btn btn-outline btn-sm" onclick="toggleShowAll()" style="font-size:11px;">Show less ▴</button>
+      ` : ''}
+    </div>
+  `;
+}
+
+function setCompetitionFilter(comp) {
+  activeFilter = comp;
+  showAllMatches = false;
+  updateMatchSelector();
+}
+
+function toggleShowAll() {
+  showAllMatches = !showAllMatches;
+  updateMatchSelector();
 }
 
 function loadMatchById(id) {
-  const m = matchData.matches.find(x=>x.id===id);
+  const m = matchData.matches.find(x => x.id === id);
   if (!m) return;
-  // Update active buttons
-  document.querySelectorAll('[id^="match-btn-"]').forEach(btn => {
-    btn.className = 'btn btn-ghost btn-sm';
-  });
-  const activeBtn = document.getElementById(`match-btn-${id}`);
-  if (activeBtn) activeBtn.className = 'btn btn-primary btn-sm';
   loadMatch(m);
+  updateMatchSelector();
 }
 
 function loadMatch(m) {
@@ -415,8 +464,9 @@ function renderXGTimeline(m) {
 
 function renderShotMap(m) {
   setTimeout(() => {
-    const matchShots = Array.isArray(shotData?.shots)
-      ? shotData.shots.filter((shot) => shot.matchId === m.id)
+    const understatId = m.externalIds?.understat;
+    const matchShots = Array.isArray(shotData?.shots) && understatId
+      ? shotData.shots.filter((shot) => shot.matchId === understatId)
       : [];
     createShotMap('shot-map-canvas', matchShots, m.homeTeam);
   }, 150);

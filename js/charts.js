@@ -275,13 +275,21 @@ function createShotMap(canvasId, shots, homeTeam) {
   // Draw pitch
   drawPitch(ctx2d, W, H);
 
+  if (shots.length === 0) {
+    ctx2d.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx2d.font = '14px sans-serif';
+    ctx2d.textAlign = 'center';
+    ctx2d.fillText('Shot data not available for this match', W / 2, H / 2);
+    return;
+  }
+
   // Draw shots
   shots.forEach(shot => {
     const isHome = shot.team === homeTeam || !shot.team;
-    // Convert coordinates (assuming 0-100 scale, shooting toward x=100)
-    // Show from attacking perspective (right side of pitch)
-    const px = (shot.x / 100) * W;
-    const py = (shot.y / 100) * H;
+    // Understat stores all shots from attacker's perspective (high x = near goal).
+    // Home team attacks right; away team shots must be mirrored so they appear on the left half.
+    const px = isHome ? (shot.x / 100) * W : ((100 - shot.x) / 100) * W;
+    const py = isHome ? (shot.y / 100) * H : ((100 - shot.y) / 100) * H;
 
     const r = 4 + shot.xG * 14; // Size by xG
     const isGoal = shot.outcome === 'Goal';

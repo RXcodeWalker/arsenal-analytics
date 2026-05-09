@@ -101,7 +101,7 @@ function normalizePlayer(element, teamById) {
     number: shirtNumber,
     nationality: "N/A",
     age: null,
-    image: null,
+    image: element.code ? `https://resources.premierleague.com/premierleague/photos/players/110x140/p${element.code}.png` : null,
     club: teamById[element.team] || "Unknown",
     stats: {
       appearances,

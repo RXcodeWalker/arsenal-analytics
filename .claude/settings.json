@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(node -e \"const d = require\\('./data/matches.json'\\); console.log\\('Generated at:', d.generatedAt\\); console.log\\('Source meta:', JSON.stringify\\(d.sourceMeta, null, 2\\)\\);\")",
+      "Bash(node -e \"let d=''; process.stdin.on\\('data',c=>d+=c\\); process.stdin.on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\); console.log\\('Generated at:', j.generatedAt\\); console.log\\('Total matches:', j.matches.length\\); j.matches.slice\\(0,5\\).forEach\\(m=>console.log\\(m.date, m.homeTeam, m.homeScore, '-', m.awayScore, m.awayTeam\\)\\); }\\);\")",
+      "Bash(git merge *)",
+      "Bash(node -e ' *)",
+      "Bash(git fetch *)"
+    ]
+  }
+}
