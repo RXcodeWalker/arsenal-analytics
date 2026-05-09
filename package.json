@@ -5,6 +5,9 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
   "devDependencies": {
     "@playwright/test": "^1.49.1"
   }

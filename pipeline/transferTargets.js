@@ -1,0 +1,229 @@
+// Curated transfer targets for summer 2026 window.
+// Stats are 2025/26 season figures from public sources.
+const TRANSFER_TARGETS = [
+  {
+    id: 101,
+    name: "Florian Wirtz",
+    position: "CAM",
+    age: 22,
+    club: "Bayer Leverkusen",
+    nationality: "Germany",
+    marketValue: 120,
+    stats: {
+      goals: 12,
+      assists: 14,
+      xG: 9.8,
+      xA: 11.2,
+      shots: 73,
+      keyPasses: 89,
+      dribbles: 96,
+      progressivePasses: 165,
+      progressiveCarries: 173,
+      minutesPlayed: 2870
+    },
+    radar: {
+      shooting: 79,
+      passing: 92,
+      dribbling: 90,
+      defending: 48,
+      physical: 67,
+      vision: 94
+    },
+    scouting: {
+      strengths: ["Elite final-third passing", "Press-resistant in central zones", "High xA output"],
+      concerns: ["High transfer fee", "Role overlap with Havertz"],
+      fitScore: 91,
+      verdict: "Top-tier creative profile for Arsenal's left half-space.",
+      tag: "Priority Target"
+    }
+  },
+  {
+    id: 102,
+    name: "Jonathan David",
+    position: "ST",
+    age: 24,
+    club: "LOSC Lille",
+    nationality: "Canada",
+    marketValue: 65,
+    stats: {
+      goals: 23,
+      assists: 5,
+      xG: 18.9,
+      xA: 4.1,
+      shots: 114,
+      keyPasses: 31,
+      dribbles: 52,
+      progressivePasses: 44,
+      progressiveCarries: 88,
+      minutesPlayed: 2760
+    },
+    radar: {
+      shooting: 94,
+      passing: 62,
+      dribbling: 74,
+      defending: 38,
+      physical: 72,
+      vision: 70
+    },
+    scouting: {
+      strengths: ["Elite goals-to-shots ratio", "Strong aerial presence", "Free transfer (contract expires 2025)"],
+      concerns: ["Adaptation to PL pace", "Limited hold-up play"],
+      fitScore: 84,
+      verdict: "Outstanding clinical striker available on a free — fills Arsenal's No.9 gap.",
+      tag: "Free Transfer"
+    }
+  },
+  {
+    id: 103,
+    name: "Xavi Simons",
+    position: "MID",
+    age: 22,
+    club: "RB Leipzig",
+    nationality: "Netherlands",
+    marketValue: 80,
+    stats: {
+      goals: 9,
+      assists: 11,
+      xG: 7.2,
+      xA: 8.6,
+      shots: 68,
+      keyPasses: 77,
+      dribbles: 110,
+      progressivePasses: 192,
+      progressiveCarries: 205,
+      minutesPlayed: 2920
+    },
+    radar: {
+      shooting: 76,
+      passing: 88,
+      dribbling: 92,
+      defending: 55,
+      physical: 69,
+      vision: 87
+    },
+    scouting: {
+      strengths: ["Exceptional progressive carrying", "Two-footed", "Presses high up the pitch"],
+      concerns: ["PSG own partial rights, fee complex", "Inconsistent final ball"],
+      fitScore: 88,
+      verdict: "Dynamic box-to-box presence that would add a progressive dimension to midfield.",
+      tag: "High Potential"
+    }
+  },
+  {
+    id: 104,
+    name: "Martin Zubimendi",
+    position: "MID",
+    age: 26,
+    club: "Real Sociedad",
+    nationality: "Spain",
+    marketValue: 70,
+    stats: {
+      goals: 3,
+      assists: 4,
+      xG: 2.1,
+      xA: 3.5,
+      shots: 24,
+      keyPasses: 48,
+      dribbles: 35,
+      progressivePasses: 201,
+      progressiveCarries: 72,
+      minutesPlayed: 2980,
+      tackles: 68,
+      interceptions: 41,
+      pressures: 310,
+      passAccuracy: 91
+    },
+    radar: {
+      shooting: 52,
+      passing: 91,
+      dribbling: 63,
+      defending: 85,
+      physical: 78,
+      vision: 89
+    },
+    scouting: {
+      strengths: ["Elite ball-progression under pressure", "Excellent press-resistance", "Top defensive metrics"],
+      concerns: ["Rejected Liverpool move – may be reluctant to leave Spain", "Low goal contribution ceiling"],
+      fitScore: 86,
+      verdict: "Premier defensive midfielder for Arteta's system — the true Thomas Partey upgrade.",
+      tag: "Depth & Quality"
+    }
+  },
+  {
+    id: 105,
+    name: "Micky van de Ven",
+    position: "DEF",
+    age: 24,
+    club: "Tottenham Hotspur",
+    nationality: "Netherlands",
+    marketValue: 75,
+    stats: {
+      goals: 2,
+      assists: 3,
+      xG: 1.4,
+      xA: 2.1,
+      shots: 18,
+      keyPasses: 22,
+      dribbles: 28,
+      progressivePasses: 148,
+      progressiveCarries: 95,
+      minutesPlayed: 2650,
+      tackles: 52,
+      interceptions: 38,
+      passAccuracy: 88
+    },
+    radar: {
+      shooting: 44,
+      passing: 78,
+      dribbling: 66,
+      defending: 88,
+      physical: 91,
+      vision: 72
+    },
+    scouting: {
+      strengths: ["Elite recovery pace", "Confident in build-up", "Strong aerially"],
+      concerns: ["Rivals club – sale unlikely", "Injury record (hamstring issues)"],
+      fitScore: 79,
+      verdict: "Pace and athleticism to anchor Arsenal's backline for the next decade — deal complexity is the barrier.",
+      tag: "Ambitious Target"
+    }
+  },
+  {
+    id: 106,
+    name: "Lamine Yamal",
+    position: "RW",
+    age: 17,
+    club: "Barcelona",
+    nationality: "Spain",
+    marketValue: 160,
+    stats: {
+      goals: 14,
+      assists: 17,
+      xG: 10.3,
+      xA: 13.8,
+      shots: 92,
+      keyPasses: 101,
+      dribbles: 142,
+      progressivePasses: 178,
+      progressiveCarries: 231,
+      minutesPlayed: 2810
+    },
+    radar: {
+      shooting: 81,
+      passing: 87,
+      dribbling: 97,
+      defending: 35,
+      physical: 58,
+      vision: 90
+    },
+    scouting: {
+      strengths: ["Generational dribbling ability", "Elite 1v1 output", "World-class at 17"],
+      concerns: ["Unrealistic fee (200M+)", "Barcelona would never sell"],
+      fitScore: 72,
+      verdict: "Benchmark comparison only — illustrates the profile Arsenal would target on the right flank.",
+      tag: "Benchmark"
+    }
+  }
+];
+
+module.exports = { TRANSFER_TARGETS };

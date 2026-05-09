@@ -4,6 +4,9 @@ const { fetchFplData } = require("../providers/fpl");
 const { fetchFootballData } = require("../providers/footballData");
 const { fetchFbrefData } = require("../providers/fbref");
 const fbrefScraper = require("../providers/fbrefScraper");
+const { fetchApiFootballData } = require("../providers/apiFootball");
+const { fetchUnderstatData } = require("../providers/understat");
+const { TRANSFER_TARGETS } = require("./transferTargets");
 const { mergeProviderData } = require("../core/merge");
 const { writeCanonicalData, computeQualityReport } = require("../core/dataWriter");
 
@@ -53,16 +56,15 @@ function isProviderHealthy(statuses, providerName) {
 
 function assertQualityThresholds(report, statuses) {
   const footballDataHealthy = isProviderHealthy(statuses, "footballData");
+  const apiFootballHealthy = isProviderHealthy(statuses, "apiFootball");
   const fbrefHealthy = isProviderHealthy(statuses, "fbref");
   const requireMatchStats = process.env.REQUIRE_MATCH_STATS === "1";
   const requireXgTimeline = process.env.REQUIRE_XG_TIMELINE === "1";
 
+  const hasStatProvider = footballDataHealthy || apiFootballHealthy || fbrefHealthy;
   const thresholds = {
-    // By default, avoid hard-failing CI for optional analytics fields.
-    // Enable strict checks by setting REQUIRE_MATCH_STATS=1 and/or REQUIRE_XG_TIMELINE=1.
-    maxMissingStatsRatio:
-      requireMatchStats && (footballDataHealthy || fbrefHealthy) ? 0.98 : 1,
-    maxMissingTimelineRatio: requireXgTimeline && fbrefHealthy ? 0.95 : 1
+    maxMissingStatsRatio: requireMatchStats && hasStatProvider ? 0.98 : 1,
+    maxMissingTimelineRatio: requireXgTimeline && (fbrefHealthy || isProviderHealthy(statuses, "understat")) ? 0.95 : 1
   };
   const statsRatio = report.matches.total > 0 ? report.matches.missingStats / report.matches.total : 0;
   const timelineRatio = report.matches.total > 0 ? report.matches.missingTimeline / report.matches.total : 0;
@@ -80,7 +82,7 @@ function assertQualityThresholds(report, statuses) {
 async function runPipeline() {
   console.log("[pipeline] starting refresh...");
 
-  const [fplResult, footballDataResult, fbrefResult] = await Promise.all([
+  const [fplResult, footballDataResult, fbrefResult, apiFootballResult, understatResult] = await Promise.all([
     runProvider("fpl", () => fetchFplData()),
     runProvider("footballData", () =>
       fetchFootballData({
@@ -91,18 +93,35 @@ async function runPipeline() {
       fetchFbrefData({
         scraper: fbrefScraper
       })
-    )
+    ),
+    runProvider("apiFootball", () =>
+      fetchApiFootballData({
+        apiKey: process.env.RAPIDAPI_KEY
+      })
+    ),
+    runProvider("understat", () => fetchUnderstatData())
   ]);
 
-  const statuses = [fplResult.status, footballDataResult.status, fbrefResult.status];
+  const statuses = [
+    fplResult.status,
+    footballDataResult.status,
+    fbrefResult.status,
+    apiFootballResult.status,
+    understatResult.status
+  ];
+
   const fpl = fplResult.payload || emptyPayload();
   const footballData = footballDataResult.payload || emptyPayload();
   const fbref = fbrefResult.payload || emptyPayload();
+  const apiFootball = apiFootballResult.payload || emptyPayload();
+  const understat = understatResult.payload || emptyPayload();
 
   const merged = mergeProviderData({
     fpl,
     footballData,
-    fbref
+    fbref,
+    apiFootball,
+    understat
   });
 
   const qualityReport = computeQualityReport({
@@ -128,6 +147,7 @@ async function runPipeline() {
     matches: merged.matches,
     shots: merged.shots,
     seasonStats: merged.seasonStats,
+    transferTargets: TRANSFER_TARGETS,
     sourceMeta: { statuses },
     generatedAt: new Date().toISOString(),
     season: getSeasonLabel(),

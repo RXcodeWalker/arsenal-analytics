@@ -1,5 +1,6 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const { TRANSFER_TARGETS: DEFAULT_TRANSFER_TARGETS } = require("../pipeline/transferTargets");
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -16,45 +17,6 @@ function isNumber(value) {
 function isInt(value) {
   return Number.isInteger(value);
 }
-
-const DEFAULT_TRANSFER_TARGETS = [
-  {
-    id: 101,
-    name: "Florian Wirtz",
-    position: "CAM",
-    age: 22,
-    club: "Bayer Leverkusen",
-    nationality: "Germany",
-    marketValue: 120,
-    stats: {
-      goals: 12,
-      assists: 14,
-      xG: 9.8,
-      xA: 11.2,
-      shots: 73,
-      keyPasses: 89,
-      dribbles: 96,
-      progressivePasses: 165,
-      progressiveCarries: 173,
-      minutesPlayed: 2870
-    },
-    radar: {
-      shooting: 79,
-      passing: 92,
-      dribbling: 90,
-      defending: 48,
-      physical: 67,
-      vision: 94
-    },
-    scouting: {
-      strengths: ["Elite final-third passing", "Press-resistant in central zones"],
-      concerns: ["High transfer fee", "Role overlap risk"],
-      fitScore: 91,
-      verdict: "Top-tier creative profile for Arsenal's left half-space.",
-      tag: "Priority Target"
-    }
-  }
-];
 
 function readDateString(value) {
   if (!isString(value)) return false;
@@ -364,6 +326,9 @@ function normalizeShot(input) {
 
 function normalizeSeasonStats(input) {
   const base = isObject(input) ? input : {};
+  // ppda is only available from FBref (blocked) — keep null rather than defaulting to 0
+  const ppdaRaw = base.ppda;
+  const ppda = (ppdaRaw === null || ppdaRaw === undefined) ? null : toNum(ppdaRaw);
   return {
     played: toInt(base.played),
     won: toInt(base.won),
@@ -377,7 +342,7 @@ function normalizeSeasonStats(input) {
     xGFor: toNum(base.xGFor),
     xGAgainst: toNum(base.xGAgainst),
     avgPossession: toNum(base.avgPossession),
-    ppda: toNum(base.ppda),
+    ppda,
     fieldTilt: toNum(base.fieldTilt),
     form: Array.isArray(base.form) ? base.form.filter((r) => ["W", "D", "L"].includes(r)) : [],
     monthlyXG: Array.isArray(base.monthlyXG) ? base.monthlyXG : []
@@ -497,6 +462,8 @@ function validateSeasonStats(stats, errors) {
   ];
 
   for (const key of requiredNumeric) {
+    // ppda may be null when FBref is unavailable — null is an acceptable "no data" value
+    if (key === "ppda" && stats[key] === null) continue;
     if (!isNumber(stats[key]) && !isInt(stats[key])) {
       valid = false;
       pushError(errors, "seasonStats", key, "Must be numeric");

@@ -103,8 +103,10 @@ function jaccardSimilarity(a, b) {
 }
 
 const SOURCE_PRIORITY = {
+  apiFootball: 4,
   fbref: 3,
   footballData: 2,
+  understat: 2,
   fpl: 1
 };
 
@@ -502,10 +504,63 @@ function mergeSeasonStats(sourcePayloads, matches) {
   return merged;
 }
 
+function applyUnderstatEnrichment(matches, understatPayload) {
+  if (!understatPayload) return matches;
+
+  const { matchXG, xgTimelines } = understatPayload;
+
+  return matches.map((match) => {
+    const enriched = deepClone(match);
+
+    // Apply per-match xG values from Understat's team endpoint (1 request), keyed by date
+    if (matchXG && enriched.date) {
+      const candidates = matchXG[enriched.date] || [];
+      for (const candidate of candidates) {
+        const home = normalizeTeamName(enriched.homeTeam);
+        const away = normalizeTeamName(enriched.awayTeam);
+        const candHome = normalizeTeamName(candidate.homeTeam);
+        const candAway = normalizeTeamName(candidate.awayTeam);
+        const isMatch = (home === candHome && away === candAway) ||
+          (jaccardSimilarity(home, candHome) > 0.6 && jaccardSimilarity(away, candAway) > 0.6);
+
+        if (!isMatch) continue;
+
+        if (!enriched.externalIds) enriched.externalIds = {};
+        const numericUnderstatId = candidate.understatId ? toNumber(candidate.understatId) : null;
+        if (numericUnderstatId) enriched.externalIds.understat = numericUnderstatId;
+
+        if (!isObject(enriched.stats.home)) enriched.stats.home = {};
+        if (!isObject(enriched.stats.away)) enriched.stats.away = {};
+
+        if (!Number.isFinite(Number(enriched.stats.home.xG)) || enriched.stats.home.xG === 0) {
+          enriched.stats.home.xG = candidate.xGHome;
+        }
+        if (!Number.isFinite(Number(enriched.stats.away.xG)) || enriched.stats.away.xG === 0) {
+          enriched.stats.away.xG = candidate.xGAway;
+        }
+
+        if (numericUnderstatId && xgTimelines?.[numericUnderstatId] && enriched.xgTimeline.length === 0) {
+          enriched.xgTimeline = xgTimelines[numericUnderstatId];
+        }
+
+        break;
+      }
+    }
+
+    return enriched;
+  });
+}
+
 function mergeProviderData(sourcePayloads) {
   const players = mergePlayers(sourcePayloads);
-  const matches = mergeMatches(sourcePayloads);
+  let matches = mergeMatches(sourcePayloads);
   const shots = mergeShots(sourcePayloads);
+
+  // Apply Understat xG enrichment after merging so timelines and xG values land on correct matches
+  if (sourcePayloads.understat) {
+    matches = applyUnderstatEnrichment(matches, sourcePayloads.understat);
+  }
+
   const seasonStats = mergeSeasonStats(sourcePayloads, matches);
 
   return { players, matches, shots, seasonStats };

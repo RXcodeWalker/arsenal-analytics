@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+      RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
       BOT_GH_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
 
     steps:
@@ -26,6 +27,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci --omit=dev || npm install --omit=dev
 
       - name: Run data pipeline
         run: node pipeline/run.js
