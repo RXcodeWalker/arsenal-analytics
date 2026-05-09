@@ -64,19 +64,113 @@ function normalizeTeamName(team) {
     .trim();
 
   const aliases = {
+    // Arsenal
     arsenal: "arsenal",
     "arsenal women": "arsenal",
+    // Bournemouth
     "afc bournemouth": "bournemouth",
     bournemouth: "bournemouth",
+    // Brentford
+    brentford: "brentford",
+    // Brighton
+    "brighton & hove albion": "brighton",
+    "brighton hove albion": "brighton",
+    brighton: "brighton",
+    // Chelsea
+    chelsea: "chelsea",
+    // Crystal Palace
+    "crystal palace": "crystal palace",
+    // Everton
+    everton: "everton",
+    // Fulham
+    fulham: "fulham",
+    // Ipswich
+    "ipswich town": "ipswich",
+    ipswich: "ipswich",
+    // Leeds
+    "leeds united": "leeds",
+    leeds: "leeds",
+    // Leicester
+    "leicester city": "leicester",
+    leicester: "leicester",
+    // Liverpool
+    liverpool: "liverpool",
+    // Luton
+    "luton town": "luton",
+    luton: "luton",
+    // Man City
     "manchester city": "man city",
     "man city": "man city",
+    // Man United
     "manchester united": "man united",
     "man united": "man united",
+    "man utd": "man united",
+    // Newcastle
+    "newcastle united": "newcastle",
+    newcastle: "newcastle",
+    // Nottm Forest
+    "nottingham forest": "nott'm forest",
+    "notts forest": "nott'm forest",
+    "nott'm forest": "nott'm forest",
+    "nottm forest": "nott'm forest",
+    // Sheffield United
+    "sheffield united": "sheffield utd",
+    "sheffield utd": "sheffield utd",
+    // Southampton
+    southampton: "southampton",
+    // Sunderland
+    sunderland: "sunderland",
+    // Tottenham
     "tottenham hotspur": "tottenham",
-    tottenham: "tottenham"
+    tottenham: "tottenham",
+    spurs: "tottenham",
+    // West Ham
+    "west ham united": "west ham",
+    "west ham": "west ham",
+    // Wolves
+    "wolverhampton wanderers": "wolves",
+    wolverhampton: "wolves",
+    wolves: "wolves",
+    // Aston Villa
+    "aston villa": "aston villa",
+    // Burnley
+    burnley: "burnley",
   };
 
   return aliases[cleaned] || cleaned;
+}
+
+const DISPLAY_NAMES = {
+  arsenal: "Arsenal",
+  bournemouth: "Bournemouth",
+  brentford: "Brentford",
+  brighton: "Brighton",
+  burnley: "Burnley",
+  chelsea: "Chelsea",
+  "crystal palace": "Crystal Palace",
+  everton: "Everton",
+  fulham: "Fulham",
+  ipswich: "Ipswich",
+  leeds: "Leeds",
+  leicester: "Leicester",
+  liverpool: "Liverpool",
+  luton: "Luton",
+  "man city": "Man City",
+  "man united": "Man United",
+  newcastle: "Newcastle",
+  "nott'm forest": "Nott'm Forest",
+  "sheffield utd": "Sheffield Utd",
+  southampton: "Southampton",
+  sunderland: "Sunderland",
+  tottenham: "Tottenham",
+  "west ham": "West Ham",
+  wolves: "Wolves",
+  "aston villa": "Aston Villa",
+};
+
+function canonicalDisplayName(team) {
+  const key = normalizeTeamName(team);
+  return DISPLAY_NAMES[key] || team;
 }
 
 function normalizePlayerName(name) {
@@ -243,6 +337,8 @@ function mergeTwoMatches(preferred, secondary) {
   const incoming = sanitizeMatch(preferredScore >= secondaryScore ? secondary : preferred);
   const merged = deepMerge(base, incoming);
   merged.id = base.id ?? incoming.id;
+  if (merged.homeTeam) merged.homeTeam = canonicalDisplayName(merged.homeTeam);
+  if (merged.awayTeam) merged.awayTeam = canonicalDisplayName(merged.awayTeam);
   return merged;
 }
 
@@ -265,7 +361,13 @@ function mergeMatches(sourcePayloads) {
     }
   }
 
-  return [...byIdentity.values()].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  return [...byIdentity.values()]
+    .map(m => {
+      if (m.homeTeam) m.homeTeam = canonicalDisplayName(m.homeTeam);
+      if (m.awayTeam) m.awayTeam = canonicalDisplayName(m.awayTeam);
+      return m;
+    })
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
 
 function mergeShots(sourcePayloads) {
