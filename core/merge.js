@@ -108,11 +108,12 @@ function normalizeTeamName(team) {
     // Newcastle
     "newcastle united": "newcastle",
     newcastle: "newcastle",
-    // Nottm Forest
-    "nottingham forest": "nott'm forest",
-    "notts forest": "nott'm forest",
-    "nott'm forest": "nott'm forest",
-    "nottm forest": "nott'm forest",
+    // Nottm Forest (internal key must be apostrophe-free — normalizeString strips apostrophes)
+    "nottingham forest": "nottm forest",
+    "notts forest": "nottm forest",
+    "nott'm forest": "nottm forest",
+    "nott m forest": "nottm forest",
+    "nottm forest": "nottm forest",
     // Sheffield United
     "sheffield united": "sheffield utd",
     "sheffield utd": "sheffield utd",
@@ -158,7 +159,7 @@ const DISPLAY_NAMES = {
   "man city": "Man City",
   "man united": "Man United",
   newcastle: "Newcastle",
-  "nott'm forest": "Nott'm Forest",
+  "nottm forest": "Nott'm Forest",
   "sheffield utd": "Sheffield Utd",
   southampton: "Southampton",
   sunderland: "Sunderland",
