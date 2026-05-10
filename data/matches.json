@@ -1,35 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-09T09:43:43.186Z",
+  "generatedAt": "2026-05-10T02:54:58.349Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-09T09:43:31.038Z",
+        "fetchedAt": "2026-05-10T02:53:30.977Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-09T09:43:31.048Z",
-        "ok": false,
-        "message": "FOOTBALL_DATA_API_KEY is required."
+        "fetchedAt": "2026-05-10T02:53:30.978Z",
+        "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-09T09:43:31.049Z",
+        "fetchedAt": "2026-05-10T02:53:30.978Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-09T09:43:31.049Z",
-        "ok": false,
-        "message": "RAPIDAPI_KEY is required for API-Football provider."
+        "fetchedAt": "2026-05-10T02:53:30.978Z",
+        "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-09T09:43:31.050Z",
+        "fetchedAt": "2026-05-10T02:53:31.036Z",
         "ok": true
       }
     ]
@@ -43,7 +41,7 @@
     "goalsAgainst": 26,
     "points": 76,
     "position": 1,
-    "cleanSheets": 17,
+    "cleanSheets": 26,
     "xGFor": 61.97,
     "xGAgainst": 30.6,
     "avgPossession": 0,
@@ -54,13 +52,18 @@
       "W",
       "L",
       "W",
-      "D",
-      "W",
-      "W",
-      "W",
-      "W",
       "W",
       "D",
+      "W",
+      "W",
+      "W",
+      "W",
+      "W",
+      "W",
+      "W",
+      "W",
+      "D",
+      "W",
       "W",
       "D",
       "W",
@@ -70,19 +73,28 @@
       "W",
       "W",
       "W",
+      "W",
       "D",
       "D",
+      "W",
       "L",
       "W",
       "W",
+      "W",
       "D",
       "D",
       "W",
       "W",
       "W",
+      "D",
+      "W",
+      "W",
       "W",
       "L",
+      "D",
       "L",
+      "W",
+      "D",
       "W",
       "W"
     ],
@@ -98,36 +110,36 @@
         "month": "Sep",
         "xGFor": 5.67,
         "xGAgainst": 2.15,
-        "goalsFor": 6,
+        "goalsFor": 8,
         "goalsAgainst": 2
       },
       {
         "month": "Oct",
         "xGFor": 6,
         "xGAgainst": 1.71,
-        "goalsFor": 4,
+        "goalsFor": 10,
         "goalsAgainst": 0
       },
       {
         "month": "Nov",
         "xGFor": 8.36,
         "xGAgainst": 2.7,
-        "goalsFor": 9,
-        "goalsAgainst": 4
+        "goalsFor": 15,
+        "goalsAgainst": 5
       },
       {
         "month": "Dec",
         "xGFor": 14.91,
         "xGAgainst": 7.79,
-        "goalsFor": 12,
+        "goalsFor": 15,
         "goalsAgainst": 5
       },
       {
         "month": "Jan",
         "xGFor": 9.8,
         "xGAgainst": 2.41,
-        "goalsFor": 9,
-        "goalsAgainst": 5
+        "goalsFor": 15,
+        "goalsAgainst": 8
       },
       {
         "month": "Feb",
@@ -140,28 +152,46 @@
         "month": "Mar",
         "xGFor": 4.14,
         "xGAgainst": 3.45,
-        "goalsFor": 5,
-        "goalsAgainst": 1
+        "goalsFor": 8,
+        "goalsAgainst": 2
       },
       {
         "month": "Apr",
         "xGFor": 6.09,
         "xGAgainst": 4.88,
-        "goalsFor": 3,
-        "goalsAgainst": 4
+        "goalsFor": 5,
+        "goalsAgainst": 5
       },
       {
         "month": "May",
         "xGFor": 4.09,
         "xGAgainst": 0.7,
-        "goalsFor": 3,
+        "goalsFor": 4,
         "goalsAgainst": 0
       }
     ]
   },
   "matches": [
     {
-      "id": 341,
+      "id": 552095,
+      "date": "2026-05-05",
+      "kickoffUtc": "2026-05-05T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 2,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Club Atlético de Madrid",
+      "homeScore": 1,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538127,
       "externalIds": {
         "understat": 29119
       },
@@ -341,7 +371,25 @@
       "keyMoments": []
     },
     {
-      "id": 331,
+      "id": 552093,
+      "date": "2026-04-29",
+      "kickoffUtc": "2026-04-29T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 1,
+      "venue": "Club Atlético de Madrid",
+      "homeTeam": "Club Atlético de Madrid",
+      "awayTeam": "Arsenal",
+      "homeScore": 1,
+      "awayScore": 1,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538118,
       "externalIds": {
         "understat": 29109
       },
@@ -497,7 +545,7 @@
       "keyMoments": []
     },
     {
-      "id": 327,
+      "id": 538111,
       "externalIds": {
         "understat": 29104
       },
@@ -505,7 +553,7 @@
       "kickoffUtc": "2026-04-19T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 33,
-      "venue": "Man City",
+      "venue": "Manchester City",
       "homeTeam": "Man City",
       "awayTeam": "Arsenal",
       "homeScore": 2,
@@ -657,7 +705,25 @@
       "keyMoments": []
     },
     {
-      "id": 311,
+      "id": 556725,
+      "date": "2026-04-15",
+      "kickoffUtc": "2026-04-15T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 2,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Sporting Clube de Portugal",
+      "homeScore": 0,
+      "awayScore": 0,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538097,
       "externalIds": {
         "understat": 29092
       },
@@ -812,7 +878,43 @@
       "keyMoments": []
     },
     {
-      "id": 291,
+      "id": 556721,
+      "date": "2026-04-07",
+      "kickoffUtc": "2026-04-07T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 1,
+      "venue": "Sporting Clube de Portugal",
+      "homeTeam": "Sporting Clube de Portugal",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 1,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 552083,
+      "date": "2026-03-17",
+      "kickoffUtc": "2026-03-17T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 2,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Bayer 04 Leverkusen",
+      "homeScore": 2,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538077,
       "externalIds": {
         "understat": 29068
       },
@@ -1020,7 +1122,25 @@
       "keyMoments": []
     },
     {
-      "id": 283,
+      "id": 552075,
+      "date": "2026-03-11",
+      "kickoffUtc": "2026-03-11T17:45:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 1,
+      "venue": "Bayer 04 Leverkusen",
+      "homeTeam": "Bayer 04 Leverkusen",
+      "awayTeam": "Arsenal",
+      "homeScore": 1,
+      "awayScore": 1,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538067,
       "externalIds": {
         "understat": 29060
       },
@@ -1028,7 +1148,7 @@
       "kickoffUtc": "2026-03-04T19:30:00Z",
       "competition": "Premier League",
       "matchweek": 29,
-      "venue": "Brighton",
+      "venue": "Brighton & Hove Albion",
       "homeTeam": "Brighton",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -1146,7 +1266,7 @@
       "keyMoments": []
     },
     {
-      "id": 271,
+      "id": 538057,
       "externalIds": {
         "understat": 29049
       },
@@ -1294,7 +1414,7 @@
       "keyMoments": []
     },
     {
-      "id": 269,
+      "id": 538053,
       "externalIds": {
         "understat": 29046
       },
@@ -1302,7 +1422,7 @@
       "kickoffUtc": "2026-02-22T16:30:00Z",
       "competition": "Premier League",
       "matchweek": 27,
-      "venue": "Spurs",
+      "venue": "Tottenham Hotspur",
       "homeTeam": "Tottenham",
       "awayTeam": "Arsenal",
       "homeScore": 1,
@@ -1468,15 +1588,15 @@
       "keyMoments": []
     },
     {
-      "id": 310,
+      "id": 538094,
       "externalIds": {
         "understat": 29087
       },
       "date": "2026-02-18",
       "kickoffUtc": "2026-02-18T20:00:00Z",
       "competition": "Premier League",
-      "matchweek": 26,
-      "venue": "Wolves",
+      "matchweek": 31,
+      "venue": "Wolverhampton Wanderers",
       "homeTeam": "Wolves",
       "awayTeam": "Arsenal",
       "homeScore": 2,
@@ -1585,7 +1705,7 @@
       "keyMoments": []
     },
     {
-      "id": 252,
+      "id": 538038,
       "externalIds": {
         "understat": 29029
       },
@@ -1718,7 +1838,7 @@
       "keyMoments": []
     },
     {
-      "id": 241,
+      "id": 538027,
       "externalIds": {
         "understat": 29019
       },
@@ -1863,7 +1983,7 @@
       "keyMoments": []
     },
     {
-      "id": 234,
+      "id": 538020,
       "externalIds": {
         "understat": 29015
       },
@@ -1871,7 +1991,7 @@
       "kickoffUtc": "2026-01-31T15:00:00Z",
       "competition": "Premier League",
       "matchweek": 24,
-      "venue": "Leeds",
+      "venue": "Leeds United",
       "homeTeam": "Leeds",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -1993,7 +2113,25 @@
       "keyMoments": []
     },
     {
-      "id": 221,
+      "id": 551980,
+      "date": "2026-01-28",
+      "kickoffUtc": "2026-01-28T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 8,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "FK Kairat",
+      "homeScore": 3,
+      "awayScore": 2,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538007,
       "externalIds": {
         "understat": 28999
       },
@@ -2021,7 +2159,25 @@
       "keyMoments": []
     },
     {
-      "id": 217,
+      "id": 551933,
+      "date": "2026-01-20",
+      "kickoffUtc": "2026-01-20T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 7,
+      "venue": "Internazionale Milano",
+      "homeTeam": "Internazionale Milano",
+      "awayTeam": "Arsenal",
+      "homeScore": 1,
+      "awayScore": 3,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 538002,
       "externalIds": {
         "understat": 28994
       },
@@ -2029,7 +2185,7 @@
       "kickoffUtc": "2026-01-17T17:30:00Z",
       "competition": "Premier League",
       "matchweek": 22,
-      "venue": "Nott'm Forest",
+      "venue": "Nottingham Forest",
       "homeTeam": "Nott'm Forest",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -2049,7 +2205,7 @@
       "keyMoments": []
     },
     {
-      "id": 201,
+      "id": 537987,
       "externalIds": {
         "understat": 28980
       },
@@ -2077,7 +2233,7 @@
       "keyMoments": []
     },
     {
-      "id": 192,
+      "id": 537975,
       "externalIds": {
         "understat": 28971
       },
@@ -2105,7 +2261,7 @@
       "keyMoments": []
     },
     {
-      "id": 181,
+      "id": 537967,
       "externalIds": {
         "understat": 28958
       },
@@ -2133,7 +2289,7 @@
       "keyMoments": []
     },
     {
-      "id": 171,
+      "id": 537957,
       "externalIds": {
         "understat": 28948
       },
@@ -2161,7 +2317,7 @@
       "keyMoments": []
     },
     {
-      "id": 164,
+      "id": 537948,
       "externalIds": {
         "understat": 28941
       },
@@ -2189,7 +2345,7 @@
       "keyMoments": []
     },
     {
-      "id": 151,
+      "id": 537937,
       "externalIds": {
         "understat": 28928
       },
@@ -2217,7 +2373,25 @@
       "keyMoments": []
     },
     {
-      "id": 141,
+      "id": 551977,
+      "date": "2025-12-10",
+      "kickoffUtc": "2025-12-10T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 6,
+      "venue": "Club Brugge KV",
+      "homeTeam": "Club Brugge KV",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 3,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537926,
       "externalIds": {
         "understat": 28919
       },
@@ -2245,7 +2419,7 @@
       "keyMoments": []
     },
     {
-      "id": 131,
+      "id": 537917,
       "externalIds": {
         "understat": 28909
       },
@@ -2273,7 +2447,7 @@
       "keyMoments": []
     },
     {
-      "id": 123,
+      "id": 537909,
       "externalIds": {
         "understat": 28900
       },
@@ -2301,7 +2475,25 @@
       "keyMoments": []
     },
     {
-      "id": 111,
+      "id": 551911,
+      "date": "2025-11-26",
+      "kickoffUtc": "2025-11-26T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 5,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Bayern München",
+      "homeScore": 3,
+      "awayScore": 1,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537897,
       "externalIds": {
         "understat": 28889
       },
@@ -2329,7 +2521,7 @@
       "keyMoments": []
     },
     {
-      "id": 108,
+      "id": 537885,
       "externalIds": {
         "understat": 28885
       },
@@ -2357,7 +2549,25 @@
       "keyMoments": []
     },
     {
-      "id": 92,
+      "id": 551979,
+      "date": "2025-11-04",
+      "kickoffUtc": "2025-11-04T17:45:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 4,
+      "venue": "SK Slavia Praha",
+      "homeTeam": "SK Slavia Praha",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 3,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537878,
       "externalIds": {
         "understat": 28869
       },
@@ -2385,7 +2595,7 @@
       "keyMoments": []
     },
     {
-      "id": 81,
+      "id": 537867,
       "externalIds": {
         "understat": 28859
       },
@@ -2413,7 +2623,25 @@
       "keyMoments": []
     },
     {
-      "id": 74,
+      "id": 551976,
+      "date": "2025-10-21",
+      "kickoffUtc": "2025-10-21T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 3,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Club Atlético de Madrid",
+      "homeScore": 4,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537859,
       "externalIds": {
         "understat": 28851
       },
@@ -2441,7 +2669,7 @@
       "keyMoments": []
     },
     {
-      "id": 61,
+      "id": 537847,
       "externalIds": {
         "understat": 28839
       },
@@ -2469,7 +2697,25 @@
       "keyMoments": []
     },
     {
-      "id": 58,
+      "id": 551978,
+      "date": "2025-10-01",
+      "kickoffUtc": "2025-10-01T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 2,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "PAE Olympiakos SFP",
+      "homeScore": 2,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537842,
       "externalIds": {
         "understat": 28836
       },
@@ -2477,7 +2723,7 @@
       "kickoffUtc": "2025-09-28T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 6,
-      "venue": "Newcastle",
+      "venue": "Newcastle United",
       "homeTeam": "Newcastle",
       "awayTeam": "Arsenal",
       "homeScore": 1,
@@ -2497,7 +2743,7 @@
       "keyMoments": []
     },
     {
-      "id": 41,
+      "id": 537828,
       "externalIds": {
         "understat": 28827
       },
@@ -2525,7 +2771,25 @@
       "keyMoments": []
     },
     {
-      "id": 31,
+      "id": 551981,
+      "date": "2025-09-16",
+      "kickoffUtc": "2025-09-16T16:45:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 1,
+      "venue": "Athletic Club",
+      "homeTeam": "Athletic Club",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 2,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
+    {
+      "id": 537817,
       "externalIds": {
         "understat": 28808
       },
@@ -2553,7 +2817,7 @@
       "keyMoments": []
     },
     {
-      "id": 25,
+      "id": 537809,
       "externalIds": {
         "understat": 28806
       },
@@ -2581,7 +2845,7 @@
       "keyMoments": []
     },
     {
-      "id": 11,
+      "id": 537797,
       "externalIds": {
         "understat": 28793
       },
@@ -2609,7 +2873,7 @@
       "keyMoments": []
     },
     {
-      "id": 9,
+      "id": 537793,
       "externalIds": {
         "understat": 28786
       },
@@ -2617,7 +2881,7 @@
       "kickoffUtc": "2025-08-17T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 1,
-      "venue": "Man Utd",
+      "venue": "Manchester United",
       "homeTeam": "Man United",
       "awayTeam": "Arsenal",
       "homeScore": 0,
