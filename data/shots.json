@@ -1,38 +1,374 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-10T13:18:52.461Z",
+  "generatedAt": "2026-05-11T03:30:56.741Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-10T13:17:24.987Z",
+        "fetchedAt": "2026-05-11T03:29:29.181Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-10T13:17:24.987Z",
+        "fetchedAt": "2026-05-11T03:29:29.182Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-10T13:17:24.988Z",
+        "fetchedAt": "2026-05-11T03:29:29.182Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-10T13:17:24.988Z",
+        "fetchedAt": "2026-05-11T03:29:29.182Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-10T13:17:25.064Z",
+        "fetchedAt": "2026-05-11T03:29:29.240Z",
         "ok": true
       }
     ]
   },
   "shots": [
+    {
+      "id": 29137000,
+      "matchId": 29137,
+      "playerId": 9492,
+      "player": "Crysencio Summerville",
+      "team": "West Ham",
+      "minute": 35,
+      "x": 85.2,
+      "y": 60.6,
+      "xG": 0.0797756016254425,
+      "outcome": "Off Target",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137001,
+      "matchId": 29137,
+      "playerId": 10948,
+      "player": "Valentín Castellanos",
+      "team": "West Ham",
+      "minute": 44,
+      "x": 85.5,
+      "y": 55.2,
+      "xG": 0.36158549785614014,
+      "outcome": "Saved",
+      "bodyPart": "Head",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137002,
+      "matchId": 29137,
+      "playerId": 12948,
+      "player": "Mateus Fernandes",
+      "team": "West Ham",
+      "minute": 45,
+      "x": 78,
+      "y": 37.3,
+      "xG": 0.018924467265605927,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137003,
+      "matchId": 29137,
+      "playerId": 10948,
+      "player": "Valentín Castellanos",
+      "team": "West Ham",
+      "minute": 48,
+      "x": 86.4,
+      "y": 44.2,
+      "xG": 0.10291603952646255,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137004,
+      "matchId": 29137,
+      "playerId": 1776,
+      "player": "Jarrod Bowen",
+      "team": "West Ham",
+      "minute": 48,
+      "x": 78.8,
+      "y": 44.4,
+      "xG": 0.02716464176774025,
+      "outcome": "Saved",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137005,
+      "matchId": 29137,
+      "playerId": 1776,
+      "player": "Jarrod Bowen",
+      "team": "West Ham",
+      "minute": 64,
+      "x": 79.8,
+      "y": 60.4,
+      "xG": 0.03585673123598099,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137006,
+      "matchId": 29137,
+      "playerId": 12948,
+      "player": "Mateus Fernandes",
+      "team": "West Ham",
+      "minute": 77,
+      "x": 95.5,
+      "y": 56.8,
+      "xG": 0.5919939875602722,
+      "outcome": "Saved",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137007,
+      "matchId": 29137,
+      "playerId": 468,
+      "player": "Callum Wilson",
+      "team": "West Ham",
+      "minute": 93,
+      "x": 88.4,
+      "y": 46.3,
+      "xG": 0.07920283824205399,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137008,
+      "matchId": 29137,
+      "playerId": 6722,
+      "player": "Konstantinos Mavropanos",
+      "team": "West Ham",
+      "minute": 101,
+      "x": 86.1,
+      "y": 44.2,
+      "xG": 0.02548527717590332,
+      "outcome": "Off Target",
+      "bodyPart": "Head",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137009,
+      "matchId": 29137,
+      "playerId": 8129,
+      "player": "Riccardo Calafiori",
+      "team": "Arsenal",
+      "minute": 8,
+      "x": 91.4,
+      "y": 66.2,
+      "xG": 0.24929143488407135,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137010,
+      "matchId": 29137,
+      "playerId": 7698,
+      "player": "Leandro Trossard",
+      "team": "Arsenal",
+      "minute": 8,
+      "x": 96.2,
+      "y": 40.7,
+      "xG": 0.20564626157283783,
+      "outcome": "Saved",
+      "bodyPart": "Head",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137011,
+      "matchId": 29137,
+      "playerId": 7698,
+      "player": "Leandro Trossard",
+      "team": "Arsenal",
+      "minute": 8,
+      "x": 95.4,
+      "y": 44.4,
+      "xG": 0.3546009063720703,
+      "outcome": "Post",
+      "bodyPart": "Head",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137012,
+      "matchId": 29137,
+      "playerId": 7254,
+      "player": "Viktor Gyokeres",
+      "team": "Arsenal",
+      "minute": 8,
+      "x": 91.2,
+      "y": 39.7,
+      "xG": 0.032811395823955536,
+      "outcome": "Blocked",
+      "bodyPart": "Head",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137013,
+      "matchId": 29137,
+      "playerId": 8706,
+      "player": "Eberechi Eze",
+      "team": "Arsenal",
+      "minute": 8,
+      "x": 81.2,
+      "y": 51.3,
+      "xG": 0.03311467543244362,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137014,
+      "matchId": 29137,
+      "playerId": 5613,
+      "player": "Gabriel",
+      "team": "Arsenal",
+      "minute": 10,
+      "x": 95.4,
+      "y": 45.8,
+      "xG": 0.1294778734445572,
+      "outcome": "Off Target",
+      "bodyPart": "Head",
+      "playType": "Corner"
+    },
+    {
+      "id": 29137015,
+      "matchId": 29137,
+      "playerId": 8129,
+      "player": "Riccardo Calafiori",
+      "team": "Arsenal",
+      "minute": 12,
+      "x": 78.5,
+      "y": 56.4,
+      "xG": 0.0353030189871788,
+      "outcome": "Off Target",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137016,
+      "matchId": 29137,
+      "playerId": 8706,
+      "player": "Eberechi Eze",
+      "team": "Arsenal",
+      "minute": 15,
+      "x": 69.2,
+      "y": 49,
+      "xG": 0.014426727779209614,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Set Piece"
+    },
+    {
+      "id": 29137017,
+      "matchId": 29137,
+      "playerId": 8129,
+      "player": "Riccardo Calafiori",
+      "team": "Arsenal",
+      "minute": 21,
+      "x": 95.1,
+      "y": 57.9,
+      "xG": 0.11873787641525269,
+      "outcome": "Blocked",
+      "bodyPart": "Head",
+      "playType": "Set Piece"
+    },
+    {
+      "id": 29137018,
+      "matchId": 29137,
+      "playerId": 8706,
+      "player": "Eberechi Eze",
+      "team": "Arsenal",
+      "minute": 34,
+      "x": 70.9,
+      "y": 44.7,
+      "xG": 0.04052787274122238,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Free Kick"
+    },
+    {
+      "id": 29137019,
+      "matchId": 29137,
+      "playerId": 7322,
+      "player": "Bukayo Saka",
+      "team": "Arsenal",
+      "minute": 51,
+      "x": 74.5,
+      "y": 36.1,
+      "xG": 0.015684960409998894,
+      "outcome": "Off Target",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137020,
+      "matchId": 29137,
+      "playerId": 7322,
+      "player": "Bukayo Saka",
+      "team": "Arsenal",
+      "minute": 57,
+      "x": 77.8,
+      "y": 35.8,
+      "xG": 0.026595981791615486,
+      "outcome": "Off Target",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137021,
+      "matchId": 29137,
+      "playerId": 5613,
+      "player": "Gabriel",
+      "team": "Arsenal",
+      "minute": 68,
+      "x": 94.9,
+      "y": 54.4,
+      "xG": 0.09598471224308014,
+      "outcome": "Blocked",
+      "bodyPart": "Foot",
+      "playType": "Set Piece"
+    },
+    {
+      "id": 29137022,
+      "matchId": 29137,
+      "playerId": 7254,
+      "player": "Viktor Gyokeres",
+      "team": "Arsenal",
+      "minute": 72,
+      "x": 92.4,
+      "y": 54.5,
+      "xG": 0.059103041887283325,
+      "outcome": "Off Target",
+      "bodyPart": "Head",
+      "playType": "Open Play"
+    },
+    {
+      "id": 29137023,
+      "matchId": 29137,
+      "playerId": 7698,
+      "player": "Leandro Trossard",
+      "team": "Arsenal",
+      "minute": 82,
+      "x": 87.6,
+      "y": 43.7,
+      "xG": 0.10713545978069305,
+      "outcome": "Goal",
+      "bodyPart": "Foot",
+      "playType": "Open Play"
+    },
     {
       "id": 29119000,
       "matchId": 29119,
@@ -3588,308 +3924,104 @@
       "outcome": "Off Target",
       "bodyPart": "Head",
       "playType": "Set Piece"
-    },
-    {
-      "id": 29015000,
-      "matchId": 29015,
-      "playerId": 6369,
-      "player": "Ethan Ampadu",
-      "team": "Leeds",
-      "minute": 10,
-      "x": 78.6,
-      "y": 27.4,
-      "xG": 0.015376578085124493,
-      "outcome": "Off Target",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015001,
-      "matchId": 29015,
-      "playerId": 780,
-      "player": "Karl Darlow",
-      "team": "Leeds",
-      "minute": 37,
-      "x": 0.9,
-      "y": 53.5,
-      "xG": 0,
-      "outcome": "OwnGoal",
-      "bodyPart": "OtherBodyPart",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015002,
-      "matchId": 29015,
-      "playerId": 8717,
-      "player": "Pascal Struijk",
-      "team": "Leeds",
-      "minute": 48,
-      "x": 92.6,
-      "y": 50.3,
-      "xG": 0.11242765933275223,
-      "outcome": "Saved",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015003,
-      "matchId": 29015,
-      "playerId": 7078,
-      "player": "Sean Longstaff",
-      "team": "Leeds",
-      "minute": 84,
-      "x": 88.6,
-      "y": 29.4,
-      "xG": 0.050906237214803696,
-      "outcome": "Blocked",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015004,
-      "matchId": 29015,
-      "playerId": 7526,
-      "player": "Martín Zubimendi",
-      "team": "Arsenal",
-      "minute": 14,
-      "x": 76.8,
-      "y": 53.5,
-      "xG": 0.025705527514219284,
-      "outcome": "Saved",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015005,
-      "matchId": 29015,
-      "playerId": 7526,
-      "player": "Martín Zubimendi",
-      "team": "Arsenal",
-      "minute": 26,
-      "x": 93,
-      "y": 45.8,
-      "xG": 0.32897278666496277,
-      "outcome": "Goal",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015006,
-      "matchId": 29015,
-      "playerId": 7254,
-      "player": "Viktor Gyokeres",
-      "team": "Arsenal",
-      "minute": 50,
-      "x": 85,
-      "y": 49.8,
-      "xG": 0.4134518504142761,
-      "outcome": "Blocked",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015007,
-      "matchId": 29015,
-      "playerId": 11707,
-      "player": "Jurriën Timber",
-      "team": "Arsenal",
-      "minute": 51,
-      "x": 97.3,
-      "y": 42,
-      "xG": 0.2919113337993622,
-      "outcome": "Off Target",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015008,
-      "matchId": 29015,
-      "playerId": 7254,
-      "player": "Viktor Gyokeres",
-      "team": "Arsenal",
-      "minute": 68,
-      "x": 94.8,
-      "y": 49.8,
-      "xG": 0.6055006980895996,
-      "outcome": "Goal",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015009,
-      "matchId": 29015,
-      "playerId": 7698,
-      "player": "Leandro Trossard",
-      "team": "Arsenal",
-      "minute": 71,
-      "x": 78.1,
-      "y": 74.5,
-      "xG": 0.012069585733115673,
-      "outcome": "Blocked",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015010,
-      "matchId": 29015,
-      "playerId": 5543,
-      "player": "Gabriel Jesus",
-      "team": "Arsenal",
-      "minute": 76,
-      "x": 92.4,
-      "y": 58.8,
-      "xG": 0.4653027355670929,
-      "outcome": "Off Target",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015011,
-      "matchId": 29015,
-      "playerId": 5543,
-      "player": "Gabriel Jesus",
-      "team": "Arsenal",
-      "minute": 78,
-      "x": 93.2,
-      "y": 50.3,
-      "xG": 0.46119558811187744,
-      "outcome": "Saved",
-      "bodyPart": "Head",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015012,
-      "matchId": 29015,
-      "playerId": 8129,
-      "player": "Riccardo Calafiori",
-      "team": "Arsenal",
-      "minute": 79,
-      "x": 94.5,
-      "y": 50,
-      "xG": 0.12907592952251434,
-      "outcome": "Off Target",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015013,
-      "matchId": 29015,
-      "playerId": 5543,
-      "player": "Gabriel Jesus",
-      "team": "Arsenal",
-      "minute": 85,
-      "x": 86.8,
-      "y": 54,
-      "xG": 0.11584313958883286,
-      "outcome": "Goal",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015014,
-      "matchId": 29015,
-      "playerId": 7752,
-      "player": "Gabriel Martinelli",
-      "team": "Arsenal",
-      "minute": 87,
-      "x": 86.8,
-      "y": 62.7,
-      "xG": 0.11211469769477844,
-      "outcome": "Saved",
-      "bodyPart": "Foot",
-      "playType": "Open Play"
-    },
-    {
-      "id": 29015015,
-      "matchId": 29015,
-      "playerId": 5543,
-      "player": "Gabriel Jesus",
-      "team": "Arsenal",
-      "minute": 88,
-      "x": 97.6,
-      "y": 40.9,
-      "xG": 0.0585690513253212,
-      "outcome": "Blocked",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015016,
-      "matchId": 29015,
-      "playerId": 5613,
-      "player": "Gabriel",
-      "team": "Arsenal",
-      "minute": 88,
-      "x": 89.2,
-      "y": 41.6,
-      "xG": 0.03267642855644226,
-      "outcome": "Saved",
-      "bodyPart": "Head",
-      "playType": "Corner"
-    },
-    {
-      "id": 29015017,
-      "matchId": 29015,
-      "playerId": 7526,
-      "player": "Martín Zubimendi",
-      "team": "Arsenal",
-      "minute": 92,
-      "x": 96.4,
-      "y": 46,
-      "xG": 0.4937904179096222,
-      "outcome": "Off Target",
-      "bodyPart": "Head",
-      "playType": "Corner"
     }
   ],
   "playerShotSummary": [
     {
+      "playerId": 9492,
+      "player": "Crysencio Summerville",
+      "shots": 1,
+      "goals": 0,
+      "totalXG": 0.08,
+      "avgXGPerShot": 0.08
+    },
+    {
+      "playerId": 10948,
+      "player": "Valentín Castellanos",
+      "shots": 2,
+      "goals": 0,
+      "totalXG": 0.465,
+      "avgXGPerShot": 0.232
+    },
+    {
+      "playerId": 12948,
+      "player": "Mateus Fernandes",
+      "shots": 2,
+      "goals": 0,
+      "totalXG": 0.611,
+      "avgXGPerShot": 0.305
+    },
+    {
+      "playerId": 1776,
+      "player": "Jarrod Bowen",
+      "shots": 2,
+      "goals": 0,
+      "totalXG": 0.063,
+      "avgXGPerShot": 0.032
+    },
+    {
+      "playerId": 468,
+      "player": "Callum Wilson",
+      "shots": 1,
+      "goals": 0,
+      "totalXG": 0.079,
+      "avgXGPerShot": 0.079
+    },
+    {
+      "playerId": 6722,
+      "player": "Konstantinos Mavropanos",
+      "shots": 1,
+      "goals": 0,
+      "totalXG": 0.025,
+      "avgXGPerShot": 0.025
+    },
+    {
+      "playerId": 8129,
+      "player": "Riccardo Calafiori",
+      "shots": 9,
+      "goals": 0,
+      "totalXG": 0.967,
+      "avgXGPerShot": 0.107
+    },
+    {
       "playerId": 7698,
       "player": "Leandro Trossard",
-      "shots": 17,
-      "goals": 0,
-      "totalXG": 0.858,
-      "avgXGPerShot": 0.05
+      "shots": 19,
+      "goals": 1,
+      "totalXG": 1.513,
+      "avgXGPerShot": 0.08
     },
     {
       "playerId": 7254,
       "player": "Viktor Gyokeres",
       "shots": 19,
-      "goals": 9,
-      "totalXG": 6.506,
-      "avgXGPerShot": 0.342
+      "goals": 8,
+      "totalXG": 5.579,
+      "avgXGPerShot": 0.294
     },
     {
       "playerId": 8706,
       "player": "Eberechi Eze",
-      "shots": 25,
+      "shots": 28,
       "goals": 3,
-      "totalXG": 2.101,
-      "avgXGPerShot": 0.084
+      "totalXG": 2.189,
+      "avgXGPerShot": 0.078
     },
     {
       "playerId": 5613,
       "player": "Gabriel",
-      "shots": 10,
+      "shots": 11,
       "goals": 0,
-      "totalXG": 1.363,
-      "avgXGPerShot": 0.136
+      "totalXG": 1.556,
+      "avgXGPerShot": 0.141
     },
     {
       "playerId": 7322,
       "player": "Bukayo Saka",
-      "shots": 16,
+      "shots": 18,
       "goals": 3,
-      "totalXG": 1.982,
-      "avgXGPerShot": 0.124
-    },
-    {
-      "playerId": 8129,
-      "player": "Riccardo Calafiori",
-      "shots": 7,
-      "goals": 0,
-      "totalXG": 0.692,
-      "avgXGPerShot": 0.099
+      "totalXG": 2.024,
+      "avgXGPerShot": 0.112
     },
     {
       "playerId": 13872,
@@ -3958,18 +4090,18 @@
     {
       "playerId": 7752,
       "player": "Gabriel Martinelli",
-      "shots": 10,
+      "shots": 9,
       "goals": 0,
-      "totalXG": 2.106,
-      "avgXGPerShot": 0.211
+      "totalXG": 1.994,
+      "avgXGPerShot": 0.222
     },
     {
       "playerId": 7526,
       "player": "Martín Zubimendi",
-      "shots": 9,
-      "goals": 2,
-      "totalXG": 1.228,
-      "avgXGPerShot": 0.136
+      "shots": 6,
+      "goals": 1,
+      "totalXG": 0.38,
+      "avgXGPerShot": 0.063
     },
     {
       "playerId": 2517,
@@ -4142,10 +4274,10 @@
     {
       "playerId": 5543,
       "player": "Gabriel Jesus",
-      "shots": 6,
-      "goals": 1,
-      "totalXG": 1.241,
-      "avgXGPerShot": 0.207
+      "shots": 2,
+      "goals": 0,
+      "totalXG": 0.14,
+      "avgXGPerShot": 0.07
     },
     {
       "playerId": 11504,
@@ -4294,10 +4426,10 @@
     {
       "playerId": 11707,
       "player": "Jurriën Timber",
-      "shots": 3,
+      "shots": 2,
       "goals": 1,
-      "totalXG": 0.965,
-      "avgXGPerShot": 0.322
+      "totalXG": 0.673,
+      "avgXGPerShot": 0.337
     },
     {
       "playerId": 9911,
@@ -4506,41 +4638,15 @@
       "goals": 0,
       "totalXG": 0.017,
       "avgXGPerShot": 0.017
-    },
-    {
-      "playerId": 6369,
-      "player": "Ethan Ampadu",
-      "shots": 1,
-      "goals": 0,
-      "totalXG": 0.015,
-      "avgXGPerShot": 0.015
-    },
-    {
-      "playerId": 780,
-      "player": "Karl Darlow",
-      "shots": 1,
-      "goals": 0,
-      "totalXG": 0,
-      "avgXGPerShot": 0
-    },
-    {
-      "playerId": 8717,
-      "player": "Pascal Struijk",
-      "shots": 1,
-      "goals": 0,
-      "totalXG": 0.112,
-      "avgXGPerShot": 0.112
-    },
-    {
-      "playerId": 7078,
-      "player": "Sean Longstaff",
-      "shots": 1,
-      "goals": 0,
-      "totalXG": 0.051,
-      "avgXGPerShot": 0.051
     }
   ],
   "matchShotSummary": [
+    {
+      "matchId": 29137,
+      "totalShots": 24,
+      "totalGoals": 1,
+      "totalXG": 2.841
+    },
     {
       "matchId": 29119,
       "totalShots": 28,
@@ -4606,12 +4712,6 @@
       "totalShots": 21,
       "totalGoals": 3,
       "totalXG": 1.621
-    },
-    {
-      "matchId": 29015,
-      "totalShots": 18,
-      "totalGoals": 3,
-      "totalXG": 3.725
     }
   ],
   "transferTargets": [
