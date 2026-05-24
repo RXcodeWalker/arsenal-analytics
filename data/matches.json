@@ -1,34 +1,35 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-24T03:34:56.007Z",
+  "generatedAt": "2026-05-24T13:26:07.299Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-24T03:33:28.748Z",
+        "fetchedAt": "2026-05-24T13:24:39.876Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-24T03:33:28.749Z",
+        "fetchedAt": "2026-05-24T13:24:39.876Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-24T03:33:28.749Z",
+        "fetchedAt": "2026-05-24T13:24:39.876Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-24T03:33:28.749Z",
+        "fetchedAt": "2026-05-24T13:24:39.877Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-24T03:33:28.809Z",
-        "ok": true
+        "fetchedAt": "2026-05-24T13:24:39.923Z",
+        "ok": false,
+        "message": "fetch failed"
       }
     ]
   },
@@ -43,7 +44,7 @@
     "position": 1,
     "cleanSheets": 27,
     "xGFor": 64.45,
-    "xGAgainst": 32.11,
+    "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
@@ -102,71 +103,71 @@
     "monthlyXG": [
       {
         "month": "Aug",
-        "xGFor": 4.56,
-        "xGAgainst": 2.02,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 6,
         "goalsAgainst": 1
       },
       {
         "month": "Sep",
-        "xGFor": 5.67,
-        "xGAgainst": 2.15,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 8,
         "goalsAgainst": 2
       },
       {
         "month": "Oct",
-        "xGFor": 6,
-        "xGAgainst": 1.71,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 10,
         "goalsAgainst": 0
       },
       {
         "month": "Nov",
-        "xGFor": 8.36,
-        "xGAgainst": 2.7,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 15,
         "goalsAgainst": 5
       },
       {
         "month": "Dec",
-        "xGFor": 14.91,
-        "xGAgainst": 7.79,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 15,
         "goalsAgainst": 5
       },
       {
         "month": "Jan",
-        "xGFor": 9.8,
-        "xGAgainst": 2.41,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 15,
         "goalsAgainst": 8
       },
       {
         "month": "Feb",
-        "xGFor": 7.3,
-        "xGAgainst": 2.79,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 10,
         "goalsAgainst": 4
       },
       {
         "month": "Mar",
-        "xGFor": 4.14,
-        "xGAgainst": 3.45,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 8,
         "goalsAgainst": 2
       },
       {
         "month": "Apr",
-        "xGFor": 6.09,
-        "xGAgainst": 4.88,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 5,
         "goalsAgainst": 5
       },
       {
         "month": "May",
-        "xGFor": 6.75,
-        "xGAgainst": 2.21,
+        "xGFor": 0,
+        "xGAgainst": 0,
         "goalsFor": 6,
         "goalsAgainst": 0
       }
@@ -175,9 +176,6 @@
   "matches": [
     {
       "id": 538147,
-      "externalIds": {
-        "understat": 29139
-      },
       "date": "2026-05-18",
       "kickoffUtc": "2026-05-18T19:00:00Z",
       "competition": "Premier League",
@@ -188,122 +186,14 @@
       "homeScore": 1,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.23
-        },
-        "away": {
-          "xG": 0.19
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 2,
-          "cumHome": 0,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 10,
-          "cumHome": 0.02,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 10,
-          "cumHome": 0.02,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 12,
-          "cumHome": 0.07,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 13,
-          "cumHome": 0.13,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 14,
-          "cumHome": 0.16,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 26,
-          "cumHome": 0.16,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 28,
-          "cumHome": 0.22,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 30,
-          "cumHome": 0.28,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 36,
-          "cumHome": 0.38,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 36,
-          "cumHome": 0.88,
-          "cumAway": 0.16,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 43,
-          "cumHome": 0.92,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 50,
-          "cumHome": 0.92,
-          "cumAway": 0.17
-        },
-        {
-          "minute": 53,
-          "cumHome": 1.03,
-          "cumAway": 0.17
-        },
-        {
-          "minute": 54,
-          "cumHome": 1.1,
-          "cumAway": 0.17
-        },
-        {
-          "minute": 56,
-          "cumHome": 1.1,
-          "cumAway": 0.19
-        },
-        {
-          "minute": 59,
-          "cumHome": 1.17,
-          "cumAway": 0.19
-        },
-        {
-          "minute": 87,
-          "cumHome": 1.23,
-          "cumAway": 0.19
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538144,
-      "externalIds": {
-        "understat": 29137
-      },
       "date": "2026-05-10",
       "kickoffUtc": "2026-05-10T15:30:00Z",
       "competition": "Premier League",
@@ -314,145 +204,10 @@
       "homeScore": 0,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.32
-        },
-        "away": {
-          "xG": 1.43
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 8,
-          "cumHome": 0,
-          "cumAway": 0.25
-        },
-        {
-          "minute": 8,
-          "cumHome": 0,
-          "cumAway": 0.45
-        },
-        {
-          "minute": 8,
-          "cumHome": 0,
-          "cumAway": 0.81
-        },
-        {
-          "minute": 8,
-          "cumHome": 0,
-          "cumAway": 0.84
-        },
-        {
-          "minute": 8,
-          "cumHome": 0,
-          "cumAway": 0.88
-        },
-        {
-          "minute": 10,
-          "cumHome": 0,
-          "cumAway": 1
-        },
-        {
-          "minute": 12,
-          "cumHome": 0,
-          "cumAway": 1.04
-        },
-        {
-          "minute": 15,
-          "cumHome": 0,
-          "cumAway": 1.05
-        },
-        {
-          "minute": 21,
-          "cumHome": 0,
-          "cumAway": 1.17
-        },
-        {
-          "minute": 34,
-          "cumHome": 0,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 35,
-          "cumHome": 0.08,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 44,
-          "cumHome": 0.44,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 45,
-          "cumHome": 0.46,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 48,
-          "cumHome": 0.56,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 48,
-          "cumHome": 0.59,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 51,
-          "cumHome": 0.59,
-          "cumAway": 1.23
-        },
-        {
-          "minute": 57,
-          "cumHome": 0.59,
-          "cumAway": 1.26
-        },
-        {
-          "minute": 64,
-          "cumHome": 0.63,
-          "cumAway": 1.26
-        },
-        {
-          "minute": 68,
-          "cumHome": 0.63,
-          "cumAway": 1.35
-        },
-        {
-          "minute": 72,
-          "cumHome": 0.63,
-          "cumAway": 1.41
-        },
-        {
-          "minute": 77,
-          "cumHome": 1.22,
-          "cumAway": 1.41
-        },
-        {
-          "minute": 82,
-          "cumHome": 1.22,
-          "cumAway": 1.52,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 93,
-          "cumHome": 1.3,
-          "cumAway": 1.52
-        },
-        {
-          "minute": 101,
-          "cumHome": 1.32,
-          "cumAway": 1.52
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
@@ -475,9 +230,6 @@
     },
     {
       "id": 538127,
-      "externalIds": {
-        "understat": 29119
-      },
       "date": "2026-05-02",
       "kickoffUtc": "2026-05-02T16:30:00Z",
       "competition": "Premier League",
@@ -488,169 +240,10 @@
       "homeScore": 3,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 4.09
-        },
-        "away": {
-          "xG": 0.7
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 2,
-          "cumHome": 0.06,
-          "cumAway": 0
-        },
-        {
-          "minute": 8,
-          "cumHome": 0.88,
-          "cumAway": 0,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 13,
-          "cumHome": 0.9,
-          "cumAway": 0
-        },
-        {
-          "minute": 20,
-          "cumHome": 0.94,
-          "cumAway": 0
-        },
-        {
-          "minute": 25,
-          "cumHome": 1.45,
-          "cumAway": 0
-        },
-        {
-          "minute": 25,
-          "cumHome": 1.59,
-          "cumAway": 0
-        },
-        {
-          "minute": 26,
-          "cumHome": 1.99,
-          "cumAway": 0
-        },
-        {
-          "minute": 26,
-          "cumHome": 2.09,
-          "cumAway": 0
-        },
-        {
-          "minute": 28,
-          "cumHome": 2.16,
-          "cumAway": 0
-        },
-        {
-          "minute": 31,
-          "cumHome": 2.16,
-          "cumAway": 0.02
-        },
-        {
-          "minute": 32,
-          "cumHome": 2.16,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 39,
-          "cumHome": 2.24,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 39,
-          "cumHome": 2.32,
-          "cumAway": 0.04,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 43,
-          "cumHome": 2.71,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 44,
-          "cumHome": 2.74,
-          "cumAway": 0.04
-        },
-        {
-          "minute": 46,
-          "cumHome": 2.74,
-          "cumAway": 0.05
-        },
-        {
-          "minute": 48,
-          "cumHome": 3.2,
-          "cumAway": 0.05,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 48,
-          "cumHome": 3.2,
-          "cumAway": 0.41
-        },
-        {
-          "minute": 49,
-          "cumHome": 3.2,
-          "cumAway": 0.45
-        },
-        {
-          "minute": 55,
-          "cumHome": 3.55,
-          "cumAway": 0.45
-        },
-        {
-          "minute": 59,
-          "cumHome": 3.59,
-          "cumAway": 0.45
-        },
-        {
-          "minute": 62,
-          "cumHome": 3.59,
-          "cumAway": 0.5
-        },
-        {
-          "minute": 70,
-          "cumHome": 3.59,
-          "cumAway": 0.56
-        },
-        {
-          "minute": 70,
-          "cumHome": 3.59,
-          "cumAway": 0.58
-        },
-        {
-          "minute": 71,
-          "cumHome": 3.59,
-          "cumAway": 0.61
-        },
-        {
-          "minute": 75,
-          "cumHome": 3.59,
-          "cumAway": 0.7
-        },
-        {
-          "minute": 80,
-          "cumHome": 4.01,
-          "cumAway": 0.7
-        },
-        {
-          "minute": 84,
-          "cumHome": 4.13,
-          "cumAway": 0.7
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
@@ -673,9 +266,6 @@
     },
     {
       "id": 538118,
-      "externalIds": {
-        "understat": 29109
-      },
       "date": "2026-04-25",
       "kickoffUtc": "2026-04-25T16:30:00Z",
       "competition": "Premier League",
@@ -686,152 +276,14 @@
       "homeScore": 1,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.64
-        },
-        "away": {
-          "xG": 0.87
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 3,
-          "cumHome": 0,
-          "cumAway": 0.05
-        },
-        {
-          "minute": 7,
-          "cumHome": 0.02,
-          "cumAway": 0.05
-        },
-        {
-          "minute": 8,
-          "cumHome": 0.04,
-          "cumAway": 0.05,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 15,
-          "cumHome": 0.04,
-          "cumAway": 0.08
-        },
-        {
-          "minute": 17,
-          "cumHome": 0.04,
-          "cumAway": 0.1
-        },
-        {
-          "minute": 22,
-          "cumHome": 0.06,
-          "cumAway": 0.1
-        },
-        {
-          "minute": 23,
-          "cumHome": 0.06,
-          "cumAway": 0.14
-        },
-        {
-          "minute": 29,
-          "cumHome": 0.06,
-          "cumAway": 0.26
-        },
-        {
-          "minute": 29,
-          "cumHome": 0.06,
-          "cumAway": 0.27
-        },
-        {
-          "minute": 30,
-          "cumHome": 0.06,
-          "cumAway": 0.3
-        },
-        {
-          "minute": 37,
-          "cumHome": 0.06,
-          "cumAway": 0.33
-        },
-        {
-          "minute": 41,
-          "cumHome": 0.06,
-          "cumAway": 0.34
-        },
-        {
-          "minute": 48,
-          "cumHome": 0.12,
-          "cumAway": 0.34
-        },
-        {
-          "minute": 57,
-          "cumHome": 0.14,
-          "cumAway": 0.34
-        },
-        {
-          "minute": 64,
-          "cumHome": 0.14,
-          "cumAway": 0.35
-        },
-        {
-          "minute": 69,
-          "cumHome": 0.25,
-          "cumAway": 0.35
-        },
-        {
-          "minute": 72,
-          "cumHome": 0.37,
-          "cumAway": 0.35
-        },
-        {
-          "minute": 79,
-          "cumHome": 0.37,
-          "cumAway": 0.82
-        },
-        {
-          "minute": 80,
-          "cumHome": 0.45,
-          "cumAway": 0.82
-        },
-        {
-          "minute": 81,
-          "cumHome": 0.53,
-          "cumAway": 0.82
-        },
-        {
-          "minute": 82,
-          "cumHome": 0.53,
-          "cumAway": 0.85
-        },
-        {
-          "minute": 83,
-          "cumHome": 0.62,
-          "cumAway": 0.85
-        },
-        {
-          "minute": 86,
-          "cumHome": 0.64,
-          "cumAway": 0.85
-        },
-        {
-          "minute": 95,
-          "cumHome": 0.64,
-          "cumAway": 0.87
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538111,
-      "externalIds": {
-        "understat": 29104
-      },
       "date": "2026-04-19",
       "kickoffUtc": "2026-04-19T15:30:00Z",
       "competition": "Premier League",
@@ -842,149 +294,10 @@
       "homeScore": 2,
       "awayScore": 1,
       "resultFromArsenalView": "L",
-      "stats": {
-        "home": {
-          "xG": 2.62
-        },
-        "away": {
-          "xG": 2.29
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 3,
-          "cumHome": 0.56,
-          "cumAway": 0
-        },
-        {
-          "minute": 3,
-          "cumHome": 0.61,
-          "cumAway": 0
-        },
-        {
-          "minute": 5,
-          "cumHome": 0.61,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 9,
-          "cumHome": 0.61,
-          "cumAway": 0.2
-        },
-        {
-          "minute": 15,
-          "cumHome": 0.67,
-          "cumAway": 0.2
-        },
-        {
-          "minute": 15,
-          "cumHome": 1.1,
-          "cumAway": 0.2,
-          "goal": true,
-          "team": "Manchester City"
-        },
-        {
-          "minute": 17,
-          "cumHome": 1.1,
-          "cumAway": 0.6,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 26,
-          "cumHome": 1.16,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 32,
-          "cumHome": 1.21,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 32,
-          "cumHome": 1.23,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 41,
-          "cumHome": 1.29,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 47,
-          "cumHome": 1.75,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 47,
-          "cumHome": 2.15,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 51,
-          "cumHome": 2.22,
-          "cumAway": 0.6
-        },
-        {
-          "minute": 59,
-          "cumHome": 2.22,
-          "cumAway": 1.11
-        },
-        {
-          "minute": 59,
-          "cumHome": 2.22,
-          "cumAway": 1.75
-        },
-        {
-          "minute": 60,
-          "cumHome": 2.22,
-          "cumAway": 1.81
-        },
-        {
-          "minute": 63,
-          "cumHome": 2.31,
-          "cumAway": 1.81
-        },
-        {
-          "minute": 64,
-          "cumHome": 2.75,
-          "cumAway": 1.81,
-          "goal": true,
-          "team": "Manchester City"
-        },
-        {
-          "minute": 68,
-          "cumHome": 2.8,
-          "cumAway": 1.81
-        },
-        {
-          "minute": 69,
-          "cumHome": 2.82,
-          "cumAway": 1.81
-        },
-        {
-          "minute": 72,
-          "cumHome": 2.82,
-          "cumAway": 1.84
-        },
-        {
-          "minute": 72,
-          "cumHome": 2.82,
-          "cumAway": 2.32
-        },
-        {
-          "minute": 94,
-          "cumHome": 2.82,
-          "cumAway": 2.63
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
@@ -1007,9 +320,6 @@
     },
     {
       "id": 538097,
-      "externalIds": {
-        "understat": 29092
-      },
       "date": "2026-04-11",
       "kickoffUtc": "2026-04-11T11:30:00Z",
       "competition": "Premier League",
@@ -1020,144 +330,10 @@
       "homeScore": 1,
       "awayScore": 2,
       "resultFromArsenalView": "L",
-      "stats": {
-        "home": {
-          "xG": 3.16
-        },
-        "away": {
-          "xG": 1.39
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 16,
-          "cumHome": 0,
-          "cumAway": 0.76,
-          "goal": true,
-          "team": "Bournemouth"
-        },
-        {
-          "minute": 19,
-          "cumHome": 0.55,
-          "cumAway": 0.76
-        },
-        {
-          "minute": 25,
-          "cumHome": 0.55,
-          "cumAway": 0.87
-        },
-        {
-          "minute": 32,
-          "cumHome": 0.57,
-          "cumAway": 0.87
-        },
-        {
-          "minute": 33,
-          "cumHome": 0.62,
-          "cumAway": 0.87
-        },
-        {
-          "minute": 34,
-          "cumHome": 1.39,
-          "cumAway": 0.87,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 39,
-          "cumHome": 1.39,
-          "cumAway": 0.93
-        },
-        {
-          "minute": 51,
-          "cumHome": 1.4,
-          "cumAway": 0.93
-        },
-        {
-          "minute": 52,
-          "cumHome": 2.26,
-          "cumAway": 0.93
-        },
-        {
-          "minute": 65,
-          "cumHome": 2.26,
-          "cumAway": 0.94
-        },
-        {
-          "minute": 67,
-          "cumHome": 2.28,
-          "cumAway": 0.94
-        },
-        {
-          "minute": 68,
-          "cumHome": 2.34,
-          "cumAway": 0.94
-        },
-        {
-          "minute": 69,
-          "cumHome": 2.35,
-          "cumAway": 0.94
-        },
-        {
-          "minute": 69,
-          "cumHome": 2.42,
-          "cumAway": 0.94
-        },
-        {
-          "minute": 71,
-          "cumHome": 2.42,
-          "cumAway": 1.01
-        },
-        {
-          "minute": 71,
-          "cumHome": 2.42,
-          "cumAway": 1.03
-        },
-        {
-          "minute": 73,
-          "cumHome": 2.42,
-          "cumAway": 1.38,
-          "goal": true,
-          "team": "Bournemouth"
-        },
-        {
-          "minute": 78,
-          "cumHome": 2.87,
-          "cumAway": 1.38
-        },
-        {
-          "minute": 85,
-          "cumHome": 3,
-          "cumAway": 1.38
-        },
-        {
-          "minute": 86,
-          "cumHome": 3.02,
-          "cumAway": 1.38
-        },
-        {
-          "minute": 91,
-          "cumHome": 3.08,
-          "cumAway": 1.38
-        },
-        {
-          "minute": 92,
-          "cumHome": 3.16,
-          "cumAway": 1.38
-        },
-        {
-          "minute": 92,
-          "cumHome": 3.16,
-          "cumAway": 1.4
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
@@ -1198,9 +374,6 @@
     },
     {
       "id": 538077,
-      "externalIds": {
-        "understat": 29068
-      },
       "date": "2026-03-14",
       "kickoffUtc": "2026-03-14T17:30:00Z",
       "competition": "Premier League",
@@ -1211,197 +384,10 @@
       "homeScore": 2,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.91
-        },
-        "away": {
-          "xG": 1.18
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 5,
-          "cumHome": 0.04,
-          "cumAway": 0
-        },
-        {
-          "minute": 7,
-          "cumHome": 0.05,
-          "cumAway": 0
-        },
-        {
-          "minute": 8,
-          "cumHome": 0.08,
-          "cumAway": 0
-        },
-        {
-          "minute": 10,
-          "cumHome": 0.15,
-          "cumAway": 0
-        },
-        {
-          "minute": 10,
-          "cumHome": 0.19,
-          "cumAway": 0
-        },
-        {
-          "minute": 12,
-          "cumHome": 0.28,
-          "cumAway": 0
-        },
-        {
-          "minute": 14,
-          "cumHome": 0.3,
-          "cumAway": 0
-        },
-        {
-          "minute": 16,
-          "cumHome": 0.3,
-          "cumAway": 0.38
-        },
-        {
-          "minute": 17,
-          "cumHome": 0.3,
-          "cumAway": 0.4
-        },
-        {
-          "minute": 17,
-          "cumHome": 0.3,
-          "cumAway": 0.84
-        },
-        {
-          "minute": 30,
-          "cumHome": 0.31,
-          "cumAway": 0.84
-        },
-        {
-          "minute": 30,
-          "cumHome": 0.31,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 34,
-          "cumHome": 0.37,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 37,
-          "cumHome": 0.38,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 44,
-          "cumHome": 0.41,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 44,
-          "cumHome": 0.47,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 44,
-          "cumHome": 0.49,
-          "cumAway": 0.89
-        },
-        {
-          "minute": 48,
-          "cumHome": 0.49,
-          "cumAway": 0.96
-        },
-        {
-          "minute": 48,
-          "cumHome": 0.49,
-          "cumAway": 1.06
-        },
-        {
-          "minute": 50,
-          "cumHome": 0.49,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 51,
-          "cumHome": 0.52,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 59,
-          "cumHome": 0.54,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 59,
-          "cumHome": 0.57,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 59,
-          "cumHome": 0.63,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 63,
-          "cumHome": 0.66,
-          "cumAway": 1.08
-        },
-        {
-          "minute": 67,
-          "cumHome": 0.66,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 74,
-          "cumHome": 0.68,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 76,
-          "cumHome": 0.7,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 76,
-          "cumHome": 0.72,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 82,
-          "cumHome": 0.8,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 88,
-          "cumHome": 1.57,
-          "cumAway": 1.1,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 92,
-          "cumHome": 1.6,
-          "cumAway": 1.1
-        },
-        {
-          "minute": 95,
-          "cumHome": 1.6,
-          "cumAway": 1.19
-        },
-        {
-          "minute": 96,
-          "cumHome": 1.91,
-          "cumAway": 1.19,
-          "goal": true,
-          "team": "Arsenal"
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
@@ -1424,9 +410,6 @@
     },
     {
       "id": 538067,
-      "externalIds": {
-        "understat": 29060
-      },
       "date": "2026-03-04",
       "kickoffUtc": "2026-03-04T19:30:00Z",
       "competition": "Premier League",
@@ -1437,122 +420,14 @@
       "homeScore": 0,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.92
-        },
-        "away": {
-          "xG": 0.51
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 2,
-          "cumHome": 0.02,
-          "cumAway": 0
-        },
-        {
-          "minute": 8,
-          "cumHome": 0.02,
-          "cumAway": 0.03,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 11,
-          "cumHome": 0.28,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 17,
-          "cumHome": 0.34,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 21,
-          "cumHome": 0.35,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 34,
-          "cumHome": 0.39,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 38,
-          "cumHome": 0.44,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 52,
-          "cumHome": 0.52,
-          "cumAway": 0.03
-        },
-        {
-          "minute": 55,
-          "cumHome": 0.52,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 56,
-          "cumHome": 0.52,
-          "cumAway": 0.19
-        },
-        {
-          "minute": 57,
-          "cumHome": 0.55,
-          "cumAway": 0.19
-        },
-        {
-          "minute": 62,
-          "cumHome": 0.85,
-          "cumAway": 0.19
-        },
-        {
-          "minute": 65,
-          "cumHome": 0.85,
-          "cumAway": 0.26
-        },
-        {
-          "minute": 67,
-          "cumHome": 0.85,
-          "cumAway": 0.28
-        },
-        {
-          "minute": 68,
-          "cumHome": 0.87,
-          "cumAway": 0.28
-        },
-        {
-          "minute": 68,
-          "cumHome": 0.92,
-          "cumAway": 0.28
-        },
-        {
-          "minute": 73,
-          "cumHome": 0.92,
-          "cumAway": 0.39
-        },
-        {
-          "minute": 87,
-          "cumHome": 0.92,
-          "cumAway": 0.51
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538057,
-      "externalIds": {
-        "understat": 29049
-      },
       "date": "2026-03-01",
       "kickoffUtc": "2026-03-01T16:30:00Z",
       "competition": "Premier League",
@@ -1563,144 +438,14 @@
       "homeScore": 2,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.72
-        },
-        "away": {
-          "xG": 1.35
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 5,
-          "cumHome": 0,
-          "cumAway": 0.02
-        },
-        {
-          "minute": 6,
-          "cumHome": 0.07,
-          "cumAway": 0.02
-        },
-        {
-          "minute": 7,
-          "cumHome": 0.1,
-          "cumAway": 0.02
-        },
-        {
-          "minute": 9,
-          "cumHome": 0.1,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 14,
-          "cumHome": 0.11,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 20,
-          "cumHome": 0.65,
-          "cumAway": 0.59,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 28,
-          "cumHome": 0.69,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 32,
-          "cumHome": 0.83,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 36,
-          "cumHome": 0.9,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 36,
-          "cumHome": 1.03,
-          "cumAway": 0.59
-        },
-        {
-          "minute": 43,
-          "cumHome": 1.03,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 46,
-          "cumHome": 1.03,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 49,
-          "cumHome": 1.04,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 49,
-          "cumHome": 1.07,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 50,
-          "cumHome": 1.07,
-          "cumAway": 0.71
-        },
-        {
-          "minute": 51,
-          "cumHome": 1.07,
-          "cumAway": 0.76
-        },
-        {
-          "minute": 52,
-          "cumHome": 1.07,
-          "cumAway": 1.21
-        },
-        {
-          "minute": 56,
-          "cumHome": 1.07,
-          "cumAway": 1.3
-        },
-        {
-          "minute": 59,
-          "cumHome": 1.07,
-          "cumAway": 1.33
-        },
-        {
-          "minute": 65,
-          "cumHome": 1.61,
-          "cumAway": 1.33,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 79,
-          "cumHome": 1.72,
-          "cumAway": 1.33
-        },
-        {
-          "minute": 86,
-          "cumHome": 1.72,
-          "cumAway": 1.35
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538053,
-      "externalIds": {
-        "understat": 29046
-      },
       "date": "2026-02-22",
       "kickoffUtc": "2026-02-22T16:30:00Z",
       "competition": "Premier League",
@@ -1711,170 +456,14 @@
       "homeScore": 1,
       "awayScore": 4,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.38
-        },
-        "away": {
-          "xG": 3.32
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 3,
-          "cumHome": 0,
-          "cumAway": 0.1
-        },
-        {
-          "minute": 4,
-          "cumHome": 0,
-          "cumAway": 0.11
-        },
-        {
-          "minute": 6,
-          "cumHome": 0,
-          "cumAway": 0.16
-        },
-        {
-          "minute": 16,
-          "cumHome": 0,
-          "cumAway": 0.63
-        },
-        {
-          "minute": 17,
-          "cumHome": 0,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 20,
-          "cumHome": 0.06,
-          "cumAway": 0.69
-        },
-        {
-          "minute": 31,
-          "cumHome": 0.06,
-          "cumAway": 0.72
-        },
-        {
-          "minute": 31,
-          "cumHome": 0.06,
-          "cumAway": 1.28,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 33,
-          "cumHome": 0.14,
-          "cumAway": 1.28,
-          "goal": true,
-          "team": "Tottenham"
-        },
-        {
-          "minute": 36,
-          "cumHome": 0.14,
-          "cumAway": 1.58
-        },
-        {
-          "minute": 39,
-          "cumHome": 0.14,
-          "cumAway": 1.62
-        },
-        {
-          "minute": 40,
-          "cumHome": 0.14,
-          "cumAway": 1.69
-        },
-        {
-          "minute": 45,
-          "cumHome": 0.19,
-          "cumAway": 1.69
-        },
-        {
-          "minute": 46,
-          "cumHome": 0.19,
-          "cumAway": 1.76,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 47,
-          "cumHome": 0.19,
-          "cumAway": 1.77
-        },
-        {
-          "minute": 50,
-          "cumHome": 0.19,
-          "cumAway": 1.78
-        },
-        {
-          "minute": 50,
-          "cumHome": 0.19,
-          "cumAway": 1.94
-        },
-        {
-          "minute": 58,
-          "cumHome": 0.19,
-          "cumAway": 2.28
-        },
-        {
-          "minute": 60,
-          "cumHome": 0.19,
-          "cumAway": 2.72,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 65,
-          "cumHome": 0.19,
-          "cumAway": 2.8
-        },
-        {
-          "minute": 70,
-          "cumHome": 0.19,
-          "cumAway": 2.82
-        },
-        {
-          "minute": 71,
-          "cumHome": 0.19,
-          "cumAway": 2.94
-        },
-        {
-          "minute": 83,
-          "cumHome": 0.29,
-          "cumAway": 2.94
-        },
-        {
-          "minute": 91,
-          "cumHome": 0.37,
-          "cumAway": 2.94
-        },
-        {
-          "minute": 93,
-          "cumHome": 0.37,
-          "cumAway": 3.32,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 97,
-          "cumHome": 0.38,
-          "cumAway": 3.32
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538094,
-      "externalIds": {
-        "understat": 29087
-      },
       "date": "2026-02-18",
       "kickoffUtc": "2026-02-18T20:00:00Z",
       "competition": "Premier League",
@@ -1885,113 +474,14 @@
       "homeScore": 2,
       "awayScore": 2,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.17
-        },
-        "away": {
-          "xG": 2.01
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 4,
-          "cumHome": 0,
-          "cumAway": 0.54,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 7,
-          "cumHome": 0,
-          "cumAway": 0.58
-        },
-        {
-          "minute": 16,
-          "cumHome": 0,
-          "cumAway": 0.61
-        },
-        {
-          "minute": 16,
-          "cumHome": 0,
-          "cumAway": 1.28
-        },
-        {
-          "minute": 24,
-          "cumHome": 0,
-          "cumAway": 1.32
-        },
-        {
-          "minute": 30,
-          "cumHome": 0,
-          "cumAway": 1.36
-        },
-        {
-          "minute": 33,
-          "cumHome": 0,
-          "cumAway": 1.49
-        },
-        {
-          "minute": 46,
-          "cumHome": 0.03,
-          "cumAway": 1.49
-        },
-        {
-          "minute": 47,
-          "cumHome": 0.04,
-          "cumAway": 1.49
-        },
-        {
-          "minute": 52,
-          "cumHome": 0.05,
-          "cumAway": 1.49
-        },
-        {
-          "minute": 55,
-          "cumHome": 0.05,
-          "cumAway": 1.87,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 60,
-          "cumHome": 0.09,
-          "cumAway": 1.87,
-          "goal": true,
-          "team": "Wolverhampton Wanderers"
-        },
-        {
-          "minute": 72,
-          "cumHome": 0.09,
-          "cumAway": 1.91
-        },
-        {
-          "minute": 93,
-          "cumHome": 0.17,
-          "cumAway": 1.91,
-          "goal": true,
-          "team": "Wolverhampton Wanderers"
-        },
-        {
-          "minute": 94,
-          "cumHome": 0.17,
-          "cumAway": 2.03
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538038,
-      "externalIds": {
-        "understat": 29029
-      },
       "date": "2026-02-12",
       "kickoffUtc": "2026-02-12T20:00:00Z",
       "competition": "Premier League",
@@ -2002,129 +492,14 @@
       "homeScore": 1,
       "awayScore": 1,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 1.81
-        },
-        "away": {
-          "xG": 0.78
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
-      "xgTimeline": [
-        {
-          "minute": 0,
-          "cumHome": 0,
-          "cumAway": 0
-        },
-        {
-          "minute": 9,
-          "cumHome": 0,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 21,
-          "cumHome": 0.11,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 21,
-          "cumHome": 0.49,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 43,
-          "cumHome": 0.57,
-          "cumAway": 0.09
-        },
-        {
-          "minute": 47,
-          "cumHome": 0.57,
-          "cumAway": 0.22
-        },
-        {
-          "minute": 52,
-          "cumHome": 0.65,
-          "cumAway": 0.22
-        },
-        {
-          "minute": 54,
-          "cumHome": 0.65,
-          "cumAway": 0.25
-        },
-        {
-          "minute": 55,
-          "cumHome": 0.65,
-          "cumAway": 0.3
-        },
-        {
-          "minute": 57,
-          "cumHome": 0.65,
-          "cumAway": 0.33
-        },
-        {
-          "minute": 60,
-          "cumHome": 0.65,
-          "cumAway": 0.47,
-          "goal": true,
-          "team": "Arsenal"
-        },
-        {
-          "minute": 63,
-          "cumHome": 0.72,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 66,
-          "cumHome": 0.79,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 68,
-          "cumHome": 0.85,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 70,
-          "cumHome": 1.22,
-          "cumAway": 0.47,
-          "goal": true,
-          "team": "Brentford"
-        },
-        {
-          "minute": 79,
-          "cumHome": 1.28,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 87,
-          "cumHome": 1.39,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 91,
-          "cumHome": 1.75,
-          "cumAway": 0.47
-        },
-        {
-          "minute": 92,
-          "cumHome": 1.75,
-          "cumAway": 0.78
-        },
-        {
-          "minute": 96,
-          "cumHome": 1.81,
-          "cumAway": 0.78
-        }
-      ],
+      "xgTimeline": [],
       "keyMoments": []
     },
     {
       "id": 538027,
-      "externalIds": {
-        "understat": 29019
-      },
       "date": "2026-02-07",
       "kickoffUtc": "2026-02-07T15:00:00Z",
       "competition": "Premier League",
@@ -2135,14 +510,7 @@
       "homeScore": 3,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.19
-        },
-        "away": {
-          "xG": 0.43
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2150,9 +518,6 @@
     },
     {
       "id": 538020,
-      "externalIds": {
-        "understat": 29015
-      },
       "date": "2026-01-31",
       "kickoffUtc": "2026-01-31T15:00:00Z",
       "competition": "Premier League",
@@ -2163,14 +528,7 @@
       "homeScore": 0,
       "awayScore": 4,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.18
-        },
-        "away": {
-          "xG": 3.54
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2196,9 +554,6 @@
     },
     {
       "id": 538007,
-      "externalIds": {
-        "understat": 28999
-      },
       "date": "2026-01-25",
       "kickoffUtc": "2026-01-25T16:30:00Z",
       "competition": "Premier League",
@@ -2209,14 +564,7 @@
       "homeScore": 2,
       "awayScore": 3,
       "resultFromArsenalView": "L",
-      "stats": {
-        "home": {
-          "xG": 1.42
-        },
-        "away": {
-          "xG": 0.64
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2242,9 +590,6 @@
     },
     {
       "id": 538002,
-      "externalIds": {
-        "understat": 28994
-      },
       "date": "2026-01-17",
       "kickoffUtc": "2026-01-17T17:30:00Z",
       "competition": "Premier League",
@@ -2255,14 +600,7 @@
       "homeScore": 0,
       "awayScore": 0,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.32
-        },
-        "away": {
-          "xG": 2.86
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2270,9 +608,6 @@
     },
     {
       "id": 537987,
-      "externalIds": {
-        "understat": 28980
-      },
       "date": "2026-01-08",
       "kickoffUtc": "2026-01-08T20:00:00Z",
       "competition": "Premier League",
@@ -2283,14 +618,7 @@
       "homeScore": 0,
       "awayScore": 0,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.7
-        },
-        "away": {
-          "xG": 0.32
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2298,9 +626,6 @@
     },
     {
       "id": 537975,
-      "externalIds": {
-        "understat": 28971
-      },
       "date": "2026-01-03",
       "kickoffUtc": "2026-01-03T17:30:00Z",
       "competition": "Premier League",
@@ -2311,14 +636,7 @@
       "homeScore": 2,
       "awayScore": 3,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.95
-        },
-        "away": {
-          "xG": 1.28
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2326,9 +644,6 @@
     },
     {
       "id": 537967,
-      "externalIds": {
-        "understat": 28958
-      },
       "date": "2025-12-30",
       "kickoffUtc": "2025-12-30T20:15:00Z",
       "competition": "Premier League",
@@ -2339,14 +654,7 @@
       "homeScore": 4,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 4.41
-        },
-        "away": {
-          "xG": 2.94
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2354,9 +662,6 @@
     },
     {
       "id": 537957,
-      "externalIds": {
-        "understat": 28948
-      },
       "date": "2025-12-27",
       "kickoffUtc": "2025-12-27T15:00:00Z",
       "competition": "Premier League",
@@ -2367,14 +672,7 @@
       "homeScore": 2,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.54
-        },
-        "away": {
-          "xG": 0.71
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2382,9 +680,6 @@
     },
     {
       "id": 537948,
-      "externalIds": {
-        "understat": 28941
-      },
       "date": "2025-12-20",
       "kickoffUtc": "2025-12-20T20:00:00Z",
       "competition": "Premier League",
@@ -2395,14 +690,7 @@
       "homeScore": 0,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.21
-        },
-        "away": {
-          "xG": 1.85
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2410,9 +698,6 @@
     },
     {
       "id": 537937,
-      "externalIds": {
-        "understat": 28928
-      },
       "date": "2025-12-13",
       "kickoffUtc": "2025-12-13T20:00:00Z",
       "competition": "Premier League",
@@ -2423,14 +708,7 @@
       "homeScore": 2,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.62
-        },
-        "away": {
-          "xG": 0.62
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2456,9 +734,6 @@
     },
     {
       "id": 537926,
-      "externalIds": {
-        "understat": 28919
-      },
       "date": "2025-12-06",
       "kickoffUtc": "2025-12-06T12:30:00Z",
       "competition": "Premier League",
@@ -2469,14 +744,7 @@
       "homeScore": 2,
       "awayScore": 1,
       "resultFromArsenalView": "L",
-      "stats": {
-        "home": {
-          "xG": 2.72
-        },
-        "away": {
-          "xG": 1.86
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2484,9 +752,6 @@
     },
     {
       "id": 537917,
-      "externalIds": {
-        "understat": 28909
-      },
       "date": "2025-12-03",
       "kickoffUtc": "2025-12-03T19:30:00Z",
       "competition": "Premier League",
@@ -2497,14 +762,7 @@
       "homeScore": 2,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.63
-        },
-        "away": {
-          "xG": 0.59
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2512,9 +770,6 @@
     },
     {
       "id": 537909,
-      "externalIds": {
-        "understat": 28900
-      },
       "date": "2025-11-30",
       "kickoffUtc": "2025-11-30T16:30:00Z",
       "competition": "Premier League",
@@ -2525,14 +780,7 @@
       "homeScore": 1,
       "awayScore": 1,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.79
-        },
-        "away": {
-          "xG": 1.23
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2558,9 +806,6 @@
     },
     {
       "id": 537897,
-      "externalIds": {
-        "understat": 28889
-      },
       "date": "2025-11-23",
       "kickoffUtc": "2025-11-23T16:30:00Z",
       "competition": "Premier League",
@@ -2571,14 +816,7 @@
       "homeScore": 4,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.28
-        },
-        "away": {
-          "xG": 0.03
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2586,9 +824,6 @@
     },
     {
       "id": 537885,
-      "externalIds": {
-        "understat": 28885
-      },
       "date": "2025-11-08",
       "kickoffUtc": "2025-11-08T17:30:00Z",
       "competition": "Premier League",
@@ -2599,14 +834,7 @@
       "homeScore": 2,
       "awayScore": 2,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 1.2
-        },
-        "away": {
-          "xG": 2.33
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2632,9 +860,6 @@
     },
     {
       "id": 537878,
-      "externalIds": {
-        "understat": 28869
-      },
       "date": "2025-11-01",
       "kickoffUtc": "2025-11-01T15:00:00Z",
       "competition": "Premier League",
@@ -2645,14 +870,7 @@
       "homeScore": 0,
       "awayScore": 2,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.68
-        },
-        "away": {
-          "xG": 2.52
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2660,9 +878,6 @@
     },
     {
       "id": 537867,
-      "externalIds": {
-        "understat": 28859
-      },
       "date": "2025-10-26",
       "kickoffUtc": "2025-10-26T14:00:00Z",
       "competition": "Premier League",
@@ -2673,14 +888,7 @@
       "homeScore": 1,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.86
-        },
-        "away": {
-          "xG": 0.35
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2706,9 +914,6 @@
     },
     {
       "id": 537859,
-      "externalIds": {
-        "understat": 28851
-      },
       "date": "2025-10-18",
       "kickoffUtc": "2025-10-18T16:30:00Z",
       "competition": "Premier League",
@@ -2719,14 +924,7 @@
       "homeScore": 0,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.5
-        },
-        "away": {
-          "xG": 2.08
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2734,9 +932,6 @@
     },
     {
       "id": 537847,
-      "externalIds": {
-        "understat": 28839
-      },
       "date": "2025-10-04",
       "kickoffUtc": "2025-10-04T14:00:00Z",
       "competition": "Premier League",
@@ -2747,14 +942,7 @@
       "homeScore": 2,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 3.06
-        },
-        "away": {
-          "xG": 0.86
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2780,9 +968,6 @@
     },
     {
       "id": 537842,
-      "externalIds": {
-        "understat": 28836
-      },
       "date": "2025-09-28",
       "kickoffUtc": "2025-09-28T15:30:00Z",
       "competition": "Premier League",
@@ -2793,14 +978,7 @@
       "homeScore": 1,
       "awayScore": 2,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 0.74
-        },
-        "away": {
-          "xG": 2.07
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2808,9 +986,6 @@
     },
     {
       "id": 537828,
-      "externalIds": {
-        "understat": 28827
-      },
       "date": "2025-09-21",
       "kickoffUtc": "2025-09-21T15:30:00Z",
       "competition": "Premier League",
@@ -2821,14 +996,7 @@
       "homeScore": 1,
       "awayScore": 1,
       "resultFromArsenalView": "D",
-      "stats": {
-        "home": {
-          "xG": 0.72
-        },
-        "away": {
-          "xG": 1.12
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2854,9 +1022,6 @@
     },
     {
       "id": 537817,
-      "externalIds": {
-        "understat": 28808
-      },
       "date": "2025-09-13",
       "kickoffUtc": "2025-09-13T11:30:00Z",
       "competition": "Premier League",
@@ -2867,14 +1032,7 @@
       "homeScore": 3,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.88
-        },
-        "away": {
-          "xG": 0.29
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2882,9 +1040,6 @@
     },
     {
       "id": 537809,
-      "externalIds": {
-        "understat": 28806
-      },
       "date": "2025-08-31",
       "kickoffUtc": "2025-08-31T15:30:00Z",
       "competition": "Premier League",
@@ -2895,14 +1050,7 @@
       "homeScore": 1,
       "awayScore": 0,
       "resultFromArsenalView": "L",
-      "stats": {
-        "home": {
-          "xG": 0.48
-        },
-        "away": {
-          "xG": 0.49
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2910,9 +1058,6 @@
     },
     {
       "id": 537797,
-      "externalIds": {
-        "understat": 28793
-      },
       "date": "2025-08-23",
       "kickoffUtc": "2025-08-23T16:30:00Z",
       "competition": "Premier League",
@@ -2923,14 +1068,7 @@
       "homeScore": 5,
       "awayScore": 0,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 2.74
-        },
-        "away": {
-          "xG": 0.16
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
@@ -2938,9 +1076,6 @@
     },
     {
       "id": 9,
-      "externalIds": {
-        "understat": 28786
-      },
       "date": "2025-08-17",
       "kickoffUtc": "2025-08-17T15:30:00Z",
       "competition": "Premier League",
@@ -2951,14 +1086,7 @@
       "homeScore": 0,
       "awayScore": 1,
       "resultFromArsenalView": "W",
-      "stats": {
-        "home": {
-          "xG": 1.38
-        },
-        "away": {
-          "xG": 1.33
-        }
-      },
+      "stats": {},
       "scorers": [],
       "assists": [],
       "xgTimeline": [],
