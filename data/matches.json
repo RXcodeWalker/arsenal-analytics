@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-30T13:29:25.318Z",
+  "generatedAt": "2026-05-31T03:48:19.529Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-30T13:27:57.966Z",
+        "fetchedAt": "2026-05-31T03:46:52.157Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-30T13:27:57.967Z",
+        "fetchedAt": "2026-05-31T03:46:52.157Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-30T13:27:57.967Z",
+        "fetchedAt": "2026-05-31T03:46:52.158Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-30T13:27:57.968Z",
+        "fetchedAt": "2026-05-31T03:46:52.158Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-30T13:27:58.025Z",
+        "fetchedAt": "2026-05-31T03:46:52.216Z",
         "ok": true
       }
     ]
@@ -48,7 +48,6 @@
     "ppda": 0,
     "fieldTilt": 0,
     "form": [
-      "L",
       "W",
       "W",
       "D",
@@ -97,7 +96,8 @@
       "W",
       "W",
       "W",
-      "W"
+      "W",
+      "L"
     ],
     "monthlyXG": [
       {
@@ -167,12 +167,30 @@
         "month": "May",
         "xGFor": 10.66,
         "xGAgainst": 3.21,
-        "goalsFor": 8,
-        "goalsAgainst": 1
+        "goalsFor": 12,
+        "goalsAgainst": 6
       }
     ]
   },
   "matches": [
+    {
+      "id": 552096,
+      "date": "2026-05-30",
+      "kickoffUtc": "2026-05-30T16:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 0,
+      "venue": "Paris Saint-Germain",
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Arsenal",
+      "homeScore": 5,
+      "awayScore": 4,
+      "resultFromArsenalView": "L",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 538157,
       "externalIds": {
@@ -2941,7 +2959,7 @@
       "keyMoments": []
     },
     {
-      "id": 537809,
+      "id": 25,
       "externalIds": {
         "understat": 28806
       },
