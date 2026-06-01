@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-05-31T13:45:03.758Z",
+  "generatedAt": "2026-06-01T04:01:50.288Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-05-31T13:43:36.491Z",
+        "fetchedAt": "2026-06-01T04:00:22.873Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-05-31T13:43:36.492Z",
+        "fetchedAt": "2026-06-01T04:00:22.873Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-05-31T13:43:36.492Z",
+        "fetchedAt": "2026-06-01T04:00:22.873Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-05-31T13:43:36.492Z",
+        "fetchedAt": "2026-06-01T04:00:22.874Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-05-31T13:43:36.550Z",
+        "fetchedAt": "2026-06-01T04:00:22.931Z",
         "ok": true
       }
     ]
