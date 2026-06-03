@@ -9,7 +9,10 @@
       "Bash(node -e \"let d=''; process.stdin.on\\('data',c=>d+=c\\); process.stdin.on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\); console.log\\('Generated at:', j.generatedAt\\); console.log\\('Total matches:', j.matches.length\\); j.matches.slice\\(0,5\\).forEach\\(m=>console.log\\(m.date, m.homeTeam, m.homeScore, '-', m.awayScore, m.awayTeam\\)\\); }\\);\")",
       "Bash(git merge *)",
       "Bash(node -e ' *)",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(node -e \"const d=require\\('./data/matches.json'\\); const comps=[...new Set\\(d.matches.map\\(m=>m.competition\\)\\)]; console.log\\(JSON.stringify\\(comps,null,2\\)\\);\")",
+      "Bash(node -e \"const d=require\\('./data/players.json'\\); d.players.filter\\(p=>String\\(p.club||''\\).toLowerCase\\(\\)==='arsenal'\\).forEach\\(p=>console.log\\(JSON.stringify\\({id:p.id,name:p.name}\\)\\)\\);\")",
+      "Bash(node -e \"const d=require\\('./data/matches.json'\\); console.log\\(JSON.stringify\\(d.seasonStats?.form?.slice\\(0,5\\)\\), 'len:', d.seasonStats?.form?.length\\);\")"
     ]
   }
 }

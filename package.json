@@ -2,11 +2,13 @@
   "name": "arsenal-analytics-site",
   "private": true,
   "scripts": {
+    "generate:articles-index": "node scripts/generate-articles-index.js",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1"

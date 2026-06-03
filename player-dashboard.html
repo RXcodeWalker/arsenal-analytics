@@ -197,6 +197,16 @@ async function fetchJson(path) {
   }
 }
 
+const PREPOSITIONS = new Set(['dos', 'de', 'da', 'del', 'van', 'von', 'der', 'di', 'du']);
+function getDisplayName(fullName) {
+  const parts = fullName.split(' ');
+  if (parts.length <= 2) return parts[parts.length - 1];
+  for (let i = 1; i < parts.length - 1; i++) {
+    if (!PREPOSITIONS.has(parts[i].toLowerCase())) return parts[i];
+  }
+  return parts[parts.length - 1];
+}
+
 function safeNumber(value, fallback = 0) {
   const n = Number(value);
   return Number.isFinite(n) ? n : fallback;
@@ -264,7 +274,7 @@ async function loadData() {
 
     // Per-90 chart
     setTimeout(() => {
-      const names = playersData.players.map(p=>p.name.split(' ').pop());
+      const names = playersData.players.map(p=>getDisplayName(p.name));
       const per90 = playersData.players.map(p => ((p.stats.goals + p.stats.assists) / (p.stats.minutesPlayed/90)).toFixed(2));
       createHorizontalBar('per90-chart', names, per90.map(Number), '#EF0107');
     }, 400);
@@ -283,7 +293,7 @@ function renderPlayerSelector(players) {
             : `<span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:white;">${p.name.split(' ').map(n=>n[0]).join('')}</span>`}
         </div>
         <div class="player-position-badge" style="font-size:9px;padding:2px 6px;">${displayText(p.position, 'UNK')}</div>
-        <div style="font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:var(--white);margin-top:4px;line-height:1.2;">${p.name.split(' ').pop()}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:var(--white);margin-top:4px;line-height:1.2;">${getDisplayName(p.name)}</div>
         <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">#${displayNumber(p.number)}</div>
       </div>
     </button>

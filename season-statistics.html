@@ -287,7 +287,7 @@ async function loadData() {
 
   // Points accumulation
   setTimeout(() => {
-    const pts = [];
+    const pts = [0];
     let running = 0;
     ss.form.forEach((r,i) => {
       running += r==='W' ? 3 : r==='D' ? 1 : 0;
@@ -296,7 +296,7 @@ async function loadData() {
     new Chart(document.getElementById('points-chart'), {
       type: 'line',
       data: {
-        labels: ss.form.map((_,i) => `GW${22+i}`),
+        labels: ['GW0', ...ss.form.map((_,i) => `GW${i+1}`)],
         datasets: [{
           label: 'Points',
           data: pts,
@@ -306,7 +306,7 @@ async function loadData() {
           tension: 0.4,
           borderWidth: 2.5,
           pointRadius: 4,
-          pointBackgroundColor: pts.map((p,i) => ss.form[i]==='W' ? '#4ADE80' : ss.form[i]==='D' ? '#C8A84B' : '#EF0107'),
+          pointBackgroundColor: ['#888888', ...pts.slice(1).map((p,i) => ss.form[i]==='W' ? '#4ADE80' : ss.form[i]==='D' ? '#C8A84B' : '#EF0107')],
         }]
       },
       options: {

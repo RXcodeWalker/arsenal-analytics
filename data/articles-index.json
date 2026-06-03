@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-05-28T10:15:05.777Z",
+  "count": 6,
+  "articles": [
+    {
+      "title": "Arsenal 3-1 Chelsea: A Full xG Postmortem",
+      "slug": "chelsea-postmortem",
+      "date": "2025-04-06",
+      "excerpt": "With a 2.84 xG to 1.42, the scoreline barely told the full story. We break down every chance, every key decision, and how Arteta's setup exposed Chelsea's high defensive line.",
+      "tags": [
+        "Match Report",
+        "xG",
+        "Tactical"
+      ],
+      "cover": "/assets/articles/chelsea-postmortem/cover.jpg",
+      "category": "Match Analysis",
+      "readTime": "12 min",
+      "featured": false,
+      "emoji": "📋",
+      "aliases": [
+        "chelsea-postmortem"
+      ],
+      "search": {
+        "title": "Arsenal 3-1 Chelsea: A Full xG Postmortem",
+        "excerpt": "With a 2.84 xG to 1.42, the scoreline barely told the full story. We break down every chance, every key decision, and how Arteta's setup exposed Chelsea's high defensive line.",
+        "tags": [
+          "Match Report",
+          "xG",
+          "Tactical"
+        ],
+        "text": "arsenal 3-1 chelsea: a full xg postmortem with a 2.84 xg to 1.42, the scoreline barely told the full story. we break down every chance, every key decision, and how arteta's setup exposed chelsea's high defensive line. match report xg tactical"
+      }
+    },
+    {
+      "title": "The Half-Space Invasion: How Arteta's 4-3-3 Creates Overloads",
+      "slug": "half-space-invasion",
+      "date": "2025-04-06",
+      "excerpt": "Arsenal's dominance in the half-spaces between the opposition's defence and midfield is no accident. We examine the positional rotations and pressing triggers that make this system devastating in transition.",
+      "tags": [
+        "Tactical",
+        "xG",
+        "Formation"
+      ],
+      "cover": "/assets/articles/half-space-invasion/cover.jpg",
+      "category": "Tactical Analysis",
+      "readTime": "8 min",
+      "featured": true,
+      "emoji": "📊",
+      "aliases": [
+        "half-space-invasion"
+      ],
+      "search": {
+        "title": "The Half-Space Invasion: How Arteta's 4-3-3 Creates Overloads",
+        "excerpt": "Arsenal's dominance in the half-spaces between the opposition's defence and midfield is no accident. We examine the positional rotations and pressing triggers that make this system devastating in transition.",
+        "tags": [
+          "Tactical",
+          "xG",
+          "Formation"
+        ],
+        "text": "the half-space invasion: how arteta's 4-3-3 creates overloads arsenal's dominance in the half-spaces between the opposition's defence and midfield is no accident. we examine the positional rotations and pressing triggers that make this system devastating in transition. tactical xg formation"
+      }
+    },
+    {
+      "title": "Bukayo Saka: The Right Wing Perfected",
+      "slug": "saka-breakdown",
+      "date": "2025-04-02",
+      "excerpt": "A comprehensive data breakdown of Saka's 2024/25 season - where he shoots, how he creates, and what his progressive stats reveal about his evolution into a genuine world-class player.",
+      "tags": [
+        "Player Profile",
+        "Shot Map",
+        "Data"
+      ],
+      "cover": "/assets/articles/saka-breakdown/cover.jpg",
+      "category": "Player Profile",
+      "readTime": "6 min",
+      "featured": false,
+      "emoji": "⚡",
+      "aliases": [
+        "saka-breakdown"
+      ],
+      "search": {
+        "title": "Bukayo Saka: The Right Wing Perfected",
+        "excerpt": "A comprehensive data breakdown of Saka's 2024/25 season - where he shoots, how he creates, and what his progressive stats reveal about his evolution into a genuine world-class player.",
+        "tags": [
+          "Player Profile",
+          "Shot Map",
+          "Data"
+        ],
+        "text": "bukayo saka: the right wing perfected a comprehensive data breakdown of saka's 2024/25 season - where he shoots, how he creates, and what his progressive stats reveal about his evolution into a genuine world-class player. player profile shot map data"
+      }
+    },
+    {
+      "title": "Measuring Arsenal's Press: PPDA and Beyond",
+      "slug": "ppda-analysis",
+      "date": "2025-03-28",
+      "excerpt": "Arsenal's 7.8 PPDA ranks among the elite. We examine what drives their defensive intensity and where the system gets stretched - and what that means for title contention.",
+      "tags": [
+        "Press",
+        "Defensive",
+        "PPDA"
+      ],
+      "cover": "/assets/articles/ppda-analysis/cover.jpg",
+      "category": "Press Analysis",
+      "readTime": "10 min",
+      "featured": false,
+      "emoji": "🔴",
+      "aliases": [
+        "ppda-analysis"
+      ],
+      "search": {
+        "title": "Measuring Arsenal's Press: PPDA and Beyond",
+        "excerpt": "Arsenal's 7.8 PPDA ranks among the elite. We examine what drives their defensive intensity and where the system gets stretched - and what that means for title contention.",
+        "tags": [
+          "Press",
+          "Defensive",
+          "PPDA"
+        ],
+        "text": "measuring arsenal's press: ppda and beyond arsenal's 7.8 ppda ranks among the elite. we examine what drives their defensive intensity and where the system gets stretched - and what that means for title contention. press defensive ppda"
+      }
+    },
+    {
+      "title": "Odegaard's Vision: Mapping Arsenal's Creative Hub",
+      "slug": "odegaard-vision",
+      "date": "2025-03-20",
+      "excerpt": "How does Odegaard create chances that shouldn't exist? We chart his passing networks, press-escaping movements, and the subtle positional triggers that unlock defenses.",
+      "tags": [
+        "Tactical",
+        "Player Profile",
+        "Passing"
+      ],
+      "cover": "/assets/articles/odegaard-vision/cover.jpg",
+      "category": "Tactical Analysis",
+      "readTime": "9 min",
+      "featured": false,
+      "emoji": "🎯",
+      "aliases": [
+        "odegaard-vision"
+      ],
+      "search": {
+        "title": "Odegaard's Vision: Mapping Arsenal's Creative Hub",
+        "excerpt": "How does Odegaard create chances that shouldn't exist? We chart his passing networks, press-escaping movements, and the subtle positional triggers that unlock defenses.",
+        "tags": [
+          "Tactical",
+          "Player Profile",
+          "Passing"
+        ],
+        "text": "odegaard's vision: mapping arsenal's creative hub how does odegaard create chances that shouldn't exist? we chart his passing networks, press-escaping movements, and the subtle positional triggers that unlock defenses. tactical player profile passing"
+      }
+    },
+    {
+      "title": "Declan Rice: The Engine That Keeps Arsenal Running",
+      "slug": "rice-engine",
+      "date": "2025-03-14",
+      "excerpt": "Rice's impact on Arsenal goes far beyond tackles and interceptions. This is a full breakdown of his contribution to buildup play, press triggers, and late attacking runs.",
+      "tags": [
+        "Player Profile",
+        "Defensive",
+        "Data"
+      ],
+      "cover": "/assets/articles/rice-engine/cover.jpg",
+      "category": "Player Profile",
+      "readTime": "7 min",
+      "featured": false,
+      "emoji": "⚙️",
+      "aliases": [
+        "rice-engine"
+      ],
+      "search": {
+        "title": "Declan Rice: The Engine That Keeps Arsenal Running",
+        "excerpt": "Rice's impact on Arsenal goes far beyond tackles and interceptions. This is a full breakdown of his contribution to buildup play, press triggers, and late attacking runs.",
+        "tags": [
+          "Player Profile",
+          "Defensive",
+          "Data"
+        ],
+        "text": "declan rice: the engine that keeps arsenal running rice's impact on arsenal goes far beyond tackles and interceptions. this is a full breakdown of his contribution to buildup play, press triggers, and late attacking runs. player profile defensive data"
+      }
+    }
+  ]
+}

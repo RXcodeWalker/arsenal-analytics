@@ -281,7 +281,8 @@ function updateMatchSelector() {
       ${competitions.map(comp => `
         <button
           class="btn ${activeFilter === comp ? 'btn-primary' : 'btn-outline'} btn-sm"
-          onclick="setCompetitionFilter(${JSON.stringify(comp)})"
+          onclick="setCompetitionFilter(this.dataset.comp)"
+          data-comp="${comp.replace(/"/g, '&quot;')}"
           style="font-size:11px;letter-spacing:0.5px;"
         >${comp === 'All' ? 'All Competitions' : getCompetitionLabel(comp)}</button>
       `).join('')}
