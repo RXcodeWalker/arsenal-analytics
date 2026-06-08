@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-06-07T13:52:27.372Z",
+  "generatedAt": "2026-06-08T03:59:11.816Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-06-07T13:51:00.008Z",
+        "fetchedAt": "2026-06-08T03:57:44.575Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-06-07T13:51:00.008Z",
+        "fetchedAt": "2026-06-08T03:57:44.575Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-06-07T13:51:00.009Z",
+        "fetchedAt": "2026-06-08T03:57:44.576Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-06-07T13:51:00.009Z",
+        "fetchedAt": "2026-06-08T03:57:44.576Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-06-07T13:51:00.065Z",
+        "fetchedAt": "2026-06-08T03:57:44.634Z",
         "ok": true
       }
     ]
@@ -41,7 +41,7 @@
     "goalsAgainst": 27,
     "points": 85,
     "position": 1,
-    "cleanSheets": 26,
+    "cleanSheets": 9,
     "xGFor": 66.98,
     "xGAgainst": 33.11,
     "avgPossession": 0,
@@ -50,9 +50,6 @@
     "form": [
       "W",
       "W",
-      "D",
-      "W",
-      "W",
       "W",
       "W",
       "W",
@@ -63,39 +60,7 @@
       "W",
       "W",
       "D",
-      "W",
-      "L",
-      "W",
-      "W",
-      "W",
-      "W",
-      "W",
-      "W",
       "D",
-      "D",
-      "W",
-      "L",
-      "W",
-      "W",
-      "W",
-      "D",
-      "D",
-      "W",
-      "W",
-      "W",
-      "D",
-      "W",
-      "W",
-      "W",
-      "L",
-      "D",
-      "L",
-      "W",
-      "D",
-      "W",
-      "W",
-      "W",
-      "W",
       "W",
       "L"
     ],
@@ -192,7 +157,7 @@
       "keyMoments": []
     },
     {
-      "id": 538157,
+      "id": 373,
       "externalIds": {
         "understat": 29150
       },
@@ -357,7 +322,7 @@
       "keyMoments": []
     },
     {
-      "id": 538147,
+      "id": 361,
       "externalIds": {
         "understat": 29139
       },
@@ -483,7 +448,7 @@
       "keyMoments": []
     },
     {
-      "id": 538144,
+      "id": 360,
       "externalIds": {
         "understat": 29137
       },
@@ -491,7 +456,7 @@
       "kickoffUtc": "2026-05-10T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 36,
-      "venue": "West Ham United",
+      "venue": "West Ham",
       "homeTeam": "West Ham",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -657,7 +622,7 @@
       "keyMoments": []
     },
     {
-      "id": 538127,
+      "id": 341,
       "externalIds": {
         "understat": 29119
       },
@@ -855,7 +820,7 @@
       "keyMoments": []
     },
     {
-      "id": 538118,
+      "id": 331,
       "externalIds": {
         "understat": 29109
       },
@@ -1011,7 +976,7 @@
       "keyMoments": []
     },
     {
-      "id": 538111,
+      "id": 327,
       "externalIds": {
         "understat": 29104
       },
@@ -1019,7 +984,7 @@
       "kickoffUtc": "2026-04-19T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 33,
-      "venue": "Manchester City",
+      "venue": "Man City",
       "homeTeam": "Man City",
       "awayTeam": "Arsenal",
       "homeScore": 2,
@@ -1189,7 +1154,7 @@
       "keyMoments": []
     },
     {
-      "id": 538097,
+      "id": 311,
       "externalIds": {
         "understat": 29092
       },
@@ -1380,7 +1345,7 @@
       "keyMoments": []
     },
     {
-      "id": 538077,
+      "id": 291,
       "externalIds": {
         "understat": 29068
       },
@@ -1606,7 +1571,7 @@
       "keyMoments": []
     },
     {
-      "id": 538067,
+      "id": 283,
       "externalIds": {
         "understat": 29060
       },
@@ -1614,7 +1579,7 @@
       "kickoffUtc": "2026-03-04T19:30:00Z",
       "competition": "Premier League",
       "matchweek": 29,
-      "venue": "Brighton & Hove Albion",
+      "venue": "Brighton",
       "homeTeam": "Brighton",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -1732,7 +1697,7 @@
       "keyMoments": []
     },
     {
-      "id": 538057,
+      "id": 271,
       "externalIds": {
         "understat": 29049
       },
@@ -1880,7 +1845,7 @@
       "keyMoments": []
     },
     {
-      "id": 538053,
+      "id": 269,
       "externalIds": {
         "understat": 29046
       },
@@ -1888,7 +1853,7 @@
       "kickoffUtc": "2026-02-22T16:30:00Z",
       "competition": "Premier League",
       "matchweek": 27,
-      "venue": "Tottenham Hotspur",
+      "venue": "Spurs",
       "homeTeam": "Tottenham",
       "awayTeam": "Arsenal",
       "homeScore": 1,
@@ -2054,15 +2019,15 @@
       "keyMoments": []
     },
     {
-      "id": 538094,
+      "id": 310,
       "externalIds": {
         "understat": 29087
       },
       "date": "2026-02-18",
       "kickoffUtc": "2026-02-18T20:00:00Z",
       "competition": "Premier League",
-      "matchweek": 31,
-      "venue": "Wolverhampton Wanderers",
+      "matchweek": 26,
+      "venue": "Wolves",
       "homeTeam": "Wolves",
       "awayTeam": "Arsenal",
       "homeScore": 2,
@@ -2171,7 +2136,7 @@
       "keyMoments": []
     },
     {
-      "id": 538038,
+      "id": 252,
       "externalIds": {
         "understat": 29029
       },
@@ -2199,7 +2164,7 @@
       "keyMoments": []
     },
     {
-      "id": 538027,
+      "id": 241,
       "externalIds": {
         "understat": 29019
       },
@@ -2227,7 +2192,7 @@
       "keyMoments": []
     },
     {
-      "id": 538020,
+      "id": 234,
       "externalIds": {
         "understat": 29015
       },
@@ -2235,7 +2200,7 @@
       "kickoffUtc": "2026-01-31T15:00:00Z",
       "competition": "Premier League",
       "matchweek": 24,
-      "venue": "Leeds United",
+      "venue": "Leeds",
       "homeTeam": "Leeds",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -2273,7 +2238,7 @@
       "keyMoments": []
     },
     {
-      "id": 538007,
+      "id": 221,
       "externalIds": {
         "understat": 28999
       },
@@ -2319,7 +2284,7 @@
       "keyMoments": []
     },
     {
-      "id": 538002,
+      "id": 217,
       "externalIds": {
         "understat": 28994
       },
@@ -2327,7 +2292,7 @@
       "kickoffUtc": "2026-01-17T17:30:00Z",
       "competition": "Premier League",
       "matchweek": 22,
-      "venue": "Nottingham Forest",
+      "venue": "Nott'm Forest",
       "homeTeam": "Nott'm Forest",
       "awayTeam": "Arsenal",
       "homeScore": 0,
@@ -2347,7 +2312,7 @@
       "keyMoments": []
     },
     {
-      "id": 537987,
+      "id": 201,
       "externalIds": {
         "understat": 28980
       },
@@ -2375,7 +2340,7 @@
       "keyMoments": []
     },
     {
-      "id": 537975,
+      "id": 192,
       "externalIds": {
         "understat": 28971
       },
@@ -2403,7 +2368,7 @@
       "keyMoments": []
     },
     {
-      "id": 537967,
+      "id": 181,
       "externalIds": {
         "understat": 28958
       },
@@ -2431,7 +2396,7 @@
       "keyMoments": []
     },
     {
-      "id": 537957,
+      "id": 171,
       "externalIds": {
         "understat": 28948
       },
@@ -2459,7 +2424,7 @@
       "keyMoments": []
     },
     {
-      "id": 537948,
+      "id": 164,
       "externalIds": {
         "understat": 28941
       },
@@ -2487,7 +2452,7 @@
       "keyMoments": []
     },
     {
-      "id": 537937,
+      "id": 151,
       "externalIds": {
         "understat": 28928
       },
@@ -2533,7 +2498,7 @@
       "keyMoments": []
     },
     {
-      "id": 537926,
+      "id": 141,
       "externalIds": {
         "understat": 28919
       },
@@ -2561,7 +2526,7 @@
       "keyMoments": []
     },
     {
-      "id": 537917,
+      "id": 131,
       "externalIds": {
         "understat": 28909
       },
@@ -2589,7 +2554,7 @@
       "keyMoments": []
     },
     {
-      "id": 537909,
+      "id": 123,
       "externalIds": {
         "understat": 28900
       },
@@ -2635,7 +2600,7 @@
       "keyMoments": []
     },
     {
-      "id": 537897,
+      "id": 111,
       "externalIds": {
         "understat": 28889
       },
@@ -2663,7 +2628,7 @@
       "keyMoments": []
     },
     {
-      "id": 537885,
+      "id": 108,
       "externalIds": {
         "understat": 28885
       },
@@ -2709,7 +2674,7 @@
       "keyMoments": []
     },
     {
-      "id": 537878,
+      "id": 92,
       "externalIds": {
         "understat": 28869
       },
@@ -2737,7 +2702,7 @@
       "keyMoments": []
     },
     {
-      "id": 537867,
+      "id": 81,
       "externalIds": {
         "understat": 28859
       },
@@ -2783,7 +2748,7 @@
       "keyMoments": []
     },
     {
-      "id": 537859,
+      "id": 74,
       "externalIds": {
         "understat": 28851
       },
@@ -2811,7 +2776,7 @@
       "keyMoments": []
     },
     {
-      "id": 537847,
+      "id": 61,
       "externalIds": {
         "understat": 28839
       },
@@ -2857,7 +2822,7 @@
       "keyMoments": []
     },
     {
-      "id": 537842,
+      "id": 58,
       "externalIds": {
         "understat": 28836
       },
@@ -2865,7 +2830,7 @@
       "kickoffUtc": "2025-09-28T15:30:00Z",
       "competition": "Premier League",
       "matchweek": 6,
-      "venue": "Newcastle United",
+      "venue": "Newcastle",
       "homeTeam": "Newcastle",
       "awayTeam": "Arsenal",
       "homeScore": 1,
@@ -2885,7 +2850,7 @@
       "keyMoments": []
     },
     {
-      "id": 537828,
+      "id": 41,
       "externalIds": {
         "understat": 28827
       },
@@ -2931,7 +2896,7 @@
       "keyMoments": []
     },
     {
-      "id": 537817,
+      "id": 31,
       "externalIds": {
         "understat": 28808
       },
