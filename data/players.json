@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-06-10T15:34:32.003Z",
+  "generatedAt": "2026-06-11T03:57:03.351Z",
   "season": "2025/26",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-06-10T15:33:04.579Z",
+        "fetchedAt": "2026-06-11T03:55:35.954Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-06-10T15:33:04.580Z",
+        "fetchedAt": "2026-06-11T03:55:35.954Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-06-10T15:33:04.580Z",
+        "fetchedAt": "2026-06-11T03:55:35.954Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-06-10T15:33:04.580Z",
+        "fetchedAt": "2026-06-11T03:55:35.954Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-06-10T15:33:04.638Z",
+        "fetchedAt": "2026-06-11T03:55:35.991Z",
         "ok": true
       }
     ]
@@ -602,7 +602,7 @@
       "position": "FWD",
       "number": null,
       "nationality": "Germany",
-      "age": 26,
+      "age": 27,
       "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p219847.png",
       "club": "Arsenal",
       "stats": {
