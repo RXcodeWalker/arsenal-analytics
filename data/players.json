@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-07-23T13:55:51.821Z",
+  "generatedAt": "2026-07-24T02:35:28.296Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-07-23T13:55:38.895Z",
+        "fetchedAt": "2026-07-24T02:35:15.091Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-07-23T13:55:38.895Z",
+        "fetchedAt": "2026-07-24T02:35:15.091Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-07-23T13:55:38.895Z",
+        "fetchedAt": "2026-07-24T02:35:15.092Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-07-23T13:55:38.896Z",
+        "fetchedAt": "2026-07-24T02:35:15.092Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-07-23T13:55:38.952Z",
+        "fetchedAt": "2026-07-24T02:35:15.149Z",
         "ok": true
       }
     ]
@@ -833,6 +833,19 @@
         "physical": 100,
         "vision": 100
       },
+      "form": []
+    },
+    {
+      "id": 144434,
+      "name": "Christos Tzolis",
+      "position": "FWD",
+      "number": null,
+      "nationality": "Greece",
+      "age": 24,
+      "image": null,
+      "club": "Arsenal",
+      "stats": {},
+      "radar": {},
       "form": []
     },
     {
