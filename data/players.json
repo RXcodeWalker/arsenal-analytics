@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-07-24T02:35:28.296Z",
+  "generatedAt": "2026-07-24T13:43:21.688Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-07-24T02:35:15.091Z",
+        "fetchedAt": "2026-07-24T13:43:08.777Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-07-24T02:35:15.091Z",
+        "fetchedAt": "2026-07-24T13:43:08.778Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-07-24T02:35:15.092Z",
+        "fetchedAt": "2026-07-24T13:43:08.778Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-07-24T02:35:15.092Z",
+        "fetchedAt": "2026-07-24T13:43:08.778Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-07-24T02:35:15.149Z",
+        "fetchedAt": "2026-07-24T13:43:08.836Z",
         "ok": true
       }
     ]
@@ -842,10 +842,39 @@
       "number": null,
       "nationality": "Greece",
       "age": 24,
-      "image": null,
+      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p439509.png",
       "club": "Arsenal",
-      "stats": {},
-      "radar": {},
+      "stats": {
+        "appearances": 0,
+        "goals": 0,
+        "assists": 0,
+        "xG": 0,
+        "xA": 0,
+        "shots": 0,
+        "shotsOnTarget": 0,
+        "keyPasses": 0,
+        "progressivePasses": 0,
+        "progressiveCarries": 0,
+        "dribbles": 0,
+        "dribbleSuccess": 0,
+        "aerialWon": 0,
+        "aerialLost": 0,
+        "tackles": 0,
+        "interceptions": 0,
+        "minutesPlayed": 0,
+        "touches": 0,
+        "passAccuracy": 0,
+        "pressures": 0,
+        "pressureSuccess": 0
+      },
+      "radar": {
+        "shooting": 0,
+        "passing": 0,
+        "dribbling": 0,
+        "defending": 40,
+        "physical": 0,
+        "vision": 0
+      },
       "form": []
     },
     {
