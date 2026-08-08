@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-07T13:00:26.621Z",
+  "generatedAt": "2026-08-08T01:27:37.424Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-08-07T13:00:13.546Z",
+        "fetchedAt": "2026-08-08T01:27:24.446Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-08-07T13:00:13.546Z",
+        "fetchedAt": "2026-08-08T01:27:24.446Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-08-07T13:00:13.546Z",
+        "fetchedAt": "2026-08-08T01:27:24.447Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-08-07T13:00:13.547Z",
+        "fetchedAt": "2026-08-08T01:27:24.447Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-08-07T13:00:13.603Z",
+        "fetchedAt": "2026-08-08T01:27:24.504Z",
         "ok": true
       }
     ]
@@ -538,39 +538,10 @@
       "number": null,
       "nationality": "Denmark",
       "age": 32,
-      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p128295.png",
+      "image": null,
       "club": "Arsenal",
-      "stats": {
-        "appearances": 1,
-        "goals": 0,
-        "assists": 0,
-        "xG": 0.08,
-        "xA": 0.04,
-        "shots": 0,
-        "shotsOnTarget": 0,
-        "keyPasses": 6,
-        "progressivePasses": 0,
-        "progressiveCarries": 0,
-        "dribbles": 0,
-        "dribbleSuccess": 0,
-        "aerialWon": 0,
-        "aerialLost": 0,
-        "tackles": 0,
-        "interceptions": 0,
-        "minutesPlayed": 101,
-        "touches": 0,
-        "passAccuracy": 0,
-        "pressures": 0,
-        "pressureSuccess": 0
-      },
-      "radar": {
-        "shooting": 0,
-        "passing": 5,
-        "dribbling": 20,
-        "defending": 40,
-        "physical": 7,
-        "vision": 10
-      },
+      "stats": {},
+      "radar": {},
       "form": []
     },
     {
