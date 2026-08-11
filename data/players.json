@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-10T13:04:31.798Z",
+  "generatedAt": "2026-08-11T01:39:39.202Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-08-10T13:04:18.787Z",
+        "fetchedAt": "2026-08-11T01:39:26.058Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-08-10T13:04:18.787Z",
+        "fetchedAt": "2026-08-11T01:39:26.058Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-08-10T13:04:18.787Z",
+        "fetchedAt": "2026-08-11T01:39:26.059Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-08-10T13:04:18.787Z",
+        "fetchedAt": "2026-08-11T01:39:26.059Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-08-10T13:04:18.832Z",
+        "fetchedAt": "2026-08-11T01:39:26.124Z",
         "ok": true
       }
     ]
@@ -1320,6 +1320,48 @@
         "defending": 40,
         "physical": 100,
         "vision": 65
+      },
+      "form": []
+    },
+    {
+      "id": 452,
+      "name": "Bruno Guimarães Rodriguez Moura",
+      "position": "MID",
+      "number": null,
+      "nationality": "N/A",
+      "age": null,
+      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p208706.png",
+      "club": "Arsenal",
+      "stats": {
+        "appearances": 27,
+        "goals": 9,
+        "assists": 7,
+        "xG": 5.59,
+        "xA": 4.96,
+        "shots": 0,
+        "shotsOnTarget": 0,
+        "keyPasses": 757,
+        "progressivePasses": 0,
+        "progressiveCarries": 0,
+        "dribbles": 0,
+        "dribbleSuccess": 0,
+        "aerialWon": 0,
+        "aerialLost": 0,
+        "tackles": 0,
+        "interceptions": 0,
+        "minutesPlayed": 2456,
+        "touches": 0,
+        "passAccuracy": 0,
+        "pressures": 0,
+        "pressureSuccess": 0
+      },
+      "radar": {
+        "shooting": 76,
+        "passing": 100,
+        "dribbling": 100,
+        "defending": 40,
+        "physical": 100,
+        "vision": 100
       },
       "form": []
     }
