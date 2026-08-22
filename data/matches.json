@@ -1,54 +1,83 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-21T12:43:14.863Z",
+  "generatedAt": "2026-08-22T01:09:10.772Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-08-21T12:43:01.986Z",
+        "fetchedAt": "2026-08-22T01:08:51.467Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-08-21T12:43:01.986Z",
+        "fetchedAt": "2026-08-22T01:08:51.468Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-08-21T12:43:01.986Z",
+        "fetchedAt": "2026-08-22T01:08:51.468Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-08-21T12:43:01.986Z",
+        "fetchedAt": "2026-08-22T01:08:51.468Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-08-21T12:43:02.026Z",
+        "fetchedAt": "2026-08-22T01:08:51.514Z",
         "ok": true
       }
     ]
   },
   "seasonStats": {
-    "played": 0,
-    "won": 0,
+    "played": 1,
+    "won": 1,
     "drawn": 0,
     "lost": 0,
-    "goalsFor": 0,
+    "goalsFor": 3,
     "goalsAgainst": 0,
-    "points": 0,
+    "points": 3,
     "position": 1,
-    "cleanSheets": 0,
-    "xGFor": 67.6,
+    "cleanSheets": 1,
+    "xGFor": 1.88,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
-    "form": [],
-    "monthlyXG": []
+    "form": [
+      "W"
+    ],
+    "monthlyXG": [
+      {
+        "month": "Aug",
+        "xGFor": 0,
+        "xGAgainst": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 0
+      }
+    ]
   },
-  "matches": []
+  "matches": [
+    {
+      "id": 560542,
+      "date": "2026-08-21",
+      "kickoffUtc": "2026-08-21T19:00:00Z",
+      "competition": "Premier League",
+      "matchweek": 1,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Coventry City",
+      "homeScore": 3,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    }
+  ]
 }
