@@ -1,53 +1,54 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-31T18:48:31.673Z",
+  "generatedAt": "2026-09-01T03:43:57.024Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-08-31T18:48:12.682Z",
+        "fetchedAt": "2026-09-01T03:43:31.763Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-08-31T18:48:12.682Z",
+        "fetchedAt": "2026-09-01T03:43:31.764Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-08-31T18:48:12.683Z",
+        "fetchedAt": "2026-09-01T03:43:31.764Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-08-31T18:48:12.683Z",
+        "fetchedAt": "2026-09-01T03:43:31.764Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-08-31T18:48:12.741Z",
+        "fetchedAt": "2026-09-01T03:43:31.823Z",
         "ok": true
       }
     ]
   },
   "seasonStats": {
-    "played": 1,
-    "won": 1,
+    "played": 2,
+    "won": 2,
     "drawn": 0,
     "lost": 0,
-    "goalsFor": 3,
+    "goalsFor": 4,
     "goalsAgainst": 0,
-    "points": 3,
-    "position": 9,
-    "cleanSheets": 1,
-    "xGFor": 1.88,
+    "points": 6,
+    "position": 2,
+    "cleanSheets": 2,
+    "xGFor": 2.92,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
     "form": [
+      "W",
       "W"
     ],
     "monthlyXG": [
@@ -55,12 +56,30 @@
         "month": "Aug",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 3,
+        "goalsFor": 4,
         "goalsAgainst": 0
       }
     ]
   },
   "matches": [
+    {
+      "id": 560557,
+      "date": "2026-08-31",
+      "kickoffUtc": "2026-08-31T19:00:00Z",
+      "competition": "Premier League",
+      "matchweek": 2,
+      "venue": "Aston Villa",
+      "homeTeam": "Aston Villa",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 1,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560542,
       "date": "2026-08-21",
