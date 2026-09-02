@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-02T03:02:53.984Z",
+  "generatedAt": "2026-09-02T16:00:45.620Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-02T03:02:28.765Z",
+        "fetchedAt": "2026-09-02T16:00:20.106Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-02T03:02:28.766Z",
+        "fetchedAt": "2026-09-02T16:00:20.107Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-02T03:02:28.766Z",
+        "fetchedAt": "2026-09-02T16:00:20.107Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-02T03:02:28.766Z",
+        "fetchedAt": "2026-09-02T16:00:20.107Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-02T03:02:28.825Z",
+        "fetchedAt": "2026-09-02T16:00:20.146Z",
         "ok": true
       }
     ]
@@ -99,19 +99,6 @@
         "physical": 0,
         "vision": 0
       },
-      "form": []
-    },
-    {
-      "id": 171455,
-      "name": "Tommy Setford",
-      "position": "GK",
-      "number": null,
-      "nationality": "England",
-      "age": 20,
-      "image": null,
-      "club": "Arsenal",
-      "stats": {},
-      "radar": {},
       "form": []
     },
     {
@@ -558,32 +545,6 @@
       "form": []
     },
     {
-      "id": 24102,
-      "name": "Christian Nørgaard",
-      "position": "MID",
-      "number": null,
-      "nationality": "Denmark",
-      "age": 32,
-      "image": null,
-      "club": "Arsenal",
-      "stats": {},
-      "radar": {},
-      "form": []
-    },
-    {
-      "id": 112948,
-      "name": "Fabio Vieira",
-      "position": "MID",
-      "number": null,
-      "nationality": "Portugal",
-      "age": 26,
-      "image": null,
-      "club": "Arsenal",
-      "stats": {},
-      "radar": {},
-      "form": []
-    },
-    {
       "id": 115035,
       "name": "Martín Zubimendi",
       "position": "MID",
@@ -594,48 +555,6 @@
       "club": "Arsenal",
       "stats": {},
       "radar": {},
-      "form": []
-    },
-    {
-      "id": 188476,
-      "name": "Ethan Nwaneri",
-      "position": "MID",
-      "number": null,
-      "nationality": "England",
-      "age": 19,
-      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p499175.png",
-      "club": "Arsenal",
-      "stats": {
-        "appearances": 0,
-        "goals": 0,
-        "assists": 0,
-        "xG": 0,
-        "xA": 0,
-        "shots": 0,
-        "shotsOnTarget": 0,
-        "keyPasses": 0,
-        "progressivePasses": 0,
-        "progressiveCarries": 0,
-        "dribbles": 0,
-        "dribbleSuccess": 0,
-        "aerialWon": 0,
-        "aerialLost": 0,
-        "tackles": 0,
-        "interceptions": 0,
-        "minutesPlayed": 0,
-        "touches": 0,
-        "passAccuracy": 0,
-        "pressures": 0,
-        "pressureSuccess": 0
-      },
-      "radar": {
-        "shooting": 0,
-        "passing": 0,
-        "dribbling": 0,
-        "defending": 40,
-        "physical": 0,
-        "vision": 0
-      },
       "form": []
     },
     {
@@ -677,61 +596,6 @@
         "defending": 40,
         "physical": 32,
         "vision": 19
-      },
-      "form": []
-    },
-    {
-      "id": 3236,
-      "name": "Gabriel Jesus",
-      "position": "FWD",
-      "number": null,
-      "nationality": "Brazil",
-      "age": 29,
-      "image": null,
-      "club": "Arsenal",
-      "stats": {},
-      "radar": {},
-      "form": []
-    },
-    {
-      "id": 7799,
-      "name": "Reiss Nelson",
-      "position": "FWD",
-      "number": null,
-      "nationality": "England",
-      "age": 26,
-      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p200641.png",
-      "club": "Arsenal",
-      "stats": {
-        "appearances": 0,
-        "goals": 0,
-        "assists": 0,
-        "xG": 0,
-        "xA": 0,
-        "shots": 0,
-        "shotsOnTarget": 0,
-        "keyPasses": 0,
-        "progressivePasses": 0,
-        "progressiveCarries": 0,
-        "dribbles": 0,
-        "dribbleSuccess": 0,
-        "aerialWon": 0,
-        "aerialLost": 0,
-        "tackles": 0,
-        "interceptions": 0,
-        "minutesPlayed": 0,
-        "touches": 0,
-        "passAccuracy": 0,
-        "pressures": 0,
-        "pressureSuccess": 0
-      },
-      "radar": {
-        "shooting": 0,
-        "passing": 0,
-        "dribbling": 0,
-        "defending": 40,
-        "physical": 0,
-        "vision": 0
       },
       "form": []
     },
@@ -1253,6 +1117,48 @@
       "form": []
     },
     {
+      "id": 22,
+      "name": "Ethan Nwaneri",
+      "position": "MID",
+      "number": null,
+      "nationality": "N/A",
+      "age": null,
+      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p499175.png",
+      "club": "Arsenal",
+      "stats": {
+        "appearances": 0,
+        "goals": 0,
+        "assists": 0,
+        "xG": 0,
+        "xA": 0,
+        "shots": 0,
+        "shotsOnTarget": 0,
+        "keyPasses": 0,
+        "progressivePasses": 0,
+        "progressiveCarries": 0,
+        "dribbles": 0,
+        "dribbleSuccess": 0,
+        "aerialWon": 0,
+        "aerialLost": 0,
+        "tackles": 0,
+        "interceptions": 0,
+        "minutesPlayed": 0,
+        "touches": 0,
+        "passAccuracy": 0,
+        "pressures": 0,
+        "pressureSuccess": 0
+      },
+      "radar": {
+        "shooting": 0,
+        "passing": 0,
+        "dribbling": 0,
+        "defending": 40,
+        "physical": 0,
+        "vision": 0
+      },
+      "form": []
+    },
+    {
       "id": 23,
       "name": "Fábio Ferreira Vieira",
       "position": "MID",
@@ -1260,6 +1166,48 @@
       "nationality": "N/A",
       "age": null,
       "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p438098.png",
+      "club": "Arsenal",
+      "stats": {
+        "appearances": 0,
+        "goals": 0,
+        "assists": 0,
+        "xG": 0,
+        "xA": 0,
+        "shots": 0,
+        "shotsOnTarget": 0,
+        "keyPasses": 0,
+        "progressivePasses": 0,
+        "progressiveCarries": 0,
+        "dribbles": 0,
+        "dribbleSuccess": 0,
+        "aerialWon": 0,
+        "aerialLost": 0,
+        "tackles": 0,
+        "interceptions": 0,
+        "minutesPlayed": 0,
+        "touches": 0,
+        "passAccuracy": 0,
+        "pressures": 0,
+        "pressureSuccess": 0
+      },
+      "radar": {
+        "shooting": 0,
+        "passing": 0,
+        "dribbling": 0,
+        "defending": 40,
+        "physical": 0,
+        "vision": 0
+      },
+      "form": []
+    },
+    {
+      "id": 24,
+      "name": "Reiss Nelson",
+      "position": "MID",
+      "number": null,
+      "nationality": "N/A",
+      "age": null,
+      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p200641.png",
       "club": "Arsenal",
       "stats": {
         "appearances": 0,
