@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-04T03:04:35.733Z",
+  "generatedAt": "2026-09-04T15:48:42.898Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-04T03:04:10.297Z",
+        "fetchedAt": "2026-09-04T15:48:17.723Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-04T03:04:10.297Z",
+        "fetchedAt": "2026-09-04T15:48:17.723Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-04T03:04:10.298Z",
+        "fetchedAt": "2026-09-04T15:48:17.724Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-04T03:04:10.298Z",
+        "fetchedAt": "2026-09-04T15:48:17.724Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-04T03:04:10.355Z",
+        "fetchedAt": "2026-09-04T15:48:17.781Z",
         "ok": true
       }
     ]
@@ -639,19 +639,6 @@
         "physical": 0,
         "vision": 0
       },
-      "form": []
-    },
-    {
-      "id": 61450,
-      "name": "Martinelli",
-      "position": "FWD",
-      "number": null,
-      "nationality": "Brazil",
-      "age": 25,
-      "image": null,
-      "club": "Arsenal",
-      "stats": {},
-      "radar": {},
       "form": []
     },
     {
