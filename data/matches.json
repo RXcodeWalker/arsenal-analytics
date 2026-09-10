@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-09T15:58:45.071Z",
+  "generatedAt": "2026-09-10T03:15:25.694Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-09T15:58:13.578Z",
+        "fetchedAt": "2026-09-10T03:14:36.739Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-09T15:58:13.579Z",
+        "fetchedAt": "2026-09-10T03:14:36.740Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-09T15:58:13.579Z",
+        "fetchedAt": "2026-09-10T03:14:36.740Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-09T15:58:13.579Z",
+        "fetchedAt": "2026-09-10T03:14:36.741Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-09T15:58:13.619Z",
+        "fetchedAt": "2026-09-10T03:14:36.801Z",
         "ok": true
       }
     ]
@@ -41,13 +41,14 @@
     "goalsAgainst": 1,
     "points": 9,
     "position": 2,
-    "cleanSheets": 2,
+    "cleanSheets": 3,
     "xGFor": 4.98,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
     "form": [
+      "W",
       "W",
       "W",
       "W"
@@ -64,12 +65,30 @@
         "month": "Sep",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 2,
+        "goalsFor": 3,
         "goalsAgainst": 1
       }
     ]
   },
   "matches": [
+    {
+      "id": 575333,
+      "date": "2026-09-09",
+      "kickoffUtc": "2026-09-09T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 1,
+      "venue": "SSC Napoli",
+      "homeTeam": "SSC Napoli",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 1,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560570,
       "date": "2026-09-06",
