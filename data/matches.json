@@ -1,53 +1,54 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-12T15:02:55.709Z",
+  "generatedAt": "2026-09-13T03:21:17.502Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-12T15:02:17.978Z",
+        "fetchedAt": "2026-09-13T03:20:33.685Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-12T15:02:17.978Z",
+        "fetchedAt": "2026-09-13T03:20:33.686Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-12T15:02:17.978Z",
+        "fetchedAt": "2026-09-13T03:20:33.686Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-12T15:02:17.979Z",
+        "fetchedAt": "2026-09-13T03:20:33.687Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-12T15:02:18.036Z",
+        "fetchedAt": "2026-09-13T03:20:33.747Z",
         "ok": true
       }
     ]
   },
   "seasonStats": {
-    "played": 3,
-    "won": 3,
+    "played": 4,
+    "won": 4,
     "drawn": 0,
     "lost": 0,
-    "goalsFor": 6,
+    "goalsFor": 8,
     "goalsAgainst": 1,
-    "points": 9,
-    "position": 3,
-    "cleanSheets": 3,
-    "xGFor": 4.98,
+    "points": 12,
+    "position": 1,
+    "cleanSheets": 4,
+    "xGFor": 6.87,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
     "fieldTilt": 0,
     "form": [
+      "W",
       "W",
       "W",
       "W",
@@ -65,12 +66,30 @@
         "month": "Sep",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 3,
+        "goalsFor": 5,
         "goalsAgainst": 1
       }
     ]
   },
   "matches": [
+    {
+      "id": 560577,
+      "date": "2026-09-12",
+      "kickoffUtc": "2026-09-12T19:00:00Z",
+      "competition": "Premier League",
+      "matchweek": 4,
+      "venue": "Sunderland",
+      "homeTeam": "Sunderland",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 2,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 575333,
       "date": "2026-09-09",
