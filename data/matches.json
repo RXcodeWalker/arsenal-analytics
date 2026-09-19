@@ -1,48 +1,48 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-19T03:17:39.616Z",
+  "generatedAt": "2026-09-19T15:25:43.311Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-19T03:16:55.758Z",
+        "fetchedAt": "2026-09-19T15:24:59.427Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-19T03:16:55.759Z",
+        "fetchedAt": "2026-09-19T15:24:59.427Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-19T03:16:55.759Z",
+        "fetchedAt": "2026-09-19T15:24:59.428Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-19T03:16:55.759Z",
+        "fetchedAt": "2026-09-19T15:24:59.428Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-19T03:16:55.817Z",
+        "fetchedAt": "2026-09-19T15:24:59.473Z",
         "ok": true
       }
     ]
   },
   "seasonStats": {
-    "played": 4,
+    "played": 5,
     "won": 4,
     "drawn": 0,
-    "lost": 0,
+    "lost": 1,
     "goalsFor": 8,
-    "goalsAgainst": 1,
+    "goalsAgainst": 4,
     "points": 12,
-    "position": 1,
+    "position": 2,
     "cleanSheets": 4,
-    "xGFor": 6.87,
+    "xGFor": 7.44,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
