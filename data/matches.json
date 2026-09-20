@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-19T15:25:43.311Z",
+  "generatedAt": "2026-09-20T03:35:51.052Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-19T15:24:59.427Z",
+        "fetchedAt": "2026-09-20T03:35:00.857Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-19T15:24:59.427Z",
+        "fetchedAt": "2026-09-20T03:35:00.858Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-19T15:24:59.428Z",
+        "fetchedAt": "2026-09-20T03:35:00.858Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-19T15:24:59.428Z",
+        "fetchedAt": "2026-09-20T03:35:00.858Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-19T15:24:59.473Z",
+        "fetchedAt": "2026-09-20T03:35:00.916Z",
         "ok": true
       }
     ]
@@ -42,7 +42,7 @@
     "points": 12,
     "position": 2,
     "cleanSheets": 4,
-    "xGFor": 7.44,
+    "xGFor": 8.51,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
@@ -52,7 +52,8 @@
       "W",
       "W",
       "W",
-      "W"
+      "W",
+      "L"
     ],
     "monthlyXG": [
       {
@@ -67,11 +68,29 @@
         "xGFor": 0,
         "xGAgainst": 0,
         "goalsFor": 5,
-        "goalsAgainst": 1
+        "goalsAgainst": 4
       }
     ]
   },
   "matches": [
+    {
+      "id": 560586,
+      "date": "2026-09-19",
+      "kickoffUtc": "2026-09-19T14:00:00Z",
+      "competition": "Premier League",
+      "matchweek": 5,
+      "venue": "Brighton & Hove Albion",
+      "homeTeam": "Brighton",
+      "awayTeam": "Arsenal",
+      "homeScore": 3,
+      "awayScore": 0,
+      "resultFromArsenalView": "L",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560577,
       "date": "2026-09-12",
