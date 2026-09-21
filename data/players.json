@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-21T03:29:53.259Z",
+  "generatedAt": "2026-09-21T17:54:44.837Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-21T03:29:03.194Z",
+        "fetchedAt": "2026-09-21T17:53:54.672Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-21T03:29:03.194Z",
+        "fetchedAt": "2026-09-21T17:53:54.672Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-21T03:29:03.194Z",
+        "fetchedAt": "2026-09-21T17:53:54.672Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-21T03:29:03.194Z",
+        "fetchedAt": "2026-09-21T17:53:54.673Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-21T03:29:03.230Z",
+        "fetchedAt": "2026-09-21T17:53:54.733Z",
         "ok": true
       }
     ]
@@ -199,7 +199,7 @@
         "xA": 0.03,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 2,
+        "keyPasses": 4,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -216,11 +216,11 @@
       },
       "radar": {
         "shooting": 0,
-        "passing": 2,
-        "dribbling": 5,
+        "passing": 4,
+        "dribbling": 9,
         "defending": 40,
         "physical": 0,
-        "vision": 3
+        "vision": 5
       },
       "form": []
     },
@@ -283,7 +283,7 @@
         "xA": 0.62,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 29,
+        "keyPasses": 53,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -300,11 +300,11 @@
       },
       "radar": {
         "shooting": 3,
-        "passing": 24,
-        "dribbling": 50,
+        "passing": 44,
+        "dribbling": 60,
         "defending": 40,
-        "physical": 31,
-        "vision": 30
+        "physical": 44,
+        "vision": 41
       },
       "form": []
     },
@@ -422,7 +422,7 @@
         "xA": 0.09,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 4,
+        "keyPasses": 6,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -439,11 +439,11 @@
       },
       "radar": {
         "shooting": 0,
-        "passing": 3,
-        "dribbling": 2,
+        "passing": 5,
+        "dribbling": 3,
         "defending": 40,
-        "physical": 3,
-        "vision": 2
+        "physical": 6,
+        "vision": 3
       },
       "form": []
     },
@@ -464,7 +464,7 @@
         "xA": 1.32,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 161,
+        "keyPasses": 167,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -484,8 +484,8 @@
         "passing": 100,
         "dribbling": 100,
         "defending": 40,
-        "physical": 45,
-        "vision": 94
+        "physical": 49,
+        "vision": 96
       },
       "form": []
     },
@@ -519,7 +519,7 @@
         "xA": 0.69,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 90,
+        "keyPasses": 108,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -536,11 +536,11 @@
       },
       "radar": {
         "shooting": 0,
-        "passing": 75,
-        "dribbling": 91,
+        "passing": 90,
+        "dribbling": 100,
         "defending": 40,
         "physical": 3,
-        "vision": 67
+        "vision": 76
       },
       "form": []
     },
@@ -574,7 +574,7 @@
         "xA": 0.37,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 66,
+        "keyPasses": 71,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -591,11 +591,11 @@
       },
       "radar": {
         "shooting": 19,
-        "passing": 55,
-        "dribbling": 70,
+        "passing": 59,
+        "dribbling": 75,
         "defending": 40,
-        "physical": 91,
-        "vision": 50
+        "physical": 100,
+        "vision": 54
       },
       "form": []
     },
@@ -616,7 +616,7 @@
         "xA": 0.23,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 0,
+        "keyPasses": 15,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -633,11 +633,11 @@
       },
       "radar": {
         "shooting": 0,
-        "passing": 0,
+        "passing": 12,
         "dribbling": 0,
         "defending": 40,
         "physical": 0,
-        "vision": 0
+        "vision": 5
       },
       "form": []
     },
@@ -658,7 +658,7 @@
         "xA": 0.98,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 79,
+        "keyPasses": 126,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -675,11 +675,11 @@
       },
       "radar": {
         "shooting": 31,
-        "passing": 66,
+        "passing": 100,
         "dribbling": 100,
         "defending": 40,
         "physical": 100,
-        "vision": 73
+        "vision": 94
       },
       "form": []
     },
@@ -700,7 +700,7 @@
         "xA": 0.55,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 109,
+        "keyPasses": 115,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -717,11 +717,11 @@
       },
       "radar": {
         "shooting": 1,
-        "passing": 91,
-        "dribbling": 43,
+        "passing": 96,
+        "dribbling": 47,
         "defending": 40,
-        "physical": 27,
-        "vision": 53
+        "physical": 31,
+        "vision": 57
       },
       "form": []
     },
@@ -784,7 +784,7 @@
         "xA": 0.08,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 0,
+        "keyPasses": 15,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -801,11 +801,11 @@
       },
       "radar": {
         "shooting": 0,
-        "passing": 0,
-        "dribbling": 0,
+        "passing": 12,
+        "dribbling": 2,
         "defending": 40,
         "physical": 0,
-        "vision": 0
+        "vision": 6
       },
       "form": []
     },
@@ -844,10 +844,10 @@
       "radar": {
         "shooting": 0,
         "passing": 0,
-        "dribbling": 70,
+        "dribbling": 87,
         "defending": 40,
         "physical": 0,
-        "vision": 28
+        "vision": 35
       },
       "form": []
     },
@@ -910,7 +910,7 @@
         "xA": 0.2,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 9,
+        "keyPasses": 22,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -927,11 +927,11 @@
       },
       "radar": {
         "shooting": 2,
-        "passing": 7,
-        "dribbling": 58,
+        "passing": 18,
+        "dribbling": 79,
         "defending": 40,
         "physical": 56,
-        "vision": 26
+        "vision": 39
       },
       "form": []
     },
@@ -994,7 +994,7 @@
         "xA": 0.15,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 3,
+        "keyPasses": 4,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -1011,11 +1011,11 @@
       },
       "radar": {
         "shooting": 1,
-        "passing": 3,
-        "dribbling": 6,
+        "passing": 4,
+        "dribbling": 8,
         "defending": 40,
-        "physical": 9,
-        "vision": 3
+        "physical": 11,
+        "vision": 5
       },
       "form": []
     },
@@ -1078,7 +1078,7 @@
         "xA": 0.04,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 4,
+        "keyPasses": 5,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -1098,7 +1098,7 @@
         "passing": 4,
         "dribbling": 11,
         "defending": 40,
-        "physical": 7,
+        "physical": 19,
         "vision": 6
       },
       "form": []
@@ -1288,7 +1288,7 @@
         "xA": 0.02,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 2,
+        "keyPasses": 14,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -1305,11 +1305,11 @@
       },
       "radar": {
         "shooting": 1,
-        "passing": 1,
-        "dribbling": 29,
+        "passing": 12,
+        "dribbling": 38,
         "defending": 40,
-        "physical": 3,
-        "vision": 12
+        "physical": 9,
+        "vision": 20
       },
       "form": []
     },
@@ -1330,7 +1330,7 @@
         "xA": 0.16,
         "shots": 0,
         "shotsOnTarget": 0,
-        "keyPasses": 5,
+        "keyPasses": 7,
         "progressivePasses": 0,
         "progressiveCarries": 0,
         "dribbles": 0,
@@ -1347,11 +1347,11 @@
       },
       "radar": {
         "shooting": 6,
-        "passing": 4,
-        "dribbling": 31,
+        "passing": 5,
+        "dribbling": 34,
         "defending": 40,
-        "physical": 9,
-        "vision": 14
+        "physical": 13,
+        "vision": 16
       },
       "form": []
     }
