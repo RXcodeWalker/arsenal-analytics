@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-22T03:28:53.239Z",
+  "generatedAt": "2026-09-22T16:21:01.786Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-09-22T03:28:03.164Z",
+        "fetchedAt": "2026-09-22T16:20:11.720Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-09-22T03:28:03.165Z",
+        "fetchedAt": "2026-09-22T16:20:11.720Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-09-22T03:28:03.165Z",
+        "fetchedAt": "2026-09-22T16:20:11.721Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-09-22T03:28:03.165Z",
+        "fetchedAt": "2026-09-22T16:20:11.721Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-09-22T03:28:03.224Z",
+        "fetchedAt": "2026-09-22T16:20:11.778Z",
         "ok": true
       }
     ]
@@ -351,48 +351,6 @@
       "form": []
     },
     {
-      "id": 244120,
-      "name": "Myles Lewis-Skelly",
-      "position": "DEF",
-      "number": null,
-      "nationality": "England",
-      "age": 19,
-      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p499169.png",
-      "club": "Arsenal",
-      "stats": {
-        "appearances": 4,
-        "goals": 0,
-        "assists": 0,
-        "xG": 0.16,
-        "xA": 0.23,
-        "shots": 0,
-        "shotsOnTarget": 0,
-        "keyPasses": 40,
-        "progressivePasses": 0,
-        "progressiveCarries": 0,
-        "dribbles": 0,
-        "dribbleSuccess": 0,
-        "aerialWon": 0,
-        "aerialLost": 0,
-        "tackles": 0,
-        "interceptions": 0,
-        "minutesPlayed": 271,
-        "touches": 0,
-        "passAccuracy": 0,
-        "pressures": 0,
-        "pressureSuccess": 0
-      },
-      "radar": {
-        "shooting": 1,
-        "passing": 34,
-        "dribbling": 18,
-        "defending": 40,
-        "physical": 11,
-        "vision": 21
-      },
-      "form": []
-    },
-    {
       "id": 1684,
       "name": "Bruno Guimarães",
       "position": "MID",
@@ -555,6 +513,48 @@
       "club": "Arsenal",
       "stats": {},
       "radar": {},
+      "form": []
+    },
+    {
+      "id": 244120,
+      "name": "Myles Lewis-Skelly",
+      "position": "MID",
+      "number": null,
+      "nationality": "England",
+      "age": 19,
+      "image": "https://resources.premierleague.com/premierleague/photos/players/110x140/p499169.png",
+      "club": "Arsenal",
+      "stats": {
+        "appearances": 4,
+        "goals": 0,
+        "assists": 0,
+        "xG": 0.16,
+        "xA": 0.23,
+        "shots": 0,
+        "shotsOnTarget": 0,
+        "keyPasses": 40,
+        "progressivePasses": 0,
+        "progressiveCarries": 0,
+        "dribbles": 0,
+        "dribbleSuccess": 0,
+        "aerialWon": 0,
+        "aerialLost": 0,
+        "tackles": 0,
+        "interceptions": 0,
+        "minutesPlayed": 271,
+        "touches": 0,
+        "passAccuracy": 0,
+        "pressures": 0,
+        "pressureSuccess": 0
+      },
+      "radar": {
+        "shooting": 1,
+        "passing": 34,
+        "dribbling": 18,
+        "defending": 40,
+        "physical": 11,
+        "vision": 21
+      },
       "form": []
     },
     {
