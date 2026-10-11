@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-10-10T17:00:51.268Z",
+  "generatedAt": "2026-10-11T04:12:45.616Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-10-10T16:59:54.845Z",
+        "fetchedAt": "2026-10-11T04:11:49.353Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-10-10T16:59:54.846Z",
+        "fetchedAt": "2026-10-11T04:11:49.353Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-10-10T16:59:54.846Z",
+        "fetchedAt": "2026-10-11T04:11:49.353Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-10-10T16:59:54.847Z",
+        "fetchedAt": "2026-10-11T04:11:49.353Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-10-10T16:59:54.906Z",
+        "fetchedAt": "2026-10-11T04:11:49.387Z",
         "ok": true
       }
     ]
@@ -279,7 +279,7 @@
         "appearances": 6,
         "goals": 1,
         "assists": 2,
-        "xG": 1.41,
+        "xG": 1.22,
         "xA": 0.68,
         "shots": 0,
         "shotsOnTarget": 0,
@@ -299,7 +299,7 @@
         "pressureSuccess": 0
       },
       "radar": {
-        "shooting": 12,
+        "shooting": 11,
         "passing": 44,
         "dribbling": 60,
         "defending": 40,
@@ -418,8 +418,8 @@
         "appearances": 6,
         "goals": 2,
         "assists": 0,
-        "xG": 2.02,
-        "xA": 1.41,
+        "xG": 1.9,
+        "xA": 1.44,
         "shots": 0,
         "shotsOnTarget": 0,
         "keyPasses": 167,
@@ -529,7 +529,7 @@
         "goals": 0,
         "assists": 0,
         "xG": 0.18,
-        "xA": 0.35,
+        "xA": 0.58,
         "shots": 0,
         "shotsOnTarget": 0,
         "keyPasses": 40,
@@ -570,7 +570,7 @@
         "appearances": 6,
         "goals": 2,
         "assists": 0,
-        "xG": 1.93,
+        "xG": 1.81,
         "xA": 0.39,
         "shots": 0,
         "shotsOnTarget": 0,
@@ -590,7 +590,7 @@
         "pressureSuccess": 0
       },
       "radar": {
-        "shooting": 20,
+        "shooting": 19,
         "passing": 59,
         "dribbling": 75,
         "defending": 40,
@@ -613,7 +613,7 @@
         "goals": 0,
         "assists": 0,
         "xG": 0,
-        "xA": 0.24,
+        "xA": 0.39,
         "shots": 0,
         "shotsOnTarget": 0,
         "keyPasses": 15,
@@ -654,7 +654,7 @@
         "appearances": 6,
         "goals": 3,
         "assists": 0,
-        "xG": 3.52,
+        "xG": 3.63,
         "xA": 1.04,
         "shots": 0,
         "shotsOnTarget": 0,
@@ -674,7 +674,7 @@
         "pressureSuccess": 0
       },
       "radar": {
-        "shooting": 32,
+        "shooting": 33,
         "passing": 100,
         "dribbling": 100,
         "defending": 40,
@@ -738,8 +738,8 @@
         "appearances": 1,
         "goals": 0,
         "assists": 0,
-        "xG": 0.22,
-        "xA": 0.35,
+        "xG": 0.28,
+        "xA": 0.52,
         "shots": 0,
         "shotsOnTarget": 0,
         "keyPasses": 44,
@@ -949,7 +949,7 @@
         "goals": 0,
         "assists": 2,
         "xG": 0.18,
-        "xA": 0.57,
+        "xA": 0.46,
         "shots": 0,
         "shotsOnTarget": 0,
         "keyPasses": 53,
