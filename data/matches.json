@@ -1,48 +1,48 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-10-18T15:26:10.217Z",
+  "generatedAt": "2026-10-19T03:25:13.739Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-10-18T15:25:07.613Z",
+        "fetchedAt": "2026-10-19T03:24:04.661Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-10-18T15:25:07.613Z",
+        "fetchedAt": "2026-10-19T03:24:04.661Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-10-18T15:25:07.614Z",
+        "fetchedAt": "2026-10-19T03:24:04.662Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-10-18T15:25:07.614Z",
+        "fetchedAt": "2026-10-19T03:24:04.662Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-10-18T15:25:07.673Z",
+        "fetchedAt": "2026-10-19T03:24:04.724Z",
         "ok": true
       }
     ]
   },
   "seasonStats": {
-    "played": 6,
-    "won": 5,
+    "played": 7,
+    "won": 6,
     "drawn": 0,
     "lost": 1,
-    "goalsFor": 10,
+    "goalsFor": 11,
     "goalsAgainst": 5,
-    "points": 15,
-    "position": 3,
-    "cleanSheets": 5,
-    "xGFor": 10.83,
+    "points": 18,
+    "position": 2,
+    "cleanSheets": 6,
+    "xGFor": 11.97,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
@@ -54,6 +54,7 @@
       "W",
       "W",
       "L",
+      "W",
       "W",
       "W"
     ],
@@ -76,12 +77,30 @@
         "month": "Oct",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 5,
+        "goalsFor": 6,
         "goalsAgainst": 1
       }
     ]
   },
   "matches": [
+    {
+      "id": 560608,
+      "date": "2026-10-18",
+      "kickoffUtc": "2026-10-18T15:30:00Z",
+      "competition": "Premier League",
+      "matchweek": 7,
+      "venue": "Nottingham Forest",
+      "homeTeam": "Nott'm Forest",
+      "awayTeam": "Arsenal",
+      "homeScore": 0,
+      "awayScore": 1,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 575346,
       "date": "2026-10-13",
