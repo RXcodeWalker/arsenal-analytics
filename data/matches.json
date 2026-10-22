@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-10-21T16:40:50.463Z",
+  "generatedAt": "2026-10-22T03:26:54.660Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-10-21T16:39:41.633Z",
+        "fetchedAt": "2026-10-22T03:25:39.687Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-10-21T16:39:41.633Z",
+        "fetchedAt": "2026-10-22T03:25:39.687Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-10-21T16:39:41.634Z",
+        "fetchedAt": "2026-10-22T03:25:39.688Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-10-21T16:39:41.634Z",
+        "fetchedAt": "2026-10-22T03:25:39.688Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-10-21T16:39:41.692Z",
+        "fetchedAt": "2026-10-22T03:25:39.746Z",
         "ok": true
       }
     ]
@@ -35,7 +35,7 @@
   "seasonStats": {
     "played": 7,
     "won": 6,
-    "drawn": 0,
+    "drawn": 1,
     "lost": 1,
     "goalsFor": 11,
     "goalsAgainst": 5,
@@ -56,7 +56,8 @@
       "L",
       "W",
       "W",
-      "W"
+      "W",
+      "D"
     ],
     "monthlyXG": [
       {
@@ -77,12 +78,30 @@
         "month": "Oct",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 6,
-        "goalsAgainst": 1
+        "goalsFor": 8,
+        "goalsAgainst": 3
       }
     ]
   },
   "matches": [
+    {
+      "id": 575372,
+      "date": "2026-10-21",
+      "kickoffUtc": "2026-10-21T19:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 3,
+      "venue": "Bayern München",
+      "homeTeam": "Bayern München",
+      "awayTeam": "Arsenal",
+      "homeScore": 2,
+      "awayScore": 2,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560608,
       "date": "2026-10-18",
