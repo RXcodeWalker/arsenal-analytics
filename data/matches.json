@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-10-24T15:26:38.322Z",
+  "generatedAt": "2026-10-25T03:22:17.601Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-10-24T15:25:22.966Z",
+        "fetchedAt": "2026-10-25T03:20:56.575Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-10-24T15:25:22.966Z",
+        "fetchedAt": "2026-10-25T03:20:56.576Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-10-24T15:25:22.967Z",
+        "fetchedAt": "2026-10-25T03:20:56.576Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-10-24T15:25:22.967Z",
+        "fetchedAt": "2026-10-25T03:20:56.577Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-10-24T15:25:23.027Z",
+        "fetchedAt": "2026-10-25T03:20:56.635Z",
         "ok": true
       }
     ]
@@ -37,12 +37,12 @@
     "won": 7,
     "drawn": 1,
     "lost": 1,
-    "goalsFor": 12,
+    "goalsFor": 13,
     "goalsAgainst": 5,
     "points": 21,
     "position": 2,
-    "cleanSheets": 6,
-    "xGFor": 13.21,
+    "cleanSheets": 7,
+    "xGFor": 13.92,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
@@ -57,7 +57,8 @@
       "W",
       "W",
       "W",
-      "D"
+      "D",
+      "W"
     ],
     "monthlyXG": [
       {
@@ -78,12 +79,30 @@
         "month": "Oct",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 8,
+        "goalsFor": 10,
         "goalsAgainst": 3
       }
     ]
   },
   "matches": [
+    {
+      "id": 560616,
+      "date": "2026-10-24",
+      "kickoffUtc": "2026-10-24T14:00:00Z",
+      "competition": "Premier League",
+      "matchweek": 8,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Everton",
+      "homeScore": 2,
+      "awayScore": 0,
+      "resultFromArsenalView": "W",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 575372,
       "date": "2026-10-21",
