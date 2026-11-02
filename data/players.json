@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-11-02T04:38:10.572Z",
+  "generatedAt": "2026-11-02T21:27:16.412Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-11-02T04:36:43.368Z",
+        "fetchedAt": "2026-11-02T21:25:49.088Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-11-02T04:36:43.368Z",
+        "fetchedAt": "2026-11-02T21:25:49.089Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-11-02T04:36:43.369Z",
+        "fetchedAt": "2026-11-02T21:25:49.089Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-11-02T04:36:43.369Z",
+        "fetchedAt": "2026-11-02T21:25:49.089Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-11-02T04:36:43.427Z",
+        "fetchedAt": "2026-11-02T21:25:49.149Z",
         "ok": false,
         "message": "fetch failed"
       }
@@ -571,7 +571,7 @@
         "appearances": 8,
         "goals": 3,
         "assists": 0,
-        "xG": 2.77,
+        "xG": 2.78,
         "xA": 0.43,
         "shots": 0,
         "shotsOnTarget": 0,
@@ -1340,7 +1340,7 @@
         "appearances": 3,
         "goals": 2,
         "assists": 0,
-        "xG": 0.27,
+        "xG": 0.28,
         "xA": 0.28,
         "shots": 0,
         "shotsOnTarget": 0,
