@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-11-08T17:39:41.382Z",
+  "generatedAt": "2026-11-09T04:49:13.988Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-11-08T17:38:14.129Z",
+        "fetchedAt": "2026-11-09T04:47:46.707Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-11-08T17:38:14.130Z",
+        "fetchedAt": "2026-11-09T04:47:46.707Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-11-08T17:38:14.130Z",
+        "fetchedAt": "2026-11-09T04:47:46.708Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-11-08T17:38:14.130Z",
+        "fetchedAt": "2026-11-09T04:47:46.708Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-11-08T17:38:14.185Z",
+        "fetchedAt": "2026-11-09T04:47:46.763Z",
         "ok": false,
         "message": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
       }
