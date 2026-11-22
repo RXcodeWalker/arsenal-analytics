@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-11-21T18:44:57.581Z",
+  "generatedAt": "2026-11-22T05:16:30.722Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-11-21T18:43:30.015Z",
+        "fetchedAt": "2026-11-22T05:15:03.499Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-11-21T18:43:30.015Z",
+        "fetchedAt": "2026-11-22T05:15:03.499Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-11-21T18:43:30.016Z",
+        "fetchedAt": "2026-11-22T05:15:03.500Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-11-21T18:43:30.016Z",
+        "fetchedAt": "2026-11-22T05:15:03.500Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-11-21T18:43:30.060Z",
+        "fetchedAt": "2026-11-22T05:15:03.541Z",
         "ok": false,
         "message": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
       }
@@ -38,12 +38,12 @@
     "won": 9,
     "drawn": 1,
     "lost": 1,
-    "goalsFor": 16,
-    "goalsAgainst": 6,
+    "goalsFor": 17,
+    "goalsAgainst": 7,
     "points": 28,
     "position": 1,
     "cleanSheets": 9,
-    "xGFor": 17.55,
+    "xGFor": 17.65,
     "xGAgainst": 0,
     "avgPossession": 0,
     "ppda": 0,
@@ -62,7 +62,8 @@
       "W",
       "W",
       "W",
-      "W"
+      "W",
+      "D"
     ],
     "monthlyXG": [
       {
@@ -90,12 +91,30 @@
         "month": "Nov",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 4,
-        "goalsAgainst": 1
+        "goalsFor": 6,
+        "goalsAgainst": 3
       }
     ]
   },
   "matches": [
+    {
+      "id": 560651,
+      "date": "2026-11-21",
+      "kickoffUtc": "2026-11-21T17:30:00Z",
+      "competition": "Premier League",
+      "matchweek": 11,
+      "venue": "Newcastle United",
+      "homeTeam": "Newcastle",
+      "awayTeam": "Arsenal",
+      "homeScore": 2,
+      "awayScore": 2,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560640,
       "date": "2026-11-07",
