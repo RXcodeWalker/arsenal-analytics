@@ -1,33 +1,33 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-11-24T08:34:06.597Z",
+  "generatedAt": "2026-11-24T21:57:48.839Z",
   "season": "2026/27",
   "sourceMeta": {
     "statuses": [
       {
         "provider": "fpl",
-        "fetchedAt": "2026-11-24T08:32:39.223Z",
+        "fetchedAt": "2026-11-24T21:56:21.565Z",
         "ok": true
       },
       {
         "provider": "footballData",
-        "fetchedAt": "2026-11-24T08:32:39.224Z",
+        "fetchedAt": "2026-11-24T21:56:21.565Z",
         "ok": true
       },
       {
         "provider": "fbref",
-        "fetchedAt": "2026-11-24T08:32:39.224Z",
+        "fetchedAt": "2026-11-24T21:56:21.566Z",
         "ok": false,
         "message": "FBref fetch failed: 403 Forbidden. Set FBREF_COOKIE in your environment to an active browser session cookie to bypass Cloudflare challenge."
       },
       {
         "provider": "apiFootball",
-        "fetchedAt": "2026-11-24T08:32:39.224Z",
+        "fetchedAt": "2026-11-24T21:56:21.566Z",
         "ok": true
       },
       {
         "provider": "understat",
-        "fetchedAt": "2026-11-24T08:32:39.280Z",
+        "fetchedAt": "2026-11-24T21:56:21.629Z",
         "ok": false,
         "message": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
       }
@@ -63,6 +63,7 @@
       "W",
       "W",
       "W",
+      "D",
       "D"
     ],
     "monthlyXG": [
@@ -91,12 +92,30 @@
         "month": "Nov",
         "xGFor": 0,
         "xGAgainst": 0,
-        "goalsFor": 6,
-        "goalsAgainst": 3
+        "goalsFor": 7,
+        "goalsAgainst": 4
       }
     ]
   },
   "matches": [
+    {
+      "id": 575399,
+      "date": "2026-11-24",
+      "kickoffUtc": "2026-11-24T20:00:00Z",
+      "competition": "UEFA Champions League",
+      "matchweek": 5,
+      "venue": "Arsenal",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Borussia Dortmund",
+      "homeScore": 1,
+      "awayScore": 1,
+      "resultFromArsenalView": "D",
+      "stats": {},
+      "scorers": [],
+      "assists": [],
+      "xgTimeline": [],
+      "keyMoments": []
+    },
     {
       "id": 560651,
       "date": "2026-11-21",
